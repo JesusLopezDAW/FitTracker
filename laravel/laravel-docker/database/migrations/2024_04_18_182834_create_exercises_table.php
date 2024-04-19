@@ -14,8 +14,12 @@ return new class extends Migration
         Schema::create('exercises', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("description");
+            $table->string("type");
+            $table->string("muscle");
             $table->string("category");
+            $table->string("equipment");
+            $table->string("difficulty");
+            $table->string("instructions");
             $table->string("image");
             $table->string("video");
             $table->unsignedBigInteger("workout_id");
