@@ -16,18 +16,16 @@ return new class extends Migration
             $table->string("name");
             $table->string("type");
             $table->string("muscle");
-            $table->string("category");
             $table->string("equipment");
             $table->string("difficulty");
-            $table->string("instructions");
+            $table->longText("instructions");
             $table->string("image");
             $table->string("video");
-            $table->unsignedBigInteger("workout_id");
-            $table->foreign("workout_id")->references("id")->on("workouts");
+            // $table->unsignedBigInteger("workout_id");
+            // $table->foreign("workout_id")->references("id")->on("workouts");
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
