@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("user_id");
+            $table->foreign("user_id")->references("id")->on("users");
+            $table->unsignedBigInteger("workout_id");
+            $table->foreign("workout_id")->references("id")->on("workouts");
+            $table->string("title")->nullable();
+            $table->string("image")->nullable();
             $table->timestamps();
         });
     }
