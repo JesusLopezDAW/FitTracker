@@ -29,7 +29,6 @@ class UserController extends Controller
             'message' => 'Creado con exito',
             'token' => $user->createToken('API TOKEN')->plainTextToken
         ], 200);
-        
     }
 
     function login(LoginRequest $request): JsonResponse
