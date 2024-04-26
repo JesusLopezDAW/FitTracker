@@ -8,5 +8,6 @@ $app = require_once __DIR__.'/bootstrap/app.php';
 
 // Ejecutar los comandos
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+$kernel->call('migrate');
 $kernel->call('migrate:refresh');
 $kernel->call('db:seed');
