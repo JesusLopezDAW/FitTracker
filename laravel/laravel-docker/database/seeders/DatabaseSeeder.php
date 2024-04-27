@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Routine;
+use App\Models\Workout;
+use Database\Factories\LogFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +16,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         
-        User::factory()->times(50)->create();
-
         $this->call([
             ExerciseSeeder::class,
             FoodSeeder::class,
         ]);
+
+        User::factory()->times(50)->create();
+        Routine::factory()->count(200)->create();
+        Workout::factory()->count(400)->create();
+        // LogFactory::times(500)->create();
+
     }
 }

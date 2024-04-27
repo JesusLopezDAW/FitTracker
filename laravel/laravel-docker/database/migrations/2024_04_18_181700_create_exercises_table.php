@@ -21,8 +21,6 @@ return new class extends Migration
             $table->longText("instructions");
             $table->string("image");
             $table->string("video");
-            // $table->unsignedBigInteger("workout_id");
-            // $table->foreign("workout_id")->references("id")->on("workouts");
             $table->timestamps();
         });
     }
