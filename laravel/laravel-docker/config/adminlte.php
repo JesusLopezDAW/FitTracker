@@ -324,8 +324,8 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
+            'text' => 'Usuarios',
+            'url' => 'users',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
