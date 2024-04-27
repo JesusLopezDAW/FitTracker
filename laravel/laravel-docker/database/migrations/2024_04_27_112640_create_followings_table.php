@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('followings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("post_id");
-            $table->foreign("post_id")->references("id")->on("posts");
-            $table->unsignedBigInteger("user_id");
+            $table->unsignedBigInteger("user_id"); // Referencia al usuario que sigue.
             $table->foreign("user_id")->references("id")->on("users");
-            $table->string("content", 500);
+            $table->unsignedBigInteger("followed_user_id"); // Referencia al usuario que es seguido.
+            $table->foreign("followed_user_id")->references("id")->on("users");
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('followings');
     }
 };

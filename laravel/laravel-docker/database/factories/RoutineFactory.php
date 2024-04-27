@@ -43,7 +43,7 @@ class RoutineFactory extends Factory
                 'aeróbicos',
                 'otros'
             ]),
-            'user_id' => $this->faker->numberBetween(1, 50),
+            'user_id' => $this->faker->numberBetween(1, 500),
             // Puedes ajustar la lógica para el campo user_id según tus necesidades
         ];
     }
