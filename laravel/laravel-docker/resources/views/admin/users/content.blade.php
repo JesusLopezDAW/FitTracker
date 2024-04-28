@@ -2,8 +2,7 @@
 
 <div class="example-wrapper">
     <div class="example-header">
-        <span>Buscar por:</span>
-        <input type="text" id="filterInput" placeholder="Filter..." oninput="onFilterTextBoxChanged()" />
+        <input type="text" id="filterInput" placeholder="Filtrar por..." oninput="onFilterTextBoxChanged()" />
     </div>
-    <div id="grid-usuarios" class="ag-theme-quartz" style="height: 500px"></div>
+    <div id="grid-usuarios" class="ag-theme-quartz"></div>
 </div>

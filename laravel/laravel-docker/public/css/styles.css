@@ -1,0 +1,28 @@
+@media (min-width: 1200px) {
+
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl {
+        max-width: 1864px;
+        /* Anula el máximo ancho */
+    }
+}
+
+.swal2-toast {
+    width: auto;
+    /* Ajusta el ancho automáticamente */
+}
+
+.swal2-toast-title {
+    font-size: 10px;
+    /* Ajusta el tamaño del texto */
+    text-align: left;
+    /* Alinea el texto a la izquierda */
+}
+
+.swal2-toast-icon {
+    margin-left: 5px;
+    /* Ajusta el margen derecho del icono */
+}

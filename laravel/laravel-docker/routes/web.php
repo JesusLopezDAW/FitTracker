@@ -28,4 +28,5 @@ require __DIR__.'/auth.php';
 
 // Rutas usuarios
 Route::get('/listarUsuarios', [UserController::class, 'listarUsuarios']);
+Route::post('/UpdateUsuario', [UserController::class, 'UpdateUsuario']);
 
