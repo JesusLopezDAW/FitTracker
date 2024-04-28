@@ -1,5 +1,6 @@
-@media (min-width: 1200px) {
 
+/* Esto es para que la pagina se vea fullscreen, si lo quitas se va todo al centro (pocho) */
+@media (min-width: 1200px) {
     .container,
     .container-lg,
     .container-md,
@@ -10,6 +11,7 @@
     }
 }
 
+/* Estilos para SweetAlert2 */
 .swal2-toast {
     width: auto;
     /* Ajusta el ancho automáticamente */

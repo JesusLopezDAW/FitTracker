@@ -1,4 +1,5 @@
 // Alertas de SweetAlert2
+// Ejemplo -> showAlert('success', "Usuario editado");
 window.showAlert = function (icon, title) {
     Swal.fire({
         toast: true,
@@ -26,7 +27,7 @@ window.showAlert = function (icon, title) {
     // json -> JSON del cual va a coger los datos para la tabla
     // gridDiv -> ID del div donde va a estar la tabla
     // filterInput -> ID del input para el buscador
-    // const gridOptions = createGrid(columnDefs, json, gridDiv, filterInput); Asi seria la llamada a la funcion
+    // Ejemplo -> const gridOptions = createGrid(columnDefs, json, gridDiv, filterInput);
 window.createGrid = function name(columnDefs, json, gridDiv, filterInput) {
 
     // Ejemplo de configurar columnDefs (Esto debes pasarselo en la funcion, es solo un ejemplo)
