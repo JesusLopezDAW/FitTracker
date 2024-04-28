@@ -1,6 +1,6 @@
 <script>
     $.ajax({
-        url: '/listarUsuarios',
+        url: '/listUsers',
         type: 'GET',
         success: function(json) {
 
@@ -92,21 +92,40 @@
                 console.log(rowEdited);
                 // Cuando se edita una celda hacemos un update de la fila a la base de datos
                 $.ajax({
-                    url: '/UpdateUsuario',
+                    url: '/UpdateUser',
                     type: 'POST',
                     data: rowEdited,
                     success: function(response) {
-                        showAlert('success', "Usuario editado");
+                        showAlert('success', 'Usuario editado');
                     },
                     error: function(xhr, status, error) {
-                        showAlert('error','Error al editar el usuario');
+                        showAlert('error', 'Error al editar el usuario');
                     }
                 });
             };
 
+            gridOptions.api.addEventListener('cellDoubleClicked', function(event) {
+                // Verificar si la celda doble clic se encuentra en la columna "ID"
+                if (event.column.getColDef().field === 'id') {
+                    Swal.fire({
+                        // title: "¿Quieres ver los detalles del usuario?",
+                        text: "¿Quieres ver los detalles del usuario?",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Ver detalles"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const userId = event.data.id;
+                            // Redirigir al usuario a la URL para ver los detalles del usuario por su ID
+                            window.location.href = `/user-details/${userId}`;
+                        }
+                    });
+                }
+            });
         },
         error: function(xhr, status, error) {
-            showAlert('error','Error al listar los usuarios');
+            showAlert('error', 'Error al listar los usuarios');
         }
     });
 </script>

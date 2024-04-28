@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <p>Welcome to this shit of admin panel.</p>
+    @include('admin.dashboard.content')
 @stop
 
 @section('css')

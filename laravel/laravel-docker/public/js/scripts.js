@@ -1,33 +1,25 @@
-// Alertas de SweetAlert2
-// Ejemplo -> showAlert('success', "Usuario editado");
+// // Alertas de SweetAlert2
+// // Ejemplo -> showAlert('success', "Usuario editado");
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 1500
+});
 window.showAlert = function (icon, title) {
-    Swal.fire({
-        toast: true,
+    Toast.fire({
         icon: icon,
-        title: title,
-        position: 'top', // Ajusta la posición a la parte superior derecha
-        customClass: {
-            popup: 'swal2-toast',
-            title: 'swal2-toast-title',
-            icon: 'swal2-toast-icon',
-        },
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    });
-};
+        title: title
+    })
+}
 
 // Crear tabla con AG-GRID
 // Los parametros que hay que pasarle son:
-    // columnDefs -> Definicion de las columnas
-    // json -> JSON del cual va a coger los datos para la tabla
-    // gridDiv -> ID del div donde va a estar la tabla
-    // filterInput -> ID del input para el buscador
-    // Ejemplo -> const gridOptions = createGrid(columnDefs, json, gridDiv, filterInput);
+// columnDefs -> Definicion de las columnas
+// json -> JSON del cual va a coger los datos para la tabla
+// gridDiv -> ID del div donde va a estar la tabla
+// filterInput -> ID del input para el buscador
+// Ejemplo -> const gridOptions = createGrid(columnDefs, json, gridDiv, filterInput);
 window.createGrid = function name(columnDefs, json, gridDiv, filterInput) {
 
     // Ejemplo de configurar columnDefs (Esto debes pasarselo en la funcion, es solo un ejemplo)
@@ -171,12 +163,12 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput) {
     new agGrid.Grid(gridDiv, gridOptions);
 
     // Evento para el buscador de la tabla
-    filterInput.addEventListener('input', function(event) {
+    filterInput.addEventListener('input', function (event) {
         gridOptions.api.setQuickFilter(filterInput.value);
     });
 
     // Cuando mueves una columna guarda el estado de las columnas
-    gridOptions.api.addEventListener('columnMoved', function() {
+    gridOptions.api.addEventListener('columnMoved', function () {
         const columnState = gridOptions.api.getColumnState();
         localStorage.setItem('columnState', JSON.stringify(columnState));
     });

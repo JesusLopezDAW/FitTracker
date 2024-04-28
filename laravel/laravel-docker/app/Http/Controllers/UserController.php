@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function listarUsuarios()
+    public function listUsers()
     {
         $users = User::all();
         return response()->json($users, 200);
     }
 
-    public function UpdateUsuario(Request $request)
+    public function UpdateUser(Request $request)
     {
         $id = $request->input('id');
         $user = User::find($id);
@@ -29,6 +29,12 @@ class UserController extends Controller
 
         $user->save();
 
-        return response()->json(['message' => 'Usuario actualizado correctamente'], 200);
+        return "success";
+    }
+
+    public function userDetails($userId)
+    {
+        $user = User::find($userId);
+        return view("admin.user-details", ['user' => $user]);
     }
 }

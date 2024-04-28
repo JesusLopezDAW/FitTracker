@@ -1,15 +1,14 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuarios')
+@section('title', 'XXXX')
 
 @section('content')
-    @include('admin.users.content')
+    @include('admin.x.x')
 @stop
 
 @section('css')
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    @include('admin.users.styles')
+    @include('admin.x.x')
 @stop
 
 @section('js')
@@ -21,5 +20,5 @@
 
     <script src="{{ asset('js/scripts.js') }}"></script>
 
-    @include('admin.users.scripts')
+    @include('admin.x.x')
 @stop

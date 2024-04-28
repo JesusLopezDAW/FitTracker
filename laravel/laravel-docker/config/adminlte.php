@@ -257,7 +257,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '/dashboard',
+    'dashboard_url' => '/dashboard', // URL al darle al icono de la empresa
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -451,7 +451,7 @@ return [
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
