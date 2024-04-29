@@ -13,11 +13,9 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/users', function () {
-    return view('admin.users');
-})->middleware(['auth', 'verified'])->name('users');
+Route::get('/users', [UserController::class, 'listUsers'])->middleware(['auth', 'verified'])->name('users');
 
-Route::get('/{userName}', function () {
+Route::get('/users/{userName}', function () {
     return view('admin.user-details');
 })->middleware(['auth', 'verified'])->name('user-details');
 

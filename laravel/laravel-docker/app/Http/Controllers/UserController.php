@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
     public function listUsers()
     {
         $users = User::all();
-        return response()->json($users, 200);
+        $json = $users->toJson();
+        return view('admin.users', compact('json'));
     }
 
     public function UpdateUser(Request $request)

@@ -21,6 +21,7 @@ window.showAlert = function (icon, title) {
 // filterInput -> ID del input para el buscador
 // Ejemplo -> const gridOptions = createGrid(columnDefs, json, gridDiv, filterInput);
 window.createGrid = function name(columnDefs, json, gridDiv, filterInput) {
+    console.log(json)
 
     // Ejemplo de configurar columnDefs (Esto debes pasarselo en la funcion, es solo un ejemplo)
     // const columnDefs = [{
