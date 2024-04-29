@@ -116,9 +116,9 @@
                         confirmButtonText: "Ver detalles"
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            const userId = event.data.id;
+                            const userName = event.data.name;
                             // Redirigir al usuario a la URL para ver los detalles del usuario por su ID
-                            window.location.href = `/user-details/${userId}`;
+                            window.location.href = `/user/${userName}`;
                         }
                     });
                 }

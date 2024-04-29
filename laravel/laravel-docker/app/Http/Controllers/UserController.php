@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $id = $request->input('id');
         $user = User::find($id);
-        
+
         $user->name = $request->input('name');
         $user->surname = $request->input('surname');
         $user->username = $request->input('username');
@@ -32,9 +32,25 @@ class UserController extends Controller
         return "success";
     }
 
-    public function userDetails($userId)
+    public function userDetails($userName)
     {
-        $user = User::find($userId);
-        return view("admin.user-details", ['user' => $user]);
+        // Buscar el usuario por el nombre
+        $user = User::where('name', $userName)->first();
+
+        // Verificar si el usuario existe
+        if ($user) {
+            // Obtener el ID del usuario
+            $userId = $user->id;
+
+            // Buscar al usuario utilizando el ID
+            $user = User::find($userId);
+
+            // Devolver los detalles del usuario a la vista
+            return view("admin.user-details", ['user' => $user]);
+        } else {
+            // Si el usuario no existe, podrías manejarlo de alguna manera
+            // aquí, como mostrar un mensaje de error o redirigir a otra página
+            return redirect()->back()->with('error', 'Usuario no encontrado');
+        }
     }
 }
