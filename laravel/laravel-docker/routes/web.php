@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,8 +28,13 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+// Listar -> Index (GET)
+// Insertar -> Store (POST)
+// Listar usuario especifico -> Show (GET): /user/{user} 
+// Update (PUT/PATCH): /user/{user} - Esta ruta actualiza un usuario existente en la base de datos. También podría ser /user/{user}/edit.
+// Destroy (DELETE): /user/{user} - Esta ruta elimina un usuario de la base de datos.
+Route::resource("/user",UserController::class);
 
-// Rutas usuarios
-Route::get('/listUsers', [UserController::class, 'listUsers']);
-Route::post('/UpdateUser', [UserController::class, 'UpdateUser']);
-Route::get('/user/{userName}', [UserController::class, 'userDetails']);
+
+
+// Route::get('/user/{userName}', [UserController::class, 'userDetails']);

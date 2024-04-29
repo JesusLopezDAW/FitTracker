@@ -75,10 +75,9 @@
     // Div donde se renderizará la tabla
     const gridDiv = document.querySelector('#grid-usuarios');
     const filterInput = document.querySelector('#filterInput');
-    var data = "{{ $json }}"
-    // console.log(data)
-    const gridOptions = createGrid(columnDefs, JSON.parse(data), gridDiv, filterInput);
+    const usersData = {!! $users->toJson() !!};
 
+    const gridOptions = createGrid(columnDefs, usersData, gridDiv, filterInput);
     // Cuando se edite una celda guarda la fila de la celda que se ha editado
     gridOptions.onCellValueChanged = function(event) {
         const rowEdited = event.node.data;
@@ -88,8 +87,8 @@
         console.log(rowEdited);
         // Cuando se edita una celda hacemos un update de la fila a la base de datos
         $.ajax({
-            url: '/UpdateUser',
-            type: 'POST',
+            url: '/user/update',
+            type: 'PUT',
             data: rowEdited,
             success: function(response) {
                 showAlert('success', 'Usuario editado');

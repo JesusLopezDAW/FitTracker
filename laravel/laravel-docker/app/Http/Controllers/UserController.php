@@ -11,11 +11,10 @@ class UserController extends Controller
     public function listUsers()
     {
         $users = User::all();
-        $json = $users->toJson();
-        return view('admin.users', compact('json'));
+        return view('admin.users', compact('users'));
     }
 
-    public function UpdateUser(Request $request)
+    public function update(Request $request)
     {
         $id = $request->input('id');
         $user = User::find($id);
@@ -34,7 +33,7 @@ class UserController extends Controller
         return "success";
     }
 
-    public function userDetails($userName)
+    public function show($userName)
     {
         // Buscar el usuario por el nombre
         $user = User::where('name', $userName)->first();
