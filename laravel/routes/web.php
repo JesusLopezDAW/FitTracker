@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -35,7 +36,6 @@ require __DIR__.'/auth.php';
 // Destroy (DELETE): /user/{user} - Esta ruta elimina un usuario de la base de datos.
 Route::resource("/user",UserController::class);
 Route::resource("/food",FoodController::class);
-Route::resource("/exercise",ExerciseController::class);
 
 
 
