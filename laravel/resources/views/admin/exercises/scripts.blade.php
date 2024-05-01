@@ -10,95 +10,60 @@
             editable: true
         },
         {
-            headerName: 'Apellido',
-            field: 'surname',
+            headerName: 'Tipo',
+            field: 'type',
             editable: true
         },
         {
-            headerName: 'Nombre de Usuario',
-            field: 'username',
+            headerName: 'Musculo',
+            field: 'muscle',
             editable: true
         },
         {
-            headerName: 'Teléfono',
-            field: 'phone_number',
-            editable: true,
-            cellEditor: 'agNumberCellEditor',
-            cellEditorParams: {
-                min: 1,
-                max: 999999999
-            }
-
-        },
-        {
-            headerName: 'Género',
-            field: 'gender',
-            editable: true,
-            cellEditor: 'agRichSelectCellEditor',
-            cellEditorParams: {
-                values: ['male', 'female', 'other', 'prefer_not_to_say'],
-                allowTyping: true,
-                filterList: true,
-                highlightMatch: true,
-                valueListMaxHeight: 220
-            }
-        },
-        {
-            headerName: 'Fecha de Nacimiento',
-            field: 'birthdate',
-            editable: true,
-            cellEditor: 'agDateCellEditor',
-            cellEditorParams: {
-                min: '1920-01-01'
-            }
-        },
-        {
-            headerName: 'Correo Electrónico',
-            field: 'email',
+            headerName: 'Equipamiento',
+            field: 'equipment',
             editable: true
         },
         {
-            headerName: 'Token',
-            field: 'token',
+            headerName: 'Dificultad',
+            field: 'difficulty',
+            editable: true
         },
         {
-            headerName: 'Rol',
-            field: 'rol',
+            headerName: 'Instrucciones',
+            field: 'instructions',
             editable: true,
-            cellEditor: 'agSelectCellEditor',
+            cellEditor: 'agLargeTextCellEditor',
+            cellEditorPopup: true,
             cellEditorParams: {
-                values: ['user', 'admin']
+                maxLength: 100
             }
-        },
-        {
-            headerName: 'Fecha Creaccion',
-            field: 'created_at',
         }
     ];
 
     // Div donde se renderizará la tabla
-    const gridDiv = document.querySelector('#grid-usuarios');
+    const gridDiv = document.querySelector('#grid-exercises');
     const filterInput = document.querySelector('#filterInput');
-    const usersData = {!! $users->toJson() !!};
+    const usersData = {!! $exercises->toJson() !!};
 
-    const gridOptions = createGrid(columnDefs, usersData, gridDiv, filterInput, "users");
+    const gridOptions = createGrid(columnDefs, usersData, gridDiv, filterInput, "exercises");
     // Cuando se edite una celda guarda la fila de la celda que se ha editado
     gridOptions.api.addEventListener("cellValueChanged", function(event) {
         const rowEdited = event.node.data;
         const csrf = getcsrf();
         rowEdited._token = csrf; // Agrega el token CSRF al objeto rowEdited
 
-        // console.log(rowEdited);
+        console.log(rowEdited);
         // Cuando se edita una celda hacemos un update de la fila a la base de datos
         $.ajax({
-            url: '/user/update',
+            url: '/exercise/update',
             type: 'PUT',
             data: rowEdited,
             success: function(response) {
-                showAlert('success', 'Usuario editado');
+                showAlert('success', 'Ejercicio editado');
             },
             error: function(xhr, status, error) {
-                showAlert('error', 'Error al editar el usuario');
+                showAlert('error', 'Error al editar el ejercicio');
             }
         });
     });

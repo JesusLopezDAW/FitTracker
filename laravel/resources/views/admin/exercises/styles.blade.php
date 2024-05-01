@@ -28,7 +28,7 @@
     }
 
     /* Estilo para el contenedor de la cuadrícula */
-    #grid-usuarios {
+    #grid-exercises {
         height: 500px;
         width: 100%;
     }

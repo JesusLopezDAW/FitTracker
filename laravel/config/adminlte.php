@@ -325,7 +325,7 @@ return [
         ],
         [
             'text' => 'Ejercicios',
-            'url' => 'exercises',
+            'url' => 'exercise',
             'icon' => 'fas fa-fw fa-dumbbell',
         ],
         [

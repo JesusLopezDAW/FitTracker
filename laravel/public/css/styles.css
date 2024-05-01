@@ -1,3 +1,4 @@
+@import '~toastr/build/toastr.min.css';
 
 /* Esto es para que la pagina se vea fullscreen, si lo quitas se va todo al centro (pocho) */
 @media (min-width: 1200px) {
@@ -9,4 +10,7 @@
         max-width: 1864px;
         /* Anula el máximo ancho */
     }
+}
+body {
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
