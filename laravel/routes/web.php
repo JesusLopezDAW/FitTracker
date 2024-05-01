@@ -34,6 +34,8 @@ require __DIR__.'/auth.php';
 // Update (PUT/PATCH): /user/{user} - Esta ruta actualiza un usuario existente en la base de datos. También podría ser /user/{user}/edit.
 // Destroy (DELETE): /user/{user} - Esta ruta elimina un usuario de la base de datos.
 Route::resource("/user",UserController::class);
+Route::resource("/food",FoodController::class);
+Route::resource("/exercise",ExerciseController::class);
 
 
 
