@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -36,7 +37,5 @@ require __DIR__.'/auth.php';
 Route::resource("/user",UserController::class);
 Route::resource("/food",FoodController::class);
 Route::resource("/exercise",ExerciseController::class);
-
-
 
 // Route::get('/user/{userName}', [UserController::class, 'userDetails']);

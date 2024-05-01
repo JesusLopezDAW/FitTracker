@@ -17,6 +17,8 @@
     },
     "dependencies": {
         "flatpickr": "^4.6.13",
-        "toastr": "^2.1.4"
+        "toastr": "^2.1.4",
+        "ag-grid-community": "~31.3.1",
+        "ag-grid-enterprise": "~31.3.1"
     }
 }

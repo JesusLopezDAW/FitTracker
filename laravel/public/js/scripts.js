@@ -20,7 +20,7 @@ window.showAlert = function (icon, title) {
 // gridDiv -> ID del div donde va a estar la tabla
 // filterInput -> ID del input para el buscador
 // Ejemplo -> const gridOptions = createGrid(columnDefs, json, gridDiv, filterInput);
-window.createGrid = function name(columnDefs, json, gridDiv, filterInput) {
+window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableName) {
     console.log(json)
 
     // Ejemplo de configurar columnDefs (Esto debes pasarselo en la funcion, es solo un ejemplo)
@@ -144,7 +144,7 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput) {
         // Cuando carga la tabla
         onGridReady: function (params) {
             // Recupera el estado de las columnas
-            const columnState = JSON.parse(localStorage.getItem('columnState'));
+            const columnState = JSON.parse(localStorage.getItem(`columnState${tableName}`));
             if (columnState) {
                 params.api.applyColumnState({
                     state: columnState,
@@ -156,7 +156,7 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput) {
         onColumnResized: function (params) {
             // Guardar el estado de las columnas cuando se redimensionen
             const columnState = params.api.getColumnState();
-            localStorage.setItem('columnState', JSON.stringify(columnState));
+            localStorage.setItem(`columnState${tableName}`, JSON.stringify(columnState));
         }
     };
 
@@ -171,7 +171,7 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput) {
     // Cuando mueves una columna guarda el estado de las columnas
     gridOptions.api.addEventListener('columnMoved', function () {
         const columnState = gridOptions.api.getColumnState();
-        localStorage.setItem('columnState', JSON.stringify(columnState));
+        localStorage.setItem(`columnState${tableName}`, JSON.stringify(columnState));
     });
 
     return gridOptions;
