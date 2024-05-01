@@ -92,7 +92,7 @@
         const csrf = getcsrf();
         rowEdited._token = csrf; // Agrega el token CSRF al objeto rowEdited
 
-        // console.log(rowEdited);
+        console.log(rowEdited);
         // Cuando se edita una celda hacemos un update de la fila a la base de datos
         $.ajax({
             url: '/user/update',
@@ -119,9 +119,7 @@
                 confirmButtonText: "Ver detalles"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    const userName = event.data.name;
-                    // Redirigir al usuario a la URL para ver los detalles del usuario por su ID
-                    window.location.href = `/user/${userName}`;
+                    window.location.href = '/user/' + event.data.username;
                 }
             });
         }
@@ -129,5 +127,25 @@
 
     $("#openModalBtn").click(function() {
         $("#addUserModal").modal('show');
+    });
+
+    $("#btnGuardarUsuario").click(function() {
+        let datosAsociativos = {};
+        $("#content-modal input, #content-modal select").each(function() {
+            datosAsociativos[$(this).attr("id")] = $(this).val();
+        });
+        console.log(datosAsociativos);
+
+        // $, ajax({
+        //     url: '/user/update',
+        //     type: 'PUT',
+        //     data: rowEdited,
+        //     success: function(response) {
+        //         showAlert('success', 'Usuario editado');
+        //     },
+        //     error: function(xhr, status, error) {
+        //         showAlert('error', 'Error al editar el usuario');
+        //     }
+        // })
     });
 </script>
