@@ -70,7 +70,7 @@
     const usersData = {!! $foods->toJson() !!};
     console.log('Funciona')
 
-    const gridOptions = createGrid(columnDefs, usersData, gridDiv, filterInput);
+    const gridOptions = createGrid(columnDefs, usersData, gridDiv, filterInput, "foods");
     // Cuando se edite una celda guarda la fila de la celda que se ha editado
     gridOptions.api.addEventListener('cellValueChanged', function(event) {
         const rowEdited = event.node.data;

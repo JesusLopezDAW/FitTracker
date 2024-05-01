@@ -65,9 +65,13 @@
             headerName: 'Rol',
             field: 'rol',
             editable: true,
-            cellEditor: 'agSelectCellEditor',
+            cellEditor: 'agRichSelectCellEditor',
             cellEditorParams: {
-                values: ['user', 'admin']
+                values: ['user', 'admin'],
+                allowTyping: true,
+                filterList: true,
+                highlightMatch: true,
+                valueListMaxHeight: 220
             }
         },
         {
@@ -121,5 +125,9 @@
                 }
             });
         }
+    });
+
+    $("#openModalBtn").click(function() {
+        $("#addUserModal").modal('show');
     });
 </script>

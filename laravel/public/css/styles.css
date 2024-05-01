@@ -2,6 +2,7 @@
 
 /* Esto es para que la pagina se vea fullscreen, si lo quitas se va todo al centro (pocho) */
 @media (min-width: 1200px) {
+
     .container,
     .container-lg,
     .container-md,
@@ -11,6 +12,13 @@
         /* Anula el máximo ancho */
     }
 }
+
 body {
     font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* CSS para el modal */
+.modal-dialog {
+    margin: 0 auto;
+    margin-top: calc(10% - 30px);
 }

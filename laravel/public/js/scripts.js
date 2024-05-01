@@ -19,9 +19,10 @@ window.showAlert = function (icon, title) {
 // json -> JSON del cual va a coger los datos para la tabla
 // gridDiv -> ID del div donde va a estar la tabla
 // filterInput -> ID del input para el buscador
+// tableName -> Nombre de la tabla
 // Ejemplo -> const gridOptions = createGrid(columnDefs, json, gridDiv, filterInput);
 window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableName) {
-    console.log(json)
+    // console.log(json)
 
     // Ejemplo de configurar columnDefs (Esto debes pasarselo en la funcion, es solo un ejemplo)
     // const columnDefs = [{
