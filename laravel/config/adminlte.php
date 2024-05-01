@@ -330,7 +330,7 @@ return [
         ],
         [
             'text' => 'Alimentos',
-            'url' => 'foods',
+            'url' => 'food',
             'icon' => 'fas fa-fw fa-utensils',
         ],
         [
