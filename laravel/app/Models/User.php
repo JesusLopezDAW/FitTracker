@@ -53,4 +53,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->rol === 'admin';
     }
+
+    /**
+     * Get the routines for the user.
+     */
+    public function routines()
+    {
+        return $this->hasMany(Routine::class);
+    }
 }

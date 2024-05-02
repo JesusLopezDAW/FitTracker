@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('routines', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->enum('tipo', [
+            $table->enum('type', [
                 'cardio',
                 'entrenamiento_de_fuerza',
                 'HIIT',

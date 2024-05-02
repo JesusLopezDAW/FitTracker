@@ -27,7 +27,6 @@ class WorkoutFactory extends Factory
             'name' => $this->faker->sentence(),
             'description' => $description,
             'routine_id' => $this->faker->numberBetween(1, 1000), // IDs de 1 a 100
-            'exercise_id' => $this->faker->numberBetween(1, 160), // IDs de 1 a 160
         ];
     }
 }
