@@ -2,4 +2,10 @@
 
 @section('title', 'Acceso prohibido')
 
-@section('message', 'Lo siento, parece que estás intentando acceder a una zona de administrador... 😔')
+@section('css')
+    @include('errors.403.styles')
+@stop
+
+@section('message')
+    @include('errors.403.content')
+@stop
