@@ -35,6 +35,7 @@
 
     /* Estilo para el título */
     h1.text-center {
+        padding-top: 1%;
         text-align: center;
         font-size: 36px;
         /* Aumenta el tamaño de la fuente */

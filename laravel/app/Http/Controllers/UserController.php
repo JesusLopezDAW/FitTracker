@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -14,6 +13,50 @@ class UserController extends Controller
         return view('admin.users', compact('users'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $username)
+    {
+        $user = User::where('username', $username)->first();
+
+        if ($user) {
+            // Devolver los detalles del usuario a la vista
+            return view("admin.user-details", compact('user'));
+        } else {
+            // Si el usuario no existe, podrías manejarlo de alguna manera
+            // aquí, como mostrar un mensaje de error o redirigir a otra página
+            return redirect()->back()->with('error', 'Usuario no encontrado');
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request)
     {
         $id = $request->input('id');
@@ -33,25 +76,11 @@ class UserController extends Controller
         return "success";
     }
 
-    public function show($userName)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
-        // Buscar el usuario por el nombre
-        $user = User::where('name', $userName)->first();
-
-        // Verificar si el usuario existe
-        if ($user) {
-            // Obtener el ID del usuario
-            $userId = $user->id;
-
-            // Buscar al usuario utilizando el ID
-            $user = User::find($userId);
-
-            // Devolver los detalles del usuario a la vista
-            return view("admin.user-details", ['user' => $user]);
-        } else {
-            // Si el usuario no existe, podrías manejarlo de alguna manera
-            // aquí, como mostrar un mensaje de error o redirigir a otra página
-            return redirect()->back()->with('error', 'Usuario no encontrado');
-        }
+        //
     }
 }
