@@ -28,6 +28,10 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
     // Recursos
     Route::resource("/user", UserController::class);
+    Route::get('/api/users_registered_per_day', [UserController::class, 'getUsersRegisteredPerDay']);
+    Route::get('/api/users_registered_per_month', [UserController::class, 'getUsersRegisteredPerMonth']);
+    Route::get('/api/users_registered_per_year', [UserController::class, 'getUsersRegisteredPerYear']);
+
     Route::resource("/food", FoodController::class);
     Route::resource("/exercise", ExerciseController::class);
 });
