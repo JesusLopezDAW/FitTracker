@@ -4,16 +4,7 @@
     const exerciseButtonComponent = new DeleteButtomComponent('exercise');
 
     // Configurar columnDefs
-    const columnDefs = [{
-            field: "ELIMINAR",
-            headerName: "",
-            cellRenderer: function(params) {
-                exerciseButtonComponent.init({
-                    id: params.data.id
-                });
-                return exerciseButtonComponent.getGui();
-            },
-        },
+    const columnDefs = [
         {
             headerName: 'ID',
             field: 'id',
@@ -52,6 +43,19 @@
             cellEditorParams: {
                 maxLength: 100
             }
+        },
+        {
+            field: "",
+            pinned: "left",
+            resizable: false,
+            filter: false,
+            width: 45,
+            cellRenderer: function(params) {
+                exerciseButtonComponent.init({
+                    id: params.data.id
+                });
+                return exerciseButtonComponent.getGui();
+            },
         }
     ];
 

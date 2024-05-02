@@ -23,6 +23,11 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        // Genera fechas aleatorias entre el 1 de enero de 2024 y la fecha y hora actual
+        $startDate = strtotime('2024-01-01');
+        $endDate = now()->timestamp;
+        $randomDate = mt_rand($startDate, $endDate);
+
         return [
             'name' => fake()->name(),
             'surname' => $this->faker->lastName,
@@ -36,6 +41,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'profile_photo_path' => null,
             'current_team_id' => null,
+            'created_at' => date('Y-m-d H:i:s', $randomDate), // Establece 'created_at' en la fecha aleatoria generada
         ];
     }
 

@@ -174,7 +174,7 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
         const columnState = gridOptions.api.getColumnState();
         localStorage.setItem(`columnState${tableName}`, JSON.stringify(columnState));
     });
-
+    
     return gridOptions;
 }
 
@@ -182,3 +182,4 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
 window.getcsrf = function () {
     return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 }
+

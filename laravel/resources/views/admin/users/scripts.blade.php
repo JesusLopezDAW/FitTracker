@@ -1,6 +1,24 @@
+@include('components.DeleteButtomComponent')
+
 <script>
     // Configurar columnDefs
-    const columnDefs = [{
+    const userButtonComponent = new DeleteButtomComponent('user');
+
+    const columnDefs = [
+        {
+            field: "",
+            pinned: "left",
+            resizable: false,
+            filter: false,
+            width: 45,
+            cellRenderer: function(params) {
+                userButtonComponent.init({
+                    id: params.data.id
+                });
+                return userButtonComponent.getGui();
+            },
+        }, 
+        {
             headerName: 'ID',
             field: 'id',
         },

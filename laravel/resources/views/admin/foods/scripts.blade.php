@@ -5,15 +5,18 @@
     // Configurar columnDefs
     const columnDefs = [
         {
-            field: "ELIMINAR",
-            headerName: "",
+            field: "",
+            pinned: "left",
+            resizable: false,
+            filter: false,
+            width: 45,
             cellRenderer: function(params) {
                 foodButtonComponent.init({
                     id: params.data.id
                 });
                 return foodButtonComponent.getGui();
             },
-        },
+        }, 
         {
             headerName: 'ID',
             field: 'id',
