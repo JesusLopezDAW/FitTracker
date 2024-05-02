@@ -80,6 +80,9 @@ class FoodController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $food = Food::find($id);
+        if($food){
+            $food->delete();
+        }
     }
 }

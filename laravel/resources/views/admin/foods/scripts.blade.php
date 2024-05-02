@@ -1,6 +1,20 @@
+@include('components.DeleteButtomComponent')
 <script>
+    const foodButtonComponent = new DeleteButtomComponent('food');
+
     // Configurar columnDefs
-    const columnDefs = [{
+    const columnDefs = [
+        {
+            field: "ELIMINAR",
+            headerName: "",
+            cellRenderer: function(params) {
+                foodButtonComponent.init({
+                    id: params.data.id
+                });
+                return foodButtonComponent.getGui();
+            },
+        },
+        {
             headerName: 'ID',
             field: 'id',
         },
@@ -92,5 +106,4 @@
             }
         });
     });
-    
 </script>
