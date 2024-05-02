@@ -37,8 +37,9 @@ class UserController extends Controller
         $user = User::where('username', $username)->first();
 
         if ($user) {
+            $routines = $user->routines()->with('workouts')->get();
             // Devolver los detalles del usuario a la vista
-            return view("admin.user-details", compact('user'));
+            return view("admin.user-details", compact('user', 'routines'));
         } else {
             // Si el usuario no existe, podrías manejarlo de alguna manera
             // aquí, como mostrar un mensaje de error o redirigir a otra página
@@ -88,10 +89,10 @@ class UserController extends Controller
     {
         // Obtener los datos de usuarios registrados por día
         $usersPerDay = User::selectRaw('DATE(created_at) as date, COUNT(*) as users')
-                            ->whereBetween('created_at', [now()->subDays(30), now()]) // Obtener los datos de los últimos 30 días
-                            ->groupBy('date')
-                            ->orderBy('date')
-                            ->get();
+            ->whereBetween('created_at', [now()->subDays(30), now()]) // Obtener los datos de los últimos 30 días
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
 
         return response()->json($usersPerDay);
     }
@@ -100,10 +101,10 @@ class UserController extends Controller
     {
         // Obtener los datos de usuarios registrados por mes
         $usersPerMonth = User::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as date, COUNT(*) as users')
-                            ->whereBetween('created_at', [now()->subMonths(12), now()]) // Obtener los datos de los últimos 12 meses
-                            ->groupBy('date')
-                            ->orderBy('date')
-                            ->get();
+            ->whereBetween('created_at', [now()->subMonths(12), now()]) // Obtener los datos de los últimos 12 meses
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
 
         return response()->json($usersPerMonth);
     }
@@ -112,10 +113,10 @@ class UserController extends Controller
     {
         // Obtener los datos de usuarios registrados por año
         $usersPerYear = User::selectRaw('YEAR(created_at) as date, COUNT(*) as users')
-                            ->whereBetween('created_at', [now()->subYears(5), now()]) // Obtener los datos de los últimos 5 años
-                            ->groupBy('date')
-                            ->orderBy('date')
-                            ->get();
+            ->whereBetween('created_at', [now()->subYears(5), now()]) // Obtener los datos de los últimos 5 años
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
 
         return response()->json($usersPerYear);
     }

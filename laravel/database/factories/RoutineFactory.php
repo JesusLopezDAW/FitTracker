@@ -24,7 +24,7 @@ class RoutineFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(),
-            'tipo' => $this->faker->randomElement([
+            'type' => $this->faker->randomElement([
                 'cardio',
                 'entrenamiento_de_fuerza',
                 'HIIT',
