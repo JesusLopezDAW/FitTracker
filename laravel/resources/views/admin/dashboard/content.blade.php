@@ -101,13 +101,7 @@
 
         <div class="col-md-6">
             <!-- Usuarios -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Datos de los usuarios</h5>
-                    <!-- Aquí puedes mostrar información sobre usuarios registrados diarios, semanales, mensuales, etc. -->
-                    <div id="usersTable" style="height: 300px;"></div>
-                </div>
-            </div>
+            @include('admin.dashboard.users_dart.index')
 
             <!-- Gráfico de ubicación de usuarios -->
             <div class="card mb-4">
