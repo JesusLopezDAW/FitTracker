@@ -73,6 +73,14 @@ class ExerciseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $exc = Exercise::find($id);
+        if ($exc) {
+            $exc->delete();
+            // Devuelve una respuesta de éxito
+            return response()->json(['message' => 'Ejercicio eliminado correctamente'], 200);
+        } else {
+            // Devuelve una respuesta de error si el ejercicio no se encuentra
+            return response()->json(['message' => 'No se encontró el ejercicio'], 404);
+        }
     }
 }

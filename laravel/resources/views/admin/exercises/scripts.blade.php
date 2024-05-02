@@ -1,6 +1,20 @@
+@include('components.DeleteButtomComponent')
+
 <script>
+    const exerciseButtonComponent = new DeleteButtomComponent('exercise');
+
     // Configurar columnDefs
     const columnDefs = [{
+            field: "ELIMINAR",
+            headerName: "",
+            cellRenderer: function(params) {
+                exerciseButtonComponent.init({
+                    id: params.data.id
+                });
+                return exerciseButtonComponent.getGui();
+            },
+        },
+        {
             headerName: 'ID',
             field: 'id',
         },
