@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuarios')
+@section('title', 'Ejercicios')
 
 @section('content')
     @include('admin.exercises.content')

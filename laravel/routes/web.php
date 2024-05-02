@@ -29,7 +29,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     // Recursos
     Route::resource("/user", UserController::class);
     Route::resource("/food", FoodController::class);
-    Route::resource("/exercise", FoodController::class);
+    Route::resource("/exercise", ExerciseController::class);
 });
 
 require __DIR__ . '/auth.php';
