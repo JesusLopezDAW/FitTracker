@@ -64,3 +64,9 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+// Listar -> Index (GET)
+// Insertar -> Store (POST)
+// Listar usuario especifico -> Show (GET): /user/{user} 
+// Update (PUT/PATCH): /user/{user} - Esta ruta actualiza un usuario existente en la base de datos. También podría ser /user/{user}/edit.
+// Destroy (DELETE): /user/{user} - Esta ruta elimina un usuario de la base de datos.

@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
-    public function listUsers()
+    public function index()
     {
         $users = User::all();
         return view('admin.users', compact('users'));
