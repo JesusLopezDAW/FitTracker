@@ -25,4 +25,3 @@ class LogFactory extends Factory
         ];
     }
 }
-
