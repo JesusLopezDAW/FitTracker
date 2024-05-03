@@ -21,8 +21,8 @@ class Exercise_LogFactory extends Factory
             'exercise_id' => $this->faker->numberBetween(1, 100), // Assuming there are 100 exercises
             'serie_type' => $this->faker->randomElement(['warm_up', 'normal', 'failed', 'drop']),
             'series' => $this->faker->numberBetween(1, 5),
-            'repeticiones' => $this->faker->numberBetween(5, 15),
-            'kilos' => $this->faker->numberBetween(10, 100),
+            'reps' => $this->faker->numberBetween(5, 15),
+            'kilograms' => $this->faker->numberBetween(10, 100),
             'fecha_registro' => $this->faker->dateTimeBetween('-1 year', 'now'), // Assuming logs span the last year
         ];
     }

@@ -39,7 +39,7 @@ class UserController extends Controller
         $user = User::where('username', $username)->first();
 
         if ($user) {
-            $routines = $user->routines()->with('workouts')->get();
+            $routines = $user->routines()->with('workouts.exerciseLogs.exercise')->get();
             // Devolver los detalles del usuario a la vista
             return view("admin.user-details", compact('user', 'routines'));
         } else {
@@ -85,14 +85,9 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::find($id);
-        // var_dump($user);
         if ($user) {
-            // Follower::where('follower_user_id', $user->id)->delete();
-            // Following::where('followed_user_id', $user->id)->delete();
             $user->delete();
-            // Recupera los datos actualizados después de eliminar el ejercicio
             $users = User::all(); 
-            // Devuelve una respuesta de éxito junto con los datos actualizados
             return response()->json(['message' => 'Usuario eliminado correctamente', 'data' => $users], 200);
         } else {
             // Devuelve una respuesta de error si el ejercicio no se encuentra

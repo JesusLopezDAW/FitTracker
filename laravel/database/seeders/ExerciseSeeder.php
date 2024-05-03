@@ -16,6 +16,18 @@ class ExerciseSeeder extends Seeder
         $json = file_get_contents(base_path("database/json/exercises.json"));
         $data = json_decode($json);
 
+        // Ruta de la imagen en tu computadora
+        $imagen = 'database/logoFitTracker.png';
+
+        // Leer el contenido de la imagen como datos binarios
+        $datosImagen = file_get_contents($imagen);
+
+        // Codificar los datos binarios en una cadena base64
+        $imagenBase64 = base64_encode($datosImagen);
+
+        // Crear el objeto BLOB
+        $blob = "data:image/jpeg;base64," . $imagenBase64;
+
         foreach ($data as $exercise) {
             DB::table('exercises')->insert([
                 'name' => $exercise->name,
@@ -24,7 +36,7 @@ class ExerciseSeeder extends Seeder
                 'equipment' => $exercise->equipment,
                 'difficulty' => $exercise->difficulty,
                 'instructions' => $exercise->instructions,
-                'image' => "",
+                'image' => $blob,
                 'video' => "",
             ]);
         }

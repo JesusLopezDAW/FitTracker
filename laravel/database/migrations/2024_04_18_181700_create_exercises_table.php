@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("equipment");
             $table->string("difficulty");
             $table->longText("instructions");
-            $table->string("image");
+            $table->longText("image");
             $table->string("video");
             $table->timestamps();
         });

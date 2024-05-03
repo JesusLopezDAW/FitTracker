@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('exercise_id');
             $table->enum('serie_type', ['warm_up', 'normal', 'failed', 'drop'])->default('normal');
             $table->integer('series');
-            $table->integer('repeticiones');
-            $table->integer('kilos');
+            $table->integer('reps');
+            $table->integer('kilograms');
             $table->timestamp('fecha_registro')->default(now());
             // Puedes agregar otros campos según tus necesidades
             $table->timestamps();

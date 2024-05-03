@@ -28,6 +28,18 @@ class UserFactory extends Factory
         $endDate = now()->timestamp;
         $randomDate = mt_rand($startDate, $endDate);
 
+        // Ruta de la imagen en tu computadora
+        $imagen = 'database/blank-profile-picture.png';
+
+        // Leer el contenido de la imagen como datos binarios
+        $datosImagen = file_get_contents($imagen);
+
+        // Codificar los datos binarios en una cadena base64
+        $imagenBase64 = base64_encode($datosImagen);
+
+        // Crear el objeto BLOB
+        $blob = "data:image/jpeg;base64," . $imagenBase64;
+
         return [
             'name' => fake()->name(),
             'surname' => $this->faker->lastName,
@@ -39,7 +51,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'profile_photo_path' => null,
+            'profile_photo_path' => $blob,
             'current_team_id' => null,
             'created_at' => date('Y-m-d H:i:s', $randomDate), // Establece 'created_at' en la fecha aleatoria generada
         ];

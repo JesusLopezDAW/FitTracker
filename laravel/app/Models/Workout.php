@@ -31,6 +31,6 @@ class Workout extends Model
 
     public function exerciseLogs()
     {
-        return $this->hasMany(ExerciseLog::class);
+        return $this->hasMany(Exercise_Log::class);
     }
 }
