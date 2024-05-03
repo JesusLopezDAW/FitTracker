@@ -8,6 +8,7 @@
         init(params) {
             this.eGui = document.createElement("div");
             let eButton = document.createElement("button");
+            eButton.classList.add("btnEliminarRegistro"); // Le ponemos clase para que cuando se pulse el boton refresque la tabla
             let icon = document.createElement("i");
             icon.className = "fas fa-trash"; // Clases de Font Awesome para el icono de eliminación
             eButton.appendChild(icon); // Agrega el icono como hijo del botón
@@ -64,15 +65,7 @@
                             showAlert('success',
                                 `Eliminado correctamente`
                             );
-                            // const grid = document.querySelector('#grid-usuarios');
-                            // console.log(grid);
-                            // if (grid && grid.api) {
-                            //     console.log("hola");
-                            //     grid.api.refreshCells();
-                            // }
-                            setTimeout(function() {
-                                location.reload();
-                            }, 1000);
+                            gridOptions.api.setRowData(response.data);
                         },
                         error: function(xhr, status, error) {
                             showAlert('error', `Error al eliminar el ${this.entity}`);
@@ -81,7 +74,5 @@
                 }
             });
         }
-
-
     }
 </script>

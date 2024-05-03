@@ -20,109 +20,84 @@ window.showAlert = function (icon, title) {
 // gridDiv -> ID del div donde va a estar la tabla
 // filterInput -> ID del input para el buscador
 // tableName -> Nombre de la tabla
-// Ejemplo -> const gridOptions = createGrid(columnDefs, json, gridDiv, filterInput);
+// Ejemplo -> const gridOptions = createGrid(columnDefs, json, gridDiv, filterInput, "tableName");
+let datosJSON = "";
 window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableName) {
-    // console.log(json)
-
-    // Ejemplo de configurar columnDefs (Esto debes pasarselo en la funcion, es solo un ejemplo)
-    // const columnDefs = [{
-    //     headerName: 'ID',
-    //     field: 'id',
-    // },
-    // {
-    //     headerName: 'Nombre',
-    //     field: 'name',
-    //     editable: true
-    // },
-    // {
-    //     headerName: 'Apellido',
-    //     field: 'surname',
-    //     editable: true
-    // },
-    // {
-    //     headerName: 'Nombre de Usuario',
-    //     field: 'username',
-    //     editable: true
-    // },
-    // {
-    //     headerName: 'Teléfono',
-    //     field: 'phone_number',
-    //     editable: true,
-    //     cellEditor: 'agNumberCellEditor',
-    //     cellEditorParams: {
-    //         min: 1,
-    //         max: 999999999
-    //     }
-
-    // },
-    // {
-    //     headerName: 'Género',
-    //     field: 'gender',
-    //     editable: true,
-    //     cellEditor: 'agSelectCellEditor',
-    //     cellEditorParams: {
-    //         values: ['male', 'female', 'other', 'prefer_not_to_say']
-    //     }
-    // },
-    // {
-    //     headerName: 'Fecha de Nacimiento',
-    //     field: 'birthdate',
-    //     editable: true,
-    //     cellEditor: 'agDateCellEditor',
-    //     cellEditorParams: {
-    //         min: '1920-01-01'
-    //     }
-    // },
-    // {
-    //     headerName: 'Correo Electrónico',
-    //     field: 'email',
-    //     editable: true
-    // },
-    // {
-    //     headerName: 'Token',
-    //     field: 'token',
-    // },
-    // {
-    //     headerName: 'Rol',
-    //     field: 'rol',
-    //     editable: true,
-    //     cellEditor: 'agSelectCellEditor',
-    //     cellEditorParams: {
-    //         values: ['user', 'admin']
-    //     }
-    // },
-    // {
-    //     headerName: 'Fecha Creaccion',
-    //     field: 'created_at',
-    // }
-    // ];
-
+    datosJSON = json;
     // Traducciones al español
     const localeText = {
-        // Otros textos...
-        page: 'Página',
-        more: 'Más',
-        to: 'a',
-        of: 'de',
-        next: 'Siguiente',
-        last: 'Último',
-        first: 'Primero',
-        previous: 'Anterior',
-        loadingOoo: 'Cargando...',
-        applyFilter: 'Aplicar filtro...',
-        equals: 'Igual',
-        notEqual: 'No igual',
-        lessThanOrEqual: 'Menor o igual que',
-        greaterThanOrEqual: 'Mayor o igual que',
-        inRange: 'En rango',
-        lessThan: 'Menor que',
-        greaterThan: 'Mayor que',
-        contains: 'Contiene',
-        notContains: 'No contiene',
-        startsWith: 'Empieza con',
-        endsWith: 'Termina con',
-        dateFormatOoo: 'yyyy-mm-dd',
+        // Textos generales
+        page: "Pagina",
+        more: "Mas",
+        to: "a",
+        of: "de",
+        next: "Siguiente",
+        last: "Ultimo",
+        first: "Primero",
+        previous: "anterior",
+        loadingOoo: "Cargando...",
+        selectAll: "Seleccionar todo",
+        searchOoo: "Buscar...",
+        blanks: "Espacio en blanco",
+        filterOoo: "Filtrar...",
+        applyFilter: "Aplicar filtro...",
+        equals: "es igual a",
+        notEqual: "no es igual a",
+        lessThan: "menor que",
+        greaterThan: "mayor que",
+        lessThanOrEqual: "menor o igual que",
+        greaterThanOrEqual: "mayor o igual que",
+        inRange: "en el rango",
+        contains: "contiene",
+        notContains: "no contiene",
+        startsWith: "empieza con",
+        endsWith: "acaba con",
+        group: "Grupo",
+        columns: "Columnas",
+        filters: "Filtros",
+        rowGroupColumns: "Arrastra la columna para pivotar",
+        rowGroupColumnsEmptyMessage: "Arrastra la columna para grupo",
+        valueColumns: "Valor de las columnas",
+        pivotMode: "Modo pivot",
+        groups: "Grupos",
+        values: "Valores",
+        pivots: "Pivots",
+        valueColumnsEmptyMessage: "Arrastra para columnas",
+        pivotColumnsEmptyMessage: "Arrastra para pivotar",
+        toolPanelButton: "Panel de herramientas",
+        noRowsToShow: "Sin datos",
+        pinColumn: "Pin columna",
+        valueAggregation: "Agregación de valor",
+        autosizeThiscolumn: "Tamaño automático esta columna",
+        autosizeAllColumns: "Tamaño automático todas las columnas",
+        groupBy: "Agrupar por",
+        ungroupBy: "Desagrupar por",
+        resetColumns: "Resetear columnas",
+        expandAll: "Expandir todo",
+        collapseAll: "Colapsar todo",
+        toolPanel: "Panel de herramientas",
+        export: "Exportar",
+        csvExport: "Exportar a CSV",
+        excelExport: "Exportar a Excel",
+        pinLeft: "Pin izquierda",
+        pinRight: "Pin derecha",
+        noPin: "Sin pin",
+        sum: "Suma",
+        min: "Minimo",
+        max: "Maximo",
+        none: "Ninguno",
+        count: "Cuenta",
+        average: "Promedio",
+        copy: "Copiar",
+        copyWithHeaders: "Copiar con cabeceras",
+        ctrlC: "Ctrl + C",
+        paste: "Pegar",
+        ctrlV: "Ctrl + V",
+        searchOoo: 'Buscar...',
         pageSize: 'Tamaño de página',
+        // Textos adicionales de filtros (para fechas)
+        dateFormatOoo: 'yyyy-mm-dd',
+        // Otros textos de filtros...
     };
 
     // Inicializar Ag-Grid y configuracion
@@ -158,7 +133,41 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
             // Guardar el estado de las columnas cuando se redimensionen
             const columnState = params.api.getColumnState();
             localStorage.setItem(`columnState${tableName}`, JSON.stringify(columnState));
-        }
+        },
+        onColumnMoved: function (params) {
+            // Guardar el estado de las columnas cuando se muevan
+            const columnState = params.columnApi.getColumnState();
+            localStorage.setItem(`columnState${tableName}`, JSON.stringify(columnState));
+        },
+        onColumnPinned: function (params) {
+            // Guardar el estado de las columnas cuando se pin o despin
+            const columnState = params.columnApi.getColumnState();
+            localStorage.setItem(`columnState${tableName}`, JSON.stringify(columnState));
+        },
+        sideBar: {
+            toolPanels: [
+                {
+                    id: 'columns',
+                    labelDefault: 'Columnas',
+                    labelKey: 'columns',
+                    iconKey: 'columns',
+                    toolPanel: 'agColumnsToolPanel',
+                    toolPanelParams: {
+                        suppressPivots: true,
+                        suppressPivotMode: true,
+                        suppressValues: true
+                    }
+                },
+                {
+                    id: 'filters',
+                    labelDefault: 'Filtros',
+                    labelKey: 'filters',
+                    iconKey: 'filter',
+                    toolPanel: 'agFiltersToolPanel'
+                }
+            ],
+            defaultToolPanel: null // Activar agrupación en la barra lateral
+        },
     };
 
     // Crear la cuadrícula utilizando Ag-Grid
@@ -174,8 +183,13 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
         const columnState = gridOptions.api.getColumnState();
         localStorage.setItem(`columnState${tableName}`, JSON.stringify(columnState));
     });
-    
+
     return gridOptions;
+}
+
+// Refrescar tabla
+window.refreshTable = function(){
+    
 }
 
 // CSRF Token 

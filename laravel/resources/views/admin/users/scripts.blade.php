@@ -143,7 +143,7 @@
         }
     });
 
-    // MODAL
+    // Modal
     $("#openModalBtn").click(function() {
         $("#addUserModal").modal('show');
     });

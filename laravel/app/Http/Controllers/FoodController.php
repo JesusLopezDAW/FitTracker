@@ -81,8 +81,15 @@ class FoodController extends Controller
     public function destroy(string $id)
     {
         $food = Food::find($id);
-        if($food){
+        if ($food) {
             $food->delete();
+            // Recupera los datos actualizados después de eliminar el ejercicio
+            $foods = food::all(); 
+            // Devuelve una respuesta de éxito junto con los datos actualizados
+            return response()->json(['message' => 'Alimento eliminado correctamente', 'data' => $foods], 200);
+        } else {
+            // Devuelve una respuesta de error si el ejercicio no se encuentra
+            return response()->json(['message' => 'No se encontró el alimento'], 404);
         }
     }
 }

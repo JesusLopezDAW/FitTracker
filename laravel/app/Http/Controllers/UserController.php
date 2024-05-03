@@ -83,8 +83,15 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::find($id);
-        if($user){
+        if ($user) {
             $user->delete();
+            // Recupera los datos actualizados después de eliminar el ejercicio
+            $users = User::all(); 
+            // Devuelve una respuesta de éxito junto con los datos actualizados
+            return response()->json(['message' => 'Usuario eliminado correctamente', 'data' => $users], 200);
+        } else {
+            // Devuelve una respuesta de error si el ejercicio no se encuentra
+            return response()->json(['message' => 'No se encontró el usuario'], 404);
         }
     }
 

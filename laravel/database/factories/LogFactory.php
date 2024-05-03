@@ -1,11 +1,19 @@
 <?php
 namespace Database\Factories;
 
+use App\Models\Log;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 class LogFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Log::class;
+
     /**
      * Define the model's default state.
      *
