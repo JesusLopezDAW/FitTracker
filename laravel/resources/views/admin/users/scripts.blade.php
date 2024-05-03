@@ -143,6 +143,7 @@
         }
     });
 
+    // MODAL
     $("#openModalBtn").click(function() {
         $("#addUserModal").modal('show');
     });

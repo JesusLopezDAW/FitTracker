@@ -82,7 +82,10 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        if($user){
+            $user->delete();
+        }
     }
 
     public function getUsersRegisteredPerDay()

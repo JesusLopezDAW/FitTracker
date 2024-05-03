@@ -105,4 +105,29 @@
             });
         }
     });
+
+    // MODAL
+    $("#openModalBtn").click(function() {
+        $("#addUserModal").modal('show');
+    });
+
+    $("#btnGuardarUsuario").click(function() {
+        let datosAsociativos = {};
+        $("#content-modal input, #content-modal select").each(function() {
+            datosAsociativos[$(this).attr("id")] = $(this).val();
+        });
+        console.log(datosAsociativos);
+
+        // $, ajax({
+        //     url: '/user/update',
+        //     type: 'PUT',
+        //     data: rowEdited,
+        //     success: function(response) {
+        //         showAlert('success', 'Usuario editado');
+        //     },
+        //     error: function(xhr, status, error) {
+        //         showAlert('error', 'Error al editar el usuario');
+        //     }
+        // })
+    });
 </script>

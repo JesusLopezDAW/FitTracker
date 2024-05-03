@@ -70,6 +70,9 @@
                             //     console.log("hola");
                             //     grid.api.refreshCells();
                             // }
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
                         },
                         error: function(xhr, status, error) {
                             showAlert('error', `Error al eliminar el ${this.entity}`);
