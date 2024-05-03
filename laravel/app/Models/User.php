@@ -63,7 +63,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Define la relación "hasMany" con el modelo Followers.
+     * Define la relación "hasMany" con el modelo Follower.
      */
     public function followers()
     {
@@ -71,10 +71,18 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Define la relación "hasMany" con el modelo Followings.
+     * Define la relación "hasMany" con el modelo Following.
      */
     public function followings()
     {
         return $this->hasMany(Following::class, 'user_id');
+    }
+
+    /**
+     * Define la relación "hasMany" con el modelo Log.
+     */
+    public function logs()
+    {
+        return $this->hasMany(Log::class, 'user_id');
     }
 }
