@@ -9,11 +9,13 @@ class Follower extends Model
 {
     use HasFactory;
 
-    /**
-     * Define la relación "belongsTo" con el modelo User.
-     */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
+    }
+
+    public function followerUser()
+    {
+        return $this->belongsTo(User::class, 'follower_user_id');
     }
 }

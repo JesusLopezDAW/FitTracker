@@ -9,11 +9,13 @@ class Log extends Model
 {
     use HasFactory;
 
-    /**
-     * Define la relación "belongsTo" con el modelo User.
-     */
+    public function workout()
+    {
+        return $this->belongsTo(Workout::class);
+    }
+
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 }

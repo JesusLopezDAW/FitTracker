@@ -8,11 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 class Workout extends Model
 {
     use HasFactory;
-    /**
-     * Get the user that owns the routine.
-     */
+    
     public function routine()
     {
         return $this->belongsTo(Routine::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function logs()
+    {
+        return $this->hasMany(Log::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function exerciseLogs()
+    {
+        return $this->hasMany(ExerciseLog::class);
     }
 }

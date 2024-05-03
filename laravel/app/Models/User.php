@@ -54,35 +54,48 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->rol === 'admin';
     }
 
-    /**
-     * Get the routines for the user.
-     */
+    public function logs()
+    {
+        return $this->hasMany(Log::class);
+    }
+
+    public function workouts()
+    {
+        return $this->hasMany(Workout::class);
+    }
+
     public function routines()
     {
         return $this->hasMany(Routine::class);
     }
 
-    /**
-     * Define la relación "hasMany" con el modelo Follower.
-     */
+    public function followedUsers()
+    {
+        return $this->belongsToMany(User::class, 'followings', 'user_id', 'followed_user_id');
+    }
+
     public function followers()
     {
-        return $this->hasMany(Follower::class, 'user_id');
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_user_id');
     }
 
-    /**
-     * Define la relación "hasMany" con el modelo Following.
-     */
-    public function followings()
+    public function posts()
     {
-        return $this->hasMany(Following::class, 'user_id');
+        return $this->hasMany(Post::class);
     }
 
-    /**
-     * Define la relación "hasMany" con el modelo Log.
-     */
-    public function logs()
+    public function comments()
     {
-        return $this->hasMany(Log::class, 'user_id');
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function exerciseLogs()
+    {
+        return $this->hasMany(Exercise_Log::class);
     }
 }
