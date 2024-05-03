@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follower;
+use App\Models\Following;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -83,7 +85,10 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::find($id);
+        // var_dump($user);
         if ($user) {
+            // Follower::where('follower_user_id', $user->id)->delete();
+            // Following::where('followed_user_id', $user->id)->delete();
             $user->delete();
             // Recupera los datos actualizados después de eliminar el ejercicio
             $users = User::all(); 

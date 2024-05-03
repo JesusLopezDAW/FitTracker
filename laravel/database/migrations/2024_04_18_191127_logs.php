@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer("records");
             $table->string("calories_burned");
             $table->unsignedBigInteger("workout_id");
-            $table->foreign("workout_id")->references("id")->on("workouts");
+            $table->foreign("workout_id")->references("id")->on("workouts")->onDelete('cascade');
             $table->unsignedBigInteger("user_id");
             $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
             $table->timestamps();
