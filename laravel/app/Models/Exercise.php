@@ -16,4 +16,9 @@ class Exercise extends Model
         'difficulty',
         'instructions',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

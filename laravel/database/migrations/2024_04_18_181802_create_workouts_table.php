@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('workouts', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("description", 200);
             $table->unsignedBigInteger("routine_id");
-            $table->foreign("routine_id")->references("id")->on("routines")->onDelete('cascade');
+            $table->string("name");
+            $table->longText("description", 200);
             $table->timestamps();
+
+            // Definición de claves foráneas
+            $table->foreign("routine_id")->references("id")->on("routines")->onDelete('cascade');
         });
     }
 

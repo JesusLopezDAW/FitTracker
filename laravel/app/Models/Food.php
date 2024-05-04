@@ -21,4 +21,9 @@ class Food extends Model
         'fiber_g',
         'sugar_g',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

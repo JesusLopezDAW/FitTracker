@@ -28,7 +28,7 @@ class LogFactory extends Factory
             'volume' => $this->faker->numberBetween(1, 8000),
             'records' => $this->faker->numberBetween(0, 5),
             'calories_burned' => $this->faker->randomFloat(2, 100, 1000),
-            'workout_id' => $this->faker->numberBetween(1, 2000),
+            'workout_id' => $this->faker->unique()->numberBetween(1, 2000),
             'user_id' => $this->faker->numberBetween(1, 500)
         ];
     }

@@ -4,10 +4,26 @@
     const exerciseButtonComponent = new DeleteButtomComponent('exercise');
 
     // Configurar columnDefs
-    const columnDefs = [
-        {
+    const columnDefs = [{
             headerName: 'ID',
             field: 'id',
+        },
+        {
+            headerName: 'Visibilidad',
+            field: 'visibility',
+            editable: true,
+            cellEditor: "agRichSelectCellEditor",
+            cellEditorParams: {
+                values: ["global", "user"],
+                filterList: true,
+                searchType: "match",
+                allowTyping: true,
+                valueListMaxHeight: 220,
+            }
+        },
+        {
+            headerName: 'Creado por',
+            field: 'user_id'
         },
         {
             headerName: 'Nombre',
@@ -17,12 +33,53 @@
         {
             headerName: 'Tipo',
             field: 'type',
-            editable: true
+            editable: true,
+            cellEditor: "agRichSelectCellEditor",
+            cellEditorParams: {
+                values: [
+                    'cardio',
+                    'olympic_weightlifting',
+                    'plyometrics',
+                    'powerlifting',
+                    'strength',
+                    'stretching',
+                    'strongman'
+                ],
+                filterList: true,
+                searchType: "match",
+                allowTyping: true,
+                valueListMaxHeight: 220,
+            }
         },
         {
             headerName: 'Musculo',
             field: 'muscle',
-            editable: true
+            editable: true,
+            cellEditor: "agRichSelectCellEditor",
+            cellEditorParams: {
+                values: [
+                    'abdominals',
+                    'abductors',
+                    'adductors',
+                    'biceps',
+                    'calves',
+                    'chest',
+                    'forearms',
+                    'glutes',
+                    'hamstrings',
+                    'lats',
+                    'lower_back',
+                    'middle_back',
+                    'neck',
+                    'quadriceps',
+                    'traps',
+                    'triceps'
+                ],
+                filterList: true,
+                searchType: "match",
+                allowTyping: true,
+                valueListMaxHeight: 220,
+            }
         },
         {
             headerName: 'Equipamiento',
@@ -32,7 +89,19 @@
         {
             headerName: 'Dificultad',
             field: 'difficulty',
-            editable: true
+            editable: true,
+            cellEditor: "agRichSelectCellEditor",
+            cellEditorParams: {
+                values: [
+                    'beginner',
+                    'intermediate',
+                    'expert'
+                ],
+                filterList: true,
+                searchType: "match",
+                allowTyping: true,
+                valueListMaxHeight: 220,
+            }
         },
         {
             headerName: 'Instrucciones',

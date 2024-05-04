@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            UserSeeder::class,
             ExerciseSeeder::class,
             FoodSeeder::class,
-            UserSeeder::class,
         ]);
 
         User::factory()->times(500)->create();

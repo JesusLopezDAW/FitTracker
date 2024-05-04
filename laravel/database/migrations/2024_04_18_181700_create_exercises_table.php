@@ -13,15 +13,51 @@ return new class extends Migration
     {
         Schema::create('exercises', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("user_id");
+            $table->enum("visibility",["global", "user"]);
             $table->string("name");
-            $table->string("type");
-            $table->string("muscle");
-            $table->string("equipment");
-            $table->string("difficulty");
+            $table->enum('type', [
+                'cardio',
+                'olympic_weightlifting',
+                'plyometrics',
+                'powerlifting',
+                'strength',
+                'stretching',
+                'strongman'
+            ]);
+            $table->enum('muscle', [
+                'abdominals',
+                'abductors',
+                'adductors',
+                'biceps',
+                'calves',
+                'chest',
+                'forearms',
+                'glutes',
+                'hamstrings',
+                'lats',
+                'lower_back',
+                'middle_back',
+                'neck',
+                'quadriceps',
+                'traps',
+                'triceps'
+            ]);
+            $table->string("equipment")->nullable();
+            $table->enum('difficulty', [
+                'beginner',
+                'intermediate',
+                'expert'
+            ]);
             $table->longText("instructions");
-            $table->longText("image");
-            $table->string("video");
+            $table->string("extra_info")->nullable();
+            $table->longText("image")->nullable();
+            $table->longText("image2")->nullable();
+            $table->longText("video")->nullable();
             $table->timestamps();
+
+            // Definición de claves foráneas
+            $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
         });
     }
     /**

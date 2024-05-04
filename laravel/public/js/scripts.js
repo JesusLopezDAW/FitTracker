@@ -21,9 +21,8 @@ window.showAlert = function (icon, title) {
 // filterInput -> ID del input para el buscador
 // tableName -> Nombre de la tabla
 // Ejemplo -> const gridOptions = createGrid(columnDefs, json, gridDiv, filterInput, "tableName");
-let datosJSON = "";
 window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableName) {
-    datosJSON = json;
+
     // Traducciones al español
     const localeText = {
         // Textos generales
@@ -115,8 +114,10 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
         defaultColDef: {
             resizable: true,
             sortable: true,
-            filter: true
+            filter: true,
+            enableRowGroup: true
         },
+        rowGroupPanelShow: 'always',
         // Cuando carga la tabla
         onGridReady: function (params) {
             // Recupera el estado de las columnas
@@ -136,12 +137,12 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
         },
         onColumnMoved: function (params) {
             // Guardar el estado de las columnas cuando se muevan
-            const columnState = params.columnApi.getColumnState();
+            const columnState = params.api.getColumnState();
             localStorage.setItem(`columnState${tableName}`, JSON.stringify(columnState));
         },
         onColumnPinned: function (params) {
             // Guardar el estado de las columnas cuando se pin o despin
-            const columnState = params.columnApi.getColumnState();
+            const columnState = params.api.getColumnState();
             localStorage.setItem(`columnState${tableName}`, JSON.stringify(columnState));
         },
         sideBar: {
@@ -166,7 +167,7 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
                     toolPanel: 'agFiltersToolPanel'
                 }
             ],
-            defaultToolPanel: null // Activar agrupación en la barra lateral
+            defaultToolPanel: true // Activar agrupación en la barra lateral
         },
     };
 
@@ -185,11 +186,6 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
     });
 
     return gridOptions;
-}
-
-// Refrescar tabla
-window.refreshTable = function(){
-    
 }
 
 // CSRF Token 
