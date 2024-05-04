@@ -308,7 +308,7 @@ foreach ($postsConLikes as $post) {
                                 <ul>
                                     @foreach ($post->workout->logs as $log)
                                         <li>
-                                            <p class="mb-0">workout ID: {{ $workout->id }}</p>
+                                            <p class="mb-0">workout ID: {{ $post->workout->id }}</p>
                                             <p class="mb-0">Log ID: {{ $log->id }}</p>
                                             <p class="mb-0">Start Date: {{ $log->start_date }}</p>
                                             <p class="mb-0">End Date: {{ $log->end_date }}</p>
