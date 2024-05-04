@@ -6,6 +6,7 @@ use App\Models\Follower;
 use App\Models\Following;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -28,7 +29,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validar los datos del formulario
+        
+
+        // Crear un nuevo usuario con los datos del formulario
+        $user = new User([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'username' => $request->username,
+            'phone_number' => $request->phone_number,
+            'gender' => $request->gender,
+            'birthdate' => $request->birthdate,
+            'email' => $request->email,
+            'password' => bcrypt($request->password), // Se encripta la contraseña
+            'profile_photo_path' => $request->profile_photo_path,
+            'rol' => $request->rol,
+        ]);
+
+        // Guardar el usuario en la base de datos
+        $user->save();
     }
 
     /**
