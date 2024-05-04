@@ -17,7 +17,7 @@ class ExerciseSeeder extends Seeder
         $data = json_decode($json);
 
         // Ruta de la imagen en tu computadora
-        $imagen = 'database/logoFitTracker.png';
+        $imagen = 'public/images/logoFitTracker.png';
 
         // Leer el contenido de la imagen como datos binarios
         $datosImagen = file_get_contents($imagen);

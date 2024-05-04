@@ -27,6 +27,7 @@ return new class extends Migration
             $table->integer("fiber_g");
             $table->integer("sugar_g");
             $table->string("extra_info")->nullable();
+            $table->longText("image")->nullable();
             $table->timestamps();
 
             // Definición de claves foráneas

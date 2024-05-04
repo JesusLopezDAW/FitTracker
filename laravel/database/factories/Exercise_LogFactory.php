@@ -18,7 +18,7 @@ class Exercise_LogFactory extends Factory
     {
         return [
             'workout_id' => $this->faker->numberBetween(1, 2000), // Assuming workouts range from 1 to 2000
-            'exercise_id' => $this->faker->numberBetween(1, 100), // Assuming there are 100 exercises
+            'exercise_id' => $this->faker->numberBetween(1, 160), // Assuming there are 100 exercises
             'serie_type' => $this->faker->randomElement(['warm_up', 'normal', 'failed', 'drop']),
             'series' => $this->faker->numberBetween(1, 5),
             'reps' => $this->faker->numberBetween(5, 15),

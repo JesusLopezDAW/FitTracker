@@ -40,8 +40,19 @@ class UserController extends Controller
 
         if ($user) {
             $routines = $user->routines()->with('workouts.exerciseLogs.exercise')->get();
+            $exercises = $user->exercises()->get();
+            $workouts = $user->routines()->with('workouts')->get();
+            $followedUsers = $user->followedUsers()->get();
+            $followers = $user->followers()->get();
+            $posts = $user->posts()->with('workout.logs')->get();
+            $comments = $user->comments()->get();
+            $likes = $user->likes()->get();
+            $likesRecibidos = $user->posts()->with('likes')->get();
+            $exercises = $user->exercises()->get();
+            $foods = $user->foods()->get();
+
             // Devolver los detalles del usuario a la vista
-            return view("admin.user-details", compact('user', 'routines'));
+            return view("admin.user-details", compact('user', 'routines', "workouts", "followedUsers", "followers", "posts", "comments", "likes", "likesRecibidos", "exercises", "foods"));
         } else {
             // Si el usuario no existe, podrías manejarlo de alguna manera
             // aquí, como mostrar un mensaje de error o redirigir a otra página
