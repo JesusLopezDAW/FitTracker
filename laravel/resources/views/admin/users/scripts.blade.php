@@ -4,8 +4,7 @@
     // Configurar columnDefs
     const userButtonComponent = new DeleteButtomComponent('user');
 
-    const columnDefs = [
-        {
+    const columnDefs = [{
             field: "",
             pinned: "left",
             resizable: false,
@@ -17,7 +16,7 @@
                 });
                 return userButtonComponent.getGui();
             },
-        }, 
+        },
         {
             headerName: 'ID',
             field: 'id',
@@ -144,6 +143,9 @@
     });
 
     // Modal
+    function getCSRFToken() {
+        return $('meta[name="csrf-token"]').attr('content');
+    }
     $("#openModalBtn").click(function() {
         $("#addUserModal").modal('show');
     });
@@ -155,16 +157,22 @@
         });
         console.log(datosAsociativos);
 
-        // $, ajax({
-        //     url: '/user/update',
-        //     type: 'PUT',
-        //     data: rowEdited,
-        //     success: function(response) {
-        //         showAlert('success', 'Usuario editado');
-        //     },
-        //     error: function(xhr, status, error) {
-        //         showAlert('error', 'Error al editar el usuario');
-        //     }
-        // })
+        // Obtener el token CSRF
+        const csrf = getcsrf();
+
+        $.ajax({
+            url: '/user',
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrf
+            },
+            data: datosAsociativos,
+            success: function(response) {
+                showAlert('success', 'Usuario editado');
+            },
+            error: function(xhr, status, error) {
+                showAlert('error', 'Error al editar el usuario');
+            }
+        });
     });
 </script>
