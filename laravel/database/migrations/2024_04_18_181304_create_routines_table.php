@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('routines', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("user_id");
             $table->string("name");
             $table->enum('type', [
                 'cardio',
@@ -33,9 +34,10 @@ return new class extends Migration
                 'aeróbicos',
                 'otros'
             ])->nullable();
-            $table->unsignedBigInteger("user_id");
-            $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
             $table->timestamps();
+
+            // Definición de claves foráneas
+            $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
         });
     }
 

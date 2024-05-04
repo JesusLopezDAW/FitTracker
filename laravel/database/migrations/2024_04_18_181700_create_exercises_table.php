@@ -14,13 +14,43 @@ return new class extends Migration
         Schema::create('exercises', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("type");
-            $table->string("muscle");
+            $table->enum('type', [
+                'cardio',
+                'olympic_weightlifting',
+                'plyometrics',
+                'powerlifting',
+                'strength',
+                'stretching',
+                'strongman'
+            ]);
+            $table->enum('muscle', [
+                'abdominals',
+                'abductors',
+                'adductors',
+                'biceps',
+                'calves',
+                'chest',
+                'forearms',
+                'glutes',
+                'hamstrings',
+                'lats',
+                'lower_back',
+                'middle_back',
+                'neck',
+                'quadriceps',
+                'traps',
+                'triceps'
+            ]);
             $table->string("equipment");
-            $table->string("difficulty");
+            $table->enum('difficulty', [
+                'beginner',
+                'intermediate',
+                'expert'
+            ]);
             $table->longText("instructions");
             $table->longText("image");
-            $table->string("video");
+            $table->longText("image2");
+            $table->longText("video");
             $table->timestamps();
         });
     }

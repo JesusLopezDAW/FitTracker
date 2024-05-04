@@ -37,6 +37,7 @@ class ExerciseSeeder extends Seeder
                 'difficulty' => $exercise->difficulty,
                 'instructions' => $exercise->instructions,
                 'image' => $blob,
+                'image2' => $blob,
                 'video' => "",
             ]);
         }

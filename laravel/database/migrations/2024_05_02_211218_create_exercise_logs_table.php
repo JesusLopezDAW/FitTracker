@@ -20,7 +20,6 @@ return new class extends Migration
             $table->integer('reps');
             $table->integer('kilograms');
             $table->timestamp('fecha_registro')->default(now());
-            // Puedes agregar otros campos según tus necesidades
             $table->timestamps();
 
             // Definición de claves foráneas

@@ -111,31 +111,35 @@ $routinesData = json_decode($routines);
                             <div id="collapse{{ $workout->id }}" class="collapse"
                                 aria-labelledby="heading{{ $workout->id }}" data-parent="#accordion">
                                 <div class="card-body">
-                                    <ul class="list-group list-group-flush">
-                                        @foreach ($workout->exercise_logs as $exerciseLog)
-                                            <li class="list-group-item">
-                                                <div class="d-flex align-items-center">
-                                                    <img src="{{ $exerciseLog->exercise->image }}"
-                                                        alt="Exercise Image" class="mr-3 rounded-circle"
-                                                        style="max-width: 100px;">
-                                                    <div>
-                                                        <p class="mb-0">{{ $exerciseLog->exercise->name }}</p>
-                                                        <br>
-                                                        <div class="d-flex">
-                                                            <div class="border rounded p-1 mr-2">
-                                                                <span><i class="fas fa-dumbbell"></i>
-                                                                    {{ $exerciseLog->series }} sets</span>
-                                                            </div>
-                                                            <div class="border rounded p-1">
-                                                                <span><i class="fas fa-sync-alt"></i>
-                                                                    {{ $exerciseLog->reps }} reps</span>
+                                    @if (count($workout->exercise_logs) > 0)
+                                        <ul class="list-group list-group-flush">
+                                            @foreach ($workout->exercise_logs as $exerciseLog)
+                                                <li class="list-group-item">
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="{{ $exerciseLog->exercise->image }}"
+                                                            alt="Exercise Image" class="mr-3 rounded-circle"
+                                                            style="max-width: 100px;">
+                                                        <div>
+                                                            <p class="mb-0">{{ $exerciseLog->exercise->name }}</p>
+                                                            <br>
+                                                            <div class="d-flex">
+                                                                <div class="border rounded p-1 mr-2">
+                                                                    <span><i class="fas fa-dumbbell"></i>
+                                                                        {{ $exerciseLog->series }} sets</span>
+                                                                </div>
+                                                                <div class="border rounded p-1">
+                                                                    <span><i class="fas fa-sync-alt"></i>
+                                                                        {{ $exerciseLog->reps }} reps</span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        <p>No hay ejercicios registrados para este entrenamiento.</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
