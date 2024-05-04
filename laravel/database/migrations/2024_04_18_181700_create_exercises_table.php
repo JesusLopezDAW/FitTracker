@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('exercises', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("user_id");
+            $table->enum("visibility",["global", "user"]);
             $table->string("name");
             $table->enum('type', [
                 'cardio',
@@ -41,17 +43,21 @@ return new class extends Migration
                 'traps',
                 'triceps'
             ]);
-            $table->string("equipment");
+            $table->string("equipment")->nullable();
             $table->enum('difficulty', [
                 'beginner',
                 'intermediate',
                 'expert'
             ]);
             $table->longText("instructions");
-            $table->longText("image");
-            $table->longText("image2");
-            $table->longText("video");
+            $table->string("extra_info")->nullable();
+            $table->longText("image")->nullable();
+            $table->longText("image2")->nullable();
+            $table->longText("video")->nullable();
             $table->timestamps();
+
+            // Definición de claves foráneas
+            $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
         });
     }
     /**

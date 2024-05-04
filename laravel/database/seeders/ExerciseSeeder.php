@@ -31,14 +31,17 @@ class ExerciseSeeder extends Seeder
         foreach ($data as $exercise) {
             DB::table('exercises')->insert([
                 'name' => $exercise->name,
+                'user_id' => 1,
+                'visibility' => 'global',
                 'type' => $exercise->type,
                 'muscle' => $exercise->muscle,
                 'equipment' => $exercise->equipment,
                 'difficulty' => $exercise->difficulty,
                 'instructions' => $exercise->instructions,
+                'extra_info' => "Creado desde el panel de administracion",
                 'image' => $blob,
                 'image2' => $blob,
-                'video' => "",
+                'video' => ""
             ]);
         }
     }

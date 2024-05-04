@@ -14,14 +14,24 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Crear el usuario "FitTracker"
+        DB::table('users')->insert([
+            'name' => 'FitTracker',
+            'email' => 'fittrackerhq@gmail.com',
+            'password' => Hash::make('fittrackerhq@gmail.com'),
+            'email_verified_at' => now(), 
+            'rol' => 'admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         // Crear el usuario "Jesus"
         DB::table('users')->insert([
             'name' => 'Jesus',
             'email' => 'jesuslpzz123@gmail.com',
             'password' => Hash::make('jesuslpzz123@gmail.com'),
-            'email_verified_at' => now(), // Establecer la fecha de verificación del correo electrónico como la fecha de hoy
+            'email_verified_at' => now(), 
             'rol' => 'admin',
-            // Los otros campos se llenarán con valores predeterminados o nulos según la definición del esquema
             'created_at' => now(),
             'updated_at' => now(),
         ]);

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('food', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("user_id");
+            $table->enum("visibility",["global", "user"]);
             $table->string("name");
             $table->integer("calories");
             $table->integer("size_portion_g");
@@ -24,7 +26,11 @@ return new class extends Migration
             $table->integer("carbohydrate_total_g");
             $table->integer("fiber_g");
             $table->integer("sugar_g");
+            $table->string("extra_info")->nullable();
             $table->timestamps();
+
+            // Definición de claves foráneas
+            $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
         });
     }
 

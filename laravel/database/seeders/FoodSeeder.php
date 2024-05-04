@@ -20,6 +20,8 @@ class FoodSeeder extends Seeder
         foreach ($data as $food) {
             DB::table('food')->insert([
                 'name' => $food->name,
+                'user_id' => 1,
+                'visibility' => 'global',
                 'calories' => $food->calories,
                 'size_portion_g' => $food->size_portion_g,
                 'total_fat_g' => $food->total_fat_g,
@@ -30,6 +32,7 @@ class FoodSeeder extends Seeder
                 'carbohydrate_total_g' => $food->carbohydrate_total_g,
                 'fiber_g' => $food->fiber_g,
                 'sugar_g' => $food->sugar_g,
+                'extra_info' => "Creado desde el panel de administracion",
             ]);
         }
     }
