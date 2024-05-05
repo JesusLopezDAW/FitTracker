@@ -3,7 +3,7 @@ $routinesData = json_decode($routines);
 $exercisesData = json_decode($exercises);
 $foodsData = json_decode($foods);
 $postsData = json_decode($posts);
-
+$exercisesPostsData = json_decode($exercisesPosts);
 // Sacar numero de likes que tiene el usuario
 $postsConLikes = json_decode($likesRecibidos);
 
@@ -281,47 +281,83 @@ foreach ($postsConLikes as $post) {
             </div>
 
         </div>
+
         <div class="tab-pane fade" id="posts" role="tabpanel" aria-labelledby="posts-tab">
             <!-- Contenido de la pestaña de ejercicios -->
-            {{-- <p>{{ print_r($postsData) }}</p> --}}
-            <div id="accordion">
+            <div class="row">
                 @foreach ($postsData as $post)
-                    <div class="card mb-3">
-                        <div class="card-header" id="heading{{ $post->id }}">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse"
-                                    data-target="#collapse{{ $post->id }}" aria-expanded="true"
-                                    aria-controls="collapse{{ $post->id }}">
-                                    <span class="text-dark font-weight-bold">{{ $post->title }}</span>
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse{{ $post->id }}" class="collapse"
-                            aria-labelledby="heading{{ $post->id }}" data-parent="#accordion">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">{{ $post->workout->name }}</h5>
+                            </div>
                             <div class="card-body">
-                                <div class="image-container"
-                                    style="width: 100px; height: 100px; overflow: hidden; border-radius: 50%;">
-                                    <img src="{{ $post->image }}" alt="Post Image"
-                                        style="width: 100%; height: auto; object-fit: cover;">
-                                </div>
-                                <p class="mb-0">Nombre del Workout: {{ $post->workout->name }}</p>
-                                <ul>
-                                    @foreach ($post->workout->logs as $log)
-                                        <li>
-                                            <p class="mb-0">workout ID: {{ $post->workout->id }}</p>
-                                            <p class="mb-0">Log ID: {{ $log->id }}</p>
-                                            <p class="mb-0">Start Date: {{ $log->start_date }}</p>
-                                            <p class="mb-0">End Date: {{ $log->end_date }}</p>
-                                            <!-- Agrega aquí los demás campos del log que deseas mostrar -->
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                @foreach ($post->workout->logs as $log)
+                                    <!-- Duración, Volumen y Records en la misma línea con títulos -->
+                                    <div style="display: flex; align-items: center;">
+                                        <div style="flex: 1; display: flex; flex-direction: column;">
+                                            <small>Duración</small>
+                                            <span>{{ $log->duration }}</span>
+                                        </div>
+                                        <div style="flex: 1; display: flex; flex-direction: column;">
+                                            <small>Volumen</small>
+                                            <span>{{ $log->volume }} kg</span>
+                                        </div>
+                                        <div style="flex: 1; display: flex; flex-direction: column;">
+                                            <small>Records</small>
+                                            <span>{{ $log->records }}<i class="fas fa-medal"></i></span>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <!-- Div que simula las dos partes de la imagen del post -->
+                                    <div class="post-image" id="{{ $log->id }}">
+                                        <div class="front-image">
+                                            <img src="{{ $post->image }}" alt="Post Image" class="img-fluid">
+                                        </div>
+                                        <div class="back-image">
+                                            <ul>
+                                                @foreach ($exercisesPostsData as $exercisePost)
+                                                    @if ($exercisePost->workout->id == $post->workout->id)
+                                                        @foreach ($exercisePost->workout->exercise_logs as $exerciseLog)
+                                                            <div class="exercise-container d-flex align-items-center mb-3" style="margin-left: -30px">
+                                                                <div class="image-container" style="width: 60px; height: 60px; overflow: hidden; border-radius: 50%; margin-right: 15px;">
+                                                                    <img src="{{ $exerciseLog->exercise->image }}" alt="{{ $exerciseLog->exercise->name }}" style="width: 100%; height: auto; object-fit: cover;">
+                                                                </div>
+                                                                <div>
+                                                                    @if ($exerciseLog->series == 1)
+                                                                        <p class="mb-0 text-dark" style="font-size: 16px;">{{ $exerciseLog->series }} serie de {{ $exerciseLog->exercise->name }}</p>
+                                                                    @else
+                                                                        <p class="mb-0 text-dark" style="font-size: 16px;">{{ $exerciseLog->series }} series de {{ $exerciseLog->exercise->name }}</p>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="circles-container">
+                                        <div class="circle-wrapper">
+                                            <label for="circle1" class="circle"></label>
+                                            <input type="checkbox" id="{{ $log->id }}circle1"
+                                                class="circle-checkbox" checked />
+                                        </div>
+                                        <div class="circle-wrapper">
+                                            <label for="circle2" class="circle"></label>
+                                            <input type="checkbox" id="{{ $log->id }}circle2"
+                                                class="circle-checkbox" />
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
+
+
         <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
             <!-- Contenido de la pestaña de ejercicios -->
             <div class="card">
