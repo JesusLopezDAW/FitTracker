@@ -4,7 +4,8 @@
     // Configurar columnDefs
     const userButtonComponent = new DeleteButtomComponent('user');
 
-    const columnDefs = [{
+    const columnDefs = [
+        {
             field: "",
             pinned: "left",
             resizable: false,

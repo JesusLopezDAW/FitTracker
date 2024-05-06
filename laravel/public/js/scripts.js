@@ -107,7 +107,6 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
         pagination: true, // Activar paginación
         paginationPageSize: 20, // Número de filas por página
         rowSelection: 'multiple', // Permitir selección de multiples filas control + click
-        suppressContextMenu: true, // Desactivar menú contextual
         suppressRowClickSelection: false, // Permitir selección de filas con clic
         animateRows: true, // Animar filas al agregar o eliminar
         enableCellTextSelection: true, // Permitir selección de texto en las celdas
@@ -115,7 +114,8 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
             resizable: true,
             sortable: true,
             filter: true,
-            enableRowGroup: true
+            enableRowGroup: true,
+            enableGroup: true
         },
         rowGroupPanelShow: 'always',
         // Cuando carga la tabla
@@ -169,6 +169,16 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
             ],
             defaultToolPanel: true // Activar agrupación en la barra lateral
         },
+        toolPanelParams: {
+            suppressPivots: true,
+            suppressPivotMode: true,
+            suppressValues: true,
+            suppressRowGroups: true, 
+            suppressColumns: false,
+            suppressFilters: false,
+            suppressValues: false,
+            enableGroup: true // Habilita la agrupación en la barra lateral
+        }
     };
 
     // Crear la cuadrícula utilizando Ag-Grid
