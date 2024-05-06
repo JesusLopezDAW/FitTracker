@@ -25,6 +25,19 @@
     }
 
 
+    #card-posts {
+        width: 80%
+    }
+
+    #rowsPosts {
+        /* margin-left: 10px; */
+    }
+
+    .smaller-font {
+        font-size: 16px;
+        /* Puedes ajustar este valor según tus preferencias */
+    }
+
     /* Estilos para la imagen del posts */
     .post-image {
         width: auto;
@@ -33,12 +46,13 @@
         /* Alto fijo */
         position: relative;
         overflow: hidden;
+        margin-bottom: -4px;
     }
 
     .post-image img {
         width: 100%;
         /* Para que la imagen se ajuste al tamaño del contenedor */
-        height: auto;
+        height: 377px;
     }
 
     .front-image {
@@ -68,7 +82,7 @@
         display: flex;
         justify-content: center;
         position: absolute;
-        bottom: 5px;
+        bottom: 68px;
         /* Ajusta la posición vertical según lo necesites */
         left: 0;
         right: 0;
@@ -93,5 +107,39 @@
 
     .circle-checkbox:checked {
         background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Estilos para la barra de desplazamiento horizontal */
+    .back-image::-webkit-scrollbar {
+        height: 0;
+        /* Oculta la altura de la barra de desplazamiento */
+        width: 0;
+        /* Oculta la anchura de la barra de desplazamiento */
+        opacity: 0;
+        /* Hace que la barra de desplazamiento sea transparente */
+    }
+
+    /* Estilo del riel de la barra de desplazamiento horizontal */
+    .back-image::-webkit-scrollbar-track {
+        background-color: #f3f1f1;
+        /* Color de fondo del riel */
+        border-radius: 8px;
+        /* Borde redondeado */
+    }
+
+    /* Estilo del mango de la barra de desplazamiento horizontal */
+    .back-image::-webkit-scrollbar-thumb {
+        background-color: #f3f1f1;
+        /* Color del mango */
+        border-radius: 8px;
+        /* Borde redondeado */
+    }
+
+    /* Hover sobre el mango de la barra de desplazamiento horizontal */
+    .back-image::-webkit-scrollbar-thumb:hover {
+        background-color: #d3d2d2;
+        /* Cambio de color al pasar el mouse */
+        opacity: 1;
+        /* Hace que la barra de desplazamiento sea visible al pasar el mouse */
     }
 </style>

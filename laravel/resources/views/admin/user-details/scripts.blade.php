@@ -11,10 +11,6 @@
         }
     });
 
-    // function toggleImage() {
-    //     document.querySelector('.post-image').classList.toggle('open');
-    // }
-
     $(".post-image").click(function() {
         // Obtener el ID del div post-image clicado
         const id = $(this).attr('id');
@@ -40,4 +36,5 @@
             $("#"+id+"circle2").prop("checked", false);
         }
     });
+
 </script>
