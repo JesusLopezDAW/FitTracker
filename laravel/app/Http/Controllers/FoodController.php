@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Food;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FoodController extends Controller
 {
@@ -27,7 +28,25 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Crear un nuevo usuario con los datos del formulario
+        $food = new Food([
+            'user_id' => Auth::id(),
+            'calories' => $request->calories,
+            'carbohydrate_total_g' => $request->carbohydrate_total_g,
+            'extra_info' => $request->extra_info,
+            'fiber_g' => $request->fiber_g,
+            'name' => $request->name,
+            'potassium_mg' => $request->potassium_mg,
+            'protein_g' => $request->protein_g,
+            'saturated_fat_g' => $request->saturated_fat_g,
+            'size_portion_g' => $request->size_portion_g,
+            'sodium_mg' => $request->sodium_mg,
+            'sugar_g' => $request->sugar_g,
+            'total_fat_g' => $request->total_fat_g
+        ]);
+
+        // Guardar el alimento en la base de datos
+        $food->save();
     }
 
     /**
@@ -84,7 +103,7 @@ class FoodController extends Controller
         if ($food) {
             $food->delete();
             // Recupera los datos actualizados después de eliminar el ejercicio
-            $foods = food::all(); 
+            $foods = food::all();
             // Devuelve una respuesta de éxito junto con los datos actualizados
             return response()->json(['message' => 'Alimento eliminado correctamente', 'data' => $foods], 200);
         } else {

@@ -169,10 +169,10 @@
             },
             data: datosAsociativos,
             success: function(response) {
-                showAlert('success', 'Usuario editado');
+                showAlert('success', 'Usuario creado correctamente');
             },
             error: function(xhr, status, error) {
-                showAlert('error', 'Error al editar el usuario');
+                showAlert('error', 'Error al crear el usuario');
             }
         });
     });

@@ -128,26 +128,37 @@
 
     // MODAL
     $("#openModalBtn").click(function() {
-        $("#addUserModal").modal('show');
+        $("#addFoodModal").modal('show');
     });
 
-    $("#btnGuardarUsuario").click(function() {
+    $("#btnGuardarAlimento").click(function() {
         let datosAsociativos = {};
         $("#content-modal input, #content-modal select").each(function() {
             datosAsociativos[$(this).attr("id")] = $(this).val();
         });
-        console.log(datosAsociativos);
+        datosAsociativos["extra_info"] = "Creado desde el panel de administracion";
+        // console.log(datosAsociativos);
 
-        // $, ajax({
-        //     url: '/user/update',
-        //     type: 'PUT',
-        //     data: rowEdited,
-        //     success: function(response) {
-        //         showAlert('success', 'Usuario editado');
-        //     },
-        //     error: function(xhr, status, error) {
-        //         showAlert('error', 'Error al editar el usuario');
-        //     }
-        // })
+        // Obtener el token CSRF
+        const csrf = getcsrf();
+
+        $.ajax({
+            url: '/food',
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrf
+            },
+            data: datosAsociativos,
+            success: function(response) {
+                showAlert('success', 'Aliemento creado correctamente');
+            },
+            error: function(xhr, status, error) {
+                if (xhr.responseText.includes("cannot be null")) {
+                    showAlert('error', 'Faltan campos por rellenar');
+                }else{
+                    showAlert('error', 'Error al crear el alimento');
+                }
+            }
+        })
     });
 </script>

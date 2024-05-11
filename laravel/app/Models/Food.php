@@ -9,6 +9,7 @@ class Food extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
         'calories',
         'total_fat_g',
         'name',
@@ -20,6 +21,7 @@ class Food extends Model
         'size_portion_g',
         'fiber_g',
         'sugar_g',
+        'extra_info'
     ];
 
     public function user()
