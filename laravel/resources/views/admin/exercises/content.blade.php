@@ -4,7 +4,7 @@
     <div class="example-header">
         <input type="text" id="filterInput" placeholder="Filtrar por..." oninput="onFilterTextBoxChanged()" />
         <button type="button" class="btn btn-primary" id="openModalBtn">
-            <i class="fas fa-user-plus"></i> Añadir Usuario
+            <i class="fas fa-user-plus"></i> Añadir Ejercicio
         </button>
     </div>
     <div id="grid-exercises" class="ag-theme-quartz"></div>
