@@ -105,7 +105,8 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
         rowData: json, // Los datos cargados desde el archivo JSON
         localeText: localeText, // Establecer el texto en español
         pagination: true, // Activar paginación
-        paginationPageSize: 20, // Número de filas por página
+        paginationPageSize: json.length, // Número de filas por página
+        paginationPageSizeSelector: [10, 20, 50, 100, 200, 500, 1000, json.length],
         rowSelection: 'multiple', // Permitir selección de multiples filas control + click
         suppressRowClickSelection: false, // Permitir selección de filas con clic
         animateRows: true, // Animar filas al agregar o eliminar
@@ -114,10 +115,10 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
             resizable: true,
             sortable: true,
             filter: true,
-            enableRowGroup: true,
-            enableGroup: true
+            // enableRowGroup: true,
+            // enableGroup: true
         },
-        rowGroupPanelShow: 'always',
+        // rowGroupPanelShow: 'always',
         // Cuando carga la tabla
         onGridReady: function (params) {
             // Recupera el estado de las columnas
@@ -166,19 +167,12 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
                     iconKey: 'filter',
                     toolPanel: 'agFiltersToolPanel'
                 }
-            ],
-            defaultToolPanel: true // Activar agrupación en la barra lateral
+            ]
         },
-        toolPanelParams: {
-            suppressPivots: true,
-            suppressPivotMode: true,
-            suppressValues: true,
-            suppressRowGroups: true, 
-            suppressColumns: false,
-            suppressFilters: false,
-            suppressValues: false,
-            enableGroup: true // Habilita la agrupación en la barra lateral
-        }
+        getRowHeight: function (params) {
+            return 28; // Establecer la altura de las filas en 30px
+        },
+        headerHeight: 30,
     };
 
     // Crear la cuadrícula utilizando Ag-Grid
