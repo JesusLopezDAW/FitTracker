@@ -155,48 +155,38 @@
         });
     });
 
-    gridOptions.api.addEventListener('cellDoubleClicked', function(event) {
-        // Verificar si la celda doble clic se encuentra en la columna "ID"
-        if (event.column.getColDef().field === 'id') {
-            Swal.fire({
-                // title: "¿Quieres ver los detalles del usuario?",
-                text: "¿Quieres ver los detalles del usuario?",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Ver detalles"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    const userName = event.data.name;
-                    // Redirigir al usuario a la URL para ver los detalles del usuario por su ID
-                    window.location.href = `/user/${userName}`;
-                }
-            });
-        }
-    });
-
     // MODAL
     $("#openModalBtn").click(function() {
-        $("#addUserModal").modal('show');
+        $("#addExerciseModal").modal('show');
     });
 
-    $("#btnGuardarUsuario").click(function() {
+    $("#btnGuardarEjercicio").click(function() {
         let datosAsociativos = {};
+        datosAsociativos['type'] = $("#content-modal select[name='type']").val()
         $("#content-modal input, #content-modal select").each(function() {
             datosAsociativos[$(this).attr("id")] = $(this).val();
         });
         console.log(datosAsociativos);
 
-        // $, ajax({
-        //     url: '/user/update',
-        //     type: 'PUT',
-        //     data: rowEdited,
-        //     success: function(response) {
-        //         showAlert('success', 'Usuario editado');
-        //     },
-        //     error: function(xhr, status, error) {
-        //         showAlert('error', 'Error al editar el usuario');
-        //     }
-        // })
+        const csrf = getcsrf();
+
+        $.ajax({
+            url: '/exercise',
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrf
+            },
+            data: datosAsociativos,
+            success: function(response) {
+                showAlert('success', 'Ejercicio añadido');
+            },
+            error: function(xhr, status, error) {
+                if (xhr.responseText.includes("cannot be null")) {
+                    showAlert('error', 'Faltan campos por rellenar');
+                }else{
+                    showAlert('error', 'Error al crear el ejercicio');
+                }
+            }
+        })
     });
 </script>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exercise;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExerciseController extends Controller
 {
@@ -29,7 +31,31 @@ class ExerciseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userId = Auth::id();
+
+        if (!$userId) {
+            return response()->json(['message' => 'El usuario no existe']);
+        }
+
+        $visibility = User::find($userId)->isAdmin() ? 'global' : 'user';
+
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'type' => 'required|in:cardio,olympic_weightlifting,plyometrics,powerlifting,strength,stretching,strongman',
+            'muscle' => 'nullable|in:abdominals,abductors,adductors,biceps,calves,chest,forearms,glutes,hamstrings,lats,lower_back,middle_back,neck,quadriceps,traps,triceps',
+            'equipment' => 'nullable|string',
+            'difficulty' => 'nullable|string',
+            'instructions' => 'required|string',
+            'image' => 'nullable|image',
+            'video' => 'nullable|string',
+        ]);
+
+        $validatedData['user_id'] = $userId;
+        $validatedData['visibility'] = $visibility;
+
+        $exercise = Exercise::create($validatedData);
+
+        return response()->json(['message' => 'Ejercicio creado correctamente', 'exercise' => $exercise], 201);
     }
 
     /**
@@ -77,7 +103,7 @@ class ExerciseController extends Controller
         if ($exercise) {
             $exercise->delete();
             // Recupera los datos actualizados después de eliminar el ejercicio
-            $exercises = Exercise::all(); 
+            $exercises = Exercise::all();
             // Devuelve una respuesta de éxito junto con los datos actualizados
             return response()->json(['message' => 'Ejercicio eliminado correctamente', 'data' => $exercises], 200);
         } else {
