@@ -33,10 +33,6 @@ class ExerciseController extends Controller
     {
         $userId = Auth::id();
 
-        if (!$userId) {
-            return response()->json(['message' => 'El usuario no existe']);
-        }
-
         $visibility = User::find($userId)->isAdmin() ? 'global' : 'user';
 
         $validatedData = $request->validate([
@@ -45,18 +41,24 @@ class ExerciseController extends Controller
             'muscle' => 'nullable|in:abdominals,abductors,adductors,biceps,calves,chest,forearms,glutes,hamstrings,lats,lower_back,middle_back,neck,quadriceps,traps,triceps',
             'equipment' => 'nullable|string',
             'difficulty' => 'nullable|string',
-            'instructions' => 'required|string',
-            'image' => 'nullable|image',
-            'video' => 'nullable|string',
+            'instructions' => 'required|string'
         ]);
 
         $validatedData['user_id'] = $userId;
         $validatedData['visibility'] = $visibility;
+        $validatedData['extra_info'] = "Creado desde el panel de administracion";
+
+        if ($request->hasFile('image')) {
+            $imagePath = public_path('images/' . $request->file('image')->getClientOriginalName());
+            $imageBlob = file_get_contents($imagePath); // Obtener el contenido de la imagen como blob
+            $validatedData['image'] = $imageBlob; // Asignar el blob al campo de imagen validado
+        }
 
         $exercise = Exercise::create($validatedData);
 
         return response()->json(['message' => 'Ejercicio creado correctamente', 'exercise' => $exercise], 201);
     }
+
 
     /**
      * Display the specified resource.

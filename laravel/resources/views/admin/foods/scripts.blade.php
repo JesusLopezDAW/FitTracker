@@ -133,32 +133,51 @@
 
     $("#btnGuardarAlimento").click(function() {
         let datosAsociativos = {};
+        let camposVacios = false;
+
         $("#content-modal input, #content-modal select").each(function() {
             datosAsociativos[$(this).attr("id")] = $(this).val();
+
+            switch ($(this).attr("id")) {
+                case "name":
+                case "calories":
+                case "size_portion_g":
+                case "total_fat_g":
+                case "saturated_fat_g":
+                case "protein_g":
+                case "sodium_mg":
+                case "potassium_mg":
+                case "carbohydrate_total_g":
+                case "fiber_g":
+                case "sugar_g":
+                    if ($(this).val() === "") {
+                        $(this).addClass("is-invalid");
+                        camposVacios = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
         });
-        datosAsociativos["extra_info"] = "Creado desde el panel de administracion";
-        // console.log(datosAsociativos);
 
-        // Obtener el token CSRF
-        const csrf = getcsrf();
-
-        $.ajax({
-            url: '/food',
-            type: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': csrf
-            },
-            data: datosAsociativos,
-            success: function(response) {
-                showAlert('success', 'Aliemento creado correctamente');
-            },
-            error: function(xhr, status, error) {
-                if (xhr.responseText.includes("cannot be null")) {
-                    showAlert('error', 'Faltan campos por rellenar');
-                }else{
+        if (camposVacios) {
+            showAlert('error', 'Por favor, completa todos los campos obligatorios.');
+        } else {
+            const csrf = getcsrf();
+            $.ajax({
+                url: '/food',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrf
+                },
+                data: datosAsociativos,
+                success: function(response) {
+                    showAlert('success', 'Alimento creado correctamente');
+                },
+                error: function(xhr, status, error) {
                     showAlert('error', 'Error al crear el alimento');
                 }
-            }
-        })
+            });
+        }
     });
 </script>
