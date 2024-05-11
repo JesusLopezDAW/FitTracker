@@ -27,3 +27,40 @@ body {
 .ag-watermark {
     display: none !important;
 }
+
+.ag-header {
+    background: #343A40 !important;
+}
+
+.ag-icon-asc,
+.ag-icon-desc,
+.ag-icon-menu,
+.ag-header-cell-resize,
+.ag-header-cell-text {
+    color: white !important;
+}
+
+.ag-header-cell-resize::after {
+    background-color: white !important;
+}
+
+.ag-theme-alpine .ag-row {
+    border: none !important;
+}
+
+.ag-row {
+    border: none !important
+}
+
+.ag-cell {
+    border-bottom: 0px !important;
+    border-top: 0px !important;
+}
+
+.ag-theme-quartz input[class^=ag-] {
+    min-height: 22px !important;
+}
+
+.ag-header-row-column-filter {
+    background-color: #f5f5f5 !important;
+}
