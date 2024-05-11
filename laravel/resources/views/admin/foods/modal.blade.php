@@ -143,24 +143,14 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Agrega los otros campos de la tabla aquí -->
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="visibility">Visibilidad</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-eye"></i></span>
-                                    </div>
-                                    <select class="form-control" id="visibility">
-                                        <option value="global">Global</option>
-                                        <option value="user">Usuario</option>
-                                    </select>
-                                </div>
+                                <label for="image">Imagen</label>
+                                <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

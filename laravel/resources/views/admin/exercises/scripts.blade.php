@@ -162,31 +162,45 @@
 
     $("#btnGuardarEjercicio").click(function() {
         let datosAsociativos = {};
-        datosAsociativos['type'] = $("#content-modal select[name='type']").val()
+        let camposVacios = false;
+
         $("#content-modal input, #content-modal select").each(function() {
             datosAsociativos[$(this).attr("id")] = $(this).val();
+
+            switch ($(this).attr("id")) {
+                case "name":
+                case "type":
+                case "muscle":
+                case "difficulty":
+                case "instructions":
+                    if ($(this).val() === "") {
+                        $(this).addClass("is-invalid");
+                        camposVacios = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
         });
-        console.log(datosAsociativos);
 
-        const csrf = getcsrf();
-
-        $.ajax({
-            url: '/exercise',
-            type: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': csrf
-            },
-            data: datosAsociativos,
-            success: function(response) {
-                showAlert('success', 'Ejercicio añadido');
-            },
-            error: function(xhr, status, error) {
-                if (xhr.responseText.includes("cannot be null")) {
-                    showAlert('error', 'Faltan campos por rellenar');
-                }else{
+        if (camposVacios) {
+            showAlert('error', 'Por favor, completa todos los campos obligatorios.');
+        } else {
+            const csrf = getcsrf();
+            $.ajax({
+                url: '/exercise',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrf
+                },
+                data: datosAsociativos,
+                success: function(response) {
+                    showAlert('success', 'Ejercicio añadido');
+                },
+                error: function(xhr, status, error) {
                     showAlert('error', 'Error al crear el ejercicio');
                 }
-            }
-        })
+            });
+        }
     });
 </script>

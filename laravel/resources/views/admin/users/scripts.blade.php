@@ -4,8 +4,7 @@
     // Configurar columnDefs
     const userButtonComponent = new DeleteButtomComponent('user');
 
-    const columnDefs = [
-        {
+    const columnDefs = [{
             field: "",
             pinned: "left",
             resizable: false,
@@ -153,23 +152,26 @@
 
     $("#btnGuardarUsuario").click(function() {
         let datosAsociativos = {};
+        let camposVacios = false; 
+
         $("#content-modal input, #content-modal select").each(function() {
             datosAsociativos[$(this).attr("id")] = $(this).val();
-        });
-        const user = $("#name").val();
-        const email = $("#email").val();
-        const password = $("#password").val();
 
-        if ( !user || !email || !password) {
-            if (!user) {
-                $("#name").addClass("is-invalid");
+            switch ($(this).attr("id")) {
+                case "name":
+                case "email":
+                case "password":
+                    if ($(this).val() === "") {
+                        $(this).addClass("is-invalid");
+                        camposVacios = true; 
+                    }
+                    break;
+                default:
+                    break;
             }
-            if (!email) {
-                $("#email").addClass("is-invalid");
-            }
-            if (!password) {
-                $("#password").addClass("is-invalid");
-            }
+        });
+
+        if (camposVacios) {
             showAlert('error', 'Por favor, completa todos los campos obligatorios.');
         } else {
             const csrf = getcsrf();
@@ -188,6 +190,5 @@
                 }
             });
         }
-
     });
 </script>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Food;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,25 +29,34 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        // Crear un nuevo usuario con los datos del formulario
-        $food = new Food([
-            'user_id' => Auth::id(),
-            'calories' => $request->calories,
-            'carbohydrate_total_g' => $request->carbohydrate_total_g,
-            'extra_info' => $request->extra_info,
-            'fiber_g' => $request->fiber_g,
-            'name' => $request->name,
-            'potassium_mg' => $request->potassium_mg,
-            'protein_g' => $request->protein_g,
-            'saturated_fat_g' => $request->saturated_fat_g,
-            'size_portion_g' => $request->size_portion_g,
-            'sodium_mg' => $request->sodium_mg,
-            'sugar_g' => $request->sugar_g,
-            'total_fat_g' => $request->total_fat_g
+        $userId = Auth::id();
+        $visibility = User::find($userId)->isAdmin() ? 'global' : 'user';
+
+        $imagenBase64 = base64_encode($request->image);
+        $blob = "data:image/jpeg;base64," . $imagenBase64;
+
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'calories' => 'required|integer',
+            'size_portion_g' => 'required|integer',
+            'total_fat_g' => 'required|integer',
+            'saturated_fat_g' => 'required|integer',
+            'protein_g' => 'required|integer',
+            'sodium_mg' => 'required|integer',
+            'potassium_mg' => 'required|integer',
+            'carbohydrate_total_g' => 'required|integer',
+            'fiber_g' => 'required|integer',
+            'sugar_g' => 'required|integer',
+            'image' => 'nullable|image'
         ]);
 
-        // Guardar el alimento en la base de datos
-        $food->save();
+        $validatedData['user_id'] = $userId;
+        $validatedData['visibility'] = $visibility;
+        $validatedData['extra_info'] = "Creado desde el panel de administracion";
+        $validatedData['image'] = $blob;
+
+        $food = Food::create($validatedData);
+        return response()->json(['message' => 'Alimento creado correctamente', 'food' => $food], 201);
     }
 
     /**
