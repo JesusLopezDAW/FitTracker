@@ -156,24 +156,38 @@
         $("#content-modal input, #content-modal select").each(function() {
             datosAsociativos[$(this).attr("id")] = $(this).val();
         });
-        console.log(datosAsociativos);
+        const user = $("#name").val();
+        const email = $("#email").val();
+        const password = $("#password").val();
 
-        // Obtener el token CSRF
-        const csrf = getcsrf();
-
-        $.ajax({
-            url: '/user',
-            type: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': csrf
-            },
-            data: datosAsociativos,
-            success: function(response) {
-                showAlert('success', 'Usuario creado correctamente');
-            },
-            error: function(xhr, status, error) {
-                showAlert('error', 'Error al crear el usuario');
+        if ( !user || !email || !password) {
+            if (!user) {
+                $("#name").addClass("is-invalid");
             }
-        });
+            if (!email) {
+                $("#email").addClass("is-invalid");
+            }
+            if (!password) {
+                $("#password").addClass("is-invalid");
+            }
+            showAlert('error', 'Por favor, completa todos los campos obligatorios.');
+        } else {
+            const csrf = getcsrf();
+            $.ajax({
+                url: '/user',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrf
+                },
+                data: datosAsociativos,
+                success: function(response) {
+                    showAlert('success', 'Usuario creado correctamente');
+                },
+                error: function(xhr, status, error) {
+                    showAlert('error', 'Error al crear el usuario');
+                }
+            });
+        }
+
     });
 </script>
