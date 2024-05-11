@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\ExerciseSuggestionController;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\FoodSuggestionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\Exercise;
@@ -23,7 +25,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::controller(ProfileController::class)->group(function () {
         Route::get('/profile', 'edit')->name('profile.edit');
         Route::patch('/profile', 'update')->name('profile.update');
-        Route::delete('/profile','destroy')->name('profile.destroy');
+        Route::delete('/profile', 'destroy')->name('profile.destroy');
     });
 
     // Recursos
@@ -34,6 +36,12 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
     Route::resource("/food", FoodController::class);
     Route::resource("/exercise", ExerciseController::class);
+
+    // Sugerencias
+    Route::prefix('suggestion')->group(function () {
+        Route::resource('/exercise', ExerciseSuggestionController::class);
+        Route::resource('/food', FoodSuggestionController::class);
+    });
 });
 
 require __DIR__ . '/auth.php';

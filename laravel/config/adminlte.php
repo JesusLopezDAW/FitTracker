@@ -334,6 +334,20 @@ return [
             'icon' => 'fas fa-fw fa-utensils',
         ],
         [
+            'text' => 'Sugerencias',
+            'icon' => 'fas fa-fw fa-envelope',
+            'submenu' => [
+                [
+                    'text' => 'Ejercicios',
+                    'url' => '/suggestion/exercise',
+                ],
+                [
+                    'text' => 'Alimentos',
+                    'url' => '/suggestion/food',
+                ],
+            ],
+        ],
+        [
             'text' => 'Ajustes',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-bars',
