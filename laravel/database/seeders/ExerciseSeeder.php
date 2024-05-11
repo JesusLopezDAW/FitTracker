@@ -17,7 +17,7 @@ class ExerciseSeeder extends Seeder
         $data = json_decode($json);
 
         // Ruta de la imagen en tu computadora
-        $imagen = 'database/logoFitTracker.png';
+        $imagen = 'public/images/logoFitTracker.png';
 
         // Leer el contenido de la imagen como datos binarios
         $datosImagen = file_get_contents($imagen);
@@ -31,13 +31,17 @@ class ExerciseSeeder extends Seeder
         foreach ($data as $exercise) {
             DB::table('exercises')->insert([
                 'name' => $exercise->name,
+                'user_id' => 1,
+                'visibility' => 'global',
                 'type' => $exercise->type,
                 'muscle' => $exercise->muscle,
                 'equipment' => $exercise->equipment,
                 'difficulty' => $exercise->difficulty,
                 'instructions' => $exercise->instructions,
+                'extra_info' => "Creado desde el panel de administracion",
                 'image' => $blob,
-                'video' => "",
+                'image2' => $blob,
+                'video' => ""
             ]);
         }
     }

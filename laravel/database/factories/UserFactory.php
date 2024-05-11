@@ -29,7 +29,7 @@ class UserFactory extends Factory
         $randomDate = mt_rand($startDate, $endDate);
 
         // Ruta de la imagen en tu computadora
-        $imagen = 'database/blank-profile-picture.png';
+        $imagen = 'public/images/blank-profile-picture.png';
 
         // Leer el contenido de la imagen como datos binarios
         $datosImagen = file_get_contents($imagen);

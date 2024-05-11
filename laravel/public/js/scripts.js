@@ -21,9 +21,8 @@ window.showAlert = function (icon, title) {
 // filterInput -> ID del input para el buscador
 // tableName -> Nombre de la tabla
 // Ejemplo -> const gridOptions = createGrid(columnDefs, json, gridDiv, filterInput, "tableName");
-let datosJSON = "";
 window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableName) {
-    datosJSON = json;
+
     // Traducciones al español
     const localeText = {
         // Textos generales
@@ -108,15 +107,17 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
         pagination: true, // Activar paginación
         paginationPageSize: 20, // Número de filas por página
         rowSelection: 'multiple', // Permitir selección de multiples filas control + click
-        suppressContextMenu: true, // Desactivar menú contextual
         suppressRowClickSelection: false, // Permitir selección de filas con clic
         animateRows: true, // Animar filas al agregar o eliminar
         enableCellTextSelection: true, // Permitir selección de texto en las celdas
         defaultColDef: {
             resizable: true,
             sortable: true,
-            filter: true
+            filter: true,
+            enableRowGroup: true,
+            enableGroup: true
         },
+        rowGroupPanelShow: 'always',
         // Cuando carga la tabla
         onGridReady: function (params) {
             // Recupera el estado de las columnas
@@ -136,12 +137,12 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
         },
         onColumnMoved: function (params) {
             // Guardar el estado de las columnas cuando se muevan
-            const columnState = params.columnApi.getColumnState();
+            const columnState = params.api.getColumnState();
             localStorage.setItem(`columnState${tableName}`, JSON.stringify(columnState));
         },
         onColumnPinned: function (params) {
             // Guardar el estado de las columnas cuando se pin o despin
-            const columnState = params.columnApi.getColumnState();
+            const columnState = params.api.getColumnState();
             localStorage.setItem(`columnState${tableName}`, JSON.stringify(columnState));
         },
         sideBar: {
@@ -166,8 +167,18 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
                     toolPanel: 'agFiltersToolPanel'
                 }
             ],
-            defaultToolPanel: null // Activar agrupación en la barra lateral
+            defaultToolPanel: true // Activar agrupación en la barra lateral
         },
+        toolPanelParams: {
+            suppressPivots: true,
+            suppressPivotMode: true,
+            suppressValues: true,
+            suppressRowGroups: true, 
+            suppressColumns: false,
+            suppressFilters: false,
+            suppressValues: false,
+            enableGroup: true // Habilita la agrupación en la barra lateral
+        }
     };
 
     // Crear la cuadrícula utilizando Ag-Grid
@@ -185,11 +196,6 @@ window.createGrid = function name(columnDefs, json, gridDiv, filterInput, tableN
     });
 
     return gridOptions;
-}
-
-// Refrescar tabla
-window.refreshTable = function(){
-    
 }
 
 // CSRF Token 

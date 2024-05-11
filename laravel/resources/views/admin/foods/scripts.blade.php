@@ -3,8 +3,7 @@
     const foodButtonComponent = new DeleteButtomComponent('food');
 
     // Configurar columnDefs
-    const columnDefs = [
-        {
+    const columnDefs = [{
             field: "",
             pinned: "left",
             resizable: false,
@@ -16,10 +15,27 @@
                 });
                 return foodButtonComponent.getGui();
             },
-        }, 
+        },
         {
             headerName: 'ID',
             field: 'id',
+        },
+        {
+            headerName: 'Visibilidad',
+            field: 'visibility',
+            editable: true,
+            cellEditor: "agRichSelectCellEditor",
+            cellEditorParams: {
+                values: ["global", "user"],
+                filterList: true,
+                searchType: "match",
+                allowTyping: true,
+                valueListMaxHeight: 220,
+            }
+        },
+        {
+            headerName: 'Creado por',
+            field: 'user_id'
         },
         {
             headerName: 'Nombre',

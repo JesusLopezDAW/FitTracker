@@ -27,7 +27,6 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->longText('profile_photo_path')->nullable();
             $table->enum('rol', ['user', 'admin'])->default("user");
-
             $table->timestamps();
         });
 

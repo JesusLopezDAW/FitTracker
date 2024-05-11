@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("workout_id");
+            $table->unsignedBigInteger("user_id");
             $table->date("start_date");
             $table->date("end_date");
             $table->string("duration");
             $table->integer("volume");
             $table->integer("records");
             $table->string("calories_burned");
-            $table->unsignedBigInteger("workout_id");
-            $table->foreign("workout_id")->references("id")->on("workouts")->onDelete('cascade');
-            $table->unsignedBigInteger("user_id");
-            $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
             $table->timestamps();
+
+            // Definición de claves foráneas
+            $table->foreign("user_id")->references("id")->on("users")->onDelete('cascade');
+            $table->foreign("workout_id")->references("id")->on("workouts")->onDelete('cascade');
         });
     }
 
