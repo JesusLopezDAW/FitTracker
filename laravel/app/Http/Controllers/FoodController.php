@@ -32,9 +32,6 @@ class FoodController extends Controller
         $userId = Auth::id();
         $visibility = User::find($userId)->isAdmin() ? 'global' : 'user';
 
-        $imagenBase64 = base64_encode($request->image);
-        $blob = "data:image/jpeg;base64," . $imagenBase64;
-
         $validatedData = $request->validate([
             'name' => 'required|string',
             'calories' => 'required|integer',
@@ -46,14 +43,21 @@ class FoodController extends Controller
             'potassium_mg' => 'required|integer',
             'carbohydrate_total_g' => 'required|integer',
             'fiber_g' => 'required|integer',
-            'sugar_g' => 'required|integer',
-            'image' => 'nullable|image'
+            'sugar_g' => 'required|integer'
         ]);
 
         $validatedData['user_id'] = $userId;
         $validatedData['visibility'] = $visibility;
         $validatedData['extra_info'] = "Creado desde el panel de administracion";
-        $validatedData['image'] = $blob;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('public/images/foods');
+            $imageFullPath = storage_path('app/' . $imagePath);
+            $imageBinary = file_get_contents($imageFullPath);
+            $imagenBase64 = base64_encode($imageBinary);
+            $imagenDataURL = "data:image/jpeg;base64," . $imagenBase64;
+            $validatedData['image'] = $imagenDataURL;
+        }
 
         $food = Food::create($validatedData);
         return response()->json(['message' => 'Alimento creado correctamente', 'food' => $food], 201);
@@ -97,8 +101,10 @@ class FoodController extends Controller
             'carbohydrate_total_g' => $request->input('carbohydrate_total_g'),
             'size_portion_g' => $request->input('size_portion_g'),
             'fiber_g' => $request->input('fiber_g'),
-            'sugar_g' => $request->input('sugar_g')
-        ]);;
+            'sugar_g' => $request->input('sugar_g'),
+            'visibility' => $request->input("visibility")
+        ]);
+
         $food->save();
 
         return response()->json(['message' => 'Alimento actualizado correctamente'], 200);

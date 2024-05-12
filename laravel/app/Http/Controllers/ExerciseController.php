@@ -96,19 +96,26 @@ class ExerciseController extends Controller
      */
     public function update(Request $request)
     {
-        $id = $request->input('id');
-        $exercise = Exercise::find($id);
 
-        $exercise->name = $request->input('name');
-        $exercise->type = $request->input('type');
-        $exercise->muscle = $request->input('muscle');
-        $exercise->equipment = $request->input('equipment');
-        $exercise->difficulty = $request->input('difficulty');
-        $exercise->instructions = $request->input('instructions');
+        $exercise = Exercise::find($request->id);
+
+        if (!$exercise) {
+            return response()->json(['error' => 'No se encontró el alimento'], 404);
+        }
+
+        $exercise->update([
+            'name' => $request->input('name'),
+            'type' => $request->input('type'),
+            'muscle' => $request->input('muscle'),
+            'equipment' => $request->input('equipment'),
+            'difficulty' => $request->input('difficulty'),
+            'instructions' => $request->input('instructions'),
+            'visibility' => $request->input('visibility')
+        ]);
 
         $exercise->save();
 
-        return "success";
+        return response()->json(['message' => 'Ejercicio actualizado correctamente'], 200);
     }
 
     /**
