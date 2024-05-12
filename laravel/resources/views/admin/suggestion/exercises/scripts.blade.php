@@ -22,6 +22,7 @@
         },
         {
             field: "",
+            pinned: "left",
             resizable: false,
             filter: false,
             width: 45,
@@ -39,6 +40,7 @@
         {
             headerName: 'Visibilidad',
             field: 'visibility',
+            pinned: "right",
             editable: true,
             cellEditor: "agRichSelectCellEditor",
             cellEditorParams: {

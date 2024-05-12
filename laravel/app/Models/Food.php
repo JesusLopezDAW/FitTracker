@@ -22,7 +22,8 @@ class Food extends Model
         'fiber_g',
         'sugar_g',
         'extra_info',
-        'visibility'
+        'visibility',
+        "image"
     ];
 
     public function user()

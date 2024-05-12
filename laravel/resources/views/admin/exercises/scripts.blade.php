@@ -3,7 +3,6 @@
 <script>
     const exerciseButtonComponent = new DeleteButtomComponent('exercise');
 
-    // Configurar columnDefs
     const columnDefs = [{
             headerName: 'ID',
             field: 'id',
@@ -128,20 +127,17 @@
         }
     ];
 
-    // Div donde se renderizará la tabla
     const gridDiv = document.querySelector('#grid-exercises');
     const filterInput = document.querySelector('#filterInput');
     const usersData = {!! $exercises->toJson() !!};
 
     const gridOptions = createGrid(columnDefs, usersData, gridDiv, filterInput, "exercises");
-    // Cuando se edite una celda guarda la fila de la celda que se ha editado
+
     gridOptions.api.addEventListener("cellValueChanged", function(event) {
         const rowEdited = event.node.data;
         const csrf = getcsrf();
-        rowEdited._token = csrf; // Agrega el token CSRF al objeto rowEdited
+        rowEdited._token = csrf;
 
-        console.log(rowEdited);
-        // Cuando se edita una celda hacemos un update de la fila a la base de datos
         $.ajax({
             url: '/exercise/update',
             type: 'PUT',
@@ -155,17 +151,18 @@
         });
     });
 
-    // MODAL
     $("#openModalBtn").click(function() {
         $("#addExerciseModal").modal('show');
     });
 
     $("#btnGuardarEjercicio").click(function() {
-        let datosAsociativos = {};
+        let formData = new FormData();
         let camposVacios = false;
 
         $("#content-modal input, #content-modal select").each(function() {
-            datosAsociativos[$(this).attr("id")] = $(this).val();
+            if ($(this).attr("id") != "image" && $(this).attr("id") != "video") {
+                formData.append($(this).attr("id"), $(this).val());
+            }
 
             switch ($(this).attr("id")) {
                 case "name":
@@ -183,6 +180,12 @@
             }
         });
 
+        let imageFile = $("#image")[0].files[0];
+        let videoFile = $("#video")[0].files[0];
+
+        formData.append('image', imageFile);
+        formData.append('video', videoFile);
+
         if (camposVacios) {
             showAlert('error', 'Por favor, completa todos los campos obligatorios.');
         } else {
@@ -193,9 +196,12 @@
                 headers: {
                     'X-CSRF-TOKEN': csrf
                 },
-                data: datosAsociativos,
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function(response) {
-                    showAlert('success', 'Ejercicio añadido');
+                    showAlert('success', 'Ejercicio creado correctamente');
+                    $("#addExerciseModal").modal('hide');
                 },
                 error: function(xhr, status, error) {
                     showAlert('error', 'Error al crear el ejercicio');

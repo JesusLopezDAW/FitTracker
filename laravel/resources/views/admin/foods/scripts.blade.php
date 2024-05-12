@@ -126,17 +126,18 @@
         });
     });
 
-    // MODAL
     $("#openModalBtn").click(function() {
         $("#addFoodModal").modal('show');
     });
 
     $("#btnGuardarAlimento").click(function() {
-        let datosAsociativos = {};
+        let formData = new FormData();
         let camposVacios = false;
 
         $("#content-modal input, #content-modal select").each(function() {
-            datosAsociativos[$(this).attr("id")] = $(this).val();
+            if ($(this).attr("id") != "image") {
+                formData.append($(this).attr("id"), $(this).val());
+            }
 
             switch ($(this).attr("id")) {
                 case "name":
@@ -160,6 +161,9 @@
             }
         });
 
+        let imageFile = $("#image")[0].files[0];
+        formData.append('image', imageFile);
+
         if (camposVacios) {
             showAlert('error', 'Por favor, completa todos los campos obligatorios.');
         } else {
@@ -170,7 +174,9 @@
                 headers: {
                     'X-CSRF-TOKEN': csrf
                 },
-                data: datosAsociativos,
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function(response) {
                     showAlert('success', 'Alimento creado correctamente');
                 },

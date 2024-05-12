@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Exercise;
 use App\Models\User;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ExerciseController extends Controller
 {
@@ -38,9 +41,9 @@ class ExerciseController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string',
             'type' => 'required|in:cardio,olympic_weightlifting,plyometrics,powerlifting,strength,stretching,strongman',
-            'muscle' => 'nullable|in:abdominals,abductors,adductors,biceps,calves,chest,forearms,glutes,hamstrings,lats,lower_back,middle_back,neck,quadriceps,traps,triceps',
+            'muscle' => 'nullable|in:abdominals,abductors,adductors,biceps,calves,chest,forearms,glutes,hamstrings,lats,lower_back,middle_back,neck,quadriceps,traps,triceps|string',
             'equipment' => 'nullable|string',
-            'difficulty' => 'nullable|string',
+            'difficulty' => 'nullable|string|in:beginner,intermediate,expert',
             'instructions' => 'required|string'
         ]);
 
@@ -49,9 +52,21 @@ class ExerciseController extends Controller
         $validatedData['extra_info'] = "Creado desde el panel de administracion";
 
         if ($request->hasFile('image')) {
-            $imagePath = public_path('images/' . $request->file('image')->getClientOriginalName());
-            $imageBlob = file_get_contents($imagePath); // Obtener el contenido de la imagen como blob
-            $validatedData['image'] = $imageBlob; // Asignar el blob al campo de imagen validado
+            $imagePath = $request->file('image')->store('public/images/exercises');
+            $imageFullPath = storage_path('app/' . $imagePath);
+            $imageBinary = file_get_contents($imageFullPath);
+            $imagenBase64 = base64_encode($imageBinary);
+            $imagenDataURL = "data:image/jpeg;base64," . $imagenBase64;
+            $validatedData['image'] = $imagenDataURL;
+        }
+
+        if ($request->hasFile('video')) {
+            $videoPath = $request->file('video')->store('public/videos/exercises');
+            $videoFullPath = storage_path('app/' . $videoPath);
+            $videoBinary = file_get_contents($videoFullPath);
+            $videoBase64 = base64_encode($videoBinary);
+            $videoDataURL = "data:video/mp4;base64," . $videoBase64;
+            $validatedData['video'] = $videoDataURL;
         }
 
         $exercise = Exercise::create($validatedData);
@@ -81,19 +96,26 @@ class ExerciseController extends Controller
      */
     public function update(Request $request)
     {
-        $id = $request->input('id');
-        $exercise = Exercise::find($id);
 
-        $exercise->name = $request->input('name');
-        $exercise->type = $request->input('type');
-        $exercise->muscle = $request->input('muscle');
-        $exercise->equipment = $request->input('equipment');
-        $exercise->difficulty = $request->input('difficulty');
-        $exercise->instructions = $request->input('instructions');
+        $exercise = Exercise::find($request->id);
+
+        if (!$exercise) {
+            return response()->json(['error' => 'No se encontró el alimento'], 404);
+        }
+
+        $exercise->update([
+            'name' => $request->input('name'),
+            'type' => $request->input('type'),
+            'muscle' => $request->input('muscle'),
+            'equipment' => $request->input('equipment'),
+            'difficulty' => $request->input('difficulty'),
+            'instructions' => $request->input('instructions'),
+            'visibility' => $request->input('visibility')
+        ]);
 
         $exercise->save();
 
-        return "success";
+        return response()->json(['message' => 'Ejercicio actualizado correctamente'], 200);
     }
 
     /**

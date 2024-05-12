@@ -40,6 +40,7 @@
         {
             headerName: 'Visibilidad',
             field: 'visibility',
+            pinned: "right",
             editable: true,
             cellEditor: "agRichSelectCellEditor",
             cellEditorParams: {
