@@ -1,24 +1,24 @@
 <?php
-    $routinesData = json_decode($routines);
-    $exercisesData = json_decode($exercises);
-    $foodsData = json_decode($foods);
-    $postsData = json_decode($posts);
-    $exercisesPostsData = json_decode($exercisesPosts);
-    $postsWithLikes = json_decode($likesRecibidos);
-    $commentsData = json_decode($commentsRecibidos);
-    $commentsUser = json_decode($comments);
+$routinesData = json_decode($routines);
+$exercisesData = json_decode($exercises);
+$foodsData = json_decode($foods);
+$postsData = json_decode($posts);
+$exercisesPostsData = json_decode($exercisesPosts);
+$postsWithLikes = json_decode($likesRecibidos);
+$commentsData = json_decode($commentsRecibidos);
+$commentsUser = json_decode($comments);
 
-    $totalLikes = 0;
-    foreach ($postsWithLikes as $post) {
-        $totalLikes += count($post->likes);
-    }
+$totalLikes = 0;
+foreach ($postsWithLikes as $post) {
+    $totalLikes += count($post->likes);
+}
 
-    $totalComments = 0;
-    if (!empty($commentsData)) {
-        foreach ($commentsData as $postComment) {
-            $totalComments += count($postComment->comments);
-        }
+$totalComments = 0;
+if (!empty($commentsData)) {
+    foreach ($commentsData as $postComment) {
+        $totalComments += count($postComment->comments);
     }
+}
 ?>
 
 <div class="container" style="margin-top: -24px;">
@@ -66,24 +66,34 @@
             <div class="card">
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><i class="fas fa-id-card mr-2"></i><strong>ID Usuario:</strong> {{ $user->id }}</li>
-                        <li class="list-group-item"><i class="fas fa-user mr-2"></i><strong>Nombre:</strong> {{ $user->name }}</li>
-                        <li class="list-group-item"><i class="fas fa-user mr-2"></i><strong>Apellido:</strong> {{ $user->surname }}</li>
-                        <li class="list-group-item"><i class="fas fa-user mr-2"></i><strong>Nombre de usuario:</strong> {{ $user->username }}</li>
-                        <li class="list-group-item"><i class="fas fa-phone-alt mr-2"></i><strong>Teléfono:</strong> {{ $user->phone_number }}</li>
-                        <li class="list-group-item"><i class="fas fa-venus-mars mr-2"></i><strong>Género:</strong> {{ $user->gender }}</li>
-                        <li class="list-group-item"><i class="fas fa-birthday-cake mr-2"></i><strong>Fecha de Nacimiento:</strong> {{ $user->birthdate }}</li>
-                        <li class="list-group-item"><i class="fas fa-envelope mr-2"></i><strong>Email:</strong> {{ $user->email }}</li>
-                        <li class="list-group-item"><i class="fas fa-user-tag mr-2"></i><strong>Rol:</strong> {{ $user->rol }}</li>
-                        <li class="list-group-item"><i class="fas fa-calendar-alt mr-2"></i><strong>Fecha de Creación:</strong> {{ $user->created_at }}</li>
+                        <li class="list-group-item"><i class="fas fa-id-card mr-2"></i><strong>ID Usuario:</strong>
+                            {{ $user->id }}</li>
+                        <li class="list-group-item"><i class="fas fa-user mr-2"></i><strong>Nombre:</strong>
+                            {{ $user->name }}</li>
+                        <li class="list-group-item"><i class="fas fa-user mr-2"></i><strong>Apellido:</strong>
+                            {{ $user->surname }}</li>
+                        <li class="list-group-item"><i class="fas fa-user mr-2"></i><strong>Nombre de usuario:</strong>
+                            {{ $user->username }}</li>
+                        <li class="list-group-item"><i class="fas fa-phone-alt mr-2"></i><strong>Teléfono:</strong>
+                            {{ $user->phone_number }}</li>
+                        <li class="list-group-item"><i class="fas fa-venus-mars mr-2"></i><strong>Género:</strong>
+                            {{ $user->gender }}</li>
+                        <li class="list-group-item"><i class="fas fa-birthday-cake mr-2"></i><strong>Fecha de
+                                Nacimiento:</strong> {{ $user->birthdate }}</li>
+                        <li class="list-group-item"><i class="fas fa-envelope mr-2"></i><strong>Email:</strong>
+                            {{ $user->email }}</li>
+                        <li class="list-group-item"><i class="fas fa-user-tag mr-2"></i><strong>Rol:</strong>
+                            {{ $user->rol }}</li>
+                        <li class="list-group-item"><i class="fas fa-calendar-alt mr-2"></i><strong>Fecha de
+                                Creación:</strong> {{ $user->created_at }}</li>
                     </ul>
                 </div>
             </div>
             <div class="card">
                 <div class="card-header bg-light" id="extraDataHeading">
                     <h5 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#extraDataCollapse"
-                            aria-expanded="true" aria-controls="extraDataCollapse">
+                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                            data-target="#extraDataCollapse" aria-expanded="true" aria-controls="extraDataCollapse">
                             <i class="fas fa-info-circle mr-2"></i>Datos Extra
                         </button>
                     </h5>
@@ -91,17 +101,31 @@
                 <div id="extraDataCollapse" class="collapse" aria-labelledby="extraDataHeading">
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><i class="fas fa-dumbbell mr-2"></i><strong>Rutinas:</strong> {{ count($routines) }}</li>
-                            <li class="list-group-item"><i class="fas fa-running mr-2"></i><strong>Entrenamientos:</strong> {{ count($workouts) }}</li>
-                            <li class="list-group-item"><i class="fas fa-dumbbell mr-2"></i><strong>Ejercicios propios:</strong> {{ count($exercises) }}</li>
-                            <li class="list-group-item"><i class="fas fa-utensils mr-2"></i><strong>Aliementos propios:</strong> {{ count($foods) }}</li>
-                            <li class="list-group-item"><i class="fas fa-user-friends mr-2"></i><strong>Siguiendo:</strong> {{ count($followedUsers) }}</li>
-                            <li class="list-group-item"><i class="fas fa-users mr-2"></i><strong>Seguidores:</strong> {{ count($followers) }}</li>
-                            <li class="list-group-item"><i class="fas fa-edit mr-2"></i><strong>Posts:</strong> {{ count($posts) }}</li>
-                            <li class="list-group-item"><i class="fas fa-comment mr-2"></i><strong>Comentarios:</strong> {{ count($comments) }}</li>
-                            <li class="list-group-item"><i class="fas fa-comments mr-2"></i><strong>Comentarios recibidos:</strong> {{ $totalComments }}</li>
-                            <li class="list-group-item"><i class="fas fa-thumbs-up mr-2"></i><strong>Likes:</strong> {{ count($likes) }}</li>
-                            <li class="list-group-item"><i class="fas fa-thumbs-up mr-2"></i><strong>Likes Recibidos:</strong> {{ $totalLikes }}</li>
+                            <li class="list-group-item"><i class="fas fa-dumbbell mr-2"></i><strong>Rutinas:</strong>
+                                {{ count($routines) }}</li>
+                            <li class="list-group-item"><i
+                                    class="fas fa-running mr-2"></i><strong>Entrenamientos:</strong>
+                                {{ count($workouts) }}</li>
+                            <li class="list-group-item"><i class="fas fa-dumbbell mr-2"></i><strong>Ejercicios
+                                    propios:</strong> {{ count($exercises) }}</li>
+                            <li class="list-group-item"><i class="fas fa-utensils mr-2"></i><strong>Aliementos
+                                    propios:</strong> {{ count($foods) }}</li>
+                            <li class="list-group-item"><i
+                                    class="fas fa-user-friends mr-2"></i><strong>Siguiendo:</strong>
+                                {{ count($followedUsers) }}</li>
+                            <li class="list-group-item"><i class="fas fa-users mr-2"></i><strong>Seguidores:</strong>
+                                {{ count($followers) }}</li>
+                            <li class="list-group-item"><i class="fas fa-edit mr-2"></i><strong>Posts:</strong>
+                                {{ count($posts) }}</li>
+                            <li class="list-group-item"><i
+                                    class="fas fa-comment mr-2"></i><strong>Comentarios:</strong>
+                                {{ count($comments) }}</li>
+                            <li class="list-group-item"><i class="fas fa-comments mr-2"></i><strong>Comentarios
+                                    recibidos:</strong> {{ $totalComments }}</li>
+                            <li class="list-group-item"><i class="fas fa-thumbs-up mr-2"></i><strong>Likes:</strong>
+                                {{ count($likes) }}</li>
+                            <li class="list-group-item"><i class="fas fa-thumbs-up mr-2"></i><strong>Likes
+                                    Recibidos:</strong> {{ $totalLikes }}</li>
                         </ul>
                     </div>
                 </div>
@@ -110,7 +134,8 @@
         <div class="tab-pane fade" id="routines" role="tabpanel" aria-labelledby="routines-tab">
             <div class="accordion" id="routineAccordion">
                 @if (empty($routinesData))
-                    <p style="font-size: 28px; color: #555; text-align: center; margin-top: 220px;">{{ $user->username }} no tiene rutinas.</p>
+                    <p style="font-size: 28px; color: #555; text-align: center; margin-top: 220px;">
+                        {{ $user->username }} no tiene rutinas.</p>
                 @else
                     @foreach ($routinesData as $routine)
                         <div class="card mb-3">
@@ -119,7 +144,8 @@
                                     <button class="btn btn-link" type="button" data-toggle="collapse"
                                         data-target="#routineCollapse{{ $routine->id }}" aria-expanded="true"
                                         aria-controls="routineCollapse{{ $routine->id }}">
-                                        <span class="text-dark"><i class="fas fa-list-alt mr-2"></i>ID Rutina {{ $routine->id }}</span>
+                                        <span class="text-dark"><i class="fas fa-list-alt mr-2"></i>ID Rutina
+                                            {{ $routine->id }}</span>
                                     </button>
                                     <button class="btn btn-link" type="button" data-toggle="collapse"
                                         data-target="#routineCollapse{{ $routine->id }}" aria-expanded="true"
@@ -135,7 +161,8 @@
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item"><strong>Nombre de Rutina:</strong>
                                             {{ $routine->name }}</li>
-                                        <li class="list-group-item"><strong>Tipo de Rutina:</strong> {{ $routine->type }}
+                                        <li class="list-group-item"><strong>Tipo de Rutina:</strong>
+                                            {{ $routine->type }}
                                         </li>
                                     </ul>
                                 </div>
@@ -149,7 +176,8 @@
             <div id="accordion">
                 @forelse ($routinesData as $routine)
                     @if (empty($routine))
-                        <p style="font-size: 28px; color: #555; text-align: center; margin-top: 220px;">{{ $user->username }} no tiene entrenamientos.</p>
+                        <p style="font-size: 28px; color: #555; text-align: center; margin-top: 220px;">
+                            {{ $user->username }} no tiene entrenamientos.</p>
                     @else
                         @foreach ($routine->workouts as $workout)
                             <div class="card mb-3">
@@ -158,7 +186,8 @@
                                         <button class="btn btn-link" data-toggle="collapse"
                                             data-target="#collapse{{ $workout->id }}" aria-expanded="true"
                                             aria-controls="collapse{{ $workout->id }}">
-                                            <span class="text-dark"><i class="fas fa-dumbbell mr-2"></i>{{ $workout->name }}</span>
+                                            <span class="text-dark"><i
+                                                    class="fas fa-dumbbell mr-2"></i>{{ $workout->name }}</span>
                                         </button>
                                     </h5>
                                 </div>
@@ -172,13 +201,17 @@
                                                         <div class="d-flex align-items-center">
                                                             <div class="image-container"
                                                                 style="width: 100px; height: 100px; overflow: hidden; border-radius: 50%;">
-                                                                <img src="{{ $exerciseLog->exercise->image }}"
+                                                                {{-- <img src="{{ $exerciseLog->exercise->image }}"
+                                                                    alt="Exercise Image"
+                                                                    style="width: 100%; height: auto; object-fit: cover;"> --}}
+                                                                <img src="data:image/jpeg;base64,{{ $exerciseLog->exercise->image }}"
                                                                     alt="Exercise Image"
                                                                     style="width: 100%; height: auto; object-fit: cover;">
                                                             </div>
                                                             <div class="ml-3 d-flex flex-column">
                                                                 <!-- Añade un margen a la izquierda y establece flex-column para alinear verticalmente -->
-                                                                <p class="mb-0">{{ $exerciseLog->exercise->name }}</p>
+                                                                <p class="mb-0">{{ $exerciseLog->exercise->name }}
+                                                                </p>
                                                                 <div class="d-flex">
                                                                     <div class="border rounded p-1 mr-2">
                                                                         <span><i class="fas fa-dumbbell"></i>
@@ -203,14 +236,16 @@
                         @endforeach
                     @endif
                 @empty
-                    <p style="font-size: 28px; color: #555; text-align: center; margin-top: 220px;">{{ $user->username }} no tiene rutinas.</p>
+                    <p style="font-size: 28px; color: #555; text-align: center; margin-top: 220px;">
+                        {{ $user->username }} no tiene rutinas.</p>
                 @endforelse
             </div>
         </div>
         <div class="tab-pane fade" id="exercises" role="tabpanel" aria-labelledby="exercises-tab">
             <div class="accordion" id="exerciseAccordion">
                 @if (empty($exercisesData))
-                    <p style="font-size: 28px; color: #555; text-align: center; margin-top: 220px;">{{ $user->username }} no tiene ejercicios propios.</p>
+                    <p style="font-size: 28px; color: #555; text-align: center; margin-top: 220px;">
+                        {{ $user->username }} no tiene ejercicios propios.</p>
                 @else
                     @foreach ($exercisesData as $exercise)
                         <div class="card mb-3">
@@ -250,14 +285,15 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach 
+                    @endforeach
                 @endif
             </div>
         </div>
         <div class="tab-pane fade" id="foods" role="tabpanel" aria-labelledby="foods-tab">
             <div class="accordion" id="foodAccordion">
                 @if (empty($foodsData))
-                    <p style="font-size: 28px; color: #555; text-align: center; margin-top: 220px;">{{ $user->username }} no tiene aliementos propios.</p>
+                    <p style="font-size: 28px; color: #555; text-align: center; margin-top: 220px;">
+                        {{ $user->username }} no tiene aliementos propios.</p>
                 @else
                     @foreach ($foodsData as $food)
                         <div class="card mb-3">
@@ -316,7 +352,8 @@
             <!-- Contenido de la pestaña de ejercicios -->
             <div class="row justify-content">
                 @if (empty($postsData))
-                    <p style="font-size: 28px; color: #555; text-align: center; margin-top: 220px;">{{ $user->username }} no tiene posts.</p>
+                    <p style="font-size: 28px; color: #555; text-align: center; margin-top: 220px;">
+                        {{ $user->username }} no tiene posts.</p>
                 @else
                     @foreach ($postsData as $post)
                         <div class="col-md-4 mb-3" id="rowsPosts">
@@ -352,15 +389,25 @@
                                                     @foreach ($exercisesPostsData as $exercisePost)
                                                         @if ($exercisePost->workout->id == $post->workout->id)
                                                             @foreach ($exercisePost->workout->exercise_logs as $exerciseLog)
-                                                                <div class="exercise-container d-flex align-items-center mb-3" style="margin-left: -30px">
-                                                                    <div class="image-container" style="width: 60px; height: 60px; overflow: hidden; border-radius: 50%; margin-right: 15px;">
-                                                                        <img src="{{ $exerciseLog->exercise->image }}" alt="{{ $exerciseLog->exercise->name }}" style="width: 100%; height: auto; object-fit: cover;">
+                                                                <div class="exercise-container d-flex align-items-center mb-3"
+                                                                    style="margin-left: -30px">
+                                                                    <div class="image-container"
+                                                                        style="width: 60px; height: 60px; overflow: hidden; border-radius: 50%; margin-right: 15px;">
+                                                                        <img src="{{ $exerciseLog->exercise->image }}"
+                                                                            alt="{{ $exerciseLog->exercise->name }}"
+                                                                            style="width: 100%; height: auto; object-fit: cover;">
                                                                     </div>
                                                                     <div>
                                                                         @if ($exerciseLog->series == 1)
-                                                                            <p class="mb-0 text-dark" style="font-size: 16px;">{{ $exerciseLog->series }} serie de {{ $exerciseLog->exercise->name }}</p>
+                                                                            <p class="mb-0 text-dark"
+                                                                                style="font-size: 16px;">
+                                                                                {{ $exerciseLog->series }} serie de
+                                                                                {{ $exerciseLog->exercise->name }}</p>
                                                                         @else
-                                                                            <p class="mb-0 text-dark" style="font-size: 16px;">{{ $exerciseLog->series }} series de {{ $exerciseLog->exercise->name }}</p>
+                                                                            <p class="mb-0 text-dark"
+                                                                                style="font-size: 16px;">
+                                                                                {{ $exerciseLog->series }} series de
+                                                                                {{ $exerciseLog->exercise->name }}</p>
                                                                         @endif
                                                                     </div>
                                                                 </div>
@@ -368,39 +415,42 @@
                                                         @endif
                                                     @endforeach
                                                 </ul>
-                                            </div>                                                                          
+                                            </div>
                                         </div>
                                         <div class="circles-container">
                                             <div class="circle-wrapper">
                                                 <label for="circle1" class="circle"></label>
-                                                <input type="checkbox" id="{{ $log->id }}circle1" class="circle-checkbox" checked />
+                                                <input type="checkbox" id="{{ $log->id }}circle1"
+                                                    class="circle-checkbox" checked />
                                             </div>
                                             <div class="circle-wrapper">
                                                 <label for="circle2" class="circle"></label>
-                                                <input type="checkbox" id="{{ $log->id }}circle2" class="circle-checkbox" />
+                                                <input type="checkbox" id="{{ $log->id }}circle2"
+                                                    class="circle-checkbox" />
                                             </div>
                                         </div>
                                         <hr>
-                                        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                        <div
+                                            style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
                                             <?php
-                                                foreach ($postsWithLikes as $postLike) {
-                                                    if ($postLike->id == $post->id) {
-                                                        $numLikes = count($postLike->likes);
-                                                    }
+                                            foreach ($postsWithLikes as $postLike) {
+                                                if ($postLike->id == $post->id) {
+                                                    $numLikes = count($postLike->likes);
                                                 }
+                                            }
                                             ?>
                                             <div>
-                                                <small>&nbsp; &nbsp; {{$numLikes}} me gustas</small>
+                                                <small>&nbsp; &nbsp; {{ $numLikes }} me gustas</small>
                                             </div>
                                             <?php
-                                                foreach ($commentsData as $postComment) {
-                                                    if ($postComment->id == $post->id) {
-                                                        $numComments = count($postComment->comments);
-                                                    }
+                                            foreach ($commentsData as $postComment) {
+                                                if ($postComment->id == $post->id) {
+                                                    $numComments = count($postComment->comments);
                                                 }
+                                            }
                                             ?>
                                             <div>
-                                                <small>{{$numComments}} comentarios</small> &nbsp; &nbsp;
+                                                <small>{{ $numComments }} comentarios</small> &nbsp; &nbsp;
                                             </div>
                                         </div>
                                     @endforeach
@@ -415,22 +465,22 @@
             <div class="card">
                 <div class="card-body">
                     @foreach ($commentsUser as $comment)
-                    <div class="card mb-3">
-                        <div class="card-body d-flex align-items-center">
-                            <div class="border rounded p-1 mr-2" style="background-color: #f8f9fa;">
-                                <i class="far fa-comment"></i> Comentario ID: {{ $comment->id }}
+                        <div class="card mb-3">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="border rounded p-1 mr-2" style="background-color: #f8f9fa;">
+                                    <i class="far fa-comment"></i> Comentario ID: {{ $comment->id }}
+                                </div>
+                                <div class="border rounded p-1 ml-2" style="background-color: #f8f9fa;">
+                                    <i class="far fa-sticky-note"></i> Post ID: {{ $comment->post_id }}
+                                </div>
                             </div>
-                            <div class="border rounded p-1 ml-2" style="background-color: #f8f9fa;">
-                                <i class="far fa-sticky-note"></i> Post ID: {{ $comment->post_id }}
+                            <div class="card-body py-2">
+                                <p class="card-text">Comentario: {{ $comment->content }}</p>
                             </div>
                         </div>
-                        <div class="card-body py-2">
-                            <p class="card-text">Comentario: {{ $comment->content }}</p>
-                        </div>
-                    </div>
                     @endforeach
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 </div>

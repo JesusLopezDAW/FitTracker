@@ -160,13 +160,108 @@
         $("#addExerciseModal").modal('show');
     });
 
+    // $("#btnGuardarEjercicio").click(function() {
+    //     let datosAsociativos = {};
+    //     let camposVacios = false;
+
+    //     $("#content-modal input, #content-modal select").each(function() {
+    //         datosAsociativos[$(this).attr("id")] = $(this).val();
+
+    //         switch ($(this).attr("id")) {
+    //             case "name":
+    //             case "type":
+    //             case "muscle":
+    //             case "difficulty":
+    //             case "instructions":
+    //                 if ($(this).val() === "") {
+    //                     $(this).addClass("is-invalid");
+    //                     camposVacios = true;
+    //                 }
+    //                 break;
+    //             default:
+    //                 break;
+    //         }
+    //     });
+    //     console.log(datosAsociativos);
+    //     if (camposVacios) {
+    //         showAlert('error', 'Por favor, completa todos los campos obligatorios.');
+    //     } else {
+    //         const csrf = getcsrf();
+    //         $.ajax({
+    //             url: '/exercise',
+    //             type: 'POST',
+    //             headers: {
+    //                 'X-CSRF-TOKEN': csrf
+    //             },
+    //             data: datosAsociativos,
+    //             success: function(response) {
+    //                 showAlert('success', 'Ejercicio añadido');
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 showAlert('error', 'Error al crear el ejercicio');
+    //             }
+    //         });
+    //     }
+    // });
+
+    // $("#btnGuardarEjercicio").click(function() {
+    //     let formData = new FormData($("#exerciseForm")[0]); // Obtener los datos del formulario
+    //     console.log("FormData:", formData); 
+    //     // Validar campos obligatorios
+    //     let camposVacios = false;
+    //     $("#content-modal input, #content-modal select").each(function() {
+    //         switch ($(this).attr("id")) {
+    //             case "name":
+    //             case "type":
+    //             case "muscle":
+    //             case "difficulty":
+    //             case "instructions":
+    //                 if ($(this).val() === "") {
+    //                     $(this).addClass("is-invalid");
+    //                     camposVacios = true;
+    //                 }
+    //                 break;
+    //             default:
+    //                 break;
+    //         }
+    //     });
+
+    //     if (camposVacios) {
+    //         showAlert('error', 'Por favor, completa todos los campos obligatorios.');
+    //     } else {
+    //         console.log(formData);
+    //         const csrf = getcsrf();
+    //         $.ajax({
+    //             url: '/exercise',
+    //             type: 'POST',
+    //             headers: {
+    //                 'X-CSRF-TOKEN': csrf
+    //             },
+    //             data: formData, // Enviar datos del formulario
+    //             processData: false, // Desactivar el procesamiento de datos
+    //             contentType: false, // Desactivar el tipo de contenido
+    //             success: function(response) {
+    //                 showAlert('success', 'Ejercicio añadido');
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 showAlert('error', 'Error al crear el ejercicio');
+    //             }
+    //         });
+    //     }
+    // });
+
     $("#btnGuardarEjercicio").click(function() {
-        let datosAsociativos = {};
+        let formData = new FormData(); // Crear un objeto FormData para enviar los datos
         let camposVacios = false;
 
+        // Recorrer los campos de entrada y select del modal
         $("#content-modal input, #content-modal select").each(function() {
-            datosAsociativos[$(this).attr("id")] = $(this).val();
+            // Agregar los datos al objeto FormData
+            if ($(this).attr("id") != "image" && $(this).attr("id") != "video") {
+                formData.append($(this).attr("id"), $(this).val());
+            }
 
+            // Verificar si el campo está vacío y es obligatorio
             switch ($(this).attr("id")) {
                 case "name":
                 case "type":
@@ -183,6 +278,15 @@
             }
         });
 
+        // Obtener los archivos seleccionados para la imagen y el video
+        let imageFile = $("#image")[0].files[0];
+        let videoFile = $("#video")[0].files[0];
+
+        // Agregar la imagen y el video al objeto FormData como blobs
+        formData.append('image', imageFile);
+        formData.append('video', videoFile);
+
+        // console.log(formData);
         if (camposVacios) {
             showAlert('error', 'Por favor, completa todos los campos obligatorios.');
         } else {
@@ -193,7 +297,9 @@
                 headers: {
                     'X-CSRF-TOKEN': csrf
                 },
-                data: datosAsociativos,
+                data: formData,
+                processData: false, // Desactivar el procesamiento de datos
+                contentType: false, // Desactivar el tipo de contenido
                 success: function(response) {
                     showAlert('success', 'Ejercicio añadido');
                 },

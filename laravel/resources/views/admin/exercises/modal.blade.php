@@ -50,7 +50,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-dumbbell"></i></span>
                                     </div>
-                                    <select class="form-control" name="muscle">
+                                    <select class="form-control" name="muscle" id="muscle">
                                         <option value="" selected></option>
                                         <option value="abdominals">Abdominals</option>
                                         <option value="abductors">Abductors</option>
