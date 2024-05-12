@@ -2,9 +2,9 @@
 @include('components.AddButtomComponent')
 
 <script>
-    const exerciseButtonComponent = new DeleteButtomComponent('exercise');
+    const exerciseButtonComponent = new DeleteButtomComponent('suggestion/exercise');
     const addButtonComponent = new AddButtomComponent('exercise');
-    console.log('ola')
+
     // Configurar columnDefs
     const columnDefs = [
         {

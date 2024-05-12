@@ -52,6 +52,16 @@ class ExerciseSuggestionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $exercise = Exercise::find($id);
+        if ($exercise) {
+            $exercise->delete();
+            // Recupera los datos actualizados después de eliminar el ejercicio
+            $exercises = Exercise::where('visibility', 'user')->get();
+            // Devuelve una respuesta de éxito junto con los datos actualizados
+            return response()->json(['message' => 'Ejercicio eliminado correctamente', 'data' => $exercises], 200);
+        } else {
+            // Devuelve una respuesta de error si el ejercicio no se encuentra
+            return response()->json(['message' => 'No se encontró el ejercicio'], 404);
+        }
     }
 }

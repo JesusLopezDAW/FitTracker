@@ -54,6 +54,10 @@ return new class extends Migration
             $table->longText("image")->nullable();
             $table->longText("image2")->nullable();
             $table->longText("video")->nullable();
+            $table->enum('suggestion', [
+                'yes',
+                'no'
+            ])->nullable();
             $table->timestamps();
 
             // Definición de claves foráneas

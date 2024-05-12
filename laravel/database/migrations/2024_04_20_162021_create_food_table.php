@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('food', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("user_id");
-            $table->enum("visibility",["global", "user"]);
+            $table->enum("visibility", ["global", "user"]);
             $table->string("name");
             $table->integer("calories");
             $table->integer("size_portion_g");
@@ -28,6 +28,10 @@ return new class extends Migration
             $table->integer("sugar_g");
             $table->string("extra_info")->nullable();
             $table->longText("image")->nullable();
+            $table->enum('suggestion', [
+                'yes',
+                'no'
+            ])->nullable();
             $table->timestamps();
 
             // Definición de claves foráneas
