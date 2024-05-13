@@ -15,6 +15,13 @@
 @stop
 
 @section('js')
+ {{-- MAPA --}}
+    <!-- Resources -->
+    <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js" type="text/javascript"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js" type="text/javascript"></script>
+    <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/index.js" type="text/javascript"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/ag-charts-enterprise@9.0.0/dist/umd/ag-charts-enterprise.js"></script> 
     <script src="https://unpkg.com/ag-charts-community/dist/ag-charts-community.min.js"></script>
@@ -23,7 +30,7 @@
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-enterprise/dist/ag-grid-enterprise.js"></script>
 
     <script src="{{ asset('js/scripts.js') }}"></script>
-    <script src="dashboard/user_map/data.js"></script>
-    <script src="dashboard/user_map/topology.js"></script>
-    <script src="dashboard/user_map/main.js"></script>
+
+   
+
 @stop
