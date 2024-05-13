@@ -196,6 +196,7 @@ class UserController extends Controller
             case 'global':
             default:
                 return Carbon::now()->startOfDay();
+        }
     }
 
     public function getUsersByCountry()
