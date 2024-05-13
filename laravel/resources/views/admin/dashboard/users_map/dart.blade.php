@@ -55,19 +55,10 @@
                         geoJSON: am5geodata_worldLow
                     }));
                     console.log(am5geodata_worldLow)
-                    // console.log('pre')
-                    // for (var i = 0; i < am5geodata_worldLow.features.length; i++) {
-                    //     var item = am5geodata_worldLow.features[i];
-                    //     var users = userData[i] ||
-                    //         0; // If there is no data for a country, set the number of users to 0
-                    //     ///console.log(userData.ES)
-                    //     item.properties.users = users;
-                    // }
 
                     am5geodata_worldLow.features.forEach(pais => {
                         var item = pais.id;
                         var users = userData[item] || 0;
-                        // console.log(pais)
                         pais.properties.users = users;
                     });
 
