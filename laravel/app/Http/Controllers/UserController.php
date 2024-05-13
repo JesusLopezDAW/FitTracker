@@ -7,6 +7,7 @@ use App\Models\Following;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -195,6 +196,22 @@ class UserController extends Controller
             case 'global':
             default:
                 return Carbon::now()->startOfDay();
+    }
+
+    public function getUsersByCountry()
+    {
+        // Realiza la consulta para contar el número de usuarios por país
+        $usersByCountry = User::select('country', DB::raw('COUNT(*) as total'))
+            ->groupBy('country')
+            ->get();
+
+        // Formatea los resultados en un arreglo asociativo
+        $userCountByCountry = [];
+        foreach ($usersByCountry as $user) {
+            $userCountByCountry[$user->country] = $user->total;
         }
+
+        // Devuelve la respuesta JSON
+        return response()->json($userCountByCountry);
     }
 }
