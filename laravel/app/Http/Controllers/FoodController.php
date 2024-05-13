@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Food;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -125,6 +126,40 @@ class FoodController extends Controller
         } else {
             // Devuelve una respuesta de error si el ejercicio no se encuentra
             return response()->json(['message' => 'No se encontró el alimento'], 404);
+        }
+    }
+
+    public function getFoodsByPeriod($period)
+    {
+        // Obtener la fecha de inicio según el período seleccionado
+        $startDate = $this->getStartDate($period);
+
+        // Obtener los ejercicios creados desde la fecha de inicio hasta ahora
+        $foods = Food::where('created_at', '>=', $startDate)->get();
+
+        // Devolver los ejercicios como respuesta JSON
+        return response()->json($foods);
+    }
+
+    private function getStartDate($period)
+    {
+        // Calcular la fecha de inicio según el período seleccionado
+        switch ($period) {
+            case 'hoy':
+                return Carbon::now()->startOfDay();
+            case 'ultima_semana':
+                return Carbon::now()->subWeek()->startOfDay();
+            case 'ultimo_mes':
+                return Carbon::now()->subMonth()->startOfDay();
+            case 'ultimos_3_meses':
+                return Carbon::now()->subMonths(3)->startOfDay();
+            case 'ultimos_6_meses':
+                return Carbon::now()->subMonths(6)->startOfDay();
+            case 'ultimo_ano':
+                return Carbon::now()->subYear()->startOfDay();
+            case 'global':
+            default:
+                return Carbon::now()->startOfDay();
         }
     }
 }

@@ -16,13 +16,17 @@ class FoodSeeder extends Seeder
     {
         $json = file_get_contents(base_path("database/json/food.json"));
         $data = json_decode($json);
-        
+
         $imagen = 'public/images/logoFitTracker.png';
         $datosImagen = file_get_contents($imagen);
         $imagenBase64 = base64_encode($datosImagen);
         $blob = "data:image/jpeg;base64," . $imagenBase64;
 
         foreach ($data as $food) {
+            // Genera una fecha aleatoria entre el 1 de enero de 2024 y hoy
+            $randomTimestamp = rand(strtotime('2024-01-01'), time());
+            $randomDate = date('Y-m-d H:i:s', $randomTimestamp);
+
             DB::table('food')->insert([
                 'name' => $food->name,
                 'user_id' => 1,
@@ -39,6 +43,8 @@ class FoodSeeder extends Seeder
                 'sugar_g' => $food->sugar_g,
                 'image' => $blob,
                 'extra_info' => "Creado desde el panel de administracion",
+                'created_at' => $randomDate, // Asigna la fecha aleatoria de creación
+                // 'updated_at' => $randomDate, // Puedes asignar la misma fecha de creación a updated_at
             ]);
         }
     }

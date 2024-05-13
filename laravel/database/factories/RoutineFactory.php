@@ -22,6 +22,11 @@ class RoutineFactory extends Factory
      */
     public function definition()
     {
+        // Genera fechas aleatorias entre el 1 de enero de 2024 y la fecha y hora actual
+        $startDate = strtotime('2024-01-01');
+        $endDate = now()->timestamp;
+        $randomDate = mt_rand($startDate, $endDate);
+
         return [
             'name' => $this->faker->sentence(),
             'type' => $this->faker->randomElement([
@@ -45,6 +50,7 @@ class RoutineFactory extends Factory
             ]),
             'user_id' => $this->faker->numberBetween(1, 500),
             // Puedes ajustar la lógica para el campo user_id según tus necesidades
+            'created_at' => date('Y-m-d H:i:s', $randomDate), // Establece 'created_at' en la fecha aleatoria generada
         ];
     }
 }
