@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Follower;
 use App\Models\Following;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -31,7 +32,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // Validar los datos del formulario
-        
+
 
         // Crear un nuevo usuario con los datos del formulario
         $user = new User([
@@ -62,7 +63,7 @@ class UserController extends Controller
             $routines = $user->routines()->with('workouts.exerciseLogs.exercise')->get();
             $posts = $user->posts()->with('workout.logs')->get();
             $exercisesPosts = $user->posts()->with('workout.exerciseLogs.exercise')->get();
-            
+
             $workouts = $user->routines()->with('workouts')->get();
             $exercises = $user->exercises()->get();
             $foods = $user->foods()->get();
@@ -72,7 +73,7 @@ class UserController extends Controller
             $comments = $user->comments()->get();
             $followedUsers = $user->followedUsers()->get();
             $followers = $user->followers()->get();
-            
+
             // Devolver los detalles del usuario a la vista
             return view("admin.user-details", compact('user', 'routines', "workouts", "followedUsers", "followers", "posts", "exercisesPosts", "comments", "commentsRecibidos", "likes", "likesRecibidos", "exercises", "foods"));
         } else {
@@ -120,7 +121,7 @@ class UserController extends Controller
         $user = User::find($id);
         if ($user) {
             $user->delete();
-            $users = User::all(); 
+            $users = User::all();
             return response()->json(['message' => 'Usuario eliminado correctamente', 'data' => $users], 200);
         } else {
             // Devuelve una respuesta de error si el ejercicio no se encuentra
@@ -162,6 +163,39 @@ class UserController extends Controller
             ->get();
 
         return response()->json($usersPerYear);
+    }
+
+    public function getUsersByPeriod($period)
+    {
+        // Obtener la fecha de inicio según el período seleccionado
+        $startDate = $this->getStartDate($period);
+
+        // Obtener los ejercicios creados desde la fecha de inicio hasta ahora
+        $users = User::where('created_at', '>=', $startDate)->get();
+
+        // Devolver los ejercicios como respuesta JSON
+        return response()->json($users);
+    }
+
+    private function getStartDate($period)
+    {
+        // Calcular la fecha de inicio según el período seleccionado
+        switch ($period) {
+            case 'hoy':
+                return Carbon::now()->startOfDay();
+            case 'ultima_semana':
+                return Carbon::now()->subWeek()->startOfDay();
+            case 'ultimo_mes':
+                return Carbon::now()->subMonth()->startOfDay();
+            case 'ultimos_3_meses':
+                return Carbon::now()->subMonths(3)->startOfDay();
+            case 'ultimos_6_meses':
+                return Carbon::now()->subMonths(6)->startOfDay();
+            case 'ultimo_ano':
+                return Carbon::now()->subYear()->startOfDay();
+            case 'global':
+            default:
+                return Carbon::now()->startOfDay();
     }
 
     public function getUsersByCountry()

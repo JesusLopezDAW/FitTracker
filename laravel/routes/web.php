@@ -1,12 +1,20 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\ExerciseSuggestionController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\FoodSuggestionController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoutineController;
 use App\Http\Controllers\UserController;
+use App\Models\Comment;
 use App\Models\Exercise;
+use App\Models\Like;
+use App\Models\Post;
+use App\Models\Routine;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -38,12 +46,24 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
     Route::resource("/food", FoodController::class);
     Route::resource("/exercise", ExerciseController::class);
+    Route::resource('/likes', LikeController::class);
+    Route::resource('/posts', PostController::class);
+    Route::resource('/routines', RoutineController::class);
 
     // Sugerencias
     Route::prefix('suggestion')->group(function () {
         Route::resource('/exercise', ExerciseSuggestionController::class);
         Route::resource('/food', FoodSuggestionController::class);
     });
+
+    Route::get('exercise/getExercisesByPeriod/{period}', [ExerciseController::class, 'getExercisesByPeriod']);
+    Route::get('user/getUsersByPeriod/{period}', [UserController::class, 'getUsersByPeriod']);
+    Route::get('food/getFoodsByPeriod/{period}', [FoodController::class, 'getFoodsByPeriod']);
+    Route::get('like/getLikesByPeriod/{period}', [LikeController::class, 'getLikesByPeriod']);
+    Route::get('post/getPostsByPeriod/{period}', [PostController::class, 'getPostsByPeriod']);
+    Route::get('comment/getCommentsByPeriod/{period}', [CommentController::class, 'getCommentsByPeriod']);
+    Route::get('routine/getRoutinesByPeriod/{period}', [RoutineController::class, 'getRoutinesByPeriod']);
+
 });
 
 require __DIR__ . '/auth.php';

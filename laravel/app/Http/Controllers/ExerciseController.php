@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exercise;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Query\Expression;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -96,7 +97,6 @@ class ExerciseController extends Controller
      */
     public function update(Request $request)
     {
-
         $exercise = Exercise::find($request->id);
 
         if (!$exercise) {
@@ -133,6 +133,40 @@ class ExerciseController extends Controller
         } else {
             // Devuelve una respuesta de error si el ejercicio no se encuentra
             return response()->json(['message' => 'No se encontró el ejercicio'], 404);
+        }
+    }
+
+    public function getExercisesByPeriod($period)
+    {
+        // Obtener la fecha de inicio según el período seleccionado
+        $startDate = $this->getStartDate($period);
+
+        // Obtener los ejercicios creados desde la fecha de inicio hasta ahora
+        $exercises = Exercise::where('created_at', '>=', $startDate)->get();
+
+        // Devolver los ejercicios como respuesta JSON
+        return response()->json($exercises);
+    }
+
+    private function getStartDate($period)
+    {
+        // Calcular la fecha de inicio según el período seleccionado
+        switch ($period) {
+            case 'hoy':
+                return Carbon::now()->startOfDay();
+            case 'ultima_semana':
+                return Carbon::now()->subWeek()->startOfDay();
+            case 'ultimo_mes':
+                return Carbon::now()->subMonth()->startOfDay();
+            case 'ultimos_3_meses':
+                return Carbon::now()->subMonths(3)->startOfDay();
+            case 'ultimos_6_meses':
+                return Carbon::now()->subMonths(6)->startOfDay();
+            case 'ultimo_ano':
+                return Carbon::now()->subYear()->startOfDay();
+            case 'global':
+            default:
+                return Carbon::now()->startOfDay();
         }
     }
 }

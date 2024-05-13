@@ -16,6 +16,11 @@ class Exercise_LogFactory extends Factory
      */
     public function definition(): array
     {
+        // Genera fechas aleatorias entre el 1 de enero de 2024 y la fecha y hora actual
+        $startDate = strtotime('2024-01-01');
+        $endDate = now()->timestamp;
+        $randomDate = mt_rand($startDate, $endDate);
+
         return [
             'workout_id' => $this->faker->numberBetween(1, 2000), // Assuming workouts range from 1 to 2000
             'exercise_id' => $this->faker->numberBetween(1, 160), // Assuming there are 100 exercises
@@ -24,6 +29,7 @@ class Exercise_LogFactory extends Factory
             'reps' => $this->faker->numberBetween(5, 15),
             'kilograms' => $this->faker->numberBetween(10, 100),
             'fecha_registro' => $this->faker->dateTimeBetween('-1 year', 'now'), // Assuming logs span the last year
+            'created_at' => date('Y-m-d H:i:s', $randomDate), // Establece 'created_at' en la fecha aleatoria generada
         ];
     }
 }

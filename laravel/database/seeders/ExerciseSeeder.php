@@ -22,6 +22,10 @@ class ExerciseSeeder extends Seeder
         $blob = "data:image/jpeg;base64," . $imagenBase64;
 
         foreach ($data as $exercise) {
+            // Genera una fecha aleatoria entre el 1 de enero de 2024 y hoy
+            $randomTimestamp = rand(strtotime('2024-01-01'), time());
+            $randomDate = date('Y-m-d H:i:s', $randomTimestamp);
+
             DB::table('exercises')->insert([
                 'name' => $exercise->name,
                 'user_id' => 1,
@@ -34,7 +38,9 @@ class ExerciseSeeder extends Seeder
                 'extra_info' => "Creado desde el panel de administracion",
                 'image' => $blob,
                 'image2' => $blob,
-                'video' => ""
+                'video' => "",
+                'created_at' => $randomDate, // Asigna la fecha aleatoria de creación
+                // 'updated_at' => $randomDate, // Puedes asignar la misma fecha de creación a updated_at
             ]);
         }
     }
