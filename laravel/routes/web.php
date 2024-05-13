@@ -33,6 +33,8 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/api/users_registered_per_day', [UserController::class, 'getUsersRegisteredPerDay']);
     Route::get('/api/users_registered_per_month', [UserController::class, 'getUsersRegisteredPerMonth']);
     Route::get('/api/users_registered_per_year', [UserController::class, 'getUsersRegisteredPerYear']);
+    Route::get('/users_by_country', [UserController::class, 'getUsersByCountry']);
+
 
     Route::resource("/food", FoodController::class);
     Route::resource("/exercise", ExerciseController::class);
