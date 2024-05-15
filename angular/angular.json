@@ -62,11 +62,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "medium-angular-docker:build"
+            "buildTarget": "medium-angular-docker:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "medium-angular-docker:build:production"
+              "buildTarget": "medium-angular-docker:build:production"
             }
           }
         },
