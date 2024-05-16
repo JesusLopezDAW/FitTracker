@@ -1,0 +1,12 @@
+/* Estilos para el modo oscuro */
+.navbar-dark.bg-dark {
+    background-color: #343a40 !important;
+    color: #fff !important;
+  }
+  
+  /* Estilos para el modo claro */
+  .navbar-light.bg-light {
+    background-color: #f8f9fa !important;
+    color: #000 !important;
+  }
+  

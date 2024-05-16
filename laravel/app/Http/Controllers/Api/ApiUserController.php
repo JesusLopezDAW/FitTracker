@@ -27,7 +27,6 @@ class ApiUserController extends Controller
             ],
             'message' => 'Creado con exito'
         ], 200);
-
     }
 
     function login(LoginRequest $request): JsonResponse

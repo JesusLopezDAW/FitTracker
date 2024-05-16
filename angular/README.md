@@ -14,17 +14,39 @@ El proyecto sigue una estructura bien organizada que facilita el desarrollo y el
 proyecto-angular-increible/
 │
 └── src/
-    ├── app/
-    │   ├── componentes/
-    │   │   ├── componente1/
-    │   │   ├── componente2/
-    │   │   └── ...
-    │   ├── servicios/
-    │   ├── modelos/
-    │   ├── rutas/
-    │   └── ...
-    ├── assets/
-    └── ...
+    |-- app/
+    |   |-- auth/
+    |   |   |-- auth.guard.ts
+    |   |   |-- auth.service.ts
+    |   |-- home/
+    |   |   |-- home.component.html
+    |   |   |-- home.component.css
+    |   |   |-- home.component.ts
+    |   |   |-- home.module.ts (si es necesario)
+    |   |-- login/
+    |   |   |-- login.component.html
+    |   |   |-- login.component.css
+    |   |   |-- login.component.ts
+    |   |   |-- login.module.ts (si es necesario)
+    |   |-- register/
+    |   |   |-- register.component.html
+    |   |   |-- register.component.css
+    |   |   |-- register.component.ts
+    |   |   |-- register.module.ts (si es necesario)
+    |   |-- shared/
+    |   |   |-- navbar/
+    |   |   |   |-- navbar.component.html
+    |   |   |   |-- navbar.component.css
+    |   |   |   |-- navbar.component.ts
+    |   |   |-- footer/
+    |   |       |-- footer.component.html
+    |   |       |-- footer.component.css
+    |   |       |-- footer.component.ts
+    |   |-- app-routing.module.ts
+    |   |-- app.module.ts
+    |-- assets/
+    |-- environments/
+    |-- ...
 ```
 
 ## Comandos Útiles de Angular
