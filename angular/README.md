@@ -34,28 +34,36 @@ Aquí tienes una lista de algunos de los comandos más útiles que hemos utiliza
 ```bash
 # Crear un Nuevo Componente
 ng generate component nombre-del-componente
-
+```
+```bash
 # Crear un Nuevo Servicio
 ng generate service nombre-del-servicio
-
+```
+```bash
 # Crear un Nuevo Módulo
 ng generate module nombre-del-modulo
-
+```
+```bash
 # Crear una Nueva Ruta
 ng generate module nombre-del-modulo --route nombre-de-la-ruta
-
+```
+```bash
 # Ejecutar el Servidor de Desarrollo
 ng serve
-
+```
+```bash
 # Compilar la Aplicación para Producción
 ng build --prod
-
+```
+```bash
 # Ejecutar Pruebas Unitarias
 ng test
-
+```
+```bash
 # Ejecutar Pruebas de Extremo a Extremo
 ng e2e
-
+```
+```bash
 # Ayuda y Documentación de Angular CLI
 ng help
 ```
