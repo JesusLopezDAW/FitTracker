@@ -31,40 +31,40 @@ proyecto-angular-increible/
 
 Aquí tienes una lista de algunos de los comandos más útiles que hemos utilizado en este proyecto:
 
-```bash
 # Crear un Nuevo Componente
+```bash
 ng generate component nombre-del-componente
 ```
-```bash
 # Crear un Nuevo Servicio
+```bash
 ng generate service nombre-del-servicio
 ```
-```bash
 # Crear un Nuevo Módulo
+```bash
 ng generate module nombre-del-modulo
 ```
-```bash
 # Crear una Nueva Ruta
+```bash
 ng generate module nombre-del-modulo --route nombre-de-la-ruta
 ```
-```bash
 # Ejecutar el Servidor de Desarrollo
+```bash
 ng serve
 ```
-```bash
 # Compilar la Aplicación para Producción
+```bash
 ng build --prod
 ```
-```bash
 # Ejecutar Pruebas Unitarias
+```bash
 ng test
 ```
-```bash
 # Ejecutar Pruebas de Extremo a Extremo
+```bash
 ng e2e
 ```
-```bash
 # Ayuda y Documentación de Angular CLI
+```bash
 ng help
 ```
 
