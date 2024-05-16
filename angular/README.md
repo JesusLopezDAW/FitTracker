@@ -33,23 +33,23 @@ Aquí tienes una lista de algunos de los comandos más útiles que hemos utiliza
 
 ### Crear un Nuevo Componente
 ```bash
-ng generate component nombre-del-componente
+ng g c nombre-del-componente
 ```
 ### Crear un Nuevo Servicio
 ```bash
-ng generate service nombre-del-servicio
+ng g service nombre-del-servicio
 ```
 ### Crear un Nuevo Módulo
 ```bash
-ng generate module nombre-del-modulo
+ng g module nombre-del-modulo
 ```
 ### Crear una Nueva Ruta
 ```bash
-ng generate module nombre-del-modulo --route nombre-de-la-ruta
+ng g module nombre-del-modulo --route nombre-de-la-ruta
 ```
 ### Ejecutar el Servidor de Desarrollo
 ```bash
-ng serve
+ng s
 ```
 ### Compilar la Aplicación para Producción
 ```bash
