@@ -10,7 +10,7 @@ Este proyecto está diseñado para demostrar las capacidades y la elegancia de A
 
 El proyecto sigue una estructura bien organizada que facilita el desarrollo y el mantenimiento de la aplicación. Aquí hay un vistazo a la estructura de archivos y carpetas:
 
-\```
+``` 
 proyecto-angular-increible/
 │
 └── src/
@@ -25,14 +25,13 @@ proyecto-angular-increible/
     │   └── ...
     ├── assets/
     └── ...
-\```
+```
 
 ## Comandos Útiles de Angular
 
 Aquí tienes una lista de algunos de los comandos más útiles que hemos utilizado en este proyecto:
 
-\```bash
-
+```bash
 # Crear un Nuevo Componente
 ng generate component nombre-del-componente
 
@@ -59,7 +58,7 @@ ng e2e
 
 # Ayuda y Documentación de Angular CLI
 ng help
-\```
+```
 
 ## Contribución
 
