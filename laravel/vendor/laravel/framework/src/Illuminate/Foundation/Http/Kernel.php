@@ -71,6 +71,8 @@ class Kernel implements KernelContract
      */
     protected $routeMiddleware = [
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'auth:api' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
+
     ];
 
     /**

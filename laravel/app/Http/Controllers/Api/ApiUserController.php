@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Requests\Auth\RegisterRequest;
-use App\Http\Requests\RegisterRequest as RequestsRegisterRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class ApiUserController extends Controller
 {
-    function register(RequestsRegisterRequest $request): JsonResponse
+    function register(RegisterRequest $request): JsonResponse
     {
         $user = User::create([
             'name' => $request->name,
@@ -26,8 +25,7 @@ class ApiUserController extends Controller
                 'true' => true,
                 'code' => 200
             ],
-            'message' => 'Creado con exito',
-            'token' => $user->createToken('API TOKEN')->plainTextToken
+            'message' => 'Creado con exito'
         ], 200);
 
     }
