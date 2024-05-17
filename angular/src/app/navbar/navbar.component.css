@@ -1,0 +1,35 @@
+.navbar-desktop {
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    background-color: #15202b;
+    display: none;
+}
+
+.navbar-mobile {
+    background-color: #15202b;
+    border-top: 1px solid #38444d;
+}
+
+.nav-link {
+    color: #ffffff;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #1DA1F2;
+}
+
+@media (min-width: 992px) {
+    .navbar-desktop {
+        display: flex;
+    }
+
+    .navbar-mobile {
+        display: none;
+    }
+}

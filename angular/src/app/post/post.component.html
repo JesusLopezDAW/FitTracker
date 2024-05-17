@@ -1,0 +1,19 @@
+<div class="card mb-3 post-card">
+    <div class="card-body">
+        <div class="d-flex">
+            <img [src]="post.image" class="rounded-circle post-avatar" alt="Avatar">
+            <div class="ml-3">
+                <h5 class="card-title">{{ post.author }}</h5>
+                <p class="card-text">{{ post.content }}</p>
+            </div>
+        </div>
+        <div class="post-image-container">
+            <img [src]="post.postImage" class="post-image" alt="Post Image">
+        </div>
+        <div class="d-flex justify-content-between mt-2">
+            <button class="btn btn-link">Like</button>
+            <button class="btn btn-link">Comment</button>
+            <button class="btn btn-link">Share</button>
+        </div>
+    </div>
+</div>

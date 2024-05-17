@@ -1,2 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
-/* @import "~bootstrap/dist/css/bootstrap.min.css"; */
+body {
+    background-color: #15202b;
+    color: #ffffff;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.bg-dark {
+    background-color: #15202b !important;
+}
+
+.text-light {
+    color: #ffffff !important;
+}
+
+a {
+    color: #1DA1F2;
+}
+
+a:hover {
+    color: #1a91da;
+}

@@ -1,12 +1,44 @@
-/* Estilos para el modo oscuro */
-.navbar-dark.bg-dark {
-    background-color: #343a40 !important;
-    color: #fff !important;
+body {
+  background-color: #0e141b;
+  color: #ffffff;
+  margin: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.content {
+  margin-left: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+@media (min-width: 992px) {
+  .content {
+    margin-left: 250px;
   }
-  
-  /* Estilos para el modo claro */
-  .navbar-light.bg-light {
-    background-color: #f8f9fa !important;
-    color: #000 !important;
+}
+
+.bg-dark {
+  background-color: #15202b !important;
+}
+
+.text-light {
+  color: #ffffff !important;
+}
+
+a {
+  color: #1DA1F2;
+}
+
+a:hover {
+  color: #1a91da;
+}
+
+.suggestions {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .suggestions {
+    display: block;
   }
-  
+}

@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-*{
+* {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
 }
 
-section{
+section {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +18,7 @@ section{
     background-size: cover;
 }
 
-.contenedor{
+.contenedor {
     position: relative;
     width: 400px;
     /* background-color: red; */
@@ -32,20 +32,20 @@ section{
 }
 
 
-.contenedor h2{
+.contenedor h2 {
     font-size: 2.3rem;
     color: #fff;
     text-align: center;
 }
 
-.input-contenedor{
+.input-contenedor {
     position: relative;
     margin: 30px 0;
     width: 300px;
     border-bottom: 2px solid #fff;
 }
 
-.input-contenedor label{
+.input-contenedor label {
     position: absolute;
     top: 50%;
     left: 5px;
@@ -57,12 +57,12 @@ section{
     font-family: bold;
 }
 
-input:focus ~ label,
-input:valid ~ label{
+input:focus~label,
+input:valid~label {
     top: -5px;
 }
 
-.input-contenedor input{
+.input-contenedor input {
     width: 100%;
     height: 50px;
     background-color: transparent;
@@ -73,7 +73,7 @@ input:valid ~ label{
     color: #fff;
 }
 
-.input-contenedor i{
+.input-contenedor i {
     position: absolute;
     color: #fff;
     font-size: 1.6rem;
@@ -81,7 +81,7 @@ input:valid ~ label{
     right: 8px;
 }
 
-.olvidar{
+.olvidar {
     margin: -15px 0 15px;
     font-size: .9rem;
     color: #fff;
@@ -89,22 +89,22 @@ input:valid ~ label{
     justify-content: center;
 }
 
-.olvidar label input{
+.olvidar label input {
     margin: 3px;
 }
 
-.olvidar label a{
+.olvidar label a {
     color: #fff;
     text-decoration: none;
     transition: .3s;
     font-size: .9em;
 }
 
-.olvidar label a:hover{
+.olvidar label a:hover {
     text-decoration: underline;
 }
 
-button{
+button {
     width: 100%;
     height: 45px;
     border-radius: 40px;
@@ -117,24 +117,24 @@ button{
     transition: .4s;
 }
 
-button:hover{
+button:hover {
     opacity: .9;
 }
 
-.registrar{
+.registrar {
     font-size: .8rem;
     color: #fff;
     text-align: center;
     margin: 20px 0 10px;
 }
 
-.registrar p a{
+.registrar p a {
     text-decoration: none;
     color: #fff;
     font-weight: bold;
     transition: .3s;
 }
 
-.registrar p a:hover{
+.registrar p a:hover {
     text-decoration: underline;
 }
