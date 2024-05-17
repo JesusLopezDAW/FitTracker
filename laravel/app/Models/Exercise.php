@@ -23,6 +23,11 @@ class Exercise extends Model
         'video'
     ];
 
+    protected $hidden = [
+        'user_id',
+        'id'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
