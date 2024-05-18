@@ -112,8 +112,16 @@ hr {
 }
 
 /* Imagen perfil */
-#imagenPerfilNavBar {
-    margin-left: -257px;
+.imagenAppNavBar {
+    width: 45px;
+    height: 35px;
+}
+.textAppNavBar {
+    font-family: 'Dancing Script', cursive;
+    padding-left: 0px;
+}
+#divAppNavBar{
+    margin-left: -147px;
 }
 
 /* Animacion iconos al pasar el raton por encima */
@@ -133,9 +141,9 @@ hr {
 /* Estilos para el dropdown de configuración */
 .settings-menu {
     position: absolute;
-    top: 205px;
+    top: 227px;
     left: 14px;
-    width: 309px;
+    width: 320px;
     height: 300px;
     background-color: var(--background-color);
     border: 1px solid var(--border-color);
@@ -147,9 +155,9 @@ hr {
 
 .theme-settings {
     position: absolute;
-    top: 338px;
+    top: 360px;
     left: 14px;
-    width: 309px;
+    width: 320px;
     height: 167px;
     background-color: var(--background-color);
     border: 1px solid var(--border-color);

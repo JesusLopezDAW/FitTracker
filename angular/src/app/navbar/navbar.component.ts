@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2, HostListener } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Inject } from '@angular/core';
@@ -11,16 +11,44 @@ import { Inject } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  showDropdown = false;
+  showSettingsOptions = false;
   showThemeSettings = false;
-  isSearchActive: boolean = false;
+  isSearchActive = false; // Inicializado como un booleano
   currentTheme: string = 'oscuro'; // Tema inicial
   isInputFocused = false;
 
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+  constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: Document) {
+    this.document.addEventListener('click', (event) => {
+      // Si se hace click fuera del div del buscador se cierra el buscador
+      const searchComponent = (event.target as HTMLElement).closest('.search-component');
+      const iconComponent = (event.target as HTMLElement).closest('.buscador-icon');
+      if (searchComponent === null && this.isSearchActive && iconComponent === null) {
+        this.toggleSearch();
+      }
+      
+      // Si se hace click fuera del div de opciones se cierra
+      const themeComponent = (event.target as HTMLElement).closest('.theme-settings');
+      const cambiarAspectoComponent = (event.target as HTMLElement).closest('.cambiarAspecto');
+      if(this.showThemeSettings && themeComponent === null && cambiarAspectoComponent === null){
+        this.toggleThemeSettings();
+      }
+      // Si se hace click fuera del div de cambiar tema se cierra
+      const settingsComponent = (event.target as HTMLElement).closest('.settings-menu');
+      const settingsIconComponent = (event.target as HTMLElement).closest('.settings-icon');
+      if(this.showSettingsOptions && settingsComponent === null && settingsIconComponent === null){
+        this.toggleDropdown();
+      }
+    });
+  }
 
   toggleSearch() {
     this.isSearchActive = !this.isSearchActive;
+    const iconApp = this.document.getElementById("divAppNavBar") as HTMLElement;
+    if(this.isSearchActive){
+      iconApp.innerHTML = '<img src="../../assets/icons/logoBlancoNavBar.png" alt="Logo" class="d-inline-block align-top imagenAppNavBar" style="width: 45px; height: 35px; margin-left: 144px; margin-top: 10px; margin-bottom: 11px;">';
+    }else{
+      iconApp.innerHTML = '<h1 style="font-family: Dancing Script; padding-left: 0px;">FitTracker</h1>';
+    }
     const spans = document.querySelectorAll('.nav-link span') as NodeListOf<HTMLElement>;
     spans.forEach((span) => {
       span.style.display = this.isSearchActive ? 'none' : 'inline';
@@ -43,14 +71,13 @@ export class NavbarComponent {
   }
 
   toggleDropdown() {
-    this.showDropdown = !this.showDropdown;
+    this.showSettingsOptions = !this.showSettingsOptions;
     this.showThemeSettings = false; // Oculta los ajustes de tema si se muestra el dropdown
-    console.log(this.showDropdown);
   }
 
   toggleThemeSettings() {
     this.showThemeSettings = !this.showThemeSettings;
-    this.showDropdown = false; // Oculta el dropdown si se muestran los ajustes de tema
+    this.showSettingsOptions = false; // Oculta el dropdown si se muestran los ajustes de tema
   }
 
   changeTheme(theme: string) {
