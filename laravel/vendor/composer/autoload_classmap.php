@@ -6,7 +6,12 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Http\\Controllers\\Api\\ApiUserController' => $baseDir . '/app/Http/Controllers/Api/ApiUserController.php',
+    'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Helpers\\JsonResponse' => $baseDir . '/app/Helpers/JsonResponse.php',
+    'App\\Http\\Controllers\\API\\ExerciseController' => $baseDir . '/app/Http/Controllers/API/ExerciseController.php',
+    'App\\Http\\Controllers\\API\\FoodController' => $baseDir . '/app/Http/Controllers/API/FoodController.php',
+    'App\\Http\\Controllers\\API\\PostController' => $baseDir . '/app/Http/Controllers/API/PostController.php',
+    'App\\Http\\Controllers\\API\\WorkoutController' => $baseDir . '/app/Http/Controllers/API/WorkoutController.php',
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => $baseDir . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
@@ -29,7 +34,11 @@ return array(
     'App\\Http\\Controllers\\RoutineController' => $baseDir . '/app/Http/Controllers/RoutineController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Middleware\\AdminMiddleware' => $baseDir . '/app/Http/Middleware/AdminMiddleware.php',
+    'App\\Http\\Middleware\\JwtMiddleware' => $baseDir . '/app/Http/Middleware/JwtMiddleware.php',
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
+    'App\\Http\\Requests\\ExerciseRequest' => $baseDir . '/app/Http/Requests/ExerciseRequest.php',
+    'App\\Http\\Requests\\FoodRequest' => $baseDir . '/app/Http/Requests/FoodRequest.php',
+    'App\\Http\\Requests\\PostRequest' => $baseDir . '/app/Http/Requests/PostRequest.php',
     'App\\Http\\Requests\\ProfileUpdateRequest' => $baseDir . '/app/Http/Requests/ProfileUpdateRequest.php',
     'App\\Http\\Requests\\RegisterRequest' => $baseDir . '/app/Http/Requests/RegisterRequest.php',
     'App\\Models\\Comment' => $baseDir . '/app/Models/Comment.php',

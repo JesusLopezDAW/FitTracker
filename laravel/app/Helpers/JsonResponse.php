@@ -2,9 +2,11 @@
 
 namespace App\Helpers;
 
+use Illuminate\Http\JsonResponse as HttpJsonResponse;
+
 class JsonResponse
 {
-    public static function success($data, $message = 'Success', $code = 200)
+    public static function success($data, $message = 'Success', $code = 200): HttpJsonResponse
     {
         return response()->json([
             'status' => true,
@@ -13,7 +15,7 @@ class JsonResponse
         ], $code);
     }
 
-    public static function error($message, $code = 400)
+    public static function error($message, $code = 400): HttpJsonResponse
     {
         return response()->json([
             'status' => false,

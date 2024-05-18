@@ -24,8 +24,7 @@ class Exercise extends Model
     ];
 
     protected $hidden = [
-        'user_id',
-        'id'
+ 
     ];
 
     public function user()

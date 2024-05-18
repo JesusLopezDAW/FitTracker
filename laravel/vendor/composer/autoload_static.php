@@ -563,7 +563,12 @@ class ComposerStaticInitda9b7a1dc1dd923105198c572cc7df8d
     );
 
     public static $classMap = array (
-        'App\\Http\\Controllers\\Api\\ApiUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/ApiUserController.php',
+        'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Helpers\\JsonResponse' => __DIR__ . '/../..' . '/app/Helpers/JsonResponse.php',
+        'App\\Http\\Controllers\\API\\ExerciseController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/ExerciseController.php',
+        'App\\Http\\Controllers\\API\\FoodController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/FoodController.php',
+        'App\\Http\\Controllers\\API\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/PostController.php',
+        'App\\Http\\Controllers\\API\\WorkoutController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/WorkoutController.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
@@ -586,7 +591,11 @@ class ComposerStaticInitda9b7a1dc1dd923105198c572cc7df8d
         'App\\Http\\Controllers\\RoutineController' => __DIR__ . '/../..' . '/app/Http/Controllers/RoutineController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Middleware\\AdminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminMiddleware.php',
+        'App\\Http\\Middleware\\JwtMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/JwtMiddleware.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
+        'App\\Http\\Requests\\ExerciseRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ExerciseRequest.php',
+        'App\\Http\\Requests\\FoodRequest' => __DIR__ . '/../..' . '/app/Http/Requests/FoodRequest.php',
+        'App\\Http\\Requests\\PostRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PostRequest.php',
         'App\\Http\\Requests\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileUpdateRequest.php',
         'App\\Http\\Requests\\RegisterRequest' => __DIR__ . '/../..' . '/app/Http/Requests/RegisterRequest.php',
         'App\\Models\\Comment' => __DIR__ . '/../..' . '/app/Models/Comment.php',

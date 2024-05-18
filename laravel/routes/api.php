@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ExerciseController;
 use App\Http\Controllers\API\FoodController;
+use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -19,10 +20,10 @@ Route::middleware('auth:api')->group(function () {
 
     // TODO 
     // Route::resource('/likes', LikeController::class);
-    // Route::resource('/posts', PostController::class);
     // Route::resource('/routines', RoutineController::class);
 
     Route::resource("/exercise", ExerciseController::class);
     Route::resource("/food", FoodController::class);
+    Route::resource('/posts', PostController::class);
 
 });

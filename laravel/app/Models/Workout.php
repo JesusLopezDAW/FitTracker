@@ -24,9 +24,9 @@ class Workout extends Model
         return $this->hasMany(Log::class);
     }
 
-    public function posts()
+    public function post()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasOne(Post::class);
     }
 
     public function exerciseLogs()
