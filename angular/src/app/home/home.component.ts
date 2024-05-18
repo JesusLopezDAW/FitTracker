@@ -27,7 +27,31 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void { }
+  async ngOnInit(): Promise<void> {
+    await this.fetchData();
+  }
+
+  async fetchData(): Promise<void> {
+    const headersList = {
+      "Accept": "*/*",
+      "User-Agent": "Thunder Client (https://www.thunderclient.com/)",
+      "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTcxNjA2NTQ1NywiZXhwIjoxNzE2MDY5MDU3LCJuYmYiOjE3MTYwNjU0NTcsImp0aSI6InlLMWM2UWtRbUZES3RSWHIiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.4UVFnHpnvTSbyBjr7NYcnPZMv3GDljL52VGOtKTk254",
+      "post_id": "1",
+      "Content-Type": "application/json"
+    };
+
+
+    try {
+      let response = await fetch("http://localhost/api/feed", {
+        method: "GET",
+        headers: headersList,
+      });
+      let data = await response.text();
+      console.log(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
 
   togglePosts(showForYou: boolean) {
     this.showForYou = showForYou;
