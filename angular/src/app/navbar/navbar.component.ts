@@ -1,7 +1,7 @@
-import { Component, Renderer2, OnDestroy } from '@angular/core';
-import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Component } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { PLATFORM_ID, Inject } from '@angular/core';
+import { Inject } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -12,15 +12,13 @@ import { PLATFORM_ID, Inject } from '@angular/core';
 })
 export class NavbarComponent {
   showDropdown = false;
-  showTooltip = false;
-  isInputFocused = false;
+  showThemeSettings = false;
   isSearchActive: boolean = false;
   currentTheme: string = 'oscuro'; // Tema inicial
+  isInputFocused = false;
 
-  constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: Document, @Inject(PLATFORM_ID) private platformId: Object) {
-    // Definir closeDropdownOutside en el constructor
-    this.closeDropdownOutside = this.closeDropdownOutside.bind(this);
-  }
+  constructor(@Inject(DOCUMENT) private document: Document) { }
+
   toggleSearch() {
     this.isSearchActive = !this.isSearchActive;
     const spans = document.querySelectorAll('.nav-link span') as NodeListOf<HTMLElement>;
@@ -44,53 +42,44 @@ export class NavbarComponent {
     this.isInputFocused = false;
   }
 
-  setTheme(theme: string) {
-    this.currentTheme = theme;
-    switch (theme) {
-      case 'oscuro':
-        this.setThemeVariables('#000000', '#000000', '#FFFFFF');
-        break;
-      case 'noche-clara':
-        this.setThemeVariables('#15202B', '#15202B', '#FFFFFF');
-        break;
-      case 'blanco':
-        this.setThemeVariables('#FFFFFF', '#FFFFFF', '#000000');
-        break;
-    }
-  }
-
-  setThemeVariables(bgColor: string, navBgColor: string, textColor: string) {
-    if (isPlatformBrowser(this.platformId)) {
-      this.renderer.setStyle(document.documentElement, '--oscuro', bgColor);
-      this.renderer.setStyle(document.documentElement, '--noche-clara', navBgColor);
-      this.renderer.setStyle(document.documentElement, '--blanco', textColor);
-    }
-  }
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
-    if (this.showDropdown) {
-      // Agregar evento de clic para cerrar el menú si se hace clic fuera de él
-      this.document.addEventListener('click', this.closeDropdownOutside);
-    } else {
-      // Eliminar el evento de clic cuando el menú se cierra
-      this.document.removeEventListener('click', this.closeDropdownOutside);
+    this.showThemeSettings = false; // Oculta los ajustes de tema si se muestra el dropdown
+    console.log(this.showDropdown);
+  }
+
+  toggleThemeSettings() {
+    this.showThemeSettings = !this.showThemeSettings;
+    this.showDropdown = false; // Oculta el dropdown si se muestran los ajustes de tema
+  }
+
+  changeTheme(theme: string) {
+    this.currentTheme = theme;
+    const root = this.document.documentElement;
+    const icon = this.document.getElementById("icon-theme") as HTMLElement;
+
+    switch (theme) {
+      case 'oscuro':
+        icon.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        root.style.setProperty('--background-color', '#000000');
+        root.style.setProperty('--background-input', '#262626');
+        root.style.setProperty('--text-color', '#FFFFFF');
+        root.style.setProperty('--border-color', '#2F3336');
+        break;
+      case 'media_noche':
+        icon.innerHTML = '<i class="fa-solid fa-cloud-moon"></i>';
+        root.style.setProperty('--background-color', '#15202B');
+        root.style.setProperty('--background-input', '#273340');
+        root.style.setProperty('--text-color', '#FFFFFF');
+        root.style.setProperty('--border-color', '#38444D');
+        break;
+      case 'blanco':
+        icon.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        root.style.setProperty('--background-color', '#FFFFFF');
+        root.style.setProperty('--background-input', '#EFEFEF');
+        root.style.setProperty('--text-color', '#000000');
+        root.style.setProperty('--border-color', '#DBDBDB');
+        break;
     }
   }
-
-  closeDropdownOutside(event: MouseEvent) {
-    const targetElement = event.target as HTMLElement;
-    const dropdownElement = document.querySelector('.dropdown') as HTMLElement;
-    // Verificar si se hizo clic fuera del menú
-    if (!dropdownElement.contains(targetElement)) {
-      this.showDropdown = false;
-      // Eliminar el evento de clic después de cerrar el menú
-      this.document.removeEventListener('click', this.closeDropdownOutside);
-    }
-  }
-
-  ngOnDestroy() {
-    // Limpiar el evento de clic al destruir el componente
-    this.document.removeEventListener('click', this.closeDropdownOutside);
-  }
-
 }

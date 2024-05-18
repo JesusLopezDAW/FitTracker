@@ -1,6 +1,6 @@
 .container-fluid {
     padding: 0;
-    background-color: #000000;
+    background-color: var(--background-color);
 }
 
 .col-2,
@@ -26,7 +26,7 @@
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    color: #FFFFFF;
+    color: var(--text-color);
     outline: none;
     transition: background-color 0.3s;
     flex: 1; /* Cada botón ocupa el 50% del contenedor */
@@ -36,12 +36,12 @@
     font-size: 17px; /* Tamaño de letra deseado */
 }
 .tab-button.active span {
-    border-bottom: 3px solid royalblue; /* Línea debajo del texto */
+    border-bottom: 3px solid var(--principal); /* Línea debajo del texto */
     width: 120%; /* La línea tiene el 100% del ancho del texto */
     padding-bottom: 7px; /* Agrega más margen entre la línea y el texto */
 
 }
 
 .tab-button:hover {
-    background-color: #181818; /* Color de fondo al pasar el ratón */
+    background-color: var(--background-input); /* Color de fondo al pasar el ratón */
 }

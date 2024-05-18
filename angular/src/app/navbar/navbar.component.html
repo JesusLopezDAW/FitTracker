@@ -26,7 +26,6 @@
                 </div>
             </a>
         </li>
-        <!-- Repite la estructura para los demás elementos -->
         <li class="nav-item mb-3">
             <a class="nav-link" routerLink="/explore" routerLinkActive="active">
                 <div class="icon-container" style="padding-left: 5px;">
@@ -78,12 +77,12 @@
             </a>
         </li>
         <li class="nav-item mb-3">
-            <a class="nav-link" routerLink="/more" routerLinkActive="active">
-                <div class="icon-container" style="padding-left: 2px;">
-                    <i class="fas fa-ellipsis-h"></i>
+            <a class="nav-link" (click)="toggleDropdown()">
+                <div class="icon-container" style="padding-left: 7px;">
+                    <i class="fa-solid fa-bars"></i>
                 </div>
                 <div class="icon-text-container">
-                    <span>Configuracion</span>
+                    <span>Más</span>
                 </div>
             </a>
         </li>
@@ -98,18 +97,7 @@
             </a>
         </li>
     </ul>
-    <div class="dropdown" [ngClass]="{'show': showDropdown}">
-        <button class="btn btn-secondary dropdown-toggle" type="button" (click)="toggleDropdown()"
-            aria-expanded="false">
-            Cambiar Tema
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" (click)="setTheme('oscuro')">Modo Oscuro</a></li>
-            <li><a class="dropdown-item" href="#" (click)="setTheme('noche-clara')">Noche Clara</a></li>
-            <li><a class="dropdown-item" href="#" (click)="setTheme('blanco')">Blanco</a></li>
-        </ul>
-    </div>
-    <button class="btn btn-primary w-100 my-4 newWorkout" id="newWorkout">
+    <button class="btn btn-primary w-100 my-4 newWorkout" id="newWorkout" style="font-weight: bold;">
         <span *ngIf="!isSearchActive">Nuevo entrenamiento</span>
         <span *ngIf="isSearchActive"><i class="fa-solid fa-plus"></i></span>
     </button>
@@ -154,4 +142,70 @@
     <a class="nav-link" routerLink="/messages" routerLinkActive="active">
         <i class="fas fa-envelope"></i>
     </a>
+</div>
+
+
+
+<!-- Recuadro de cambiar aspecto -->
+<div *ngIf="showThemeSettings" class="theme-settings">
+    <div class="theme-header">
+        <h5 style="text-align: left;">
+            <a href="#" (click)="toggleDropdown()">
+                <i class="fa-solid fa-arrow-rotate-left"></i>
+            </a>
+            Cambiar aspecto
+        </h5>
+        <div class="theme-icon" id="icon-theme">
+            <i class="fa-solid fa-moon"></i>
+        </div>
+    </div>
+    <div class="theme-option">
+        <span>Oscuro</span>
+        <label class="switch">
+            <input type="radio" name="theme" (change)="changeTheme('oscuro')" [checked]="currentTheme === 'oscuro'">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="theme-option">
+        <span>Noche clara</span>
+        <label class="switch">
+            <input type="radio" name="theme" (change)="changeTheme('media_noche')" [checked]="currentTheme === 'media_noche'">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <div class="theme-option">
+        <span>Blanco</span>
+        <label class="switch">
+            <input type="radio" name="theme" (change)="changeTheme('blanco')" [checked]="currentTheme === 'blanco'">
+            <span class="slider"></span>
+        </label>
+    </div>
+</div>
+
+
+
+<!-- Div opciones -->
+<div *ngIf="showDropdown" class="settings-menu">
+    <ul class="navbar-nav flex-column w-100">
+        <li class="nav-item mb-3">
+            <a class="nav-link" href="#">
+                <div class="icon-container">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+                <div class="icon-text-container">
+                    <span>Configuración</span>
+                </div>
+            </a>
+        </li>
+        <li class="nav-item mb-2">
+            <a class="nav-link" href="#" (click)="toggleThemeSettings()">
+                <div class="icon-container">
+                    <i class="fa-solid fa-palette"></i>
+                </div>
+                <div class="icon-text-container">
+                    <span>Cambiar aspecto</span>
+                </div>
+            </a>
+        </li>
+    </ul>
 </div>

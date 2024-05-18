@@ -9,9 +9,9 @@
 .post-card {
     margin-bottom: 0;
     /* Elimina el margen inferior */
-    background-color: #0000;
+    background-color: var(--background-color);
     /* Color de fondo transparente */
-    border: 1px solid #2F3336;
+    border: 1px solid var(--border-color);
     /* Borde y color */
     border-radius: 0;
     /* Borde cuadrado */

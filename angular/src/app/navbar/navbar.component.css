@@ -5,14 +5,14 @@
     left: 0;
     top: 0;
     width: 350px;
-    border-right: 1px solid #262626;
+    border-right: 1px solid var(--border-color);
     transition: width 0.3s ease;
     z-index: 1;
 }
 
 /* Estilos navbar mobile */
 .navbar-mobile {
-    border-top: 1px solid #262626;
+    border-top: 1px solid var(--border-color);
 }
 
 /* Estilo div busquedad */
@@ -22,7 +22,7 @@
     left: -100px;
     top: 0;
     width: 385px;
-    border-right: 1px solid #262626;
+    border-right: 1px solid var(--border-color);
     visibility: hidden;
     opacity: 0;
     transition: left 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
@@ -46,7 +46,7 @@
     height: 40px;
     display: flex;
     align-items: center;
-    background-color: #262626;
+    background-color: var(--background-input);
     border-radius: 10px;
     padding: 5px;
 }
@@ -57,7 +57,7 @@
     border: none;
     outline: none;
     background-color: transparent;
-    color: white;
+    color: var(--text-color);
 }
 
 .search-icon,
@@ -65,7 +65,7 @@
     position: absolute;
     right: 20px;
     cursor: pointer;
-    color: white;
+    color: var(--text-color);
 }
 
 .search-icon {
@@ -74,24 +74,19 @@
 
 hr {
     margin: 20px 0;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
 }
 
 .search-results p {
     margin: 10px 0;
-    color: white;
+    color: var(--text-color);
 }
 
 /* Estilos navbar */
 .nav-link {
-    color: #ffffff;
     font-size: 1.3rem;
     padding: 0.5rem;
     transition: color 0.3s;
-}
-
-.nav-link:hover {
-    color: #1DA1F2;
 }
 
 .nav-link span {
@@ -110,9 +105,10 @@ hr {
 
 /* Boton de iniciar entrenamiento */
 .newWorkout {
-    background-color: royalblue;
-    border-radius: 15px;
+    background-color: var(--principal);
+    border-radius: 10px;
     height: 40px;
+    color: #FFFF !important;
 }
 
 /* Imagen perfil */
@@ -131,4 +127,103 @@ hr {
 
 .icon-container:hover i {
     transform: scale(1.1);
+}
+
+/* Estilos mas opciones */
+/* Estilos para el dropdown de configuración */
+.settings-menu {
+    position: absolute;
+    top: 205px;
+    left: 14px;
+    width: 309px;
+    height: 300px;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.theme-settings {
+    position: absolute;
+    top: 338px;
+    left: 14px;
+    width: 309px;
+    height: 167px;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.theme-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.theme-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.theme-header h5 {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.theme-icon {
+    padding-right: 9px;
+    font-size: 1.2rem;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--background-input); /* Ajuste aquí */
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--background-color);
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: var(--principal);
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
 }
