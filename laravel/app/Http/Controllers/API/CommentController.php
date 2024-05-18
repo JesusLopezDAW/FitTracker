@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CommentRequest;
+use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -12,31 +17,43 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        return JsonResponse::success(Auth::user()->comments, 'Success', 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function commentsInPost(string $id)
     {
-        //
+        $post = Post::find($id);
+        return JsonResponse::success($post->comments, 'Success', 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+
+    public function store(CommentRequest $request)
     {
-        //
+        $user = Auth::user();
+
+        $comment = Comment::create([
+            'post_id' => $request->input('post_id'),
+            'user_id' => $user->id,
+            'content' => $request->input('content'),
+        ]);
+
+        return JsonResponse::success($comment, 'Created successfuly', 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(CommentRequest $request, string $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+
+        // Verificar que el comentario pertenece al usuario autenticado
+        if ($comment->user_id !== Auth::id()) {
+            return response()->json(['error' => 'Comment not found or access denied'], 404);
+        }
+
+        $comment->update([
+            'content' => $request->content,
+        ]);
+
+        return JsonResponse::success($comment, 'Updated successfuly', 200);
     }
 
     /**
@@ -44,6 +61,14 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+
+        // Verificar que el comentario pertenece al usuario autenticado
+        if ($comment->user_id !== Auth::id()) {
+            return JsonResponse::error('Coment doesnt exist', 404);
+        }
+
+        $comment->delete();
+        return JsonResponse::success($comment, 'Deleted successfuly', 200);
     }
 }

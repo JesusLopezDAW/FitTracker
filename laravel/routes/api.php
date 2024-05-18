@@ -39,5 +39,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/likes/{id}', [LikeController::class, 'likesInPost']);
     Route::resource('/likes', LikeController::class);
 
+    Route::get('/comments/{id}', [CommentController::class, 'commentsInPost']);
     Route::resource('/comments', CommentController::class);
+    
 });
