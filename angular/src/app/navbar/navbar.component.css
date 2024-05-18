@@ -1,21 +1,28 @@
+/* Estilo navbar vista pc */
 .navbar-desktop {
     height: 100vh;
     position: fixed;
     left: 0;
     top: 0;
     width: 350px;
-    border-right: 1px solid #2F3336;
+    border-right: 1px solid #262626;
     transition: width 0.3s ease;
     z-index: 1;
 }
 
+/* Estilos navbar mobile */
+.navbar-mobile {
+    border-top: 1px solid #262626;
+}
+
+/* Estilo div busquedad */
 .search-component {
     height: 100vh;
     position: fixed;
     left: -100px;
     top: 0;
     width: 385px;
-    border-right: 1px solid #2F3336;
+    border-right: 1px solid #262626;
     visibility: hidden;
     opacity: 0;
     transition: left 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
@@ -30,7 +37,6 @@
 
 .search-content {
     padding: 20px;
-    /* background-color: #2F3336; */
     height: 100%;
     overflow-y: auto;
 }
@@ -76,11 +82,7 @@ hr {
     color: white;
 }
 
-.navbar-mobile {
-    /* background-color: #15202b; */
-    border-top: 1px solid #38444d;
-}
-
+/* Estilos navbar */
 .nav-link {
     color: #ffffff;
     font-size: 1.3rem;
@@ -90,6 +92,10 @@ hr {
 
 .nav-link:hover {
     color: #1DA1F2;
+}
+
+.nav-link span {
+    font-size: 20px;
 }
 
 @media (min-width: 992px) {
@@ -102,22 +108,27 @@ hr {
     }
 }
 
+/* Boton de iniciar entrenamiento */
 .newWorkout {
+    background-color: royalblue;
     border-radius: 15px;
     height: 40px;
 }
 
+/* Imagen perfil */
 #imagenPerfilNavBar {
     margin-left: -257px;
 }
 
-.nav-link span {
-    font-size: 20px;
-    /* Tamaño de fuente deseado */
+/* Animacion iconos al pasar el raton por encima */
+.icon-container i {
+    transition: transform 0.2s ease;
 }
 
-.navbar-desktop {
-    /* Otras propiedades CSS */
-    transition: width 0.3s ease;
-    /* Define la transición para la propiedad width */
+.nav-item:hover .icon-container i {
+    transform: scale(1.1);
+}
+
+.icon-container:hover i {
+    transform: scale(1.1);
 }

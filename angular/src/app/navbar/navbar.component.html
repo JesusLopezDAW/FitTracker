@@ -98,6 +98,17 @@
             </a>
         </li>
     </ul>
+    <div class="dropdown" [ngClass]="{'show': showDropdown}">
+        <button class="btn btn-secondary dropdown-toggle" type="button" (click)="toggleDropdown()"
+            aria-expanded="false">
+            Cambiar Tema
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" (click)="setTheme('oscuro')">Modo Oscuro</a></li>
+            <li><a class="dropdown-item" href="#" (click)="setTheme('noche-clara')">Noche Clara</a></li>
+            <li><a class="dropdown-item" href="#" (click)="setTheme('blanco')">Blanco</a></li>
+        </ul>
+    </div>
     <button class="btn btn-primary w-100 my-4 newWorkout" id="newWorkout">
         <span *ngIf="!isSearchActive">Nuevo entrenamiento</span>
         <span *ngIf="isSearchActive"><i class="fa-solid fa-plus"></i></span>
@@ -111,7 +122,8 @@
         <br>
         <div class="search-input-wrapper">
             <i class="fa-solid fa-magnifying-glass search-icon" *ngIf="!isInputFocused"></i>
-            <input type="text" placeholder="Buscar" class="search-input" (focus)="onInputFocus()" (blur)="onInputBlur()">
+            <input type="text" placeholder="Buscar" class="search-input" (focus)="onInputFocus()"
+                (blur)="onInputBlur()">
             <i class="fa-solid fa-xmark clear-input" (click)="clearSearchInput()" *ngIf="isInputFocused"></i>
         </div>
         <hr>
