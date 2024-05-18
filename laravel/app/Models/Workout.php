@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Workout extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'routine_id',
+        'name',
+        'description',
+    ];
     
     public function routine()
     {
@@ -24,9 +30,9 @@ class Workout extends Model
         return $this->hasMany(Log::class);
     }
 
-    public function posts()
+    public function post()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasOne(Post::class);
     }
 
     public function exerciseLogs()

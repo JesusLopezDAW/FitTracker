@@ -9,6 +9,11 @@ class Routine extends Model
 {
     use HasFactory;
     
+    protected $fillable = [
+        'name',
+        'type',
+        'user_id',
+    ];
 
     public function user()
     {
