@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\ExerciseController;
+use App\Http\Controllers\API\FollowingController;
 use App\Http\Controllers\API\FoodController;
 use App\Http\Controllers\API\LikeController;
 use App\Http\Controllers\API\PostController;
@@ -21,6 +22,10 @@ Route::middleware('auth:api')->group(function () {
     Route::post('refresh', [AuthController::class, 'refresh']);
 
     // TODO 
+    // Route::resource("/exercise-log", ExerciseController::class);
+    // Route::resource("/log", ExerciseController::class);
+    // Route::resource("/followers", ExerciseController::class);
+
 
     Route::resource("/exercise", ExerciseController::class);
 
@@ -41,5 +46,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('/comments/{id}', [CommentController::class, 'commentsInPost']);
     Route::resource('/comments', CommentController::class);
-    
+
+    Route::resource("/following", FollowingController::class);
+    Route::get('/list/following', [FollowingController::class, 'followingList']);
 });

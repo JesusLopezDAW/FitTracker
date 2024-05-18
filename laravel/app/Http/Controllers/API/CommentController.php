@@ -7,27 +7,23 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use App\Models\Post;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse as HttpJsonResponse;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(): HttpJsonResponse
     {
         return JsonResponse::success(Auth::user()->comments, 'Success', 200);
     }
 
-    public function commentsInPost(string $id)
+    public function commentsInPost(string $id): HttpJsonResponse
     {
         $post = Post::find($id);
         return JsonResponse::success($post->comments, 'Success', 200);
     }
 
-
-    public function store(CommentRequest $request)
+    public function store(CommentRequest $request): HttpJsonResponse
     {
         $user = Auth::user();
 
@@ -40,7 +36,7 @@ class CommentController extends Controller
         return JsonResponse::success($comment, 'Created successfuly', 200);
     }
 
-    public function update(CommentRequest $request, string $id)
+    public function update(CommentRequest $request, string $id): HttpJsonResponse
     {
         $comment = Comment::findOrFail($id);
 
@@ -56,10 +52,7 @@ class CommentController extends Controller
         return JsonResponse::success($comment, 'Updated successfuly', 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(string $id): HttpJsonResponse
     {
         $comment = Comment::findOrFail($id);
 

@@ -9,6 +9,11 @@ class Following extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'followed_user_id',
+        'user_id',
+    ];
+
     /**
      * Define la relación "belongsTo" con el modelo User.
      */
