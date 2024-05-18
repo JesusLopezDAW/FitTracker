@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\ExerciseController;
 use App\Http\Controllers\API\FoodController;
+use App\Http\Controllers\API\LikeController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\RoutineController;
 use App\Http\Controllers\API\WorkoutController;
@@ -19,7 +21,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('refresh', [AuthController::class, 'refresh']);
 
     // TODO 
-    // Route::resource('/likes', LikeController::class);
 
     Route::resource("/exercise", ExerciseController::class);
 
@@ -32,6 +33,11 @@ Route::middleware('auth:api')->group(function () {
 
     Route::resource("/workout", WorkoutController::class);
     Route::get("/routine-workout/{id}", [WorkoutController::class, 'getRoutineWorkout']);
-    
+
     Route::resource('/routines', RoutineController::class);
+
+    Route::get('/likes/{id}', [LikeController::class, 'likesInPost']);
+    Route::resource('/likes', LikeController::class);
+
+    Route::resource('/comments', CommentController::class);
 });
