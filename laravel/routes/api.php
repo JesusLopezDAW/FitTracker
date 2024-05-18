@@ -3,9 +3,9 @@
 use App\Http\Controllers\API\ExerciseController;
 use App\Http\Controllers\API\FoodController;
 use App\Http\Controllers\API\PostController;
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\API\RoutineController;
+use App\Http\Controllers\API\WorkoutController;
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -20,10 +20,18 @@ Route::middleware('auth:api')->group(function () {
 
     // TODO 
     // Route::resource('/likes', LikeController::class);
-    // Route::resource('/routines', RoutineController::class);
 
     Route::resource("/exercise", ExerciseController::class);
+
     Route::resource("/food", FoodController::class);
+
     Route::resource('/posts', PostController::class);
 
+    Route::get('/feed', [PostController::class, 'getInterestingPosts']);
+    Route::get('/feed/followed', [PostController::class, 'getFollowedPosts']);
+
+    Route::resource("/workout", WorkoutController::class);
+    Route::get("/routine-workout/{id}", [WorkoutController::class, 'getRoutineWorkout']);
+    
+    Route::resource('/routines', RoutineController::class);
 });

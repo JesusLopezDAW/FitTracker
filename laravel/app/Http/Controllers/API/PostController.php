@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse as HttpJsonResponse;
 use Illuminate\Support\Facades\DB;
@@ -16,10 +15,7 @@ class PostController extends Controller
 {
     public function index(): HttpJsonResponse
     {
-        $user = Auth::user();
-        dd($user);
-
-        return JsonResponse::success($user->posts, 'success', 200);
+        return JsonResponse::success(Auth::user()->posts, 'success', 200);
     }
 
     public function store(PostRequest $request): HttpJsonResponse
@@ -61,28 +57,78 @@ class PostController extends Controller
         return JsonResponse::success($post, 'Post created successfully', 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(string $id): HttpJsonResponse
     {
-        //
+        $post = Post::find($id);
+
+        if (!$post) {
+            return JsonResponse::error('Error: This post do not exist', 400);
+        }
+
+        return JsonResponse::success($post, 'Success', 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(PostRequest $request, string $id)
     {
-        //
+        $userId = Auth::id();
+
+        $post = Post::find($id);
+
+        if (!$post) {
+            return JsonResponse::error('Error: This post do not exist', 404);
+        }
+
+        $user = $post->user;
+        // Verificar si el usuario es el propietario del post
+        if ($user->id !== $userId) {
+            return JsonResponse::error('Error: You are not authorized to update this post', 403);
+        }
+
+        $post->update($request->all());
+
+        return JsonResponse::success($post, 'Update success', 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(string $id): HttpJsonResponse
     {
-        //
+        $userId = Auth::id();
+
+        $post = Post::find($id);
+
+        if (!$post) {
+            return JsonResponse::error('Error: This post do not exist', 400);
+        }
+        // TODO: move functions
+        $user = $post->user;
+        if ($user->id !== $userId) {
+            return JsonResponse::error('Error: You are not authorized to update this post', 403);
+        }
+
+        $post->delete();
+
+        return JsonResponse::success($post, 'Delete success', 200);
+    }
+
+    public function getFollowedPosts()
+    {
+        $user = Auth::user();
+        $followedUserIds = $user->followings->pluck('id');
+
+        $posts = Post::whereIn('user_id', $followedUserIds)
+            ->orderBy('created_at', 'desc')
+            ->withCount('likes') // Contar los likes asociados a cada post
+            ->paginate(10);
+
+        return JsonResponse::success($posts, 'Success', 200);
+    }
+
+    public function getInterestingPosts()
+    {
+        $posts = Post::withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->paginate(10);
+
+        return JsonResponse::success($posts, 'Success', 200);
     }
 
     private function getLastWorkoutForUser($userId)
@@ -99,5 +145,12 @@ class PostController extends Controller
         order by workouts.created_at
         LIMIT 1;');
         return $lastWorkout[0]->id;
+    }
+
+    private function verifyWorkout($workout)
+    {
+        if (!$workout) {
+            return JsonResponse::error('Error: Workout not found for the user', 404);
+        }
     }
 }
