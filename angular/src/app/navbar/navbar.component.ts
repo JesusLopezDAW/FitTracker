@@ -11,6 +11,8 @@ import { RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
   darkMode = false;
+  isInputFocused = false;
+  isSearchActive: boolean = false;
 
   toggleDarkMode() {
     this.darkMode = !this.darkMode;
@@ -19,5 +21,28 @@ export class NavbarComponent {
     } else {
       document.body.classList.remove('bg-dark', 'text-light');
     }
+  }
+
+  toggleSearch() {
+    this.isSearchActive = !this.isSearchActive;
+    const spans = document.querySelectorAll('.nav-link span') as NodeListOf<HTMLElement>;
+    spans.forEach((span) => {
+      span.style.display = this.isSearchActive ? 'none' : 'inline';
+    });
+  }
+
+  clearSearchInput() {
+    const searchInput = document.querySelector('.search-input') as HTMLInputElement;
+    if (searchInput) {
+      searchInput.value = '';
+    }
+  }
+
+  onInputFocus() {
+    this.isInputFocused = true;
+  }
+
+  onInputBlur() {
+    this.isInputFocused = false;
   }
 }

@@ -1,83 +1,145 @@
-<div class="navbar-desktop navbar navbar-expand-lg navbar-dark bg-dark flex-column p-3">
-    <a class="navbar-brand mb-3" href="#">
+<!-- Navbar para escritorio -->
+<div class="navbar-desktop navbar navbar-expand-lg navbar-dark bg-dark flex-column p-3"
+    [ngStyle]="{ width: isSearchActive ? '85px' : '350px' }">
+    <a class="navbar-brand mb-3" href="#" id="imagenPerfilNavBar">
         <img src="https://via.placeholder.com/30" alt="Logo" class="d-inline-block align-top">
     </a>
     <ul class="navbar-nav flex-column w-100">
-        <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="/">
-                <i class="fas fa-home"></i> Inicio
+        <li class="nav-item mb-3">
+            <a class="nav-link" routerLink="/" routerLinkActive="active">
+                <div class="icon-container" style="padding-left: 2px;">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+                <div class="icon-text-container">
+                    <span>Inicio</span>
+                </div>
             </a>
         </li>
-        <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="/explore">
-                <i class="fas fa-search"></i> Explorar
+        <li class="nav-item mb-3">
+            <a class="nav-link" routerLink="/" routerLinkActive="active" [class.search-active]="isSearchActive"
+                (click)="toggleSearch()">
+                <div class="icon-container" style="padding-left: 4px;">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="icon-text-container">
+                    <span>Busqueda</span>
+                </div>
             </a>
         </li>
-        <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="/notifications">
-                <i class="fas fa-bell"></i> Notificaciones
+        <!-- Repite la estructura para los demás elementos -->
+        <li class="nav-item mb-3">
+            <a class="nav-link" routerLink="/explore" routerLinkActive="active">
+                <div class="icon-container" style="padding-left: 5px;">
+                    <i class="fa-solid fa-list"></i>
+                </div>
+                <div class="icon-text-container">
+                    <span>Rutinas</span>
+                </div>
             </a>
         </li>
-        <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="/messages">
-                <i class="fas fa-envelope"></i> Mensajes
+        <li class="nav-item mb-3">
+            <a class="nav-link" routerLink="/notifications" routerLinkActive="active">
+                <div class="icon-container" style="padding-left: 4px;">
+                    <i class="fa-solid fa-dumbbell"></i>
+                </div>
+                <div class="icon-text-container">
+                    <span>Ejercicios</span>
+                </div>
             </a>
         </li>
-        <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="/lists">
-                <i class="fas fa-list"></i> Listas
+        <li class="nav-item mb-3">
+            <a class="nav-link" routerLink="/messages" routerLinkActive="active">
+                <div class="icon-container" style="padding-left: 6px;">
+                    <i class="fa-regular fa-paper-plane"></i>
+                </div>
+                <div class="icon-text-container">
+                    <span>Mensajes</span>
+                </div>
             </a>
         </li>
-        <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="/bookmarks">
-                <i class="fas fa-bookmark"></i> Guardados
+        <li class="nav-item mb-3">
+            <a class="nav-link" routerLink="/communities" routerLinkActive="active">
+                <div class="icon-container">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="icon-text-container">
+                    <span>Comunidades</span>
+                </div>
             </a>
         </li>
-        <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="/communities">
-                <i class="fas fa-users"></i> Comunidades
+        <li class="nav-item mb-3">
+            <a class="nav-link" routerLink="/premium" routerLinkActive="active">
+                <div class="icon-container">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="icon-text-container">
+                    <span>Premium</span>
+                </div>
             </a>
         </li>
-        <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="/premium">
-                <i class="fas fa-star"></i> Premium
+        <li class="nav-item mb-3">
+            <a class="nav-link" routerLink="/more" routerLinkActive="active">
+                <div class="icon-container" style="padding-left: 2px;">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+                <div class="icon-text-container">
+                    <span>Configuracion</span>
+                </div>
             </a>
         </li>
-        <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="/profile">
-                <i class="fas fa-user"></i> Perfil
-            </a>
-        </li>
-        <li class="nav-item mb-2">
-            <a class="nav-link" routerLink="/more">
-                <i class="fas fa-ellipsis-h"></i> Más opciones
+        <li class="nav-item mb-3">
+            <a class="nav-link" routerLink="/profile" routerLinkActive="active">
+                <div class="icon-container" style="padding-left: 2px;">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="icon-text-container">
+                    <span>Perfil</span>
+                </div>
             </a>
         </li>
     </ul>
-    <button class="btn btn-primary w-100 my-3">
-        Postear
+    <button class="btn btn-primary w-100 my-4 newWorkout" id="newWorkout">
+        <span *ngIf="!isSearchActive">Nuevo entrenamiento</span>
+        <span *ngIf="isSearchActive"><i class="fa-solid fa-plus"></i></span>
     </button>
-    <div class="mt-auto">
-        <a class="nav-link text-center" routerLink="/profile">
-            <i class="fas fa-user"></i> Perfil
-        </a>
+</div>
+
+<!-- Componente a la derecha del navbar -->
+<div class="search-component" [ngClass]="{'active': isSearchActive}">
+    <div class="search-content">
+        <h4>Búsqueda</h4>
+        <br>
+        <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass search-icon" *ngIf="!isInputFocused"></i>
+            <input type="text" placeholder="Buscar" class="search-input" (focus)="onInputFocus()" (blur)="onInputBlur()">
+            <i class="fa-solid fa-xmark clear-input" (click)="clearSearchInput()" *ngIf="isInputFocused"></i>
+        </div>
+        <hr>
+        <div class="search-results">
+            <p>Usuario 1</p>
+            <p>Usuario 2</p>
+            <p>Usuario 3</p>
+            <p>Usuario 4</p>
+            <p>Usuario 5</p>
+        </div>
     </div>
 </div>
 
+<!-- Navbar para móvil -->
 <div class="navbar-mobile navbar navbar-expand-lg navbar-dark bg-dark justify-content-between fixed-bottom d-lg-none">
-    <a class="nav-link" routerLink="/profile">
+    <a class="nav-link" routerLink="/profile" routerLinkActive="active">
         <i class="fas fa-user"></i>
     </a>
-    <a class="nav-link" routerLink="/">
+    <a class="nav-link" routerLink="/" routerLinkActive="active">
         <i class="fas fa-home"></i>
     </a>
-    <a class="nav-link" routerLink="/explore">
+    <a class="nav-link" routerLink="/explore" routerLinkActive="active">
         <i class="fas fa-search"></i>
     </a>
-    <a class="nav-link" routerLink="/notifications">
+    <a class="nav-link" routerLink="/notifications" routerLinkActive="active">
         <i class="fas fa-bell"></i>
     </a>
-    <a class="nav-link" routerLink="/messages">
+    <a class="nav-link" routerLink="/messages" routerLinkActive="active">
         <i class="fas fa-envelope"></i>
     </a>
 </div>

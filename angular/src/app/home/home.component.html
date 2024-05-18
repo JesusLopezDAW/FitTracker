@@ -1,14 +1,16 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-2">
-            <app-navbar></app-navbar>
+        <div class="col-3">
+            <!-- <app-navbar></app-navbar> -->
         </div>
-        <div class="col-8 posts-section">
+        <div class="col-6 posts-section">
             <div class="tabs-container">
-                <button class="tab-button" [ngClass]="{'active': showForYou}" (click)="togglePosts(true)">Para
-                    ti</button>
-                <button class="tab-button" [ngClass]="{'active': !showForYou}"
-                    (click)="togglePosts(false)">Siguiendo</button>
+                <div class="tab-button" [ngClass]="{'active': showForYou}" (click)="togglePosts(true)">
+                    <span>Para ti</span> <!-- Texto del botón envuelto en un span -->
+                </div>
+                <div class="tab-button" [ngClass]="{'active': !showForYou}" (click)="togglePosts(false)">
+                    <span>Siguiendo</span> <!-- Texto del botón envuelto en un span -->
+                </div>
             </div>
             <div *ngIf="showForYou">
                 <app-post *ngFor="let post of postsForYou" [post]="post"></app-post>
@@ -17,9 +19,9 @@
                 <app-post *ngFor="let post of postsFollowing" [post]="post"></app-post>
             </div>
         </div>
-        <div class="col-2">
-            <!-- <app-profile></app-profile> -->
-            <app-suggestions></app-suggestions>
-        </div>
+        <!-- <div class="col-2"> -->
+        <!-- <app-profile></app-profile> -->
+        <!-- <app-suggestions></app-suggestions> -->
+        <!-- </div> -->
     </div>
 </div>

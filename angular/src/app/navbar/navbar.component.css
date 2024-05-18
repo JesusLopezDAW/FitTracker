@@ -3,19 +3,87 @@
     position: fixed;
     left: 0;
     top: 0;
-    width: 250px;
-    background-color: #15202b;
-    display: none;
+    width: 350px;
+    border-right: 1px solid #2F3336;
+    transition: width 0.3s ease;
+    z-index: 1;
+}
+
+.search-component {
+    height: 100vh;
+    position: fixed;
+    left: -100px;
+    top: 0;
+    width: 385px;
+    border-right: 1px solid #2F3336;
+    visibility: hidden;
+    opacity: 0;
+    transition: left 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
+    /* z-index: 0; */
+}
+
+.search-component.active {
+    visibility: visible;
+    opacity: 1;
+    left: 85px;
+}
+
+.search-content {
+    padding: 20px;
+    /* background-color: #2F3336; */
+    height: 100%;
+    overflow-y: auto;
+}
+
+.search-input-wrapper {
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background-color: #262626;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: white;
+}
+
+.search-icon,
+.clear-input {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+.search-icon {
+    right: 20px;
+}
+
+hr {
+    margin: 20px 0;
+    border: 1px solid #ccc;
+}
+
+.search-results p {
+    margin: 10px 0;
+    color: white;
 }
 
 .navbar-mobile {
-    background-color: #15202b;
+    /* background-color: #15202b; */
     border-top: 1px solid #38444d;
 }
 
 .nav-link {
     color: #ffffff;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     padding: 0.5rem;
     transition: color 0.3s;
 }
@@ -32,4 +100,24 @@
     .navbar-mobile {
         display: none;
     }
+}
+
+.newWorkout {
+    border-radius: 15px;
+    height: 40px;
+}
+
+#imagenPerfilNavBar {
+    margin-left: -257px;
+}
+
+.nav-link span {
+    font-size: 20px;
+    /* Tamaño de fuente deseado */
+}
+
+.navbar-desktop {
+    /* Otras propiedades CSS */
+    transition: width 0.3s ease;
+    /* Define la transición para la propiedad width */
 }
