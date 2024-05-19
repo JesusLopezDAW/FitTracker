@@ -1,0 +1,65 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.container-fluid.h-100 {
+    height: 100%;
+}
+
+.row.h-100 {
+    height: 100%;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+.flex-grow-1 {
+    flex-grow: 1 !important;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+.routines-content {
+    position: fixed;
+    top: 27px;
+    left: 436px;
+    right: 20px;
+    max-width: calc(100% - 332px);
+    overflow-x: auto;
+    color: var(--principal);
+}
+
+.card {
+    border: 1px solid var(--border-color);
+    background-color: var(--background-input);
+    margin-bottom: 3%;
+}
+
+.card-header {
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.new-routine {
+    margin-top: 10px;
+}
+
+input{
+    color: black;
+}
+
+li{
+    background-color: var(--background-input);
+    /* border: none; */
+    border: 2px solid var(--background-color);
+    color: var(--text-color);
+}

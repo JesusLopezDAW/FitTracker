@@ -75,6 +75,7 @@ export class NavbarComponent {
   }
 
   toggleDropdown() {
+    console.log(this.showSettingsOptions);
     this.showSettingsOptions = !this.showSettingsOptions;
     this.showThemeSettings = false; // Oculta los ajustes de tema si se muestra el dropdown
   }

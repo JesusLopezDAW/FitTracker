@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { StatsComponent } from './stats/stats.component';
 import { PostsComponent } from './posts/posts.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  // imports: [CommonModule, StatsComponent, PostsComponent],
-  imports: [CommonModule, PostsComponent],
+  imports: [CommonModule, PostsComponent, RouterModule],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
@@ -20,6 +19,10 @@ export class ProfileComponent {
 
   showSection(section: string) {
     this.activeSection = section;
+  }
+
+  isActive(section: string): boolean {
+    return this.activeSection === section;
   }
 
 }

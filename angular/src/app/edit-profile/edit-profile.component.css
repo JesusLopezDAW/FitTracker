@@ -1,0 +1,48 @@
+.container {
+    color: white;
+    background-color: #000;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.nav-link {
+    color: grey;
+    margin-bottom: 10px;
+}
+
+.nav-link.active {
+    color: white;
+    font-weight: bold;
+}
+
+.form-label,
+.form-text {
+    color: grey;
+}
+
+.form-control {
+    background-color: #121212;
+    color: white;
+    border: none;
+}
+
+.form-control:focus {
+    background-color: #121212;
+    color: white;
+    border: none;
+    box-shadow: none;
+}
+
+.btn-primary {
+    background-color: #0095f6;
+    border: none;
+}
+
+.btn-primary:focus {
+    box-shadow: none;
+}
+
+.form-check-input:checked {
+    background-color: #0095f6;
+    border-color: #0095f6;
+}

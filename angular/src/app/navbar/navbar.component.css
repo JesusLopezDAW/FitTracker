@@ -116,12 +116,6 @@ hr {
         /* Ajusta el padding si es necesario */
     }
 
-    /* Ajuste del botón de nuevo entrenamiento */
-    .btn.newWorkout span {
-        /* display: none; */
-        /* Oculta el texto del botón */
-    }
-
     .btn.newWorkout i {
         display: inline-block;
         /* Asegura que el icono se muestre */
@@ -198,7 +192,7 @@ hr {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     border-radius: 10px;
-    z-index: 1;
+    z-index: 101;
 }
 
 .theme-settings {
@@ -212,7 +206,7 @@ hr {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     border-radius: 10px;
-    z-index: 1;
+    z-index: 101;
 }
 
 .theme-option {

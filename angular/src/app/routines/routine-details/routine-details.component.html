@@ -1,0 +1,18 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Rutina {{ routineId }}</h3>
+            <h5>Exercises</h5>
+            <ul class="list-group">
+                <li *ngFor="let exercise of exercises" class="list-group-item">
+                    <div>
+                        <strong>{{ exercise.name }}</strong>
+                        <div>Sets: {{ exercise.sets }}</div>
+                        <div>Reps: {{ exercise.reps }}</div>
+                        <div>Rest: {{ exercise.rest }}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

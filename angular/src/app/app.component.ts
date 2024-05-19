@@ -2,11 +2,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DOCUMENT } from '@angular/common';
+import { HomeComponent } from './home/home.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, NavbarComponent],
+  imports: [RouterModule, NavbarComponent, HomeComponent, EditProfileComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -15,11 +17,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // Adjuntar un controlador de eventos al evento de redimensionamiento de la ventana
-    window.addEventListener('resize', () => {
-      this.checkSize();
-    });
+    // window.addEventListener('resize', () => {
+    //   this.checkSize();
+    // });
 
-    this.checkSize();
+    // this.checkSize();
   }
 
   checkSize() {

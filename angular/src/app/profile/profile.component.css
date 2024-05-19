@@ -5,11 +5,19 @@ h2 {
 
 hr {
     /* width: 3px; */
-    border-color: var(--border-color);
+    height: 5px;
+    /* Ajusta el grosor aquí */
+    background-color: var(--border-color);
+    /* Ajusta el color aquí */
+    border: none;
+    /* Elimina el borde por defecto */
+    /* border-color: var(--border-color); */
 }
 
 .text-dark {
     color: var(--text-color) !important;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 a.text-dark:hover {
@@ -17,8 +25,9 @@ a.text-dark:hover {
 }
 
 .btn-outline-primary {
-    color: var(--principal);
-    border-color: var(--principal);
+    background-color: var(--background-input);
+    color: var(--text-color);
+    border-color: var(--border-color);
 }
 
 .btn-outline-primary:hover {
@@ -48,6 +57,25 @@ a.routerLink .fas {
     margin-right: 5px;
 }
 
-.content-profile{
+.content-profile {
     margin-left: 23%;
+}
+
+.profileOptions {
+    margin-top: 2%;
+    border-top: 2px solid var(--border-color);
+    padding-top: 2%;
+    /* border-width: 1px; */
+}
+
+.profileOptions a {
+    font-size: 16px;
+    color: #71767B!important;
+    text-decoration: none;
+}
+
+.profileOptions a.active {
+    font-weight: bold;
+    color: var(--text-color) !important;
+    border-bottom: 2px solid var(--principal);
 }

@@ -28,13 +28,10 @@
               "src/styles.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/@fullcalendar/daygrid/main.css"
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "./node_modules/@popperjs/core/dist/umd/popper.min.js",
-              "node_modules/chart.js/dist/chart.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
             ],
             "server": "src/main.server.ts",
             "prerender": true,
@@ -99,9 +96,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/chart.js/dist/chart.js"
-            ]
+            "scripts": []
           }
         }
       }
