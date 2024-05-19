@@ -2,8 +2,10 @@
     <div class="row h-100">
         <div class="col-md-12 p-0">
             <div class="col-md-10 p-0 d-flex flex-column">
-                <h3>Mis rutinas</h3>
-                <button class="btn btn-primary mb-3" (click)="createNewRoutine()">New Routine</button>
+                <div style="display: flex;">
+                    <h3>Mis rutinas</h3>
+                    <button style="margin-right: 0px;" class="btn btn-primary mb-3 newRoutine" (click)="createNewRoutine()">Nueva rutina</button>
+                </div>
                 <div class="row">
                     <ng-container *ngFor="let routine of routines; let routineIndex = index">
                         <div class="col-md-3 mb-3" cdkDropList [cdkDropListData]="routine.workouts" (cdkDropListDropped)="drop($event, routineIndex)">

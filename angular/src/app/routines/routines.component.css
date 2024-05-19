@@ -53,6 +53,11 @@ body {
     margin-top: 10px;
 }
 
+.newRoutine{
+    background-color: var(--principal) !important;
+    margin-left: 20px;
+}
+
 input {
     color: var(--background-color);
 }

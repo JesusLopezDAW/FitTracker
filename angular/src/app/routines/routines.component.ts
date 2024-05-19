@@ -30,7 +30,7 @@ interface Routine {
 })
 export class RoutinesComponent {
 
-
+  // Iconos
   faEdit = faEdit;
   faCheck = faCheck;
   faTimes = faTimes;
@@ -47,7 +47,27 @@ export class RoutinesComponent {
         { id: 3, name: 'Espalda / Biceps' },
       ]
     },
-    { name: 'Routine 2', workouts: [{ id: 2, name: 'Pecho' }] }
+    {
+      name: '5 dias', workouts: [
+        { id: 1, name: 'Pecho' },
+        { id: 2, name: 'Espalda' },
+        { id: 3, name: 'Hombros' },
+        { id: 4, name: 'Pierna' },
+        { id: 5, name: 'Brazos' },
+      ]
+    },
+    {
+      name: 'Frecuencia 2', workouts: [
+        { id: 1, name: 'Pecho / Hombros / Triceps' },
+        { id: 2, name: 'Espalda / Biceps' },
+        { id: 3, name: 'Pierna' }
+      ]
+    },
+    {
+      name: 'Diaria', workouts: [
+        { id: 1, name: 'Paja al fallo' }
+      ]
+    }
   ];
 
   @ViewChild('newWorkoutInput') newWorkoutInput!: ElementRef;
@@ -58,6 +78,8 @@ export class RoutinesComponent {
 
   createNewRoutine() {
     this.routines.push({ name: 'New Routine', workouts: [] });
+    const index = this.routines.length - 1;
+    this.editRoutineName(index);
   }
 
   startCreatingWorkout(routineIndex: number) {
@@ -127,7 +149,7 @@ export class RoutinesComponent {
         this.cancelNewWorkoutIfCreating();
       }
     } catch (error) {
-      
+
     }
   }
 
