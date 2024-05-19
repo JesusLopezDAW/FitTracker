@@ -7,6 +7,7 @@ use App\Http\Controllers\API\FoodController;
 use App\Http\Controllers\API\LikeController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\RoutineController;
+use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\WorkoutController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -49,4 +50,6 @@ Route::middleware('auth:api')->group(function () {
 
     Route::resource("/following", FollowingController::class);
     Route::get('/list/following', [FollowingController::class, 'followingList']);
+
+    Route::get('/search/user', [UserController::class, 'search']);
 });
