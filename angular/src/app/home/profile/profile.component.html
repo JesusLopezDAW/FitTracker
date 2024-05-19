@@ -1,0 +1,20 @@
+<!-- <div class="profile-container">
+    <img [src]="user.profileImage" alt="{{ user.name }}" class="profile-image">
+    <div class="profile-info">
+        <div class="profile-details">
+            <span class="username">{{ user.username }}</span>
+            <span class="name">{{ user.name }}</span>
+        </div>
+        <button class="profile-button"><a href="/profile" class="change-link">Cambiar</a></button>
+    </div>
+</div> -->
+<div class="profile-container">
+    <div class="profile">
+        <img [src]="user.profileImage" alt="{{ user.name }}" class="profile-image">
+        <div class="profile-details">
+            <span class="username">{{ user.username }}</span>
+            <span class="name">{{ user.name }}</span>
+        </div>
+        <a href="/profile" class="profile-button"><span class="profileSpan">Ver perfil</span></a>
+    </div>
+</div>

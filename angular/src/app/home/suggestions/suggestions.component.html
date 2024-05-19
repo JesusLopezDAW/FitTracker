@@ -1,0 +1,11 @@
+<div class="suggestions-container">
+    <h5>Sugerencias para ti</h5>
+    <div *ngFor="let suggestion of suggestions" class="suggestion">
+        <img [src]="suggestion.profileImage" alt="{{ suggestion.name }}" class="profile-image">
+        <div class="suggestion-details">
+            <span class="username">{{ suggestion.username }}</span>
+            <span class="name">{{ suggestion.name }}</span>
+        </div>
+        <button class="follow-button"><span class="followSpan">Seguir</span></button>
+    </div>
+</div>

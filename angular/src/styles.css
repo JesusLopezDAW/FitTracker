@@ -20,7 +20,7 @@ body {
 
 .text-light,
 * {
-    color: var(--text-color) !important;
+    color: var(--text-color);
 }
 
 /* Textos */
@@ -37,7 +37,7 @@ a,
 li,
 dt,
 dd {
-    color: var(--text-color) !important;
+    color: var(--text-color);
 }
 
 /* NavBar */

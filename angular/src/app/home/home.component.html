@@ -3,7 +3,7 @@
         <div class="col-2">
             <!-- <app-navbar></app-navbar> -->
         </div>
-        <div class="col-8 posts-section">
+        <div class="col-8 posts-section" id="posts-section">
             <div class="tabs-container">
                 <div class="tab-button" [ngClass]="{'active': showForYou}" (click)="togglePosts(true)">
                     <span>Para ti</span> <!-- Texto del botón envuelto en un span -->
@@ -19,9 +19,9 @@
                 <app-post *ngFor="let post of postsFollowing" [post]="post"></app-post>
             </div>
         </div>
-        <!-- <div class="col-2"> -->
-        <!-- <app-profile></app-profile> -->
-        <!-- <app-suggestions></app-suggestions> -->
-        <!-- </div> -->
+        <div class="col-2 right-sidebar" id="right-sidebar">
+            <app-profile></app-profile>
+            <app-suggestions></app-suggestions>
+        </div>
     </div>
 </div>

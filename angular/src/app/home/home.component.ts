@@ -1,41 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { PostComponent } from '../post/post.component';
-import { SuggestionsComponent } from '../suggestions/suggestions.component';
+import { SuggestionsComponent } from './suggestions/suggestions.component';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { ProfileComponent } from '../profile/profile.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, PostComponent, SuggestionsComponent, NavbarComponent, ProfileComponent],
+  imports: [CommonModule, PostComponent, NavbarComponent, ProfileComponent, SuggestionsComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   postsForYou = [
-    { id: 1, author: 'Author 1', content: 'Para ti Post 1', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/600x300' },
-    { id: 2, author: 'Author 2', content: 'Para ti Post 2', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/600x300' }
+    { id: 1, author: 'Author 1', content: 'Para ti Post 1', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/640x480' },
+    { id: 2, author: 'Author 2', content: 'Para ti Post 2', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/640x480' }
   ];
 
   postsFollowing = [
-    { id: 1, author: 'Author 1', content: 'Siguiendo Post 1', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/600x300' },
-    { id: 2, author: 'Author 2', content: 'Siguiendo Post 2', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/600x300' }
+    { id: 1, author: 'Author 1', content: 'Siguiendo Post 1', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/640x480' },
+    { id: 2, author: 'Author 2', content: 'Siguiendo Post 2', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/640x480' }
   ];
 
   showForYou = true;
 
-  constructor() { }
+  constructor(@Inject(DOCUMENT) private document: Document) { }
+
 
   async ngOnInit(): Promise<void> {
     await this.fetchData();
   }
 
+
   async fetchData(): Promise<void> {
     const headersList = {
       "Accept": "*/*",
       "User-Agent": "Thunder Client (https://www.thunderclient.com/)",
-      "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTcxNjA2NTQ1NywiZXhwIjoxNzE2MDY5MDU3LCJuYmYiOjE3MTYwNjU0NTcsImp0aSI6InlLMWM2UWtRbUZES3RSWHIiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.4UVFnHpnvTSbyBjr7NYcnPZMv3GDljL52VGOtKTk254",
+      "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTcxNjA3MzA3MiwiZXhwIjoxNzE2MDc2NjcyLCJuYmYiOjE3MTYwNzMwNzIsImp0aSI6IjNCOHNCUWEyZGZtdUk3UmQiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.UELf2lB1iwCa3UdHbgAK8KRnfXBqc4OUBN2CqksZG2Y",
       "post_id": "1",
       "Content-Type": "application/json"
     };

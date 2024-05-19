@@ -47,7 +47,11 @@ export class NavbarComponent {
     if(this.isSearchActive){
       iconApp.innerHTML = '<img src="../../assets/icons/logoBlancoNavBar.png" alt="Logo" class="d-inline-block align-top imagenAppNavBar" style="width: 45px; height: 35px; margin-left: 144px; margin-top: 10px; margin-bottom: 11px;">';
     }else{
-      iconApp.innerHTML = '<h1 style="font-family: Dancing Script; padding-left: 0px;">FitTracker</h1>';
+      if (window.innerWidth < 1440) {
+        iconApp.innerHTML = '<img src="../../assets/icons/logoBlancoNavBar.png" alt="Logo" class="d-inline-block align-top imagenAppNavBar" style="width: 45px; height: 35px; margin-left: 144px; margin-top: 10px; margin-bottom: 11px;">';
+      }else{
+        iconApp.innerHTML = '<h1 style="font-family: Dancing Script; padding-left: 0px;">FitTracker</h1>';
+      }
     }
     const spans = document.querySelectorAll('.nav-link span') as NodeListOf<HTMLElement>;
     spans.forEach((span) => {

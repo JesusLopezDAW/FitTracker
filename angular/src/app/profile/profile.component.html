@@ -1,41 +1,56 @@
-<div class="container mt-5">
+<div class="container mt-5 content-profile">
     <div class="row">
+        <!-- Imagen de perfil -->
         <div class="col-md-3 text-center">
             <img src="https://via.placeholder.com/150" alt="Profile Picture" class="rounded-circle" width="150"
                 height="150">
-            <h2 class="mt-3">jesuslpzz_</h2>
-            <button class="btn btn-outline-primary btn-sm">Editar perfil</button>
         </div>
+        <!-- Información del usuario -->
         <div class="col-md-9">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
+            <div class="d-flex flex-column">
+                <!-- Primer div: Nombre de usuario y botones -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 class="mt-3">jesuslpzz_</h2>
+                    <div>
+                        <button class="btn btn-outline-primary btn-sm">Editar perfil</button>
+                        <button class="btn btn-outline-primary btn-sm ml-2">Ver archivo</button>
+                    </div>
+                </div>
+                <!-- Segundo div: Publicaciones, seguidores y seguidos -->
+                <div class="d-flex justify-content-start align-items-center mt-3">
                     <span><strong>0</strong> publicaciones</span>
                     <span class="ml-4"><strong>732</strong> seguidores</span>
                     <span class="ml-4"><strong>289</strong> seguidos</span>
                 </div>
-                <button class="btn btn-outline-primary btn-sm">Ver archivo</button>
-            </div>
-            <div class="mt-4">
-                <p>JESUS</p>
+                <!-- Tercer div: Biografía -->
+                <div class="mt-4">
+                    <p>JESUS</p>
+                </div>
             </div>
         </div>
     </div>
     <hr>
+    <!-- Navegación de publicaciones, estadísticas y likes -->
     <div class="d-flex justify-content-around">
-        <a routerLink="/posts" class="text-dark">
+        <a (click)="showSection('posts')" class="text-dark">
             <i class="fas fa-th"></i> PUBLICACIONES
         </a>
-        <a routerLink="/saved" class="text-dark">
-            <i class="fas fa-bookmark"></i> GUARDADAS
+        <a (click)="showSection('stats')" class="text-dark">
+            <i class="fas fa-chart-bar"></i> ESTADÍSTICAS
         </a>
-        <a routerLink="/tagged" class="text-dark">
-            <i class="fas fa-user-tag"></i> ETIQUETADAS
+        <a (click)="showSection('likes')" class="text-dark">
+            <i class="fas fa-heart"></i> LIKES
         </a>
     </div>
     <hr>
-    <div class="text-center">
-        <p>Comparte fotos</p>
-        <p>Cuando compartas fotos, aparecerán en tu perfil.</p>
-        <a href="#" class="btn btn-primary">Comparte tu primera foto</a>
+    <!-- Sección de contenido dinámico -->
+    <div *ngIf="activeSection === 'posts'">
+        <app-posts></app-posts>
+    </div>
+    <div *ngIf="activeSection === 'stats'">
+        <!-- <app-stats></app-stats> -->
+    </div>
+    <div *ngIf="activeSection === 'likes'">
+        <!-- Aquí puedes añadir contenido para la sección de Likes -->
     </div>
 </div>

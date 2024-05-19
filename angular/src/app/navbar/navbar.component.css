@@ -5,9 +5,10 @@
     left: 0;
     top: 0;
     width: 350px;
+    background-color: var(--background-color);
     border-right: 1px solid var(--border-color);
     transition: width 0.3s ease;
-    z-index: 1;
+    z-index: 100;
 }
 
 /* Estilos navbar mobile */
@@ -22,11 +23,12 @@
     left: -100px;
     top: 0;
     width: 385px;
+    background-color: var(--background-color);
     border-right: 1px solid var(--border-color);
     visibility: hidden;
     opacity: 0;
     transition: left 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
-    /* z-index: 0; */
+    z-index: 99;
 }
 
 .search-component.active {
@@ -93,13 +95,57 @@ hr {
     font-size: 20px;
 }
 
-@media (min-width: 992px) {
+@media (max-width: 1439px) {
+    .navbar-desktop {
+        width: 85px !important;
+        /* Ancho comprimido */
+    }
+
+    .navbar-desktop .nav-item {
+        justify-content: center;
+        /* Centra los iconos */
+    }
+
+    .navbar-desktop .nav-item .icon-text-container {
+        display: none;
+        /* Oculta el texto */
+    }
+
+    .navbar-desktop .nav-item .icon-container {
+        padding-left: 0;
+        /* Ajusta el padding si es necesario */
+    }
+
+    /* Ajuste del botón de nuevo entrenamiento */
+    .btn.newWorkout span {
+        /* display: none; */
+        /* Oculta el texto del botón */
+    }
+
+    .btn.newWorkout i {
+        display: inline-block;
+        /* Asegura que el icono se muestre */
+    }
+
+}
+
+@media (min-width: 836px) {
     .navbar-desktop {
         display: flex;
     }
 
     .navbar-mobile {
         display: none;
+    }
+}
+
+@media (max-width: 836px) {
+    .navbar-desktop {
+        display: none;
+    }
+
+    .navbar-mobile {
+        display: flex;
     }
 }
 
@@ -116,11 +162,13 @@ hr {
     width: 45px;
     height: 35px;
 }
+
 .textAppNavBar {
     font-family: 'Dancing Script', cursive;
     padding-left: 0px;
 }
-#divAppNavBar{
+
+#divAppNavBar {
     margin-left: -147px;
 }
 
@@ -211,7 +259,8 @@ hr {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--background-input); /* Ajuste aquí */
+    background-color: var(--background-input);
+    /* Ajuste aquí */
     transition: .4s;
     border-radius: 20px;
 }

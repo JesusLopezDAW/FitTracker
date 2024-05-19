@@ -1,0 +1,56 @@
+.suggestions-container {
+    padding: 10px;
+    margin-top: 17px;
+    margin-left: -10px;
+}
+
+.suggestion {
+    display: flex;
+    align-items: center;
+    margin-bottom: 13px;
+    width: 71%;
+    
+}
+.suggestions-container h5{
+    margin-bottom: 18px;
+}
+
+.profile-image {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.suggestion-details {
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.name {
+    color: grey;
+}
+
+.follow-button {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    padding: 0; /* Sin relleno */
+    color: var(--principal); /* Color azul */
+    font-size: 14px; /* Tamaño del texto */
+    cursor: pointer; /* Cursor de puntero para indicar que es clickeable */
+}
+
+.follow-button span {
+    text-decoration: none; /* Sin subrayado */
+}
+
+.follow-button:hover span {
+    color: var(--text-color);
+}
+
+.followSpan{
+    color: var(--principal);
+}

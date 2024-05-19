@@ -4,12 +4,6 @@
   min-height: 100vh;
 }
 
-@media (min-width: 992px) {
-  .content {
-    margin-left: 250px;
-  }
-}
-
 /* .bg-dark {
   background-color: #15202b !important;
 } */
@@ -24,10 +18,4 @@ a:hover {
 
 .suggestions {
   display: none;
-}
-
-@media (min-width: 992px) {
-  .suggestions {
-    display: block;
-  }
 }
