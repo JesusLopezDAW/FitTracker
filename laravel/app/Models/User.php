@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Laravel\Scout\Searchable;
 
 class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Searchable;
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -129,5 +130,20 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     public function foods()
     {
         return $this->hasMany(Food::class);
+    }
+
+    public function toSearchableArray()
+    {
+        $array = $this->only('id', 'name', 'photo');
+
+        return $array;
+    }
+
+    public function transform()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
     }
 }
