@@ -1,8 +1,9 @@
-.container {
-    background-color: var(--background-color);
-    min-height: 100vh;
-}
-
-.list-group-item {
-    cursor: pointer;
+.routine-content {
+    position: fixed;
+    top: 27px;
+    left: -68px;
+    right: 20px;
+    max-width: calc(100% - 1219px);
+    overflow-x: auto;
+    color: var(--principal);
 }
