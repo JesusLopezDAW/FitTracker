@@ -18,18 +18,48 @@ class LikeController extends Controller
         return JsonResponse::success(Auth::user()->likes, 'success', 200);
     }
 
-    public function likesInPost(string $id): HttpJsonResponse
+    public function show(string $postId): HttpJsonResponse
     {
-        $post = Post::find($id);
+        $post = Post::find($postId);
         if(!$post){
             return JsonResponse::error('ERROR: Post doesnt exist', 404);
         }
-        return JsonResponse::success($post->likes, 'success', 200);
+        $likes = $post->likes->count();
+
+        return JsonResponse::success($likes, 'success', 200);
+
+    }
+
+    public function usersLikePost(string $postId): HttpJsonResponse
+    {
+        $post = Post::find($postId);
+        if(!$post){
+            return JsonResponse::error('ERROR: Post doesnt exist', 404);
+        }
+        $likes = $post->likes;
+
+        // Obtener los datos de los usuarios que dieron like
+        $users = $likes->map(function($like) {
+            return [
+                'id' => $like->user->id,
+                'name' => $like->user->name,
+                'image' => $like->user->image
+            ];
+        });
+
+
+        return JsonResponse::success($users, 'success', 200);
     }
 
     public function store(LikeRequest $request): HttpJsonResponse
     {
         $user = Auth::user();
+
+        $like = Like::where('user_id', $user->id)->where('post_id', $request->post_id)->first();
+
+        if($like){
+            return response()->json(['error' => 'You alredy liked this post'], 400);
+        }
 
         $like = Like::create([
             'post_id' => $request->post_id,
