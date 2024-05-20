@@ -5,21 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Following extends Model
+class Follow extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'followed_user_id',
-        'user_id',
-    ];
+    protected $fillable = ['user_id', 'followed_user_id'];
 
-    /**
-     * Define la relación "belongsTo" con el modelo User.
-     */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     public function followedUser()

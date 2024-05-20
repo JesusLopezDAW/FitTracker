@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\ExerciseController;
-use App\Http\Controllers\API\FollowingController;
+use App\Http\Controllers\API\FollowController;
 use App\Http\Controllers\API\FoodController;
 use App\Http\Controllers\API\LikeController;
 use App\Http\Controllers\API\PostController;
@@ -22,7 +22,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
 
-    // TODO 
+    // TODO: 
     // Route::resource("/exercise-log", ExerciseController::class);
     // Route::resource("/log", ExerciseController::class);
     // Route::resource("/followers", ExerciseController::class);
@@ -48,8 +48,18 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/comments/{id}', [CommentController::class, 'commentsInPost']);
     Route::resource('/comments', CommentController::class);
 
-    Route::resource("/following", FollowingController::class);
-    Route::get('/list/following', [FollowingController::class, 'followingList']);
-
     Route::get('/search/user', [UserController::class, 'search']);
+
+    Route::controller(FollowController::class)->group(function (){
+        Route::post('/follow/{user}', 'follow')->name('follow');
+        Route::post('/unfollow/{user}', 'unfollow')->name('unfollow');
+        Route::get('/followers', 'followers');
+        Route::get('/following', 'following');
+        Route::get('/followers/count', 'followersNumber');
+        Route::get('/following/count', 'followingNumber');
+    });
+    
+
+
+
 });

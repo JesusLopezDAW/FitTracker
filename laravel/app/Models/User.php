@@ -77,6 +77,18 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         return $this->rol === 'admin';
     }
 
+    // Usuarios que este usuario sigue
+    public function follows()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'user_id', 'followed_user_id');
+    }
+
+    // Usuarios que siguen a este usuario
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'followed_user_id', 'user_id');
+    }
+
     public function logs()
     {
         return $this->hasMany(Log::class);
@@ -90,16 +102,6 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     public function routines()
     {
         return $this->hasMany(Routine::class);
-    }
-
-    public function followedUsers()
-    {
-        return $this->belongsToMany(User::class, 'followings', 'user_id', 'followed_user_id');
-    }
-
-    public function followers()
-    {
-        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_user_id');
     }
 
     public function posts()
@@ -144,6 +146,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'profile_photo_path' => $this->profile_photo_path,
         ];
     }
 }
