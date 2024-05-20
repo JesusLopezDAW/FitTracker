@@ -116,7 +116,8 @@ class PostController extends Controller
 
         $posts = Post::whereIn('user_id', $followedUserIds)
             ->orderBy('created_at', 'desc')
-            ->withCount('likes') // Contar los likes asociados a cada post
+            ->withCount('likes')
+            ->withCount('comments')
             ->paginate(10);
 
         return JsonResponse::success($posts, 'Success', 200);
@@ -124,9 +125,13 @@ class PostController extends Controller
 
     public function getInterestingPosts()
     {
-        $posts = Post::withCount('likes')
-            ->orderBy('likes_count', 'desc')
-            ->paginate(10);
+        $posts = Post::with(['user:id,name,profile_photo_path'])
+        ->withCount('likes')
+        ->withCount('comments')
+        ->orderBy('likes_count', 'desc')
+        ->paginate(10);
+
+        
 
         return JsonResponse::success($posts, 'Success', 200);
     }
