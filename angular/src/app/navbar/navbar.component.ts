@@ -10,6 +10,7 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  users: any[] = []; // Define una matriz para almacenar los usuarios
   showSettingsOptions = false;
   showThemeSettings = false;
   isSearchActive = false;
@@ -86,14 +87,40 @@ export class NavbarComponent {
     this.isInputFocused = false;
   }
 
-  onInputChange(event: Event) {
+  onInputChange = async (event: Event) => {
     const input = event.target as HTMLInputElement;
     console.log(input.value);
-    if (input.value.length > 2){
-      // peticion
-      
+
+    if (input.value.length > 2) {
+      // Construir la URL con los parámetros de consulta
+      const baseUrl = "http://localhost/api/search/user";
+      const queryParam = encodeURIComponent(input.value);
+      const url = `${baseUrl}?query=${queryParam}`;
+
+      // Realizar la solicitud GET sin cuerpo
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTcxNjU2OTM4NCwiZXhwIjoxNzE2NjU0NTg0LCJuYmYiOjE3MTY1NjkzODQsImp0aSI6IjF3QUhHWERiTkpBZ2o0eEYiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.4CLV1KUmXYzwErhrdUUCt9xSu2Qyu3lthO2cnWB2knc",
+            "Content-Type": "application/json"
+          }
+        });
+
+        if (response.ok) {
+          const responseData = await response.json();
+          this.users = responseData.data; // Asigna los usuarios a la matriz
+        } else {
+          console.error('Error en la respuesta de la petición:', response.statusText);
+        }
+      } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+      }
     }
   }
+
+
+
 
   toggleDropdown() {
     this.showSettingsOptions = !this.showSettingsOptions;

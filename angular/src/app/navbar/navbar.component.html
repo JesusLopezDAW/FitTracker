@@ -115,11 +115,10 @@
         </div>
         <hr>
         <div class="search-results">
-            <p>Usuario 1</p>
-            <p>Usuario 2</p>
-            <p>Usuario 3</p>
-            <p>Usuario 4</p>
-            <p>Usuario 5</p>
+            <div *ngFor="let user of users">
+                <p>{{ user.name }}</p>
+                <!-- Aquí puedes mostrar más detalles del usuario si lo deseas -->
+            </div>
         </div>
     </div>
 </div>

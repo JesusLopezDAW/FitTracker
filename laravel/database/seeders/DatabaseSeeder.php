@@ -36,8 +36,8 @@ class DatabaseSeeder extends Seeder
         PostFactory::times(2000)->create();
         LikeFactory::times(5000)->create();
         CommentFactory::times(5000)->create();
-        FollowingFactory::times(1000)->create(); 
-        FollowerFactory::times(1000)->create(); 
+        // FollowingFactory::times(1000)->create(); 
+        // FollowerFactory::times(1000)->create(); 
         Exercise_LogFactory::times(5000)->create(); 
 
     }
