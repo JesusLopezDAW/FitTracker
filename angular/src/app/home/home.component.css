@@ -3,27 +3,19 @@
     background-color: var(--background-color);
 }
 
-.col-2,
-.col-8 {
-    padding: 0;
-}
-
 .posts-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 6%;
 }
 
 .tabs-container {
     display: flex;
-    width: 58.5%;
-    margin-left: -200px;
+    width: 100%;
+    justify-content: center;
 }
 
 .tab-button {
-    position: relative;
-    /* Para posicionar la línea absolutamente */
     background-color: transparent;
     border: none;
     padding: 10px 20px;
@@ -31,73 +23,24 @@
     color: var(--text-color);
     outline: none;
     transition: background-color 0.3s;
-    flex: 1;
-    /* Cada botón ocupa el 50% del contenedor */
     text-align: center;
 }
 
 .tab-button span {
     font-size: 17px;
-    /* Tamaño de letra deseado */
 }
 
 .tab-button.active span {
     border-bottom: 3px solid var(--principal);
-    /* Línea debajo del texto */
     width: 120%;
-    /* La línea tiene el 100% del ancho del texto */
     padding-bottom: 7px;
-    /* Agrega más margen entre la línea y el texto */
-
 }
 
 .tab-button:hover {
     background-color: var(--background-input);
-    /* Color de fondo al pasar el ratón */
 }
 
 .right-sidebar {
-    width: 400px;
-    flex: 1;
-    padding: 20px;
-    margin-left: -15%;
-    /* border-left: 1px solid #ccc; */
-}
-
-@media (max-width: 1439px) {
-    .posts-section{
-        margin-left: -5% !important;
-    }
-
-    .right-sidebar{
-        margin-left: -12% !important;
-    }
-}
-
-@media (max-width: 1200px) {
-    .posts-section{
-        margin-left: 12% !important;
-    }
-
-    .right-sidebar{
-        display: none;
-    }
-}
-
-@media (max-width: 992px) {
-    .posts-section{
-        margin-left: 15% !important;
-    }
-}
-@media (max-width: 880px) {
-    .posts-section{
-        margin-left: 34% !important;
-    }
-}
-
-@media (max-width: 836px) {
-
-    .posts-section{
-        margin-left: 31% !important;
-    }
+    background-color: #f0f0f0; /* Color de fondo opcional */
+    overflow-y: auto; /* Agrega desplazamiento vertical si es necesario */
 }

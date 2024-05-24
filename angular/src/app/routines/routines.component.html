@@ -1,22 +1,28 @@
 <div class="container-fluid h-100 routines-content">
-    <div class="row h-100">
+    <div class="row h-100 divPagRoutines">
         <div class="col-md-12 p-0">
             <div class="col-md-10 p-0 d-flex flex-column">
+                <div class="row">
+                    <br>
+                    <br>
+                </div>
                 <div style="display: flex;">
-                    <h3>Mis rutinas</h3>
-                    <button style="margin-right: 0px;" class="btn btn-primary mb-3 newRoutine" (click)="createNewRoutine()">Nueva rutina</button>
+                    <h3 id="titleRoutine">Mis rutinas</h3>
+                    <button style="margin-right: 0px;" class="btn btn-primary mb-3 newRoutine"
+                        (click)="createNewRoutine()">Nueva rutina</button>
                 </div>
                 <div class="row">
                     <ng-container *ngFor="let routine of routines; let routineIndex = index">
-                        <div class="col-md-3 mb-3" cdkDropList [cdkDropListData]="routine.workouts" (cdkDropListDropped)="drop($event, routineIndex)">
+                        <div class="col-md-4 mb-3" id="divRoutines" cdkDropList [cdkDropListData]="routine.workouts"
+                            (cdkDropListDropped)="drop($event, routineIndex)">
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center">
                                         <fa-icon [icon]="faEdit" class="text-primary mr-2"
                                             (click)="editRoutineName(routineIndex)"></fa-icon>
                                         <span *ngIf="!routine.isEditing">{{ routine.name }}</span>
-                                        <input class="nameRoutine" #editRoutineNameInput *ngIf="routine.isEditing" [(ngModel)]="routine.name"
-                                            (blur)="confirmRoutineName(routineIndex)"
+                                        <input class="nameRoutine" #editRoutineNameInput *ngIf="routine.isEditing"
+                                            [(ngModel)]="routine.name" (blur)="confirmRoutineName(routineIndex)"
                                             (keyup.enter)="confirmRoutineName(routineIndex)" />
                                     </div>
                                     <div>
@@ -34,7 +40,8 @@
                                                 <fa-icon [icon]="faEdit" class="text-primary mr-2"
                                                     (click)="editWorkoutName(routineIndex, workoutIndex)"></fa-icon>
                                                 <div *ngIf="!workout.isEditing">{{ workout.name }}</div>
-                                                <input class="nameWorkout" #editWorkoutNameInput *ngIf="workout.isEditing" [(ngModel)]="workout.name"
+                                                <input class="nameWorkout" #editWorkoutNameInput
+                                                    *ngIf="workout.isEditing" [(ngModel)]="workout.name"
                                                     (blur)="confirmWorkoutName(routineIndex, workoutIndex)"
                                                     (keyup.enter)="confirmWorkoutName(routineIndex, workoutIndex)" />
                                             </div>
@@ -60,6 +67,15 @@
                             </div>
                         </div>
                     </ng-container>
+                </div>
+
+                <!-- Para que el div de las rutinas no se quede pegado al margen inferior y haya espacio entre el div y el navbar -->
+                <div class="row">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                 </div>
             </div>
         </div>

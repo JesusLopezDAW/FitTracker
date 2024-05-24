@@ -15,7 +15,3 @@ a {
 a:hover {
   color: var(--principal);
 }
-
-.suggestions {
-  display: none;
-}

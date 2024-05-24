@@ -1,9 +1,14 @@
 :root {
-    --background-color: #000000; /* Fondo de los componentes de la pagina */
-    --text-color: #FFFFFF; /* Color los textos de la pagina */
-    --border-color: #2F3336; /* Color de los bordes de la pagina */
-    --background-input: #262626; /* Color del fondo de los inputs */
-    --principal: #1A8CD8; /* Color principal de la pagina */
+    --background-color: #000000;
+    /* Fondo de los componentes de la pagina */
+    --text-color: #FFFFFF;
+    /* Color los textos de la pagina */
+    --border-color: #2F3336;
+    /* Color de los bordes de la pagina */
+    --background-input: #262626;
+    /* Color del fondo de los inputs */
+    --principal: #4169E1;
+    /* Color principal de la pagina */
 }
 
 body {
@@ -12,6 +17,37 @@ body {
     border-color: var(--border-color) !important;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Ocultar barras de desplazamiento del body */
+}
+
+/* Seccion de posts en el home */
+.posts-section {
+    position: fixed;
+    top: 0;
+    left: 190px;
+    max-height: calc(100vh);
+    overflow-y: scroll;
+}
+
+.posts-section::-webkit-scrollbar {
+    display: none;
+}
+
+.posts-section {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* ------------------------------------------------------- */
 
 /* Estilos generales */
 .bg-dark {
@@ -43,6 +79,7 @@ dd {
 /* NavBar */
 .navbar-dark.bg-dark {
     background-color: var(--background-color) !important;
+    opacity: 0.9;
 }
 
 .navbar-nav .nav-item .nav-link {
@@ -94,5 +131,123 @@ h3 {
 .small-text {
     font-size: 12px;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.navbar-mobile-top {
+    display: none !important;
+}
+
+.navbar-mobile {
+    display: flex;
+    justify-content: space-around;
+    /* Distribuye los elementos de manera equitativa */
+    align-items: center;
+    /* Centra los elementos verticalmente */
+}
+
+.navbar-mobile .nav-link {
+    flex: 1;
+    /* Distribuye el espacio de manera uniforme entre los elementos */
+    text-align: center;
+    /* Centra el texto dentro de cada elemento */
+}
+
+@media (max-width: 1439px) {
+
+    .routines-content {
+        position: fixed !important;
+        top: 27px !important;
+        left: 156px !important;
+        right: 20px !important;
+        max-width: calc(130% - 332px) !important;
+        overflow-x: auto !important;
+        color: var(--principal) !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    #divRoutines {
+        width: 50%;
+    }
+
+    .right-sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: 992px) {
+
+}
+
+@media (max-width: 880px) {
+
+}
+
+@media (max-width: 836px) {
+
+    .routines-content {
+        /* Para asegurarte de que se restablezca a col-md-4 cuando la pantalla sea mayor a 1200px */
+        width: 100% !important;
+        top: 27px !important;
+        left: 73px !important;
+        max-width: calc(100%) !important;
+    }
+}
+
+@media (max-width: 770px) {
+
+    #divRoutines {
+        width: 100%;
+    }
+
+    .routines-content {
+        right: 0 !important;
+        left: 65px !important;
+        max-width: calc(100%) !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .navbar-mobile-top {
+        display: flex !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999999;
+        /* Asegúrate de que esté encima de otros elementos */
+        background-color: red !important;
+        /* Color de fondo */
+        color: var(--text-color);
+        /* Color del texto */
+        /* padding: 10px 0; */
+        justify-content: center;
+        /* Centrar el contenido horizontalmente */
+        align-items: center;
+        /* Centrar el contenido verticalmente */
+    }
+
+    #titleRoutine {
+        display: none;
+    }
+
+    .navbar-text {
+        font-size: 1.2rem;
+        text-align: center;
+        /* Asegúrate de que el texto esté centrado */
+    }
+
+    .newRoutine {
+        width: 100%;
+        margin-left: -0.05% !important;
+    }
+
+}
+
+@media (max-width: 764px) {
+
+    .routines-content {
+        left: 0px !important;
+        max-width: calc(89%) !important;
+    }
+}

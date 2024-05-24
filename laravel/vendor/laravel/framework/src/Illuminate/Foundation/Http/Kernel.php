@@ -69,11 +69,7 @@ class Kernel implements KernelContract
      *
      * @deprecated
      */
-    protected $routeMiddleware = [
-        'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        'auth:api' => \App\Http\Middleware\JwtMiddleware::class,
-
-    ];
+    protected $routeMiddleware = [];
 
     /**
      * The application's middleware aliases.

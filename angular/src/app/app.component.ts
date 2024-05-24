@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Renderer2, PLATFORM_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
@@ -13,23 +13,32 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+  private isBrowser: boolean;
+
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private renderer: Renderer2
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit(): void {
-    // Adjuntar un controlador de eventos al evento de redimensionamiento de la ventana
-    // window.addEventListener('resize', () => {
-    //   this.checkSize();
-    // });
-
-    // this.checkSize();
+    if (this.isBrowser) {
+      this.checkSize();
+      this.renderer.listen('window', 'resize', () => this.checkSize());
+    }
   }
 
   checkSize() {
     const iconApp = this.document.getElementById("divAppNavBar") as HTMLElement;
+    const newWorkout = this.document.getElementById("newWorkout") as HTMLElement;
     if (window.innerWidth < 1440) {
-      iconApp.innerHTML = '<img src="../../assets/icons/logoBlancoNavBar.png" alt="Logo" class="d-inline-block align-top imagenAppNavBar" style="width: 45px; height: 35px; margin-left: 144px; margin-top: 10px; margin-bottom: 11px;">';
+      newWorkout.innerHTML = "<i class='fa-solid fa-plus'></i>";
+      iconApp.innerHTML = '<img src="../../assets/icons/logoBlancoNavBar.png" alt="Logo" class="d-inline-block align-top imagenAppNavBar" style="width: 45px; height: 35px; margin-left: 144px; margin-top: 5px; margin-bottom: -10px;">';
     } else {
-      iconApp.innerHTML = '<h1 style="font-family: Dancing Script; padding-left: 0px;">FitTracker</h1>';
+      newWorkout.innerHTML = "Nuevo entrenamiento";
+      iconApp.innerHTML = '<h1 style="font-family: Dancing Script; padding-left: 0px; font-size: 42px; margin-bottom: -2px">FitTracker</h1>';
     }
   }
 }

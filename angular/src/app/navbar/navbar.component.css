@@ -155,11 +155,15 @@ hr {
 .imagenAppNavBar {
     width: 45px;
     height: 35px;
+    margin-top: 4px;
+    margin-bottom: 0px;
 }
 
 .textAppNavBar {
-    font-family: 'Dancing Script', cursive;
-    padding-left: 0px;
+    font-family: 'Dancing Script'; 
+    padding-left: 0px; 
+    font-size: 42px; 
+    margin-bottom: -2px
 }
 
 #divAppNavBar {
