@@ -115,9 +115,11 @@
         </div>
         <hr>
         <div class="search-results">
-            <div *ngFor="let user of users">
-                <p>{{ user.name }}</p>
-                <!-- Aquí puedes mostrar más detalles del usuario si lo deseas -->
+            <div *ngFor="let user of users" class="user-container">
+                <!-- <a routerLink="/profile{{user.id}}" style="cursor: pointer;"> -->
+                    <img src="{{ user.profile_photo_path }}" alt="" class="user-image">
+                    <p class="user-name">{{ user.name }}</p>
+                <!-- </a> -->
             </div>
         </div>
     </div>

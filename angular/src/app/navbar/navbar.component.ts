@@ -92,12 +92,10 @@ export class NavbarComponent {
     console.log(input.value);
 
     if (input.value.length > 2) {
-      // Construir la URL con los parámetros de consulta
       const baseUrl = "http://localhost/api/search/user";
       const queryParam = encodeURIComponent(input.value);
       const url = `${baseUrl}?query=${queryParam}`;
 
-      // Realizar la solicitud GET sin cuerpo
       try {
         const response = await fetch(url, {
           method: "GET",
@@ -109,6 +107,7 @@ export class NavbarComponent {
 
         if (response.ok) {
           const responseData = await response.json();
+          console.log(responseData.data);
           this.users = responseData.data; // Asigna los usuarios a la matriz
         } else {
           console.error('Error en la respuesta de la petición:', response.statusText);
@@ -118,9 +117,6 @@ export class NavbarComponent {
       }
     }
   }
-
-
-
 
   toggleDropdown() {
     this.showSettingsOptions = !this.showSettingsOptions;

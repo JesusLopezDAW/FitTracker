@@ -282,3 +282,20 @@ input:checked+.slider {
 input:checked+.slider:before {
     transform: translateX(20px);
 }
+
+.user-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Ajusta el margen según sea necesario */
+}
+
+.user-image {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px; /* Ajusta el margen derecho según sea necesario */
+}
+
+.user-name {
+    margin: 0;
+}
