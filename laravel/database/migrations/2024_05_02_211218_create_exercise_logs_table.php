@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('workout_id');
             $table->unsignedBigInteger('exercise_id');
+            $table->unsignedBigInteger('user_id');
             $table->enum('serie_type', ['warm_up', 'normal', 'failed', 'drop'])->default('normal');
             $table->integer('series');
             $table->integer('reps');
@@ -25,6 +26,7 @@ return new class extends Migration
             // Definición de claves foráneas
             $table->foreign('workout_id')->references('id')->on('workouts')->onDelete('cascade');
             $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

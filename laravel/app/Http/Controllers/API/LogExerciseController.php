@@ -4,53 +4,48 @@ namespace App\Http\Controllers\API;
 
 use App\Helpers\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LogRequest;
-use App\Models\Log;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ExerciseLogRequest;
+use App\Models\Exercise_log;
+use App\Models\ExerciseLog;
 use Illuminate\Http\JsonResponse as HttpJsonResponse;
+use Illuminate\Support\Facades\Auth;
 
-class LogController extends Controller
+class LogExerciseController extends Controller
 {
-    public function index(): HttpJsonResponse
-    {
-        return JsonResponse::success(Auth::user()->logs, 'Success', 200);
-    }
-
-    public function store(LogRequest $request): HttpJsonResponse
+    public function store(ExerciseLogRequest $request): HttpJsonResponse
     {
         $logData = $request->validated();
         $logData['user_id'] = Auth::id();
 
-        $log = Log::create($logData);
+        $log = Exercise_log::create($logData);
+
         return JsonResponse::success($log, 'Created successfuly', 200);
     }
 
-    public function show(string $id): HttpJsonResponse
+    public function show(string $exerciseId): HttpJsonResponse
     {
-        $log = Log::find($id);
-
-        $this->validateExist($log);
-        $this->isFromUser($log, Auth::id());
+        $user = Auth::user();
+        $log = $user->exerciseLogs->where('exercise_id', $exerciseId);
 
         return JsonResponse::success($log, 'Success', 200);
     }
 
-    public function update(LogRequest $request, string $id): HttpJsonResponse
+    public function update(ExerciseLogRequest $request, string $id): HttpJsonResponse
     {
-        $log = Log::find($id);
+        $exerciseLog = Exercise_Log::find($id);
 
-        $this->validateExist($log);
-        $this->isFromUser($log, Auth::id());
+        $this->validateExist($exerciseLog);
+        $this->isFromUser($exerciseLog, Auth::id());
 
         $logData = $request->validated();
-        $log->update($logData);
+        $exerciseLog->update($logData);
 
-        return JsonResponse::success($log, 'Success', 200);
+        return JsonResponse::success($exerciseLog, 'Success', 200);
     }
 
     public function destroy(string $id): HttpJsonResponse
     {
-        $log = Log::find($id);
+        $log = Exercise_Log::find($id);
 
         $this->validateExist($log);
         $this->isFromUser($log, Auth::id());
@@ -60,17 +55,16 @@ class LogController extends Controller
         return JsonResponse::success($log, 'Success', 200);
     }
 
-    private function validateExist(Log | string $log)
+    private function validateExist(Exercise_Log | string $log)
     {
         if(!$log){
             return JsonResponse::error('ERROR: Log doesnt exist', 404);
         }
     }
 
-    private function isFromUser(Log $log, int $userId){
+    private function isFromUser(Exercise_Log $log, int $userId){
         if ($log->user_id != $userId) {
             return JsonResponse::error('Error: This Log is not from this user', 401);
         }
     }
-
 }
