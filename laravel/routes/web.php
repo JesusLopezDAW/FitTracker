@@ -23,7 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware('guest');
 
-// Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     // Rutas AdminLTE
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
@@ -64,6 +64,6 @@ Route::get('/', function () {
     Route::get('comment/getCommentsByPeriod/{period}', [CommentController::class, 'getCommentsByPeriod']);
     Route::get('routine/getRoutinesByPeriod/{period}', [RoutineController::class, 'getRoutinesByPeriod']);
 
-// });
+});
 
 require __DIR__ . '/auth.php';
