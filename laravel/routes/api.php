@@ -5,6 +5,8 @@ use App\Http\Controllers\API\ExerciseController;
 use App\Http\Controllers\API\FollowController;
 use App\Http\Controllers\API\FoodController;
 use App\Http\Controllers\API\LikeController;
+use App\Http\Controllers\API\LogController;
+use App\Http\Controllers\API\LogExerciseController;
 use App\Http\Controllers\API\PostController;
 use App\Http\Controllers\API\RoutineController;
 use App\Http\Controllers\API\UserController;
@@ -21,12 +23,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('me', [AuthController::class, 'me']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
-
-    // TODO: 
-    // Route::resource("/exercise-log", ExerciseController::class);
-    // Route::resource("/log", ExerciseController::class);
-    // Route::resource("/followers", ExerciseController::class);
-
 
     Route::resource("/exercise", ExerciseController::class);
 
@@ -59,7 +55,9 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/following/count', 'followingNumber');
     });
     
+    Route::resource("/log", LogController::class);
 
+    Route::resource("/log/exercise", LogExerciseController::class);
 
 
 });
