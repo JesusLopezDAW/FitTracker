@@ -112,10 +112,10 @@ class PostController extends Controller
     public function getFollowedPosts()
     {
         $user = Auth::user();
-        if ($user->followings === null) {
+        if ($user->follows === null) {
             return JsonResponse::success([], 'No followed users', 200);
         }
-        $followedUserIds = $user->followings->pluck('id');
+        $followedUserIds = $user->follows->pluck('id');
 
         $posts = Post::with(['user:id,name,profile_photo_path'])
             ->whereIn('user_id', $followedUserIds)
