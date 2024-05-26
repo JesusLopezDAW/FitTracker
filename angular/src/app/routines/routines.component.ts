@@ -10,20 +10,22 @@ import { faEdit, faCheck, faTimes, faBars, faTrash, faPlus } from '@fortawesome/
 import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { RoutineEditModalComponent } from '../modals/routine-edit-modal/routine-edit-modal.component';
 import { CreateRoutineModalComponent } from '../modals/create-routine-modal/create-routine-modal.component';
+import { UpdateRoutineModalComponent } from '../modals/update-routine-modal/update-routine-modal.component';
+import { CreateWorkoutModalComponent } from '../modals/create-workout-modal/create-workout-modal.component';
+import { UpdateWorkoutModalComponent } from '../modals/update-workout-modal/update-workout-modal.component';
 
 
 interface Workout {
-  id: number;
+  id?: number;
   name: string;
-  isEditing?: boolean;
+  description?: string
 }
 
 interface Routine {
   id?: Number;
   name: string;
+  type: string;
   workouts: Workout[];
-  isEditing?: boolean;
-  isCreatingWorkout?: boolean;
 }
 
 @Component({
@@ -54,8 +56,9 @@ export class RoutinesComponent implements OnInit {
     {
       id: 1,
       name: 'Push / Pull / Legs',
+      type: "otros",
       workouts: [
-        { id: 1, name: 'Pecho / Hombros / Triceps' },
+        { id: 1, name: 'Pecho / Hombros / Triceps', description: "asd" },
         { id: 2, name: 'Piernas' },
         { id: 3, name: 'Espalda / Biceps' },
       ]
@@ -63,6 +66,7 @@ export class RoutinesComponent implements OnInit {
     {
       id: 2,
       name: '5 dias',
+      type: "otros",
       workouts: [
         { id: 1, name: 'Pecho' },
         { id: 2, name: 'Espalda' },
@@ -74,6 +78,7 @@ export class RoutinesComponent implements OnInit {
     {
       id: 3,
       name: 'Frecuencia 2',
+      type: "otros",
       workouts: [
         { id: 1, name: 'Pecho / Hombros / Triceps' },
         { id: 2, name: 'Espalda / Biceps' },
@@ -88,6 +93,7 @@ export class RoutinesComponent implements OnInit {
 
   constructor(private router: Router, private renderer: Renderer2, private modalService: NgbModal) { }
 
+  // Listar datos
   async userRoutines(): Promise<void> {
     const headersList = {
       "Accept": "*/*",
@@ -102,14 +108,15 @@ export class RoutinesComponent implements OnInit {
         headers: headersList,
       });
       let data = await response.json();
-      console.log(data.data);
       const routines = data.data;
       this.routines = routines.map((routine: any) => ({
         id: routine.id,
         name: routine.name,
+        type: routine.type,
         workouts: routine.workouts.map((workout: any) => ({
           id: workout.id,
-          name: workout.name
+          name: workout.name,
+          description: workout.description
         }))
       }));
     } catch (error) {
@@ -117,144 +124,100 @@ export class RoutinesComponent implements OnInit {
     }
   }
 
-  openEditModal() {
-    const modalRef = this.modalService.open(RoutineEditModalComponent, { centered: true });
-    modalRef.componentInstance.routineName = this.routineName;
+  // Crear rutina
+  createRoutineModal() {
+    const modalRef = this.modalService.open(CreateRoutineModalComponent, { centered: true });
+    modalRef.result.then((result) => {
+      if (result) {
+        this.routines.push({ name: result.name, type: result.type, workouts: [] });
+        this.addRoutine(result.name, result.type);
+      }
+    }).catch((error) => {
+      console.log('Modal dismissed with error:', error);
+    });
+  }
+
+  // Update rutina
+  updateRoutineModal(routineIndex: number) {
+    const routineId = this.routines[routineIndex].id;
+    const routineName = this.routines[routineIndex].name;
+    const routineType = this.routines[routineIndex].type;
+
+    const modalRef = this.modalService.open(UpdateRoutineModalComponent, { centered: true });
+    modalRef.componentInstance.routineId = routineId;
+    modalRef.componentInstance.routineName = routineName;
+    modalRef.componentInstance.routineType = routineType;
 
     modalRef.result.then((result) => {
       if (result) {
-        console.log(result);
-        this.routineName = result;
-        // Aquí puedes manejar la lógica para guardar el nombre actualizado de la rutina
+        this.routines[routineIndex].name = result.name;
+        this.routines[routineIndex].type = result.type;
+        this.updateRoutine(result.name, result.id, result.type);
       }
     }).catch((error) => {
       console.error('Error:', error);
     });
   }
 
-  mdlCreateRoutine(){
-    const modalRef = this.modalService.open(CreateRoutineModalComponent, { centered: true });
-  }
-  createNewRoutine() {
-    this.routines.push({ name: 'New Routine ' + this.routines.length, workouts: [] });
-    const index = this.routines.length - 1;
-    this.editRoutineName(index);
-    // console.log("rutina creada");
-    this.addRoutine("New Routine " + this.routines.length + 1);
-  }
-
-  startCreatingWorkout(routineIndex: number) {
-    this.cancelNewWorkoutIfCreating();
-    this.routines[routineIndex].isCreatingWorkout = true;
-    setTimeout(() => {
-      if (this.newWorkoutInput && this.newWorkoutInput.nativeElement) {
-        // Verifica si newWorkoutInput y su propiedad nativeElement están definidos
-        this.renderer.selectRootElement(this.newWorkoutInput.nativeElement)?.focus();
-        this.newWorkoutName = "Nuevo entrenamiento";
-      }
-    }, 0);
-  }
-
-  confirmNewWorkout(routineIndex: number) {
-    if (this.newWorkoutName.trim()) {
-      this.routines[routineIndex].workouts.push({ id: Date.now(), name: this.newWorkoutName });
-      this.newWorkoutName = '';
-      this.routines[routineIndex].isCreatingWorkout = false;
-    }
-    // FETCH CREAR NUEVO ENTRENAMIENTO
-    console.log("nuevo entrenamiento creado");
-  }
-
-  cancelNewWorkout(routineIndex: number) {
-    this.newWorkoutName = '';
-    this.routines[routineIndex].isCreatingWorkout = false;
-  }
-
-  editRoutineName(routineIndex: number) {
-    this.routines[routineIndex].isEditing = true;
-    setTimeout(() => {
-      this.renderer.selectRootElement(this.editRoutineNameInput.nativeElement).focus();
-    }, 0);
-  }
-
-  confirmRoutineName(routineIndex: number) {
-    // console.log(this.enterKeyPressed);
-    if (!this.enterKeyPressed) {
-      this.routines[routineIndex].isEditing = false;
-      // FETCH EDITAR NOMBRE RUTINA
-      // console.log("nombre de la rutina cambiado "+this.routines[routineIndex].name);
-      const routineId = this.routines[routineIndex].id;
-      if (routineId && typeof routineId === 'number') {
-        this.updateRoutine(this.routines[routineIndex].name, routineId);
-      }
-    }
-    this.enterKeyPressed = false;
-  }
-
-  onEnterKey(routineIndex: number) {
-    // Establece enterKeyPressed en true cuando se presiona Enter
-    this.enterKeyPressed = true;
-    // Llama a confirmRoutineName
-    this.confirmRoutineName(routineIndex);
-  }
-
-  editWorkoutName(routineIndex: number, workoutIndex: number) {
-    this.routines[routineIndex].workouts[workoutIndex].isEditing = true;
-    setTimeout(() => {
-      this.renderer.selectRootElement(this.editWorkoutNameInput.nativeElement).focus();
-    }, 0);
-  }
-
-  confirmWorkoutName(routineIndex: number, workoutIndex: number) {
-    this.routines[routineIndex].workouts[workoutIndex].isEditing = false;
-    // FETCH EDITAR NOMBRE ENTRENAMIENTO
-    console.log("nombre del entrenamiento cambiado");
-  }
-
+  // Eliminar rutina
   deleteRoutine(routineIndex: number) {
     const routineId = this.routines[routineIndex].id;
     this.routines.splice(routineIndex, 1);
-    console.log("Rutina eliminada");
-
     if (routineId && typeof routineId === 'number') {
       this.removeRoutine(routineId);
     }
   }
 
+  // Crear entrenamiento
+  createWorkoutModal(routineIndex: number) {
+    const modalRef = this.modalService.open(CreateWorkoutModalComponent, { centered: true });
+    const routineId = this.routines[routineIndex].id;
+    modalRef.result.then((result) => {
+      if (result) {
+        this.routines[routineIndex].workouts.push({ name: result.name, description: result.description });
+        if (routineId && typeof routineId === 'number') {
+          this.addWorkout(routineId, result.name, result.description, routineIndex);
+        }
+      }
+    }).catch((error) => {
+      console.log('Modal dismissed with error:', error);
+    });
+  }
+
+  // Update entrenamiento
+  updateWorkoutModal(routineIndex: number, workoutIndex: number) {
+    const routineId = this.routines[routineIndex].id;
+    const workoutId = this.routines[routineIndex].workouts[workoutIndex].id;
+    const workoutName = this.routines[routineIndex].workouts[workoutIndex].name;
+    const workoutDescription = this.routines[routineIndex].workouts[workoutIndex].description;
+    const modalRef = this.modalService.open(UpdateWorkoutModalComponent, { centered: true });
+    modalRef.componentInstance.workoutId = workoutId;
+    modalRef.componentInstance.workoutName = workoutName;
+    modalRef.componentInstance.workoutDescription = workoutDescription;
+    modalRef.result.then((result) => {
+      if (result) {
+        this.routines[routineIndex].workouts[workoutIndex].name = result.name;
+        this.routines[routineIndex].workouts[workoutIndex].description = result.description;
+        if (routineId && typeof routineId === 'number') {
+          this.updateWorkout(routineId, result.id, result.name, result.description);
+        }
+      }
+    }).catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+
+  // Eliminar entrenamiento
   deleteWorkout(routineIndex: number, workoutIndex: number) {
+    const workoutId = this.routines[routineIndex].workouts[workoutIndex].id;
     this.routines[routineIndex].workouts.splice(workoutIndex, 1);
-    const workoutId = this.routines[routineIndex].workouts[0].id;
-    console.log(workoutId);
     if (workoutId && typeof workoutId === 'number') {
       this.removeWorkout(workoutId);
     }
   }
 
-  // Si se clicka fuera del input cuando creas un nuevo entrenamiento se cancela
-  @HostListener('document:click', ['$event'])
-  onClickOutside(event: Event) {
-    const clickedElement = event.target as HTMLElement;
-    try {
-      if (!this.newWorkoutInput.nativeElement.contains(clickedElement)
-        && !clickedElement.closest('.fa-check')
-        && !clickedElement.closest('.fa-plus')
-        && !clickedElement.closest('.fa-times')) {
-        this.cancelNewWorkoutIfCreating();
-      }
-    } catch (error) {
 
-    }
-  }
-
-  cancelNewWorkoutIfCreating() {
-    this.routines.forEach(routine => {
-      if (routine.isCreatingWorkout) {
-        routine.isCreatingWorkout = false;
-        this.newWorkoutName = '';
-      }
-    });
-  }
-
+  // Evento drop (Hay que arreglarlo)
   drop(event: CdkDragDrop<Workout[]>, routineIndex: number) {
     console.log("Evento de drop activado");
     moveItemInArray(this.routines[routineIndex].workouts, event.previousIndex, event.currentIndex);
@@ -263,7 +226,6 @@ export class RoutinesComponent implements OnInit {
   }
 
   updateWorkoutIndexes(routineIndex: number) {
-    console.log(routineIndex);
     const workouts = this.routines[routineIndex].workouts;
     for (let i = 0; i < workouts.length; i++) {
       workouts[i].id = i + 1; // Actualizar el id o el índice del workout
@@ -315,7 +277,7 @@ export class RoutinesComponent implements OnInit {
       throw error;
     }
   }
-  async addRoutine(routineName: string): Promise<any> {
+  async addRoutine(routineName: string, routineType: string): Promise<any> {
     try {
       let headersList = {
         "Authorization": "bearer " + sessionStorage.getItem("authToken"),
@@ -323,7 +285,8 @@ export class RoutinesComponent implements OnInit {
       }
 
       let bodyContent = JSON.stringify({
-        "name": routineName
+        "name": routineName,
+        "type": routineType
       });
 
       let response = await fetch("http://localhost/api/routines", {
@@ -334,14 +297,13 @@ export class RoutinesComponent implements OnInit {
 
       let data = await response.json();
       console.log(data);
+      this.routines[this.routines.length - 1].id = data.data.id;
     } catch (error) {
-      console.error("Error al eliminar el entrenamiento:", error);
+      console.error("Error al crear la rutina: ", error);
       throw error;
     }
   }
-  async updateRoutine(routineName: string, routineId: number): Promise<any> {
-    console.log(routineId);
-    console.log(routineName);
+  async updateRoutine(routineName: string, routineId: number, routineType: string): Promise<any> {
     try {
       let headersList = {
         "Authorization": "bearer " + sessionStorage.getItem("authToken"),
@@ -349,12 +311,12 @@ export class RoutinesComponent implements OnInit {
       }
 
       let bodyContent = JSON.stringify({
-        "id": routineId,
-        "name": routineName
+        "name": routineName,
+        "type": routineType
       });
 
-      let response = await fetch("http://localhost/api/routines", {
-        method: "UPDATE",
+      let response = await fetch("http://localhost/api/routines/" + routineId, {
+        method: "PUT",
         body: bodyContent,
         headers: headersList
       });
@@ -363,6 +325,59 @@ export class RoutinesComponent implements OnInit {
       console.log(data);
     } catch (error) {
       console.error("Error al actualizar la rutina:", error);
+      throw error;
+    }
+  }
+  async addWorkout(routineId: number, workoutName: string, workoutDescription: string, routineIndex: number): Promise<any> {
+    try {
+      let headersList = {
+        "Authorization": "bearer " + sessionStorage.getItem("authToken"),
+        "Content-Type": "application/json"
+      }
+
+      let bodyContent = JSON.stringify({
+        "routine_id": routineId,
+        "name": workoutName,
+        "description": workoutDescription
+      });
+
+      let response = await fetch("http://localhost/api/workout", {
+        method: "POST",
+        body: bodyContent,
+        headers: headersList
+      });
+
+      let data = await response.json();
+      console.log(data);
+      this.routines[routineIndex].workouts[this.routines[routineIndex].workouts.length - 1].id = data.data.id;
+    } catch (error) {
+      console.error("Error al crear el entrenamiento:", error);
+      throw error;
+    }
+  }
+  async updateWorkout(routineId: number, workoutId: number, workoutName: string, workoutDescription: string): Promise<any> {
+    try {
+      let headersList = {
+        "Authorization": "bearer " + sessionStorage.getItem("authToken"),
+        "Content-Type": "application/json"
+      }
+
+      let bodyContent = JSON.stringify({
+        "routine_id": routineId,
+        "name": workoutName,
+        "description": workoutDescription
+      });
+
+      let response = await fetch("http://localhost/api/workout/" + workoutId, {
+        method: "PUT",
+        body: bodyContent,
+        headers: headersList
+      });
+
+      let data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error al actualizar el entrenamiento:", error);
       throw error;
     }
   }

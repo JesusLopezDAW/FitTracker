@@ -1,0 +1,16 @@
+.modal-content {
+    background-color: var(--background-color);
+}
+
+input, input:focus, select, select:focus{
+    background-color: var(--background-input);
+    border: none;
+    color: var(--text-color);
+}
+input::placeholder{
+    color: var(--text-color);
+}
+.modal-footer {
+    border: none;
+    margin-top: -15px;
+}

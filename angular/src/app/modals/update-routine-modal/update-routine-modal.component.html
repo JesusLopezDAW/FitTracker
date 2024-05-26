@@ -1,9 +1,9 @@
 <!-- create-routine-modal.component.html -->
 <div class="modal-content">
     <div class="modal-body">
-        <h1 style="text-align: center;">Nueva Rutina</h1>
+        <h1 style="text-align: center;">Editar Rutina</h1>
         <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="routineName" placeholder="Nombre">
+            <input type="text" class="form-control" [(ngModel)]="routineName" placeholder="Nombre de la rutina">
         </div>
         <br>
         <div class="form-group">
@@ -25,11 +25,13 @@
                 <option value="danza">Danza</option>
                 <option value="artes_marciales">Artes marciales</option>
                 <option value="aeróbicos">Aeróbicos</option>
+                <option value="otros">Otros</option>
             </select>
         </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
-        <button type="button" class="btn btn-primary" (click)="saveChanges()" [disabled]="!routineName || !routineType">Crear Rutina</button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges()"
+            [disabled]="!routineName || !routineType">Editar Rutina</button>
     </div>
 </div>
