@@ -31,6 +31,7 @@ class WorkoutController extends Controller
         return JsonResponse::success($workouts, 'success', 200);
     }
 
+    // IMPLEMENTAR DEVOLVER EL FALLO
     public function store(WorkoutRequest $request)
     {
         $user = Auth::user();

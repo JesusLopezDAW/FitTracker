@@ -9,7 +9,7 @@
                 <div style="display: flex;">
                     <h1 id="titleRoutine">Mis rutinas</h1>
                     <button style="margin-right: 0px;" class="btn btn-primary mb-3 newRoutine"
-                        (click)="mdlCreateRoutine()">Nueva rutina</button>
+                        (click)="createRoutineModal()">Nueva rutina</button>
                 </div>
                 <div class="row">
                     <ng-container *ngFor="let routine of routines; let routineIndex = index">
@@ -19,15 +19,12 @@
                                 <div class="card-header d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center">
                                         <fa-icon [icon]="faEdit" class="text-primary mr-2"
-                                            (click)="editRoutineName(routineIndex)"></fa-icon>
-                                        <span *ngIf="!routine.isEditing">{{ routine.name }}</span>
-                                        <input class="nameRoutine" #editRoutineNameInput *ngIf="routine.isEditing"
-                                            [(ngModel)]="routine.name" (blur)="confirmRoutineName(routineIndex)"
-                                            (keyup.enter)="onEnterKey(routineIndex)">
+                                            (click)="updateRoutineModal(routineIndex)"></fa-icon>
+                                        <span id="routineName">{{ routine.name }}</span>
                                     </div>
                                     <div>
                                         <fa-icon [icon]="faPlus" class="text-muted mr-2"
-                                            (click)="startCreatingWorkout(routineIndex)"></fa-icon>
+                                            (click)="createWorkoutModal(routineIndex)"></fa-icon>
                                         <fa-icon [icon]="faTrash" class="text-danger"
                                             (click)="deleteRoutine(routineIndex)"></fa-icon>
                                     </div>
@@ -39,12 +36,8 @@
                                             cdkDrag>
                                             <div class="d-flex align-items-center">
                                                 <fa-icon [icon]="faEdit" class="text-primary mr-2"
-                                                    (click)="editWorkoutName(routineIndex, workoutIndex)"></fa-icon>
-                                                <div *ngIf="!workout.isEditing">{{ workout.name }}</div>
-                                                <input class="nameWorkout" #editWorkoutNameInput
-                                                    *ngIf="workout.isEditing" [(ngModel)]="workout.name"
-                                                    (blur)="confirmWorkoutName(routineIndex, workoutIndex)"
-                                                    (keyup.enter)="confirmWorkoutName(routineIndex, workoutIndex)" />
+                                                    (click)="updateWorkoutModal(routineIndex, workoutIndex)"></fa-icon>
+                                                <div>{{ workout.name }}</div>
                                             </div>
                                             <div>
                                                 <fa-icon [icon]="faBars" class="text-muted mr-2"></fa-icon>
@@ -53,7 +46,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                    <div *ngIf="routine.isCreatingWorkout" class="card mt-2">
+                                    <!-- <div *ngIf="routine.isCreatingWorkout" class="card mt-2">
                                         <div
                                             class="card-body d-flex justify-content-between align-items-center newWorkout">
                                             <input #newWorkoutInput type="text" [(ngModel)]="newWorkoutName"
@@ -63,7 +56,7 @@
                                             <fa-icon [icon]="faTimes" class="text-danger ml-2"
                                                 (click)="cancelNewWorkout(routineIndex)"></fa-icon>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
