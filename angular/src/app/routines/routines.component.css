@@ -37,6 +37,9 @@ body {
     overflow-x: auto;
     color: var(--principal);
 }
+.routines-content::-webkit-scrollbar {
+    display: none;
+}
 
 .card {
     border: 1px solid var(--border-color);

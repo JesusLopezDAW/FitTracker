@@ -15,4 +15,16 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  toggleLike() {
+    // Alternar el estado de liked
+    this.post.liked = !this.post.liked;
+
+    // Incrementar o decrementar el número de likes dependiendo del estado
+    if (this.post.liked) {
+      this.post.likes++;
+    } else {
+      this.post.likes--;
+    }
+  }
 }

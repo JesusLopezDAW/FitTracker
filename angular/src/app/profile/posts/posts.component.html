@@ -1,12 +1,8 @@
-<div class="container mt-5">
-    <div class="row">
-        <div *ngFor="let post of posts" class="col-md-4 mb-4">
+<div class="container mt-5 profilePost-container">
+    <div class="row gx-2 gy-2">
+        <div *ngFor="let post of posts" class="col-md-4">
             <div class="card">
                 <img [src]="post.image" class="card-img-top" alt="Post image">
-                <div class="card-body">
-                    <h5 class="card-title">{{ post.author }}</h5>
-                    <p class="card-text">{{ post.content }}</p>
-                </div>
             </div>
         </div>
     </div>

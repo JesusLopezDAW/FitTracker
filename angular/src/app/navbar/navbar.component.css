@@ -1,10 +1,7 @@
 /* Estilo navbar vista pc */
 .navbar-desktop {
     height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 350px;
+    width: var(--navbar-width);
     background-color: var(--background-color);
     border-right: 1px solid var(--border-color);
     transition: width 0.3s ease;
@@ -22,13 +19,13 @@
     position: fixed;
     left: -100px;
     top: 0;
-    width: 385px;
+    width: 350px;
     background-color: var(--background-color);
     border-right: 1px solid var(--border-color);
     visibility: hidden;
     opacity: 0;
     transition: left 0.3s ease, visibility 0.3s ease, opacity 0.3s ease;
-    z-index: 99;
+    z-index: 5;
 }
 
 .search-component.active {
@@ -123,23 +120,17 @@ hr {
 
 }
 
-@media (min-width: 836px) {
-    .navbar-desktop {
-        display: flex;
-    }
-
-    .navbar-mobile {
-        display: none;
-    }
-}
-
-@media (max-width: 836px) {
+@media (max-width: 992px) {
     .navbar-desktop {
         display: none;
     }
 
     .navbar-mobile {
         display: flex;
+    }
+
+    .navbar-mobile-top {
+        display: flex !important;
     }
 }
 
@@ -160,9 +151,9 @@ hr {
 }
 
 .textAppNavBar {
-    font-family: 'Dancing Script'; 
-    padding-left: 0px; 
-    font-size: 42px; 
+    font-family: 'Dancing Script';
+    padding-left: 0px;
+    font-size: 42px;
     margin-bottom: -2px
 }
 
@@ -286,16 +277,124 @@ input:checked+.slider:before {
 .user-container {
     display: flex;
     align-items: center;
-    margin-bottom: 10px; /* Ajusta el margen según sea necesario */
+    margin-bottom: 10px;
+    /* Ajusta el margen según sea necesario */
 }
 
 .user-image {
     height: 50px;
     width: 50px;
     border-radius: 50%;
-    margin-right: 10px; /* Ajusta el margen derecho según sea necesario */
+    margin-right: 10px;
+    /* Ajusta el margen derecho según sea necesario */
 }
 
 .user-name {
     margin: 0;
+}
+
+/* Estilos para el navbar desktop */
+.navbar-desktop {
+    opacity: 1 !important;
+}
+
+.navbar-dark.bg-dark {
+    background-color: var(--background-color) !important;
+    opacity: 0.9;
+}
+
+.navbar-nav .nav-item .nav-link {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .nav-item .nav-link .icon-container {
+    width: 30px;
+    margin-right: 20px;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    background-color: var(--background-input) !important;
+    border-radius: 25px;
+}
+
+.navbar-nav .nav-item .nav-link .fas {
+    background-color: transparent;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+/* Estilos para el navbar móvil */
+.navbar-mobile {
+    display: flex;
+    justify-content: space-between;
+    /* Distribuye los elementos uniformemente */
+    align-items: center;
+    /* Centra verticalmente los elementos */
+    height: 60px;
+    /* Altura deseada para el navbar móvil */
+    padding: 0 20px;
+    /* Espaciado horizontal entre los íconos */
+}
+
+.navbar-mobile .nav-link {
+    color: white;
+    /* Color del texto */
+    font-size: 20px;
+    /* Tamaño del texto */
+}
+
+.navbar-mobile .nav-link:hover {
+    color: gray;
+    /* Color del texto al pasar el ratón por encima */
+}
+
+/* Estilo para los íconos */
+.navbar-mobile .nav-link i {
+    display: block;
+    /* Hace que los íconos sean bloques para centrarlos */
+    /* margin: 0 80px; */
+    /* Centra los íconos horizontalmente */
+}
+
+/* Estilos para el navbar móvil en la parte superior */
+.navbar-mobile-top {
+    width: 100%;
+    /* Ocupa el 100% del ancho de la pantalla */
+    height: 60px;
+    /* Altura deseada para la barra */
+    background-color: var(--background-color);
+    /* Color de fondo deseado */
+    display: flex;
+    /* Usa flexbox para el diseño */
+    justify-content: center;
+    /* Centra horizontalmente los elementos */
+    align-items: center;
+    /* Centra verticalmente los elementos */
+}
+
+.navbar-mobile-top .navbar-text {
+    color: white;
+    /* Color del texto */
+    font-size: 20px;
+    /* Tamaño del texto */
+}
+
+.navbar-mobile-top {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999999;
+    /* Asegúrate de que esté encima de otros elementos */
+    background-color: red !important;
+    /* Color de fondo */
+    color: var(--text-color);
+    /* Color del texto */
+    /* padding: 10px 0; */
+    justify-content: center;
+    /* Centrar el contenido horizontalmente */
+    align-items: center;
+    /* Centrar el contenido verticalmente */
 }

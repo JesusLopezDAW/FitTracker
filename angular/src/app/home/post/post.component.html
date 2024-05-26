@@ -1,0 +1,30 @@
+<div class="post-container">
+    <div class="card mb-3 post-card">
+        <div class="card-body">
+            <div class="d-flex">
+                <img [src]="post.image" class="rounded-circle post-avatar" alt="Avatar">
+                <div class="ml-3">
+                    <h5 class="card-title">{{ post.author }}</h5>
+                    <p class="card-text">{{ post.content }}</p>
+                </div>
+            </div>
+            <div class="post-image-container">
+                <img [src]="post.postImage" class="post-image" alt="Post Image">
+            </div>
+            <div class="d-flex justify-content-between align-items-center post-actions">
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-link" (click)="toggleLike()">
+                        <i *ngIf="post.liked" class="fa-solid fa-heart liked-icon"></i>
+                        <i *ngIf="!post.liked" class="fa-regular fa-heart noliked-icon"></i>
+                    </button>
+                    <span>{{ post.likes }}</span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-link"><i class="fa-regular fa-comment"></i></button>
+                    <span>{{ post.comments }}</span>
+                </div>
+                <!-- <button class="btn btn-link"><i class="fa-regular fa-bookmark"></i></button> -->
+            </div>
+        </div>
+    </div>
+</div>

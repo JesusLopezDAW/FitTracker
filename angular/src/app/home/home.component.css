@@ -1,24 +1,51 @@
-.container-fluid {
+/* .container-fluid {
     padding: 0;
     background-color: var(--background-color);
-}
+} */
 
-.posts-section {
+/* .home-content {
+    position: fixed;
+    top: 27px;
+    left: 436px;
+    right: 20px;
+    max-width: calc(100% - 332px);
+    overflow-x: auto;
+    color: var(--principal);
+} */
+
+/* .posts-section {
+    position: fixed;
+    top: 0;
+    left: 190px;
+    max-height: calc(100vh);
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 12.5%;
+    margin-top: 54px;
 }
+
+.posts-section::-webkit-scrollbar {
+    display: none;
+}
+
+.posts-section {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+} */
 
 .tabs-container {
     display: flex;
-    width: 100%;
     justify-content: center;
+    /* Centra horizontalmente los elementos */
+    width: 74vh;
 }
 
 .tab-button {
     background-color: transparent;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 120px;
     cursor: pointer;
     color: var(--text-color);
     outline: none;
@@ -40,7 +67,15 @@
     background-color: var(--background-input);
 }
 
-.right-sidebar {
-    background-color: #f0f0f0; /* Color de fondo opcional */
-    overflow-y: auto; /* Agrega desplazamiento vertical si es necesario */
+/* .right-sidebar {
+    background-color: var(--background-color);
+    margin-left: 78%;
+    margin-right: 10%;
+    width: 27%;
+} */
+
+.posts {
+    overflow-y: scroll;
+    margin-left: 14%;
+    height: calc(100vh);
 }

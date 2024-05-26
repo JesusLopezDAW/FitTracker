@@ -1,24 +1,51 @@
-<div class="container-fluid h-100">
-    <div class="row">
-        <div class="col-lg-8 posts-section" id="posts-section">
-            <div class="tabs-container">
-                <div class="tab-button" [ngClass]="{'active': showForYou}" (click)="togglePosts(true)">
-                    <span>Para ti</span>
-                </div>
-                <div class="tab-button" [ngClass]="{'active': !showForYou}" (click)="togglePosts(false)">
-                    <span>Siguiendo</span>
-                </div>
+<!-- <div class="container-fluid h-100 home-content">
+    <div class="col-lg-8 posts-section" id="posts-section">
+        <div class="tabs-container">
+            <div class="tab-button" [ngClass]="{'active': showForYou}" (click)="togglePosts(true)">
+                <span>Para ti</span>
             </div>
-            <div *ngIf="showForYou">
-                <app-post *ngFor="let post of postsForYou" [post]="post"></app-post>
-            </div>
-            <div *ngIf="!showForYou">
-                <app-post *ngFor="let post of postsFollowing" [post]="post"></app-post>
+            <div class="tab-button" [ngClass]="{'active': !showForYou}" (click)="togglePosts(false)">
+                <span>Siguiendo</span>
             </div>
         </div>
-        <div class="col-lg-4 right-sidebar" id="right-sidebar">
-            <app-profile></app-profile>
-            <app-suggestions></app-suggestions>
+        <div *ngIf="showForYou">
+            <app-post *ngFor="let post of postsForYou" [post]="post"></app-post>
+        </div>
+        <div *ngIf="!showForYou">
+            <app-post *ngFor="let post of postsFollowing" [post]="post"></app-post>
+        </div>
+        <div>
+            <br><br><br><br><br>
+        </div>
+    </div>
+    <div class="col-lg-4 right-sidebar" id="right-sidebar">
+        <app-profile></app-profile>
+        <app-suggestions></app-suggestions>
+    </div>
+</div> -->
+
+<div class="container-fluid home-content">
+    <div class="row h-100">
+        <div class="col-md-12 p-0">
+            <div class="col-md-10 p-0 d-flex flex-column posts">
+                <div class="tabs-container">
+                    <div class="tab-button" [ngClass]="{'active': showForYou}" (click)="togglePosts(true)">
+                        <span>Para ti</span>
+                    </div>
+                    <div class="tab-button" [ngClass]="{'active': !showForYou}" (click)="togglePosts(false)">
+                        <span>Siguiendo</span>
+                    </div>
+                </div>
+                <div *ngIf="showForYou">
+                    <app-post *ngFor="let post of postsForYou" [post]="post"></app-post>
+                </div>
+                <div *ngIf="!showForYou">
+                    <app-post *ngFor="let post of postsFollowing" [post]="post"></app-post>
+                </div>
+                <div>
+                    <br><br>
+                </div>
+            </div>
         </div>
     </div>
 </div>

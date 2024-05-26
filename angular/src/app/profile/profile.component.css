@@ -4,14 +4,9 @@ h2 {
 }
 
 hr {
-    /* width: 3px; */
     height: 5px;
-    /* Ajusta el grosor aquí */
     background-color: var(--border-color);
-    /* Ajusta el color aquí */
     border: none;
-    /* Elimina el borde por defecto */
-    /* border-color: var(--border-color); */
 }
 
 .text-dark {
@@ -58,7 +53,15 @@ a.routerLink .fas {
 }
 
 .content-profile {
-    margin-left: 23%;
+    width: 70%;
+    margin-left: 5%;
+    height: calc(100vh - 5rem); /* Ajusta la altura según sea necesario */
+    overflow-y: scroll; /* Permite desplazamiento vertical */
+}
+
+.content-profile::-webkit-scrollbar {
+    width: 0; /* Ancho de la barra de desplazamiento */
+    background-color: transparent; /* Color de fondo de la barra de desplazamiento */
 }
 
 .profileOptions {
