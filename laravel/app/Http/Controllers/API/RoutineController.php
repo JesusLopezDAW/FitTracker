@@ -15,7 +15,12 @@ class RoutineController extends Controller
 {
     public function index(): HttpJsonResponse
     {
-        return JsonResponse::success(Auth::user()->routines, 'success', 200);
+        $routines = Auth::user()->routines()
+        ->with('workouts:id,name,routine_id')
+        ->get(['id', 'name']);
+    
+        
+        return JsonResponse::success($routines, 'success', 200);
     }
 
     public function store(RoutineRequest $request): HttpJsonResponse
