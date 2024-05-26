@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h4 class="modal-title">Crear nueva rutina</h4>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button> -->
+</div>
+<div class="modal-body">
+    <label for="">Nombre de la rutina</label>
+    <input type="text" class="form-control" [(ngModel)]="routineName">
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="saveChanges()">Crear Rutina</button>
+</div>

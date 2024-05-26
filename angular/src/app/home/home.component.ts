@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit {
       "Accept": "*/*",
       "User-Agent": "Thunder Client (https://www.thunderclient.com/)",
       "Authorization": "Bearer " + sessionStorage.getItem("authToken"),
-      "post_id": "1",
       "Content-Type": "application/json"
     };
 
@@ -73,7 +72,6 @@ export class HomeComponent implements OnInit {
       "Accept": "*/*",
       "User-Agent": "Thunder Client (https://www.thunderclient.com/)",
       "Authorization": "Bearer " + sessionStorage.getItem("authToken"),
-      "post_id": "1",
       "Content-Type": "application/json"
     };
 
@@ -83,7 +81,7 @@ export class HomeComponent implements OnInit {
         headers: headersList,
       });
       let data = await response.json();
-      const posts = data.data;
+      const posts = data.data.data;
       console.log(posts);
       this.postsFollowing = posts.map((post: any) => ({
         id: post.id,
@@ -92,10 +90,10 @@ export class HomeComponent implements OnInit {
         image: 'https://via.placeholder.com/50', // puedes cambiar esto si tienes la URL de la imagen del autor
         // image: post.user.profile_photo_path,
         postImage: post.image,
-        liked: post.liked_by_user
+        liked: post.liked_by_user,
+        likes: post.likes_count,
+        comments: post.comments_count
         // liked: post.liked
-        // likes: post.likes_count,
-        // comments: post.comments_count
       }));
     } catch (error) {
       console.error('Error fetching data:', error);

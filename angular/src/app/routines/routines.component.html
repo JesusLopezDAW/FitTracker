@@ -7,9 +7,9 @@
                     <br>
                 </div>
                 <div style="display: flex;">
-                    <h3 id="titleRoutine">Mis rutinas</h3>
+                    <h1 id="titleRoutine">Mis rutinas</h1>
                     <button style="margin-right: 0px;" class="btn btn-primary mb-3 newRoutine"
-                        (click)="createNewRoutine()">Nueva rutina</button>
+                        (click)="mdlCreateRoutine()">Nueva rutina</button>
                 </div>
                 <div class="row">
                     <ng-container *ngFor="let routine of routines; let routineIndex = index">
@@ -23,11 +23,12 @@
                                         <span *ngIf="!routine.isEditing">{{ routine.name }}</span>
                                         <input class="nameRoutine" #editRoutineNameInput *ngIf="routine.isEditing"
                                             [(ngModel)]="routine.name" (blur)="confirmRoutineName(routineIndex)"
-                                            (keyup.enter)="confirmRoutineName(routineIndex)" />
+                                            (keyup.enter)="onEnterKey(routineIndex)">
                                     </div>
                                     <div>
-                                        <fa-icon [icon]="faPlus" (click)="startCreatingWorkout(routineIndex)"></fa-icon>
-                                        <fa-icon [icon]="faTrash" class="text-danger ml-2"
+                                        <fa-icon [icon]="faPlus" class="text-muted mr-2"
+                                            (click)="startCreatingWorkout(routineIndex)"></fa-icon>
+                                        <fa-icon [icon]="faTrash" class="text-danger"
                                             (click)="deleteRoutine(routineIndex)"></fa-icon>
                                     </div>
                                 </div>
