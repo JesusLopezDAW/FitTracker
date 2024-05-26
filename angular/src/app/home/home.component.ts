@@ -14,13 +14,13 @@ import { ProfileComponent } from './profile/profile.component';
 })
 export class HomeComponent implements OnInit {
   postsForYou = [
-    { id: 1, author: 'Author 1', content: 'Para ti Post 1', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/640x480', likes: 0, comments: 0 },
-    { id: 2, author: 'Author 2', content: 'Para ti Post 2', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/640x480', likes: 0, comments: 0 }
+    { id: 1, author: 'Author 1', content: 'Para ti Post 1', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/640x480', likes: 0, comments: 0, liked: false },
+    { id: 2, author: 'Author 2', content: 'Para ti Post 2', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/640x480', likes: 0, comments: 0, liked: true }
   ];
 
   postsFollowing = [
-    { id: 1, author: 'Author 1', content: 'Siguiendo Post 1', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/640x480', likes: 0, comments: 0 },
-    { id: 2, author: 'Author 2', content: 'Siguiendo Post 2', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/640x480', likes: 0, comments: 0 }
+    { id: 1, author: 'Author 1', content: 'Siguiendo Post 1', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/640x480', likes: 0, comments: 0, liked: false },
+    { id: 2, author: 'Author 2', content: 'Siguiendo Post 2', image: 'https://via.placeholder.com/50', postImage: 'https://via.placeholder.com/640x480', likes: 0, comments: 0, liked: false }
   ];
 
   showForYou = true;
@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
     const headersList = {
       "Accept": "*/*",
       "User-Agent": "Thunder Client (https://www.thunderclient.com/)",
-      "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTcxNjY3ODE0OSwiZXhwIjoxNzE2NzYzMzQ5LCJuYmYiOjE3MTY2NzgxNDksImp0aSI6IkZiYjJSbXgzc09zZkU1cWUiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.P6uiqbAuWGad8wq9BnoepsVpiEcBWfgWVnPu3gG64DM",
+      "Authorization": "Bearer " + sessionStorage.getItem("authToken"),
       "post_id": "1",
       "Content-Type": "application/json"
     };
@@ -59,7 +59,9 @@ export class HomeComponent implements OnInit {
         image: 'https://via.placeholder.com/50', // puedes cambiar esto si tienes la URL de la imagen del autor
         postImage: post.image,
         likes: post.likes_count,
-        comments: post.comments_count
+        comments: post.comments_count,
+        liked: post.liked_by_user
+        // liked: post.liked
         // image: post.user.profile_photo_path,
       }));
     } catch (error) {
@@ -70,7 +72,7 @@ export class HomeComponent implements OnInit {
     const headersList = {
       "Accept": "*/*",
       "User-Agent": "Thunder Client (https://www.thunderclient.com/)",
-      "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTcxNjY3ODE0OSwiZXhwIjoxNzE2NzYzMzQ5LCJuYmYiOjE3MTY2NzgxNDksImp0aSI6IkZiYjJSbXgzc09zZkU1cWUiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.P6uiqbAuWGad8wq9BnoepsVpiEcBWfgWVnPu3gG64DM",
+      "Authorization": "Bearer " + sessionStorage.getItem("authToken"),
       "post_id": "1",
       "Content-Type": "application/json"
     };
@@ -90,6 +92,8 @@ export class HomeComponent implements OnInit {
         image: 'https://via.placeholder.com/50', // puedes cambiar esto si tienes la URL de la imagen del autor
         // image: post.user.profile_photo_path,
         postImage: post.image,
+        liked: post.liked_by_user
+        // liked: post.liked
         // likes: post.likes_count,
         // comments: post.comments_count
       }));

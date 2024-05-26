@@ -17,7 +17,6 @@ export class PostComponent implements OnInit {
   }
 
   toggleLike() {
-    // Alternar el estado de liked
     this.post.liked = !this.post.liked;
 
     // Incrementar o decrementar el número de likes dependiendo del estado
