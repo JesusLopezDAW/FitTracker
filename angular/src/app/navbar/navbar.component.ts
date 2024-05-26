@@ -1,11 +1,12 @@
 import { Component, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
@@ -18,6 +19,7 @@ export class NavbarComponent {
   isInputFocused = false;
   private isBrowser: boolean;
   currentSection: string = '';
+  inputSearch: string = "";
 
   constructor(
     private renderer: Renderer2,
@@ -75,6 +77,7 @@ export class NavbarComponent {
   }
 
   clearSearchInput() {
+    console.log("asdasdasdasd");
     const searchInput = document.querySelector('.search-input') as HTMLInputElement;
     if (searchInput) {
       searchInput.value = '';
@@ -93,7 +96,7 @@ export class NavbarComponent {
     const input = event.target as HTMLInputElement;
     console.log(input.value);
 
-    if (input.value.length > 2) {
+    if (input.value.length > 1) {
       const baseUrl = "http://localhost/api/search/user";
       const queryParam = encodeURIComponent(input.value);
       const url = `${baseUrl}?query=${queryParam}`;
@@ -110,13 +113,15 @@ export class NavbarComponent {
         if (response.ok) {
           const responseData = await response.json();
           console.log(responseData.data);
-          this.users = responseData.data; // Asigna los usuarios a la matriz
+          this.users = responseData.data;
         } else {
           console.error('Error en la respuesta de la petición:', response.statusText);
         }
       } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
       }
+    }else if(input.value.length == 0){
+      this.users = [];
     }
   }
 

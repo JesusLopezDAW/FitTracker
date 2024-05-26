@@ -1,21 +1,12 @@
-.card-img-top {
-    width: 100%;
-    height: auto;
-}
-
 .card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
 }
 
-/* .card:hover {
-    transform: scale(1.05);
-} */
-
 .profilePost-container .col-md-4 {
-    padding: 2px; /* Elimina el relleno entre las columnas */
+    padding: 2px;
 }
 
 .profilePost-container .card {
-    margin-bottom: -8px; /* Elimina el margen inferior entre las filas */
+    margin-bottom: -8px;
 }

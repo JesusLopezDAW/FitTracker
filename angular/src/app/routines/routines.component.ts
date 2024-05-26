@@ -1,7 +1,7 @@
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Renderer2, ViewChild, HostListener, AfterViewInit, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -30,7 +30,7 @@ interface Routine {
 
 @Component({
   selector: 'app-routines',
-  imports: [CommonModule, NavbarComponent, FormsModule, DragDropModule, FontAwesomeModule],
+  imports: [CommonModule, NavbarComponent, FormsModule, DragDropModule, FontAwesomeModule, RouterModule],
   templateUrl: './routines.component.html',
   styleUrls: ['./routines.component.css'],
   standalone: true
