@@ -17,7 +17,9 @@ class UserController extends Controller
             'query' => 'required|string|max:255',
         ]);
 
-        $transformedUsers = User::search($query)->get()->transform(function ($user) {
+        // $user = User::where('name', 'LIKE', '%' . $query . '%')->get();
+
+        $transformedUsers = User::where('name', 'LIKE', '%' . $query . '%')->get()->transform(function ($user) {
             return $user->transform();
         });
     

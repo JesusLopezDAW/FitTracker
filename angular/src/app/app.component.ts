@@ -1,14 +1,14 @@
 import { Component, Inject, OnInit, Renderer2, PLATFORM_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NavbarComponent } from './navbar/navbar.component';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, NavbarComponent, HomeComponent, EditProfileComponent],
+  imports: [RouterModule, HomeComponent, EditProfileComponent, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

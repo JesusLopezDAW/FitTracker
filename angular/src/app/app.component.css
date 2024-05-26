@@ -1,11 +1,7 @@
-.content {
+ /* .content {
   margin-left: 0;
   padding: 20px;
   min-height: 100vh;
-}
-
-/* .bg-dark {
-  background-color: #15202b !important;
 } */
 
 a {
@@ -14,4 +10,26 @@ a {
 
 a:hover {
   color: var(--principal);
+}
+
+/* .main-content {
+  width: calc(100% - var(--navbar-width));
+  background-color: wheat;
+}  */
+
+/* Contenedor principal usando Flexbox */
+.container-fluid.d-flex {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+/* Estilos para el contenido principal */
+.main-content {
+  overflow: hidden;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 364px;
+  background-color: var(--background-color);
 }

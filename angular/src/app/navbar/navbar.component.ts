@@ -58,11 +58,13 @@ export class NavbarComponent {
     const newWorkout = this.document.getElementById("newWorkout") as HTMLElement;
     if (this.isSearchActive) {
       iconApp.innerHTML = '<img src="../../assets/icons/logoBlancoNavBar.png" alt="Logo" class="d-inline-block align-top imagenAppNavBar" style="width: 45px; height: 35px; margin-left: 144px; margin-top: 5px; margin-bottom: -10px;">';
+      newWorkout.innerHTML = "<i class='fa-solid fa-plus'></i>";
     } else {
       if (window.innerWidth < 1440) {
         newWorkout.innerHTML = "<i class='fa-solid fa-plus'></i>";
         iconApp.innerHTML = '<img src="../../assets/icons/logoBlancoNavBar.png" alt="Logo" class="d-inline-block align-top imagenAppNavBar" style="width: 45px; height: 35px; margin-left: 144px; margin-top: 5px; margin-bottom: -10px;">';
       } else {
+        newWorkout.innerHTML = "<span>Nuevo entrenamiento</span>";
         iconApp.innerHTML = '<h1 style="font-family: Dancing Script; padding-left: 0px; font-size: 42px; margin-bottom: -2px">FitTracker</h1>';
       }
     }
@@ -92,23 +94,22 @@ export class NavbarComponent {
     console.log(input.value);
 
     if (input.value.length > 2) {
-      // Construir la URL con los parámetros de consulta
       const baseUrl = "http://localhost/api/search/user";
       const queryParam = encodeURIComponent(input.value);
       const url = `${baseUrl}?query=${queryParam}`;
 
-      // Realizar la solicitud GET sin cuerpo
       try {
         const response = await fetch(url, {
           method: "GET",
           headers: {
-            "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTcxNjU2OTM4NCwiZXhwIjoxNzE2NjU0NTg0LCJuYmYiOjE3MTY1NjkzODQsImp0aSI6IjF3QUhHWERiTkpBZ2o0eEYiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.4CLV1KUmXYzwErhrdUUCt9xSu2Qyu3lthO2cnWB2knc",
+            "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTcxNjY3ODE0OSwiZXhwIjoxNzE2NzYzMzQ5LCJuYmYiOjE3MTY2NzgxNDksImp0aSI6IkZiYjJSbXgzc09zZkU1cWUiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.P6uiqbAuWGad8wq9BnoepsVpiEcBWfgWVnPu3gG64DM",
             "Content-Type": "application/json"
           }
         });
 
         if (response.ok) {
           const responseData = await response.json();
+          console.log(responseData.data);
           this.users = responseData.data; // Asigna los usuarios a la matriz
         } else {
           console.error('Error en la respuesta de la petición:', response.statusText);
@@ -118,9 +119,6 @@ export class NavbarComponent {
       }
     }
   }
-
-
-
 
   toggleDropdown() {
     this.showSettingsOptions = !this.showSettingsOptions;

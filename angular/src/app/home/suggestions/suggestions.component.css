@@ -1,4 +1,4 @@
-.suggestions-container {
+/* .suggestions-container {
     padding: 10px;
     margin-top: 17px;
     margin-left: -10px;
@@ -35,16 +35,16 @@
 }
 
 .follow-button {
-    background: none; /* Sin fondo */
-    border: none; /* Sin borde */
-    padding: 0; /* Sin relleno */
-    color: var(--principal); /* Color azul */
-    font-size: 14px; /* Tamaño del texto */
-    cursor: pointer; /* Cursor de puntero para indicar que es clickeable */
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--principal);
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .follow-button span {
-    text-decoration: none; /* Sin subrayado */
+    text-decoration: none; 
 }
 
 .follow-button:hover span {
@@ -53,4 +53,4 @@
 
 .followSpan{
     color: var(--principal);
-}
+} */
