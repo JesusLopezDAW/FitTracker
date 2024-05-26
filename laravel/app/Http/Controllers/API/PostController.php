@@ -124,6 +124,10 @@ class PostController extends Controller
             ->withCount('comments')
             ->paginate(10);
 
+        $userId = $user->id;
+        $posts->each(function ($post) use ($userId) {
+            $post->liked_by_user = $post->likes->where('user_id', $userId)->count() > 0;
+        });
         return JsonResponse::success($posts, 'Success', 200);
     }
 
@@ -135,7 +139,10 @@ class PostController extends Controller
         ->orderBy('likes_count', 'desc')
         ->paginate(10);
 
-        
+        $userId = Auth::id();
+        $posts->each(function ($post) use ($userId) {
+            $post->liked_by_user = $post->likes->where('user_id', $userId)->count() > 0;
+        });
 
         return JsonResponse::success($posts, 'Success', 200);
     }
@@ -161,5 +168,9 @@ class PostController extends Controller
         if (!$workout) {
             return JsonResponse::error('Error: Workout not found for the user', 404);
         }
+    }
+
+    private function isLiked(){
+
     }
 }
