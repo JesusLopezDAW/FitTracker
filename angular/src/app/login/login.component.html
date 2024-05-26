@@ -1,49 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- src/app/login/login.component.html -->
+<section>
+    <div class="contenedor">
+        <div class="formulario">
+            <form (ngSubmit)="acceder()">
+                <h2>Iniciar Sesion</h2>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+                <div class="input-contenedor">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="email" required [(ngModel)]="email" name="email">
+                    <label>Email</label>
+                </div>
 
-<body>
-    <section>
-        <div class="contenedor">
-            <div class="formulario">
-                <form action="#">
-                    <h2>Iniciar Sesion</h2>
+                <div class="input-contenedor">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" required [(ngModel)]="password" name="password">
+                    <label>Contraseña</label>
+                </div>
 
-                    <div class="input-contenedor">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="email" required>
-                        <label for="#">Email</label>
-                    </div>
-
-                    <div class="input-contenedor">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" required>
-                        <label for="#">Contraseña</label>
-                    </div>
-
-                    <div class="olvidar">
-                        <label for="#">
-                            <input type="checkbox">
-                            <a href="#">Olvide la contraseña</a>
-                        </label>
-                    </div>
-                </form>
+                <div class="olvidar">
+                    <label>
+                        <input type="checkbox">
+                        <a href="#">Olvide la contraseña</a>
+                    </label>
+                </div>
 
                 <div>
-                    <button>Acceder</button>
-
+                    <button type="submit">Acceder</button>
                     <div class="registrar">
                         <p>No tengo cuenta <a href="#">Crear una cuenta</a></p>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
-    </section>
-</body>
-
-</html>
+    </div>
+</section>

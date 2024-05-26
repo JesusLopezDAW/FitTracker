@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit {
     };
 
     try {
-      let response = await fetch("http://localhost/api/posts", {
+      let response = await fetch("http://localhost/api/feed/followed", {
         method: "GET",
         headers: headersList,
       });
