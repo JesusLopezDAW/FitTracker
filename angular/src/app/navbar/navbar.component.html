@@ -110,16 +110,19 @@
         <div class="search-input-wrapper">
             <i class="fa-solid fa-magnifying-glass search-icon" *ngIf="!isInputFocused"></i>
             <input type="text" placeholder="Buscar" class="search-input" (focus)="onInputFocus()" (blur)="onInputBlur()"
-                (input)="onInputChange($event)">
+                (input)="onInputChange($event)" [(ngModel)]="inputSearch">
             <i class="fa-solid fa-xmark clear-input" (click)="clearSearchInput()" *ngIf="isInputFocused"></i>
         </div>
         <hr>
-        <div class="search-results">
-            <div *ngFor="let user of users" class="user-container">
-                <!-- <a routerLink="/profile{{user.id}}" style="cursor: pointer;"> -->
+        <div class="search-results" id="search-results">
+            <p style="padding-left: 48px;" *ngIf="users.length === 0">No se encontraron resultados</p>
+            <div *ngIf="users.length > 0">
+                <div *ngFor="let user of users" class="user-container" id="user-container">
+                    <!-- <a routerLink="/profile{{user.id}}" style="cursor: pointer;"> -->
                     <img src="{{ user.profile_photo_path }}" alt="" class="user-image">
                     <p class="user-name">{{ user.name }}</p>
-                <!-- </a> -->
+                    <!-- </a> -->
+                </div>
             </div>
         </div>
     </div>

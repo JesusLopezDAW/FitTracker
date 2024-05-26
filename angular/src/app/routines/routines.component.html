@@ -31,8 +31,8 @@
                                 </div>
                                 <div class="card-body">
                                     <ul class="list-group" cdkDropList>
-                                        <li *ngFor="let workout of routine.workouts; let workoutIndex = index"
-                                            class="list-group-item d-flex justify-content-between align-items-center"
+                                        <li style="cursor: pointer;" [routerLink]="['/workout', workout.id]" routerLinkActive="active" *ngFor="let workout of routine.workouts; let workoutIndex = index"
+                                            class="workoutCard list-group-item d-flex justify-content-between align-items-center"
                                             cdkDrag>
                                             <div class="d-flex align-items-center">
                                                 <fa-icon [icon]="faEdit" class="text-primary mr-2"

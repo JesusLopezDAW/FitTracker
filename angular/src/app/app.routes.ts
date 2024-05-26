@@ -8,6 +8,7 @@ import { RoutineDetailsComponent } from './routines/routine-details/routine-deta
 import { LoginComponent } from './login/login.component';
 import { ProtectedComponent } from './protected/protected.component';
 import { AuthGuard } from './guards/auth.guard';
+import { WorkoutComponent } from './workout/workout.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -17,5 +18,6 @@ export const routes: Routes = [
   { path: 'routine/:id', component: RoutineDetailsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] },
+  { path: 'workout/:id', component: WorkoutComponent },
   { path: '**', redirectTo: '/login' }
 ];

@@ -30,7 +30,6 @@ a.text-dark:hover {
     color: var(--text-color);
 }
 
-/* Añadir espaciado a los elementos de la navbar */
 .d-flex.justify-content-between.align-items-center h2 {
     margin-right: auto;
 }
@@ -47,33 +46,27 @@ a.text-dark:hover {
     margin-left: 0.5rem !important;
 }
 
-/* Estilo del icono en los enlaces de navegación */
-a.routerLink .fas {
-    margin-right: 5px;
-}
-
 .content-profile {
     width: 70%;
     margin-left: 5%;
-    height: calc(100vh - 5rem); /* Ajusta la altura según sea necesario */
-    overflow-y: scroll; /* Permite desplazamiento vertical */
+    height: calc(100vh - 5rem);
+    overflow-y: scroll;
 }
 
 .content-profile::-webkit-scrollbar {
-    width: 0; /* Ancho de la barra de desplazamiento */
-    background-color: transparent; /* Color de fondo de la barra de desplazamiento */
+    width: 0;
+    background-color: transparent;
 }
 
 .profileOptions {
     margin-top: 2%;
     border-top: 2px solid var(--border-color);
     padding-top: 2%;
-    /* border-width: 1px; */
 }
 
 .profileOptions a {
     font-size: 16px;
-    color: #71767B!important;
+    color: #71767B !important;
     text-decoration: none;
 }
 
