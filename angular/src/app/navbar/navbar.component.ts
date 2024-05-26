@@ -102,7 +102,7 @@ export class NavbarComponent {
         const response = await fetch(url, {
           method: "GET",
           headers: {
-            "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTcxNjY3ODE0OSwiZXhwIjoxNzE2NzYzMzQ5LCJuYmYiOjE3MTY2NzgxNDksImp0aSI6IkZiYjJSbXgzc09zZkU1cWUiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.P6uiqbAuWGad8wq9BnoepsVpiEcBWfgWVnPu3gG64DM",
+            "Authorization": "Bearer " + sessionStorage.getItem("authToken"),
             "Content-Type": "application/json"
           }
         });
