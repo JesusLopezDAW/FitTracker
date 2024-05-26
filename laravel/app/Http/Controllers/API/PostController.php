@@ -114,7 +114,8 @@ class PostController extends Controller
         $user = Auth::user();
         $followedUserIds = $user->followings->pluck('id');
 
-        $posts = Post::whereIn('user_id', $followedUserIds)
+        $posts = Post::with(['user:id,name,profile_photo_path'])
+            ->whereIn('user_id', $followedUserIds)
             ->orderBy('created_at', 'desc')
             ->withCount('likes')
             ->withCount('comments')
