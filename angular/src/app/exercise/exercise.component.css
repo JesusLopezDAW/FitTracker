@@ -32,7 +32,8 @@
   }
   
   .card-header-custom {
-    background-color: blue;
+    background-color: var(--principal);
+    border: none;
     color: white;
   }
   
