@@ -7,12 +7,14 @@ import { authInterceptorProvider } from './app/interceptors/auth-interceptor.ser
 import { RouterModule } from '@angular/router';
 import { routes } from './app/app.routes';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(RouterModule.forRoot(routes)),
     importProvidersFrom(HttpClientModule),
     importProvidersFrom(FormsModule),
+    importProvidersFrom(NgbModule),
     authInterceptorProvider
   ]
 }).catch(err => console.error(err));

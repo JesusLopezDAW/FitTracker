@@ -1,0 +1,80 @@
+/* General container styles */
+.container {
+    padding: 10px;
+  }
+  
+  /* Section styles */
+  .section {
+    margin-bottom: 20px; /* Space between sections */
+  }
+  
+  .section-title {
+    margin-bottom: 10px; /* Space between title and exercises */
+    color: white;
+  }
+  
+  /* Exercise container styles */
+  .container-custom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between the cards */
+    max-width: 100%; /* Ensure the container does not exceed the screen width */
+    overflow-y: auto; /* Allow vertical scrolling if content overflows */
+    padding: 10px; /* Inner padding of the container */
+  }
+  
+  /* Card styles */
+  .card {
+    flex: 1 1 calc(20% - 10px); /* Five cards per row with a gap of 10px */
+    box-sizing: border-box; /* Include padding and border in the card's total width */
+    margin: 0; /* Remove margin as the gap handles spacing */
+    min-width: 200px; /* Ensure a minimum width */
+  }
+  
+  .card-header-custom {
+    background-color: blue;
+    color: white;
+  }
+  
+  .card-body {
+    height: fit-content;
+  }
+  
+  .btn-link {
+    text-decoration: none; /* Remove underline from the button */
+  }
+  
+  li {
+    color: black;
+    list-style-type: none;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 1200px) {
+    .card {
+      flex: 1 1 calc(25% - 10px); /* Four cards per row */
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .card {
+      flex: 1 1 calc(33.33% - 10px); /* Three cards per row */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      flex: 1 1 calc(50% - 10px); /* Two cards per row */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .card {
+      flex: 1 1 100%; /* One card per row */
+    }
+  }
+
+img{
+    width: 25px;
+}
+  
