@@ -108,7 +108,7 @@ h3 {
         left: 100px !important;
     }
 
-    .routines-content {
+    .routines-content, .workout-card {
         position: fixed !important;
         top: 27px !important;
         left: 156px !important;
@@ -134,6 +134,13 @@ h3 {
         left: 60px !important;
         max-width: calc(100%) !important;
     }
+
+    .workout-card{
+        margin-top: 40px;
+        width: 100% !important;
+        left: 60px !important;
+        max-width: calc(89%) !important;
+    }
     .main-content {
         left: 0px !important;
     }
@@ -154,6 +161,10 @@ h3 {
 
     .routines-content {
         right: 0 !important;
+    }
+    
+    .workout-card{
+        /* left: 10px !important; */
     }
 }
 
@@ -178,8 +189,24 @@ h3 {
 
 @media (max-width: 764px) {
 
-    .routines-content {
+    .routines-content{
         left: 0px !important;
         max-width: calc(89%) !important;
+    }
+    .workout-card{
+        left: 25px !important;
+        max-width: calc(89%) !important;
+    }
+}
+
+@media (max-width: 510px) {
+
+    .exercise-details{
+        display: block !important;
+    }
+    
+    .detail{
+        margin-left: 0px !important;
+        margin-top: 10px !important;
     }
 }
