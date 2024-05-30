@@ -21,7 +21,7 @@ a:hover {
 .container-fluid.d-flex {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 /* Estilos para el contenido principal */
