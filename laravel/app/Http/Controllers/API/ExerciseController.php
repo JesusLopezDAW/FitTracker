@@ -16,17 +16,19 @@ class ExerciseController extends Controller
     {
         $user = Auth::user();
 
-        $globalExercises = Exercise::where('visibility', 'global')->get();
+        // Obtener los ejercicios globales y del usuario
+        $globalExercises = Exercise::where('visibility', 'global')->get()->groupBy('muscle');
         $userExercises = Exercise::where('visibility', 'user')
             ->where('user_id', $user->id)
-            ->get();
+            ->get()
+            ->groupBy('muscle');
 
         $exercises = [
             "globals" => $globalExercises,
             "user" => $userExercises
         ];
 
-        return JsonResponse::success($exercises, 'success', 200);
+        return response()->json(['data' => $exercises, 'message' => 'success'], 200);
     }
 
     public function store(ExerciseRequest $request): HttpJsonResponse

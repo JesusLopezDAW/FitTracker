@@ -8,6 +8,7 @@ import { RoutineDetailsComponent } from './routines/routine-details/routine-deta
 import { LoginComponent } from './login/login.component';
 import { ProtectedComponent } from './protected/protected.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ExerciseComponent } from './exercise/exercise.component';
 import { WorkoutComponent } from './workout/workout.component';
 
 export const routes: Routes = [
@@ -15,7 +16,8 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
   { path: 'routines', component: RoutinesComponent, canActivate: [AuthGuard] },
-  { path: 'routine/:id', component: RoutineDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'routine/:id', component: RoutineDetailsComponent, canActivate: [AuthGuard] },  
+  { path: 'exercises', component: ExerciseComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] },
   { path: 'workout/:id', component: WorkoutComponent },
