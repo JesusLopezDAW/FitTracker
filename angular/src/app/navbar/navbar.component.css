@@ -37,7 +37,7 @@
 .search-content {
     padding: 20px;
     height: 100%;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 .search-input-wrapper {
@@ -397,4 +397,14 @@ input:checked+.slider:before {
     /* Centrar el contenido horizontalmente */
     align-items: center;
     /* Centrar el contenido verticalmente */
+}
+
+.search-results {
+    max-height: 100%;
+    overflow-y: auto;
+    padding-right: 16px; /* Añade espacio para la barra de desplazamiento */
+}
+
+.search-results::-webkit-scrollbar {
+    width: 0; /* Opción para navegadores Webkit */
 }

@@ -1,0 +1,35 @@
+<div class="workout-card">
+    <div class="workout-header">
+        <h2>Pecho</h2>
+        <button class="btnStartWorkout">Empezar Entrenamiento</button>
+        <div class="menu">
+            <i class="fas fa-ellipsis-v" (click)="toggleMenu()"></i>
+            <div class="menu-dropdown" *ngIf="menuOpen" (click)="closeMenu()">
+                <ul>
+                    <li (click)="copyRoutineLink()">Copy Routine Link</li>
+                    <li (click)="editRoutine()">Edit Routine</li>
+                    <li (click)="deleteRoutine()">Delete Routine</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="workout-body">
+        <div class="exercise" *ngFor="let exercise of exercises">
+            <img [src]="exercise.image" alt="Exercise Image">
+            <div class="exercise-info">
+                <h3>{{exercise.name}}</h3>
+                <div class="exercise-details">
+                    <div class="detail sets">
+                        <i class="fas fa-layer-group"></i> {{exercise.sets}} sets
+                    </div>
+                    <div class="detail reps">
+                        <i class="fas fa-sync-alt"></i> {{exercise.reps}} reps
+                    </div>
+                    <div class="detail rest">
+                        <i class="fas fa-clock"></i> Rest {{exercise.rest}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { ProtectedComponent } from './protected/protected.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ExerciseComponent } from './exercise/exercise.component';
+import { WorkoutComponent } from './workout/workout.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -19,5 +20,6 @@ export const routes: Routes = [
   { path: 'exercises', component: ExerciseComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] },
+  { path: 'workout/:id', component: WorkoutComponent },
   { path: '**', redirectTo: '/login' }
 ];

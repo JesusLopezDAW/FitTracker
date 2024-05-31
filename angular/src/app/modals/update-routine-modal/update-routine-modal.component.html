@@ -1,0 +1,37 @@
+<!-- create-routine-modal.component.html -->
+<div class="modal-content">
+    <div class="modal-body">
+        <h1 style="text-align: center;">Editar Rutina</h1>
+        <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="routineName" placeholder="Nombre de la rutina">
+        </div>
+        <br>
+        <div class="form-group">
+            <select class="form-control" [(ngModel)]="routineType">
+                <option value="" disabled selected>Selecciona un tipo de rutina</option>
+                <option value="cardio">Cardio</option>
+                <option value="entrenamiento_de_fuerza">Fuerza</option>
+                <option value="HIIT">HIIT</option>
+                <option value="yoga">Yoga</option>
+                <option value="pilates">Pilates</option>
+                <option value="flexibilidad">Flexibilidad</option>
+                <option value="calistenia">Calistenia</option>
+                <option value="kickboxing">Kickboxing</option>
+                <option value="crossfit">Crossfit</option>
+                <option value="natación">Natación</option>
+                <option value="ciclismo">Ciclismo</option>
+                <option value="correr">Correr</option>
+                <option value="escalada">Escalada</option>
+                <option value="danza">Danza</option>
+                <option value="artes_marciales">Artes marciales</option>
+                <option value="aeróbicos">Aeróbicos</option>
+                <option value="otros">Otros</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges()"
+            [disabled]="!routineName || !routineType">Editar Rutina</button>
+    </div>
+</div>

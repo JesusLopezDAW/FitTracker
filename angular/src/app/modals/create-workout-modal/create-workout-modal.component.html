@@ -1,0 +1,17 @@
+<!-- create-routine-modal.component.html -->
+<div class="modal-content">
+    <div class="modal-body">
+        <h1 style="text-align: center;">Nuevo Entrenamiento</h1>
+        <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="workoutName" placeholder="Nombre">
+        </div>
+        <br>
+        <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="workoutDescription" placeholder="Descripcion (Opcional)">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges()" [disabled]="!workoutName">Crear Entrenamiento</button>
+    </div>
+</div>
