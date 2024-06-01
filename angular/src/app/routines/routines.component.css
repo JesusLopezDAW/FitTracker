@@ -34,8 +34,17 @@ body {
     left: 436px;
     right: 20px;
     max-width: calc(100% - 332px);
-    overflow-x: auto;
+    max-height: calc(100vh - 27px); /* Ajusta esto según sea necesario */
+    overflow: auto; /* Permite el desplazamiento en ambos ejes */
     color: var(--principal);
+}
+
+.divPagRoutines {
+    overflow-y: auto;
+    max-height: calc(100vh - 27px); /* Ajusta esto según sea necesario */
+}
+.divPagRoutines::-webkit-scrollbar {
+    display: none;
 }
 .routines-content::-webkit-scrollbar {
     display: none;

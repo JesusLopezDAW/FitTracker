@@ -31,13 +31,13 @@
                                 </div>
                                 <div class="card-body">
                                     <ul class="list-group" cdkDropList>
-                                        <li style="cursor: pointer;" [routerLink]="['/workout', workout.id]" routerLinkActive="active" *ngFor="let workout of routine.workouts; let workoutIndex = index"
+                                        <li *ngFor="let workout of routine.workouts; let workoutIndex = index"
                                             class="workoutCard list-group-item d-flex justify-content-between align-items-center"
                                             cdkDrag>
                                             <div class="d-flex align-items-center">
                                                 <fa-icon [icon]="faEdit" class="text-primary mr-2"
                                                     (click)="updateWorkoutModal(routineIndex, workoutIndex)"></fa-icon>
-                                                <div>{{ workout.name }}</div>
+                                                <div style="cursor: pointer;" [routerLink]="['/workout', workout.id]" routerLinkActive="active" >{{ workout.name }}</div>
                                             </div>
                                             <div>
                                                 <fa-icon [icon]="faBars" class="text-muted mr-2"></fa-icon>
@@ -64,7 +64,7 @@
                 </div>
                 <!-- Para que el div de las rutinas no se quede pegado al margen inferior y haya espacio entre el div y el navbar -->
                 <div class="row">
-                    <br><br><br><br><br>
+                    <br><br><br>
                 </div>
             </div>
         </div>

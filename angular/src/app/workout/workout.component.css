@@ -20,6 +20,12 @@
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    overflow-y: auto;
+    max-height: calc(100vh - 157px);
+}
+
+.workout-card::-webkit-scrollbar {
+    display: none;
 }
 
 .workout-header {
@@ -33,6 +39,7 @@
 .workout-header h2 {
     margin: 0;
 }
+
 .workout-header i {
     text-align: right;
 }
@@ -82,7 +89,19 @@
     margin-bottom: 50px;
 }
 
-.exercise img {
+.exercise-mobile {
+    /* display: flex; */
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.exercise-header {
+    display: flex;
+    /* justify-content: center; */
+}
+
+.exercise img,
+.exercise-mobile img {
     width: 60px;
     height: 60px;
     object-fit: cover;
@@ -90,19 +109,28 @@
     margin-right: 20px;
 }
 
-.exercise-info {
+.exercise-info,
+.exercise-mobile-info {
     flex: 1;
 }
 
-.exercise-info h3 {
+.exercise-info h3,
+.exercise-mobile-info h3 {
     margin: 0;
     font-size: 18px;
 }
 
 .exercise-details {
     display: flex;
-    /* justify-content: space-between; */
     margin-top: 15px;
+}
+
+.exercise-details-mobile {
+    display: flex;
+}
+
+.exercise-details-mobile>* {
+    font-size: 10px;
 }
 
 .detail {
@@ -119,20 +147,23 @@
     margin-right: 5px;
 }
 
-.sets{
+.sets {
     justify-content: center;
     width: 9vh;
     margin-left: 0px;
 }
-.reps{
+
+.reps {
     justify-content: center;
     width: 12vh;
 }
-.rest{
+
+.rest {
     justify-content: center;
     width: 15vh;
 }
-.btnStartWorkout{
+
+.btnStartWorkout {
     background-color: var(--principal);
     color: #FFFF;
     border: none;
@@ -141,4 +172,35 @@
     padding: 5px;
     width: 20vh;
     margin-left: 3vh;
+}
+
+.workout-body.mobile {
+    display: none;
+}
+
+.mobile img {
+    width: 82px;
+}
+
+.mobile h3 {
+    font-size: 15px;
+}
+
+.btn-startWorkout-mobile{
+    /* display: none; */
+}
+
+@media (max-width: 992px) {
+
+    .btn-startWorkout-desktop {
+        display: none;
+    }
+
+    .btn-startWorkout-mobile {
+        margin-top: 10px;
+    }
+
+    .mat-mdc-raised-button{
+        width: 100% !important;
+    }
 }
