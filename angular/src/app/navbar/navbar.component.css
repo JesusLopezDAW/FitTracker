@@ -386,7 +386,7 @@ input:checked+.slider:before {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 999999;
+    z-index: 105;
     /* Asegúrate de que esté encima de otros elementos */
     background-color: red !important;
     /* Color de fondo */

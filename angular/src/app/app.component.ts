@@ -1,14 +1,24 @@
 import { Component, Inject, OnInit, Renderer2, PLATFORM_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser, CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet'; // Importar MatBottomSheetModule
+import { MatButtonModule } from '@angular/material/button'; // Importar MatButtonModule
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, HomeComponent, EditProfileComponent, NavbarComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    HomeComponent,
+    EditProfileComponent,
+    NavbarComponent,
+    MatBottomSheetModule, // Asegúrate de importar MatBottomSheetModule aquí
+    MatButtonModule // Asegúrate de importar MatButtonModule aquí
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

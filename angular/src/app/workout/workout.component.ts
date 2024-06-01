@@ -1,12 +1,16 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatButtonModule } from '@angular/material/button';
+import { StartWorkoutComponent } from '../start-workout/start-workout.component';
 
 @Component({
   selector: 'app-workout',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule, MatBottomSheetModule, MatButtonModule],
   templateUrl: './workout.component.html',
   styleUrls: ['./workout.component.css']
 })
@@ -44,14 +48,29 @@ export class WorkoutComponent implements OnInit {
       rest: '2min 30s'
     }
   ];
-
-  constructor(private route: ActivatedRoute) { }
+  private isBrowser: boolean;
+  constructor(private route: ActivatedRoute, private bottomSheet: MatBottomSheet, @Inject(DOCUMENT) private document: Document, private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: Object,) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.workoutId = params.get('id')!;
       // Aquí puedes usar workoutId para cargar los datos del workout
     });
+    if (this.isBrowser) {
+      this.checkSize();
+      this.renderer.listen('window', 'resize', () => this.checkSize());
+    }
+  }
+
+  checkSize() {
+    const button = this.document.getElementById("btn-startWorkout-mobile") as HTMLElement;
+    if (window.innerWidth <= 992) {
+      button.removeAttribute("hidden");
+    } else {
+      button.setAttribute("hidden", "true");
+    }
   }
 
   toggleMenu() {
@@ -72,5 +91,12 @@ export class WorkoutComponent implements OnInit {
 
   deleteRoutine() {
     console.log('Delete Routine');
+  }
+
+  openBottomSheet(): void {
+    this.bottomSheet.open(StartWorkoutComponent, {
+      hasBackdrop: true,
+      panelClass: 'fullscreen-bottom-sheet'
+    });
   }
 }

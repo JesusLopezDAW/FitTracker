@@ -21,5 +21,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] },
   { path: 'workout/:id', component: WorkoutComponent },
+  { path: 'startWorkout/:id', component: WorkoutComponent },
   { path: '**', redirectTo: '/login' }
 ];
