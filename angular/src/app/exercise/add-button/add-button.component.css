@@ -1,0 +1,23 @@
+.buttonAdd {
+    position: fixed;
+    right: 80px;
+    top: 5px;
+    height: fit-content;
+    width: 5%;
+    background-color: var(--principal);
+    align-items: center;
+    border-radius: 10px;
+    transition: opacity 1s; /* Transición de opacidad de 1 segundo */
+    opacity: 1;
+}
+
+p.plus {
+    margin: 10px;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+  }
+  
+p.plus:hover {
+    cursor: pointer;
+}

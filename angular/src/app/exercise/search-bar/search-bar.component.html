@@ -1,0 +1,31 @@
+
+
+  <div [ngClass]="{'search': mostrarDiv, 'button': !mostrarDiv}">
+  
+      <p class="lupa" *ngIf="mostrarDiv" (click)="toggleDiv()">
+        <i class="fa-solid fa-xmark clear-input"></i>
+      </p>
+      <p class="lupa" *ngIf="!mostrarDiv" (click)="toggleDiv()">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      </p> 
+
+      <div class="exercise" *ngIf="mostrarDiv">
+        <div class="searcher">
+          <input [(ngModel)]="query" (input)="onInputChange($event)" type="text" placeholder="Buscar ejercicio...">
+          <hr>
+        </div>
+
+        <div class="search-results" id="search-results">
+          <p style="padding-left: 48px;" *ngIf="exercises.length === 0">No se encontraron resultados</p>
+          <div *ngIf="exercises.length > 0">
+              <div *ngFor="let exercise of exercises" class="container" id="container">
+                  <!-- <a routerLink="/profile{{exercise.id}}" style="cursor: pointer;"> -->
+                  <img src="{{ exercise.image }}" alt="" class="user-image">
+                  <span class="name">{{ exercise.name }}</span>
+                  <!-- </a> -->
+              </div>
+          </div>
+      </div>
+      </div>
+  </div>
+
