@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use Illuminate\Http\Request;
 use App\Helpers\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExerciseRequest;
@@ -113,5 +114,21 @@ class ExerciseController extends Controller
         if ($exercise->visibility != 'global' && $exercise->user_id != $userId) {
             return JsonResponse::error('Error: This exercise is not from this user', 401);
         }
+    }
+
+    public function search(Request $request)
+    {
+        // Validar que el parámetro 'search' esté presente
+        $request->validate([
+            'query' => 'required|string|max:255',
+        ]);
+
+        // Obtener el parámetro de búsqueda
+        $search = $request->input('query');
+
+        // Realizar la búsqueda utilizando Algolia a través de Scout
+        $exercises = Exercise::search($search)->paginate(10);
+
+        return JsonResponse::success($exercises, 'Success', 200);
     }
 }

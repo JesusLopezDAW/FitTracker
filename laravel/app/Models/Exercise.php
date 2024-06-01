@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Exercise extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
+
     protected $fillable = [
         'user_id',
         'visibility',
@@ -30,5 +32,20 @@ class Exercise extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function toSearchableArray()
+    {
+        // Devuelve solo los campos necesarios para la búsqueda
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
+    }
+
+    public function shouldBeSearchable()
+    {
+        // Solo indexar los registros con visibility 'public'
+        return $this->visibility === 'global';
     }
 }

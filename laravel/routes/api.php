@@ -25,6 +25,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('refresh', [AuthController::class, 'refresh']);
 
     Route::resource("/exercise", ExerciseController::class);
+    Route::get("/search/exercise", [ExerciseController::class, 'search']);
 
     Route::resource("/food", FoodController::class);
 
