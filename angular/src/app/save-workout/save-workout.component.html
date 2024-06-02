@@ -1,0 +1,33 @@
+<div class="save-workout-content">
+    <div class="header">
+        <button (click)="close()" class="icon-button">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <span>Guardar</span>
+        <button (click)="save()" class="btn-save">
+            Guardar
+        </button>
+    </div>
+    <div class="workout-summary">
+        <h2>{{ workoutState.exercises[0].name }}</h2>
+        <p>Duración: {{ workoutState.formatDuration(workoutState.duration) }}</p>
+        <p>Volumen: {{ workoutState.totalVolume }} kg</p>
+        <p>Series: {{ workoutState.completedSets }}</p>
+        <p>Fecha: {{ workoutState.endTime }}</p>
+    </div>
+    <div class="file-upload">
+        <label for="file-input">
+            <i class="fas fa-upload"></i> Seleccionar archivo
+        </label>
+        <input type="file" id="file-input" (change)="onFileSelected($event)" />
+    </div>
+    <div class="image-upload">
+        <img *ngIf="imageUrl" [src]="imageUrl" alt="Imagen subida">
+    </div>
+
+    <textarea [(ngModel)]="description"
+        placeholder="¿Cómo ha ido tu entrenamiento? Deja algunas notas aquí..."></textarea>
+    <!-- <button (click)="discard()" class="btn-discard">
+        Descartar Entrenamiento
+    </button> -->
+</div>

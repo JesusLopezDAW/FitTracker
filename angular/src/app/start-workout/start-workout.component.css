@@ -147,3 +147,18 @@ table input {
     background-color: green;
     color: white;
 }
+
+@media (max-width: 400px) {
+    .exercise > * {
+        font-size: 12px;
+    }
+    .exercise{
+        margin-left: -13px;
+    }
+}
+
+@media (max-width: 320px) {
+    .exercise > * {
+        font-size: 9px;
+    }
+}

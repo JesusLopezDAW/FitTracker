@@ -6,6 +6,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { StartWorkoutComponent } from '../start-workout/start-workout.component';
+import { WorkoutStateService } from '../workout-state.service';
 
 @Component({
   selector: 'app-workout',
@@ -47,36 +48,33 @@ export class WorkoutComponent implements OnInit {
       sets: 4,
       reps: '10-11',
       rest: '2min 30s'
-    },
-    {
-      name: 'Chest Fly (Band)',
-      image: '',
-      sets: 4,
-      reps: '10-11',
-      rest: '2min 30s'
-    },
-    {
-      name: 'Chest Fly (Band)',
-      image: '',
-      sets: 4,
-      reps: '10-11',
-      rest: '2min 30s'
     }
   ];
+
   private isBrowser: boolean;
-  constructor(private route: ActivatedRoute, private bottomSheet: MatBottomSheet, @Inject(DOCUMENT) private document: Document, private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: Object,) {
+
+  constructor(
+    private route: ActivatedRoute,
+    private bottomSheet: MatBottomSheet,
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    public workoutState: WorkoutStateService
+  ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.workoutId = params.get('id')!;
-      // Aquí puedes usar workoutId para cargar los datos del workout
     });
     if (this.isBrowser) {
       this.checkSize();
       this.renderer.listen('window', 'resize', () => this.checkSize());
     }
+    this.workoutState.workoutInProgressChanged.subscribe((inProgress: boolean) => {
+      this.workoutInProgress = inProgress;
+    });
   }
 
   checkSize() {
@@ -115,11 +113,7 @@ export class WorkoutComponent implements OnInit {
     });
 
     bottomSheetRef.instance.workoutClosed.subscribe((wasPaused: boolean) => {
-      if (wasPaused) {
-        this.workoutInProgress = true;
-      } else {
-        this.workoutInProgress = false;
-      }
+      this.workoutInProgress = wasPaused;
     });
   }
 
@@ -129,5 +123,7 @@ export class WorkoutComponent implements OnInit {
 
   discardWorkout(): void {
     this.workoutInProgress = false;
+    this.workoutState.stopTimer();
+    this.workoutState.reset();
   }
 }
