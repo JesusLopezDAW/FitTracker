@@ -1,5 +1,5 @@
 <div class="container">
-  <app-add-button></app-add-button>
+  <app-add-button (exerciseAdded)="onExerciseAdded()"></app-add-button>
   <app-search-bar></app-search-bar>
 
     <div class="section">
@@ -56,7 +56,8 @@
         <ng-template #noExercises>
           <div class="text-center">
             <p>No hay ejercicios disponibles.</p>
-            <button class="btn btn-primary">Añadir Ejercicio</button>
+            <button class="btn btn-primary" (click)="toggleModal()">Añadir Ejercicio</button>
+            <app-add-exercise-modal *ngIf="showModal" (close)="toggleModal()"></app-add-exercise-modal>
           </div>
         </ng-template>
       </div>

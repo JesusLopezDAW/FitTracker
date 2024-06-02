@@ -1,5 +1,8 @@
-<div class="buttonAdd">
-    <p class="plus">
-      <i class="fa-solid fa-plus"></i>
-    </p>
+<div class="buttonAdd" (click)="toggleModal()">
+  <p class="plus">
+    <i class="fa-solid fa-plus"></i>
+  </p>
 </div>
+
+<app-add-exercise-modal *ngIf="showModal" (close)="toggleModal()" (exerciseAdded)="onExerciseAdded()"></app-add-exercise-modal>
+

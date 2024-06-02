@@ -35,11 +35,12 @@ class ExerciseController extends Controller
     public function store(ExerciseRequest $request): HttpJsonResponse
     {
         $userId = Auth::id();
-        $visibility = User::find($userId)->isAdmin() ? 'global' : 'user';
+        $visibility = User::find($userId)->isAdmin() ? 'user' : 'user';
 
-        $request['user_id'] = $userId;
-        $request['visibility'] = $visibility;
-        $request['extra_info'] = "Creado desde el panel de administracion";
+        $data = $request->validated();
+        $data['user_id'] = $userId;
+        $data['visibility'] = $visibility;
+        $data['extra_info'] = "Creado desde el panel de administracion";
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('public/images/exercises');
@@ -47,7 +48,7 @@ class ExerciseController extends Controller
             $imageBinary = file_get_contents($imageFullPath);
             $imagenBase64 = base64_encode($imageBinary);
             $imagenDataURL = "data:image/jpeg;base64," . $imagenBase64;
-            $request['image'] = $imagenDataURL;
+            $data['image'] = $imagenDataURL;
         }
 
         if ($request->hasFile('video')) {
@@ -56,10 +57,10 @@ class ExerciseController extends Controller
             $videoBinary = file_get_contents($videoFullPath);
             $videoBase64 = base64_encode($videoBinary);
             $videoDataURL = "data:video/mp4;base64," . $videoBase64;
-            $request['video'] = $videoDataURL;
+            $data['video'] = $videoDataURL;
         }
 
-        $exercise = Exercise::create($request);
+        $exercise = Exercise::create($data);
 
         return JsonResponse::success($exercise, 'Store success', 201);
     }

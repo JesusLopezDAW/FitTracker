@@ -10,7 +10,7 @@
     top: 0px;
     height: 100%;
     width: 30%;
-    background-color: var(--background-input);
+    background-color: var(--principal);
 }
   
   .close {
