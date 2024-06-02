@@ -7,18 +7,18 @@
             <span>Entreno</span>
         </div>
         <div class="right">
-            <span class="timer">{{ formatDuration(duration) }}</span>
-            <button class="btn btn-primary">Terminar</button>
+            <button class="btn btn-primary" (click)="discard()">Descartar</button>
         </div>
     </div>
     <div class="progress-bar">
-        <div class="progress" [style.width.%]="(completedSets / totalSets) * 100"></div>
+        <div class="progress" [ngClass]="{'completed': (completedSets / totalSets) === 1}"
+            [style.width.%]="(completedSets / totalSets) * 100"></div>
     </div>
     <div class="subheader">
         <div class="info">
             <span>Duración: {{ formatDuration(duration) }}</span>
             <span>Volumen: {{ totalVolume }} kg</span>
-            <span>Series: {{ totalSets }}</span>
+            <span>Series: {{ completedSets }}</span>
         </div>
     </div>
     <div class="exercise" *ngFor="let exercise of exercises; let exerciseIndex = index">
@@ -30,7 +30,7 @@
             </button>
         </div>
         <div class="rest-timer">
-            <span>Temporizador de descanso: 2min 30s</span>
+            <!-- <span style="color: var(--principal);">Temporizador de descanso: 2min 30s</span> -->
         </div>
         <table>
             <thead>

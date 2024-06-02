@@ -17,6 +17,7 @@ import { StartWorkoutComponent } from '../start-workout/start-workout.component'
 export class WorkoutComponent implements OnInit {
   workoutId: string = '';
   menuOpen: boolean = false;
+  workoutInProgress: boolean = false;
 
   exercises = [
     {
@@ -36,6 +37,20 @@ export class WorkoutComponent implements OnInit {
     {
       name: 'Chest Fly (Machine)',
       image: 'path/to/image3.png',
+      sets: 4,
+      reps: '10-11',
+      rest: '2min 30s'
+    },
+    {
+      name: 'Chest Fly (Band)',
+      image: '',
+      sets: 4,
+      reps: '10-11',
+      rest: '2min 30s'
+    },
+    {
+      name: 'Chest Fly (Band)',
+      image: '',
       sets: 4,
       reps: '10-11',
       rest: '2min 30s'
@@ -94,9 +109,25 @@ export class WorkoutComponent implements OnInit {
   }
 
   openBottomSheet(): void {
-    this.bottomSheet.open(StartWorkoutComponent, {
+    const bottomSheetRef = this.bottomSheet.open(StartWorkoutComponent, {
       hasBackdrop: true,
       panelClass: 'fullscreen-bottom-sheet'
     });
+
+    bottomSheetRef.instance.workoutClosed.subscribe((wasPaused: boolean) => {
+      if (wasPaused) {
+        this.workoutInProgress = true;
+      } else {
+        this.workoutInProgress = false;
+      }
+    });
+  }
+
+  resumeWorkout(): void {
+    this.openBottomSheet();
+  }
+
+  discardWorkout(): void {
+    this.workoutInProgress = false;
   }
 }

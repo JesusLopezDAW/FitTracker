@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
@@ -24,11 +24,13 @@ interface Set {
   styleUrls: ['./start-workout.component.css']
 })
 export class StartWorkoutComponent implements OnInit {
+  @Output() workoutClosed = new EventEmitter<boolean>();
+
   duration: number = 0; // Duration in seconds
   totalVolume: number = 0;
   totalSets: number = 0;
-  timer: any;
   completedSets: number = 0;
+  timer: any;
 
   exercises: Exercise[] = [
     {
@@ -61,6 +63,13 @@ export class StartWorkoutComponent implements OnInit {
   }
 
   close(): void {
+    this.workoutClosed.emit(true);
+    this.bottomSheetRef.dismiss();
+  }
+
+  discard(): void {
+    clearInterval(this.timer);
+    this.workoutClosed.emit(false);
     this.bottomSheetRef.dismiss();
   }
 
