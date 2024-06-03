@@ -136,17 +136,11 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 
     public function toSearchableArray()
     {
-        $array = $this->only('id', 'name', 'photo');
-
-        return $array;
-    }
-
-    public function transform()
-    {
-        return [
+        $array = [
             'id' => $this->id,
             'name' => $this->name,
-            'profile_photo_path' => $this->profile_photo_path,
         ];
+
+        return $array;
     }
 }

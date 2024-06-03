@@ -1,0 +1,117 @@
+.search, .button {
+    transition: all 0.5s ease;
+    overflow-y: auto;
+    z-index: 99999;
+}
+
+.search {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    width: 30%;
+    background-color: var(--principal);
+}
+  
+  .close {
+    opacity: 0;
+    transition: width 0.5s ease, height 0.5s ease;
+  }
+  
+  .sidebar-content {
+    margin: 10px;
+  }
+  
+  .exit {
+    margin: 10px;
+  }
+  
+  .button {
+    position: fixed;
+    right: 5px;
+    top: 5px;
+    height: fit-content;
+    width: 5%;
+    background-color: var(--principal);
+    align-items: center;
+    border-radius: 10px;
+    transition: opacity 1s; /* Transición de opacidad de 1 segundo */
+    opacity: 1;
+  }
+  
+  p.lupa {
+    margin: 10px;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+  }
+  
+  p.lupa:hover {
+    cursor: pointer;
+  }
+
+.exercise {
+    display: flex;
+    flex-direction: column; /* Organiza los elementos en una columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+    text-align: center; /* Centra el texto dentro de los elementos */
+    margin: 0 auto; /* Asegura que el contenedor esté centrado horizontalmente si tiene un ancho fijo */
+}
+
+.exercise > div {
+    margin: 10px 0;
+}
+
+.exercise input[type="text"] {
+    width: 100%; /* Ancho del input */
+    padding: 8px; /* Espacio interno del input */
+    margin-top: 10px; /* Margen superior del input */
+    color: black;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+.exercise input[type="text"]:focus {
+    outline: none; /* Asegura que no haya borde de enfoque */
+    box-shadow: none; /* Quita cualquier sombra */
+    border: none; /* Quita el borde */
+    background-color: transparent; /* Quita el color de fondo */
+    color: inherit; /* Mantiene el color del texto */
+    transition: all 0.3s ease;
+}
+
+.searcher{
+    width: 90%;
+}
+.search-content {
+    padding: 20px;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+hr {
+    margin: 20px 0;
+    border: 1px solid var(--border-color);
+}
+
+.search-results p {
+    margin: 10px 0;
+    color: var(--text-color);
+    
+}
+.search-results{
+    width: 90%;
+}
+
+.container{
+    text-align: left;
+    img{
+        width: 25px;
+        margin: 5px;
+        border-radius: 2px;
+    }
+    span{
+        text-transform: uppercase;
+    }
+}

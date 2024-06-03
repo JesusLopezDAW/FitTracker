@@ -1,6 +1,9 @@
 <div class="container">
+  <app-add-button (exerciseAdded)="onExerciseAdded()"></app-add-button>
+  <app-search-bar></app-search-bar>
+
     <div class="section">
-      <h3 class="section-title">EJERCICIOS GLOBALES</h3>
+      <h1 class="section-title">EJERCICIOS GLOBALES</h1>
       <div class="container-custom">
         <div *ngFor="let globalExercise of globalExercises; let i = index">
           <div class="card">
@@ -15,7 +18,7 @@
               <div class="card-body">
                 <ul>
                   <li *ngFor="let exercise of globalExercise[1]">
-                    <a class="image" href=""><img [src]="exercise.image" alt="Imagen">{{ exercise.name }}</a>
+                    <a class="image" [routerLink]="['/exercises', exercise.id]"><img [src]="exercise.image" alt="Imagen">{{ exercise.name }}</a>
                   </li>
                 </ul>
               </div>
@@ -26,30 +29,38 @@
     </div>
   
     <div class="section">
-      <h3 class="section-title">EJERCICIOS PERSONALIZADOS</h3>
+      <h1 class="section-title">EJERCICIOS PERSONALIZADOS</h1>
       <div class="container-custom">
-        <div *ngFor="let userExercise of userExercises; let i = index">
-          <div class="card">
-            <div class="card-header card-header-custom" id="heading{{globalExercises.length + i}}">
-              <h2 class="mb-0">
-                <button class="btn btn-link text-white" type="button" (click)="toggleCollapse(globalExercises.length + i)">
-                  {{ userExercise[0] }}
-                </button>
-              </h2>
-            </div>
-            <div [ngbCollapse]="isCollapsed !== (globalExercises.length + i)" id="collapse{{globalExercises.length + i}}">
-              <div class="card-body">
-                <ul>
-                  <li *ngFor="let exercise of userExercise[1]">
-                    <a class="image" href=""><img [src]="exercise.image" alt="Imagen">{{ exercise.name }}</a>
-                    
-                  </li>
-                </ul>
+        <ng-container *ngIf="userExercises && userExercises.length > 0; else noExercises">
+          <div *ngFor="let userExercise of userExercises; let i = index">
+            <div class="card">
+              <div class="card-header card-header-custom" id="heading{{globalExercises.length + i}}">
+                <h2 class="mb-0">
+                  <button class="btn btn-link text-white" type="button" (click)="toggleCollapse(globalExercises.length + i)">
+                    {{ userExercise[0] }}
+                  </button>
+                </h2>
+              </div>
+              <div [ngbCollapse]="isCollapsed !== (globalExercises.length + i)" id="collapse{{globalExercises.length + i}}">
+                <div class="card-body">
+                  <ul>
+                    <li *ngFor="let exercise of userExercise[1]">
+                      <a class="image" [routerLink]="['/exercises', exercise.id]"><img [src]="exercise.image" alt="Imagen">{{ exercise.name }}</a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </ng-container>
+        <ng-template #noExercises>
+          <div class="text-center">
+            <p>No hay ejercicios disponibles.</p>
+            <button class="btn btn-primary" (click)="toggleModal()">Añadir Ejercicio</button>
+            <app-add-exercise-modal *ngIf="showModal" (close)="toggleModal()"></app-add-exercise-modal>
+          </div>
+        </ng-template>
       </div>
     </div>
-  </div>
+</div>
   

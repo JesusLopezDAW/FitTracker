@@ -10,27 +10,15 @@ class UserController extends Controller
 {
     public function search(Request $request)
     {
-        $query = $request->input('query');
-
-        // Validar la entrada
+        // Validar que el parámetro 'search' esté presente
         $request->validate([
             'query' => 'required|string|max:255',
         ]);
 
-        // $user = User::where('name', 'LIKE', '%' . $query . '%')->get();
+        $search = $request->input('query');
 
-        $transformedUsers = User::where('name', 'LIKE', '%' . $query . '%')->get()->transform(function ($user) {
-            return $user->transform();
-        });
-    
-        // Crear una nueva instancia de LengthAwarePaginator para los resultados transformados
-        $paginatedUsers = new \Illuminate\Pagination\LengthAwarePaginator(
-            $transformedUsers,
-            $transformedUsers->count(),
-            10,
-            ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()]
-        );
+        $users = User::search($search)->paginate(10);
 
-        return response()->json($paginatedUsers);
+        return response()->json($users);
     }
 }

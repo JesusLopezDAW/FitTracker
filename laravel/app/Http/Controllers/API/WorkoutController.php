@@ -25,9 +25,7 @@ class WorkoutController extends Controller
     public function getRoutineWorkout(string $id): HttpJsonResponse
     {
         $user = Auth::user();
-        $workouts = Workout::whereHas('routine', function ($query) use ($user) {
-            $query->where('user_id', $user->id);
-        })->where('id', $id)->get();
+        $workouts = $user->workouts()->where('id', $id)->with('exercises')->get();
         return JsonResponse::success($workouts, 'success', 200);
     }
 

@@ -1,6 +1,7 @@
 /* General container styles */
 .container {
     padding: 10px;
+    overflow-y: auto;
   }
   
   /* Section styles */
@@ -79,3 +80,15 @@ img{
     width: 25px;
 }
   
+.search-bar-container {
+  position: fixed;
+  top: 50%;
+  right: 20px; /* Ajusta la posición según sea necesario */
+  transform: translateY(-50%);
+  z-index: 1000; /* Asegura que esté por encima del resto del contenido */
+  display: none; /* Inicialmente oculto */
+}
+
+.search-bar-container.show {
+  display: block; /* Mostrar cuando se active */
+}

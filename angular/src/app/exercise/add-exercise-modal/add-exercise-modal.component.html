@@ -1,0 +1,89 @@
+<div class="modal">
+    <div class="modal-content">
+      <div>
+        <span class="close" (click)="closeModal()">&times;</span>
+        <h3>AÑADIR EJERCICIO</h3>
+      </div>
+      <form class="exerciseForm">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" name="name" [(ngModel)]="name">
+        </div>
+  
+        <div>
+          <label for="type">Type:</label>
+          <select id="type" name="type" [(ngModel)]="type">
+            <option value="">Select Type</option>
+            <option value="cardio">Cardio</option>
+            <option value="olympic_weightlifting">Olympic Weightlifting</option>
+            <option value="plyometrics">Plyometrics</option>
+            <option value="powerlifting">Powerlifting</option>
+            <option value="strength">Strength</option>
+            <option value="stretching">Stretching</option>
+            <option value="strongman">Strongman</option>
+          </select>
+        </div>
+  
+        <div>
+          <label for="muscle">Muscle:</label>
+          <select name="muscle" [(ngModel)]="muscle">
+            <option value="">Select Muscle</option>
+            <option value="abdominals">Abdominals</option>
+            <option value="abductors">Abductors</option>
+            <option value="adductors">Adductors</option>
+            <option value="biceps">Biceps</option>
+            <option value="calves">Calves</option>
+            <option value="chest">Chest</option>
+            <option value="forearms">Forearms</option>
+            <option value="glutes">Glutes</option>
+            <option value="hamstrings">Hamstrings</option>
+            <option value="lats">Lats</option>
+            <option value="lower_back">Lower Back</option>
+            <option value="middle_back">Middle Back</option>
+            <option value="neck">Neck</option>
+            <option value="quadriceps">Quadriceps</option>
+            <option value="traps">Traps</option>
+            <option value="triceps">Triceps</option>
+          </select>
+        </div>
+  
+        <div>
+          <label for="equipment">Equipment:</label>
+          <input name="equipment" type="text" [(ngModel)]="equipment">
+        </div>
+  
+        <div>
+          <label for="difficulty">Difficulty:</label>
+          <select name="difficulty" [(ngModel)]="difficulty">
+            <option value="">Select Difficulty</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="expert">Expert</option>
+          </select>
+        </div>
+  
+        <div>
+          <label for="instructions">Instructions:</label>
+          <textarea name="instructions" [(ngModel)]="instructions"></textarea>
+        </div>
+  
+        <div>
+          <label for="extra_info">Extra Info:</label>
+          <input name="extra_info" type="text" [(ngModel)]="extra_info">
+        </div>
+  
+        <div>
+          <label for="image">Image:</label>
+          <input name="image" type="text" [(ngModel)]="image">
+        </div>
+  
+        <div>
+          <label for="video">Video:</label>
+          <input name="video" type="text" [(ngModel)]="video">
+        </div>
+  
+        <button (click)="addExercise()">Añadir ejercicio</button>
+      </form>
+    </div>
+  </div>
+  
