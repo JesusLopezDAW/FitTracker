@@ -18,7 +18,7 @@
               <div class="card-body">
                 <ul>
                   <li *ngFor="let exercise of globalExercise[1]">
-                    <a class="image" href=""><img [src]="exercise.image" alt="Imagen">{{ exercise.name }}</a>
+                    <a class="image" [routerLink]="['/exercises', exercise.id]"><img [src]="exercise.image" alt="Imagen">{{ exercise.name }}</a>
                   </li>
                 </ul>
               </div>
@@ -45,7 +45,7 @@
                 <div class="card-body">
                   <ul>
                     <li *ngFor="let exercise of userExercise[1]">
-                      <a class="image" href=""><img [src]="exercise.image" alt="Imagen">{{ exercise.name }}</a>
+                      <a class="image" [routerLink]="['/exercises', exercise.id]"><img [src]="exercise.image" alt="Imagen">{{ exercise.name }}</a>
                     </li>
                   </ul>
                 </div>

@@ -10,6 +10,7 @@ import { ProtectedComponent } from './protected/protected.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { WorkoutComponent } from './workout/workout.component';
+import { ExerciseDetailComponent } from './exercise-detail/exercise-detail.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'routines', component: RoutinesComponent, canActivate: [AuthGuard] },
   { path: 'routine/:id', component: RoutineDetailsComponent, canActivate: [AuthGuard] },  
   { path: 'exercises', component: ExerciseComponent, canActivate: [AuthGuard] },
+  { path: 'exercises/:id', component: ExerciseDetailComponent },
   { path: 'login', component: LoginComponent },
   { path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] },
   { path: 'workout/:id', component: WorkoutComponent },

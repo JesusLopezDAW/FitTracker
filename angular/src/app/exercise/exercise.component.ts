@@ -4,6 +4,8 @@ import { ExerciseService } from '../services/exercise.service';
 import { NgFor, NgIf } from '@angular/common';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms'
+import { RouterModule } from '@angular/router';
+
 
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { AddButtonComponent } from './add-button/add-button.component';
@@ -13,7 +15,7 @@ import { AddExerciseModalComponent } from './add-exercise-modal/add-exercise-mod
 @Component({
   selector: 'app-exercise',
   standalone: true,
-  imports: [CommonModule, NgFor, NgIf, NgbCollapseModule, FormsModule, SearchBarComponent, AddButtonComponent, AddExerciseModalComponent],
+  imports: [CommonModule, NgFor, NgIf, NgbCollapseModule, FormsModule, SearchBarComponent, AddButtonComponent, AddExerciseModalComponent, RouterModule],
   templateUrl: './exercise.component.html',
   styleUrls: ['./exercise.component.css'],
 })

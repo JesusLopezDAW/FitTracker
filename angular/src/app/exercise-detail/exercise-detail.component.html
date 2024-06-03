@@ -1,0 +1,36 @@
+<div class="exercise-detail-container">
+    <button class="back-button" (click)="goBack()">
+      &#8592; Back
+    </button>
+    <div class="exercise-detail">
+      <h1>{{ exercise.name }}</h1>
+      <h3>Imagen</h3>
+      <div class="images">
+        <img *ngIf="exercise.image" [src]="exercise.image" alt="Exercise Image 1">
+        <img *ngIf="exercise.image2" [src]="exercise.image2" alt="Exercise Image 2">
+      </div>
+      <div class="exercise-meta">
+        <p><strong>Tipo:</strong> {{ exercise.type }}</p>
+        <p><strong>Grupo muscular:</strong> {{ exercise.muscle }}</p>
+        <p><strong>Equipamiento:</strong> {{ exercise.equipment || 'None' }}</p>
+        <p><strong>Dificultad:</strong> {{ exercise.difficulty }}</p>
+        <p><strong>Visibilidad:</strong> {{ exercise.visibility }}</p>
+        <p><strong>Sugerencias:</strong> {{ exercise.suggestion }}</p>
+        <p><strong>Informacion extra:</strong> {{ exercise.extra_info || 'None' }}</p>
+      </div>
+      <div class="exercise-instructions">
+        <h3>Instrucciones</h3>
+        <p>{{ exercise.instructions }}</p>
+      </div>
+      <div class="exercise-media">
+        <h3>Video</h3>
+        <div *ngIf="exercise.video" class="video">
+          <video controls>
+            <source [src]="exercise.video" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+  

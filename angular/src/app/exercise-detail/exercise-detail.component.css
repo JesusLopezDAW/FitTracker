@@ -1,0 +1,112 @@
+.exercise-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    overflow-y: auto; /* Permite el scroll vertical */
+    height: 100vh; /* Ajusta la altura para ocupar toda la ventana */
+    position: relative;
+  }
+  
+  .exercise-detail-container::-webkit-scrollbar {
+    width: 0px;  /* Remueve la barra de scroll en navegadores Webkit (Chrome, Safari) */
+    background: transparent; /* Opcional: Para asegurar que el fondo es transparente */
+  }
+
+  .exercise-detail-container {
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  /* Ocultar barra de desplazamiento en Internet Explorer y Edge */
+  .exercise-detail-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+  }
+
+  .back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px;
+    background: var(--principal);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  h1 {
+    text-align: center;
+    color: var(--principal);
+    margin-top: 50px; /* Añade espacio para el botón de retroceso */
+  }
+  
+  .exercise-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .exercise-meta p {
+    flex: 1 1 45%;
+    margin: 0;
+    padding: 10px;
+    background-color: var(--background-input);
+    border-radius: 8px;
+  }
+  
+  .exercise-instructions {
+    margin-bottom: 20px;
+  }
+  
+  
+  .exercise-instructions p {
+    background-color: var(--background-input);
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .exercise-media {
+    margin-bottom: 20px;
+  }
+  
+
+  h3 {
+    margin-bottom: 10px;
+    color: var(--principal);
+  }
+  
+  .images {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .images img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .video {
+    margin-top: 10px;
+  }
+  
+  video {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  @media (max-width: 600px) {
+    .exercise-meta p {
+      flex: 1 1 100%;
+    }
+  
+    .images {
+      flex-direction: column;
+    }
+  }
+
+  

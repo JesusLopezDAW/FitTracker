@@ -21,7 +21,7 @@
               <div *ngFor="let exercise of exercises" class="container" id="container">
                   <!-- <a routerLink="/profile{{exercise.id}}" style="cursor: pointer;"> -->
                   <img src="{{ exercise.image }}" alt="" class="user-image">
-                  <span class="name">{{ exercise.name }}</span>
+                  <a [routerLink]="['/exercises', exercise.id]"><span class="name">{{ exercise.name }}</span></a>
                   <!-- </a> -->
               </div>
           </div>
