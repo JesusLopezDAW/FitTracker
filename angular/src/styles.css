@@ -146,6 +146,10 @@ h3 {
         overflow-x: auto !important;
         color: var(--principal) !important;
     }
+    .Exercises-content, .nav-tabs{
+        left: 156px !important;
+        max-width: calc(100% - 45%) !important;
+    }
 }
 
 @media (max-width: 1340px) {}
@@ -171,6 +175,18 @@ h3 {
         max-width: calc(89%) !important;
     }
 
+    .Exercises-content, .nav-tabs{
+        left: 30px !important;
+        max-width: calc(100% - 40%) !important;
+    }
+
+    .nav-tabs{
+        top: 80px !important;
+    }
+    .Exercises-content{
+        top: 135px !important;
+    }
+
     .main-content {
         left: 0px !important;
     }
@@ -188,6 +204,10 @@ h3 {
 
     .routines-content {
         right: 0 !important;
+    }
+
+    .Exercises-content, .nav-tabs{
+        max-width: 100% !important;
     }
 }
 

@@ -1,10 +1,12 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { StartWorkoutComponent } from './start-workout/start-workout.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutStateService {
   workoutInProgressChanged = new EventEmitter<boolean>();
+  private startWorkoutComponent!: StartWorkoutComponent;
   duration: number = 0; // Duration in seconds
   totalVolume: number = 0;
   totalSets: number = 0;
@@ -123,4 +125,5 @@ export class WorkoutStateService {
   setEndTime() {
     this.endTime = this.getFormattedDate();
   }
+
 }
