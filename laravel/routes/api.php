@@ -36,6 +36,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::resource("/workout", WorkoutController::class);
     Route::get("/routine-workout/{id}", [WorkoutController::class, 'getRoutineWorkout']);
+    Route::get("/workout-logs/{id}", [WorkoutController::class, 'workoutExercisesLogs']);
 
     Route::resource('/routines', RoutineController::class);
 

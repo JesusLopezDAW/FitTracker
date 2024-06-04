@@ -90,4 +90,19 @@ class WorkoutController extends Controller
 
         return JsonResponse::success($workout, 'Delete success', 200);
     }
+
+    public function workoutExercisesLogs(string $id)
+    {
+        $user = Auth::user();
+        $workout = Workout::whereHas('routine', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->find($id);
+
+        if (!$workout) {
+            return JsonResponse::error('Error: Workout not found or access denied', 404);
+        }
+
+
+        return JsonResponse::success($workout->exerciseLogs()->with('exercise')->get(), 'Success', 200);
+    }
 }
