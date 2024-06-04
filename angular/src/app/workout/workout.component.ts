@@ -6,6 +6,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { StartWorkoutComponent } from '../start-workout/start-workout.component';
+import { WorkoutStateService } from '../workout-state.service';
 
 @Component({
   selector: 'app-workout',
@@ -17,6 +18,7 @@ import { StartWorkoutComponent } from '../start-workout/start-workout.component'
 export class WorkoutComponent implements OnInit {
   workoutId: string = '';
   menuOpen: boolean = false;
+  workoutInProgress: boolean = false;
 
   exercises = [
     {
@@ -48,20 +50,31 @@ export class WorkoutComponent implements OnInit {
       rest: '2min 30s'
     }
   ];
+
   private isBrowser: boolean;
-  constructor(private route: ActivatedRoute, private bottomSheet: MatBottomSheet, @Inject(DOCUMENT) private document: Document, private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: Object,) {
+
+  constructor(
+    private route: ActivatedRoute,
+    private bottomSheet: MatBottomSheet,
+    @Inject(DOCUMENT) private document: Document,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    public workoutState: WorkoutStateService
+  ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.workoutId = params.get('id')!;
-      // Aquí puedes usar workoutId para cargar los datos del workout
     });
     if (this.isBrowser) {
       this.checkSize();
       this.renderer.listen('window', 'resize', () => this.checkSize());
     }
+    this.workoutState.workoutInProgressChanged.subscribe((inProgress: boolean) => {
+      this.workoutInProgress = inProgress;
+    });
   }
 
   checkSize() {
@@ -94,9 +107,23 @@ export class WorkoutComponent implements OnInit {
   }
 
   openBottomSheet(): void {
-    this.bottomSheet.open(StartWorkoutComponent, {
+    const bottomSheetRef = this.bottomSheet.open(StartWorkoutComponent, {
       hasBackdrop: true,
       panelClass: 'fullscreen-bottom-sheet'
     });
+
+    bottomSheetRef.instance.workoutClosed.subscribe((wasPaused: boolean) => {
+      this.workoutInProgress = wasPaused;
+    });
+  }
+
+  resumeWorkout(): void {
+    this.openBottomSheet();
+  }
+
+  discardWorkout(): void {
+    this.workoutInProgress = false;
+    this.workoutState.stopTimer();
+    this.workoutState.reset();
   }
 }

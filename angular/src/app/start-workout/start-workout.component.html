@@ -7,21 +7,21 @@
             <span>Entreno</span>
         </div>
         <div class="right">
-            <span class="timer">{{ formatDuration(duration) }}</span>
-            <button class="btn btn-primary">Terminar</button>
+            <button (click)="openSaveWorkout()" class="btn btn-primary">Terminar</button>
         </div>
     </div>
     <div class="progress-bar">
-        <div class="progress" [style.width.%]="(completedSets / totalSets) * 100"></div>
+        <div class="progress" [ngClass]="{'completed': (workoutState.completedSets / workoutState.totalSets) === 1}"
+            [style.width.%]="(workoutState.completedSets / workoutState.totalSets) * 100"></div>
     </div>
     <div class="subheader">
         <div class="info">
-            <span>Duración: {{ formatDuration(duration) }}</span>
-            <span>Volumen: {{ totalVolume }} kg</span>
-            <span>Series: {{ totalSets }}</span>
+            <span>Duración: {{ workoutState.formatDuration(workoutState.duration) }}</span>
+            <span>Volumen: {{ workoutState.totalVolume }} kg</span>
+            <span>Series: {{ workoutState.completedSets }}</span>
         </div>
     </div>
-    <div class="exercise" *ngFor="let exercise of exercises; let exerciseIndex = index">
+    <div class="exercise" *ngFor="let exercise of workoutState.exercises; let exerciseIndex = index">
         <div class="exercise-header">
             <img [src]="exercise.image" alt="{{ exercise.name }}">
             <span class="exercise-name">{{ exercise.name }}</span>
@@ -30,7 +30,7 @@
             </button>
         </div>
         <div class="rest-timer">
-            <span>Temporizador de descanso: 2min 30s</span>
+            <!-- <span style="color: var(--principal);">Temporizador de descanso: 2min 30s</span> -->
         </div>
         <table>
             <thead>
@@ -54,18 +54,20 @@
                         <input type="number" [(ngModel)]="set.reps" placeholder="{{ set.reps }}">
                     </td>
                     <td>
-                        <button (click)="toggleSetCompletion(exerciseIndex, setIndex)" class="icon-button">
+                        <button (click)="workoutState.toggleSetCompletion(exerciseIndex, setIndex)" class="icon-button">
                             <i [class]="set.completed ? 'fas fa-check-circle' : 'far fa-check-circle'"></i>
                         </button>
                     </td>
                     <td>
-                        <button (click)="deleteSet(exerciseIndex, setIndex)" class="icon-button delete-button">
+                        <button (click)="workoutState.deleteSet(exerciseIndex, setIndex)"
+                            class="icon-button delete-button">
                             <i class="fas fa-trash"></i>
                         </button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <button class="btn btn-secondary add-set-button" (click)="addSet(exerciseIndex)">+ Agregar Serie</button>
+        <button class="btn btn-secondary add-set-button" (click)="workoutState.addSet(exerciseIndex)">+ Agregar
+            Serie</button>
     </div>
 </div>
