@@ -4,8 +4,8 @@ import { DOCUMENT, isPlatformBrowser, CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { MatBottomSheetModule } from '@angular/material/bottom-sheet'; // Importar MatBottomSheetModule
-import { MatButtonModule } from '@angular/material/button'; // Importar MatButtonModule
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +16,8 @@ import { MatButtonModule } from '@angular/material/button'; // Importar MatButto
     HomeComponent,
     EditProfileComponent,
     NavbarComponent,
-    MatBottomSheetModule, // Asegúrate de importar MatBottomSheetModule aquí
-    MatButtonModule // Asegúrate de importar MatButtonModule aquí
+    MatBottomSheetModule,
+    MatButtonModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

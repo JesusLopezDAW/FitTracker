@@ -1,7 +1,6 @@
-import { Component, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -9,15 +8,16 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.css'
+  styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent {
-  mostrarDiv: boolean = false;
   query: string = '';
   exercises: any[] = [];
+  showModal = false;
 
-  toggleDiv() {
-    this.mostrarDiv = !this.mostrarDiv;
+  toggleModal() {
+    // FALTA POR HACER
+    // AQUI HAY QUE LLAMAR DE ALGUNA MANERA AL BOTON QUE ESTA HIDDEN PARA QUE SALGA EL MODAL
   }
 
   onInputChange = async (event: Event) => {
@@ -48,9 +48,8 @@ export class SearchBarComponent {
       } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
       }
-    }else if(input.value.length == 0){
+    } else if (input.value.length === 0) {
       this.exercises = [];
     }
   }
-
 }
