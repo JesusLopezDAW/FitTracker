@@ -7,11 +7,12 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { StartWorkoutComponent } from '../start-workout/start-workout.component';
 import { WorkoutStateService } from '../workout-state.service';
+import { Error404ComponentComponent } from '../error404-component/error404-component.component';
 
 @Component({
   selector: 'app-workout',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, MatBottomSheetModule, MatButtonModule],
+  imports: [FormsModule, CommonModule, RouterModule, MatBottomSheetModule, MatButtonModule, Error404ComponentComponent],
   templateUrl: './workout.component.html',
   styleUrls: ['./workout.component.css']
 })
@@ -19,37 +20,9 @@ export class WorkoutComponent implements OnInit {
   workoutId: string = '';
   menuOpen: boolean = false;
   workoutInProgress: boolean = false;
+  isLoading: boolean = true;
 
-  exercises = [
-    {
-      name: 'Iso-Lateral Chest Press (Machine)',
-      image: 'path/to/image1.png',
-      sets: 4,
-      reps: '9-12',
-      rest: '2min 30s'
-    },
-    {
-      name: 'Incline Bench Press (Dumbbell)',
-      image: 'path/to/image2.png',
-      sets: 4,
-      reps: '9-10',
-      rest: '2min 30s'
-    },
-    {
-      name: 'Chest Fly (Machine)',
-      image: 'path/to/image3.png',
-      sets: 4,
-      reps: '10-11',
-      rest: '2min 30s'
-    },
-    {
-      name: 'Chest Fly (Band)',
-      image: '',
-      sets: 4,
-      reps: '10-11',
-      rest: '2min 30s'
-    }
-  ];
+  exercises: any[] = [];
 
   private isBrowser: boolean;
 
@@ -67,7 +40,9 @@ export class WorkoutComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.workoutId = params.get('id')!;
+      this.getExercises(this.workoutId)
     });
+    console.log(this.exercises)
     if (this.isBrowser) {
       this.checkSize();
       this.renderer.listen('window', 'resize', () => this.checkSize());
@@ -75,6 +50,39 @@ export class WorkoutComponent implements OnInit {
     this.workoutState.workoutInProgressChanged.subscribe((inProgress: boolean) => {
       this.workoutInProgress = inProgress;
     });
+  }
+
+  async getExercises(id: string) {
+    const token = sessionStorage.getItem("authToken")
+
+    let headersList = {
+      "Accept": "*/*",
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+    try {
+
+      let response = await fetch("http://localhost/api/workout-logs/" + id, {
+        method: "GET",
+        headers: headersList
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      let data = await response.json();
+      this.exercises = data.data;
+      console.log(this.exercises)
+
+    } catch (error) {
+      console.error('Error fetching exercises:', error);
+      this.exercises = [];
+    } finally {
+      this.isLoading = false; // Desactivar el estado de carga una vez obtenidos los datos
+    }
+
+
   }
 
   checkSize() {
