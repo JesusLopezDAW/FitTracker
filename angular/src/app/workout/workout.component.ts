@@ -7,6 +7,8 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { StartWorkoutComponent } from '../start-workout/start-workout.component';
 import { WorkoutStateService } from '../workout-state.service';
+import { ExerciseModalComponent } from '../modals/exercise-modal/exercise-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-workout',
@@ -33,7 +35,8 @@ export class WorkoutComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: Object,
-    public workoutState: WorkoutStateService
+    public workoutState: WorkoutStateService,
+    private modalService: NgbModal
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
@@ -149,5 +152,9 @@ export class WorkoutComponent implements OnInit {
 
     let data = await response.json();
     this.workoutName = data.data.name;
+  }
+
+  openExerciseModal() {
+    this.modalService.open(ExerciseModalComponent, { size: 'lg' });
   }
 }

@@ -13,19 +13,20 @@
         <button class="btn-startWorkout-desktop" mat-raised-button (click)="openBottomSheet()">Comenzar
             Entrenamiento</button>
         <div class="menu">
-            <i class="fas fa-ellipsis-v" (click)="toggleMenu()"></i>
+            <button style="background-color: transparent; border: none;" (click)="toggleMenu()"><i class="fas fa-ellipsis-v"></i></button>
             <div class="menu-dropdown" *ngIf="menuOpen" (click)="closeMenu()">
                 <ul>
-                    <li (click)="copyRoutineLink()">Copy Routine Link</li>
-                    <li (click)="editRoutine()">Edit Routine</li>
-                    <li (click)="deleteRoutine()">Delete Routine</li>
+                    <!-- <li (click)="copyRoutineLink()">Copiar link</li> -->
+                    <!-- <li (click)="editRoutine()">Editar entrenamiento</li> -->
+                    <!-- <li (click)="deleteRoutine()">Eliminar entrenamiento</li> --> 
+                    <li (click)="openExerciseModal()">Añadir ejercicio</li> 
                 </ul>
             </div>
         </div>
     </div>
     <button mat-raised-button *ngIf="buttonMobile" class="btn-startWorkout-mobile" (click)="openBottomSheet()">Comenzar entrenamiento</button>
     <div class="workout-body desktop">
-        <p *ngIf="exercises.length==0" style="text-align: center;">Este entrenamiento no tiene ejercicios asigandos</p>
+        <p *ngIf="exercises.length==0" style="text-align: center;">Este entrenamiento no tiene ejercicios asignados</p>
         <div class="exercise" *ngFor="let exercise of exercises">
             <img [src]="exercise.exercise.image" alt="Exercise Image">
             <div class="exercise-info">
@@ -45,7 +46,7 @@
         </div>
     </div>
     <div class="workout-body mobile">
-        <p *ngIf="exercises.length==0">Este entrenamiento no tiene ejercicios asigandos</p>
+        <p *ngIf="exercises.length==0">Este entrenamiento no tiene ejercicios asignados</p>
         <div class="exercise-mobile" *ngFor="let exercise of exercises">
             <div class="exercise-header">
                 <img [src]="exercise.exercise.image" alt="Exercise Image">

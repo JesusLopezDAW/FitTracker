@@ -154,7 +154,8 @@ hr {
     font-family: 'Dancing Script';
     padding-left: 0px;
     font-size: 42px;
-    margin-bottom: -2px
+    margin-bottom: -2px;
+    color: var(--text-color);
 }
 
 #divAppNavBar {

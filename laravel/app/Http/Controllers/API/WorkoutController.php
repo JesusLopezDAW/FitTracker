@@ -102,7 +102,6 @@ class WorkoutController extends Controller
             return JsonResponse::error('Error: Workout not found or access denied', 404);
         }
 
-
         return JsonResponse::success($workout->exerciseLogs()->with('exercise')->get(), 'Success', 200);
     }
 }

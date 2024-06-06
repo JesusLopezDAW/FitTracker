@@ -1,0 +1,85 @@
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+    border-bottom: 1px solid var(--background-color);
+}
+
+.modal-body {
+    height: 80%;
+}
+
+.search-bar {
+    position: relative;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.exercise-list {
+    height: 92%;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+.exercise-list::-webkit-scrollbar {
+    display: none;
+}
+.exercise-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    background-color: var(--background-input);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.exercise-item img {
+    max-width: 50px;
+    margin-right: 1rem;
+}
+
+.loading {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#mdlAddExercise {
+    background-color: var(--background-color);
+    border: 2px solid var(--border-color);
+    height: 90vh;
+    /* border-radius: 15px; */
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.search-input {
+    padding-left: 50px;
+    /* Espacio para el ícono de búsqueda */
+}
+
+.form-control {
+    border-radius: 10px;
+    background-color: var(--background-input);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.form-control::placeholder {
+    color: grey;
+}
+.modal-footer{
+    border-top: 1px solid var(--background-color);
+}
+.exercise-item.selected {
+    background-color: var(--principal);
+}

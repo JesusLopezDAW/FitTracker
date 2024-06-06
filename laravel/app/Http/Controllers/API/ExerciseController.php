@@ -111,7 +111,8 @@ class ExerciseController extends Controller
         }
     }
 
-    private function isFromUser(Exercise $exercise, int $userId){
+    private function isFromUser(Exercise $exercise, int $userId)
+    {
         if ($exercise->visibility != 'global' && $exercise->user_id != $userId) {
             return JsonResponse::error('Error: This exercise is not from this user', 401);
         }
@@ -131,5 +132,19 @@ class ExerciseController extends Controller
         $exercises = Exercise::search($search)->paginate(10);
 
         return JsonResponse::success($exercises, 'Success', 200);
+    }
+
+    public function showAllExercises(): HttpJsonResponse
+    {
+        $user = Auth::user();
+
+        // Obtener los ejercicios globales y del usuario
+        $exercises = Exercise::where('visibility', 'global')
+            ->orWhere(function ($query) use ($user) {
+                $query->where('visibility', 'user')
+                    ->where('user_id', $user->id);
+            })->paginate(40);
+
+        return response()->json(['exercises' => $exercises, 'message' => 'success'], 200);
     }
 }

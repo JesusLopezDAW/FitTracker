@@ -1,0 +1,37 @@
+<div id="mdlAddExercise">
+    <div class="modal-header">
+        <h3 class="modal-title">Agregar Ejercicio</h3>
+        <button style="background-color: transparent; border: none;" type="button" class="close" aria-label="Close"
+            (click)="closeModal()">
+            <i class="fa-solid fa-xmark fa-xl"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="search-bar">
+            <i class="fa fa-search search-icon fa-xl"></i>
+            <input type="text" class="form-control search-input" placeholder="Buscar ejercicio"
+                (input)="onInputChange($event)">
+        </div>
+        <div class="exercise-list" (scroll)="onScroll($event)">
+            <div *ngFor="let exercise of exercises" class="exercise-item" [class.selected]="isSelected(exercise.id)"
+                (click)="toggleSelection(exercise.id)">
+                <img [src]="exercise.image" alt="Imagen del ejercicio">
+                <div>
+                    <h3>{{ exercise.name }}</h3>
+                    <p>Grupo muscular: {{ exercise.muscle }}</p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="loading" class="loading">
+            <div class="d-flex justify-content-center align-items-center fixed-top w-100" style="height: 100vh;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="addSelectedExercises()">Añadir</button>
+    </div>
+</div>
