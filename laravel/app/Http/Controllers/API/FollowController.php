@@ -13,41 +13,41 @@ class FollowController extends Controller
 {
     public function follow(string $id)
     {
-        $followUser = User::find($id);
-        if(!$followUser){
-            return JsonResponse::error('ERROR: User not found', 404);
-        }
-
         $user = Auth::user();
 
-        if($user->id == $id){
-            return JsonResponse::error('ERROR: Can not follow you', 401);
+        // Verificar si el usuario a seguir existe
+        $followedUser = User::find($id);
+
+        if (!$followedUser) {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
 
-        if($user->follows->contains($followUser->id)){
-            return JsonResponse::error('ERROR: Already following', 401);
+        // Verificar si el usuario ya sigue al usuario objetivo
+        if ($user->following()->where('followed_id', $id)->exists()) {
+            return response()->json(['error' => 'Ya sigues a este usuario'], 400);
         }
 
-        $follow = Follow::create([
-            'user_id' => $user->id,
-            'followed_user_id' => $followUser->id,
-        ]);
-
-        return JsonResponse::success($follow, 'Follow success', 200);
-
+        // Seguir al usuario objetivo
+        $user->following()->attach($id);
+        return JsonResponse::success('Follow success', 200);
     }
 
     public function unfollow(string $id)
     {
-        $unfollowUser = User::find($id);
         $user = Auth::user();
-        
-        if(!$user->follows->contains($unfollowUser->id)){
-            return JsonResponse::error('ERROR: Not following', 401);
+        $followedUser = User::find($id);
+        if (!$followedUser) {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
         }
-        $follow = Follow::where('user_id', $user->id)->where('followed_user_id', $unfollowUser->id);
-        $follow->delete();
-        return JsonResponse::success($follow, 'Unfollow success', 201);
+
+        // Verificar si el usuario ya sigue al usuario objetivo
+        if (!$user->following()->where('followed_id', $id)->exists()) {
+            return response()->json(['error' => 'No sigues a este usuario'], 400);
+        }
+
+        // Dejar de seguir al usuario objetivo
+        $user->following()->detach($id);
+        return JsonResponse::success('Unfollow success', 201);
     }
 
     public function followers()
@@ -65,8 +65,36 @@ class FollowController extends Controller
         return JsonResponse::success(Auth::user()->followers->count(), 'Success', 200);
     }
 
+    public function followersNumberOtherUser($id)
+    {
+        return JsonResponse::success(User::find($id)->followers()->count(), 'Success', 200);
+    }
+
     public function followingNumber()
     {
-        return JsonResponse::success(Auth::user()->follows->count(), 'Success', 200);
+        return JsonResponse::success(Auth::user()->following->count(), 'Success', 200);
+    }
+
+    public function followingNumberOtherUser($id)
+    {
+        return JsonResponse::success(User::find($id)->following()->count(), 'Success', 200);
+    }
+
+    public function followUser($id)
+    {
+        $followUser = User::find($id);
+        if (!$followUser) {
+            return JsonResponse::error('ERROR: User not found', 404);
+        }
+
+        $user = Auth::user();
+
+        if ($user->id == $id) {
+            return JsonResponse::error('ERROR: Can not follow you', 401);
+        }
+
+        $data = $user->follows->contains($followUser->id) ? true : false;
+
+        return JsonResponse::success($data, 'Success', 200);
     }
 }
