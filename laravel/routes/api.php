@@ -24,6 +24,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
 
+    Route::get("/exercise/all", [ExerciseController::class, 'showAllExercises']);
     Route::resource("/exercise", ExerciseController::class);
     Route::get("/search/exercise", [ExerciseController::class, 'search']);
 

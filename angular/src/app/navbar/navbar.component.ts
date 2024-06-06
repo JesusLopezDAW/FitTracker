@@ -67,7 +67,7 @@ export class NavbarComponent {
         iconApp.innerHTML = '<img src="../../assets/icons/logoBlancoNavBar.png" alt="Logo" class="d-inline-block align-top imagenAppNavBar" style="width: 45px; height: 35px; margin-left: 144px; margin-top: 5px; margin-bottom: -10px;">';
       } else {
         newWorkout.innerHTML = "<span>Nuevo entrenamiento</span>";
-        iconApp.innerHTML = '<h1 style="font-family: Dancing Script; padding-left: 0px; font-size: 42px; margin-bottom: -2px">FitTracker</h1>';
+        iconApp.innerHTML = '<h1 style="font-family: Dancing Script; padding-left: 0px; font-size: 42px; margin-bottom: -2px; color: var(--text-color)">FitTracker</h1>';
       }
     }
     const spans = document.querySelectorAll('.nav-link span') as NodeListOf<HTMLElement>;

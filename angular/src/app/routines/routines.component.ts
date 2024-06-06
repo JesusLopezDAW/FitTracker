@@ -52,40 +52,7 @@ export class RoutinesComponent implements OnInit {
   newWorkoutName = '';
   routineName: string = 'Nombre de la Rutina';
 
-  routines: Routine[] = [
-    {
-      id: 1,
-      name: 'Push / Pull / Legs',
-      type: "otros",
-      workouts: [
-        { id: 1, name: 'Pecho / Hombros / Triceps', description: "asd" },
-        { id: 2, name: 'Piernas' },
-        { id: 3, name: 'Espalda / Biceps' },
-      ]
-    },
-    {
-      id: 2,
-      name: '5 dias',
-      type: "otros",
-      workouts: [
-        { id: 1, name: 'Pecho' },
-        { id: 2, name: 'Espalda' },
-        { id: 3, name: 'Hombros' },
-        { id: 4, name: 'Pierna' },
-        { id: 5, name: 'Brazos' },
-      ]
-    },
-    {
-      id: 3,
-      name: 'Frecuencia 2',
-      type: "otros",
-      workouts: [
-        { id: 1, name: 'Pecho / Hombros / Triceps' },
-        { id: 2, name: 'Espalda / Biceps' },
-        { id: 3, name: 'Pierna' }
-      ]
-    }
-  ];
+  routines: Routine[] = [];
 
   @ViewChild('newWorkoutInput') newWorkoutInput!: ElementRef;
   @ViewChild('editRoutineNameInput') editRoutineNameInput!: ElementRef;
