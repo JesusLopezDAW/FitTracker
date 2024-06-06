@@ -15,6 +15,10 @@
                         <button routerLink="/edit-profile" routerLinkActive="active"
                             class="btn btn-outline-primary btn-sm">Editar perfil</button>
                     </div>
+                    <div *ngIf="!isYou">
+                        <button (click)="toggleFollow()" *ngIf="!follow" class="btn btn-primary btn-sm">Seguir</button>
+                        <button (click)="toggleFollow()" *ngIf="follow" class="btn btn-outline-primary btn-sm">Siguiendo</button>
+                    </div>
                 </div>
                 <!-- Segundo div: Publicaciones, seguidores y seguidos -->
                 <div class="d-flex justify-content-start align-items-center mt-3">
@@ -37,7 +41,7 @@
     </div>
     <!-- Sección de contenido dinámico -->
     <div *ngIf="activeSection === 'posts'">
-        <app-posts [userId]="userId"></app-posts>
+        <app-posts [userId]="userId" [isYou]="isYou"></app-posts>
     </div>
     <div *ngIf="activeSection === 'stats'">
         <!-- <app-stats></app-stats> -->

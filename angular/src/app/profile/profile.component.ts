@@ -21,6 +21,7 @@ export class ProfileComponent {
   posts: string = '';
   userId: string = '';
   userExist: boolean = true;
+  follow: boolean = false;
 
   isYou: boolean = false;
   private routeSub?: Subscription;
@@ -34,6 +35,7 @@ export class ProfileComponent {
     this.routeSub = this.route.paramMap.subscribe(params => {
       this.getIsYou();
       this.getUser();
+      this.isFollow();
       this.getFollowers();
       this.getFollowing();
       this.getPosts();
@@ -248,6 +250,88 @@ export class ProfileComponent {
     });
     this.isYou = this.userId ? false : true;
     console.log(this.isYou)
+  }
+
+  async isFollow(){
+    
+    try {
+      const token = sessionStorage.getItem("authToken")
+
+      let headersList = {
+        "Accept": "*/*",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+
+      let response = await fetch("http://localhost/api/follow/user/" + this.userId, { 
+        method: "GET",
+        headers: headersList
+      });
+      
+      let data = await response.json();
+      console.log('Es: ' + data);
+      this.follow = data.data;
+
+    } catch (error) {
+      console.error('Error fetching exercises:', error);
+    }
+  }
+
+  async toggleFollow() {
+    console.log('TOGGLE')
+    if (this.follow) {
+      await this.unfollow(this.userId);
+      await this.getFollowing();
+    } else {
+      await this.follows(this.userId);
+      await this.getFollowing();
+    }
+    this.follow = !this.follow;
+  }
+
+  async follows(id: string){
+    try {
+      const token = sessionStorage.getItem("authToken")
+
+      let headersList = {
+        "Accept": "*/*",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+
+      let response = await fetch("http://localhost/api/follow/"+id, {
+        method: "POST",
+        headers: headersList
+      });
+
+      let data = await response.json();
+      console.log(data)
+
+    } catch (error) {
+      console.error('Error fetching exercises:', error);
+    }
+  }
+
+  async unfollow(id: string){
+    try {
+      const token = sessionStorage.getItem("authToken")
+
+      let headersList = {
+        "Accept": "*/*",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+
+      let response = await fetch("http://localhost/api/unfollow/"+id, {
+        method: "POST",
+        headers: headersList
+      });
+
+      let data = await response.json();
+      console.log(data)
+    } catch (error) {
+      console.error('Error fetching exercises:', error);
+    }
   }
 
 }

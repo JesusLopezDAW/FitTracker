@@ -50,18 +50,23 @@
     width: 60%;
 }
 
-.overlay-content .likes, .overlay-content .comments {
+.overlay-content .likes, .overlay-content .comments, .overlay-content .trash {
     display: flex;
     align-items: center;
     font-size: 1.5rem; /* Increase font size */
 }
 
-.overlay-content .likes i, .overlay-content .comments i {
+.overlay-content .likes i, .overlay-content .comments i, .overlay-content .trash i{
     margin-right: 10px;
-    font-size: 2rem; /* Increase icon size */
+    font-size: 1.4rem; /* Increase icon size */
+    transition: 0.3s ease;
 }
 
 .liked-icon {
     color: red;
     /* Color rojo para el icono cuando está activo el like */
+}
+
+.overlay-content .trash i:hover{
+    color: red;
 }

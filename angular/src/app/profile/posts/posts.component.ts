@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 export class PostsComponent implements OnInit {
   posts: any = [];
   @Input() userId: any = null;
+  @Input() isYou: boolean = true;
 
   constructor() { }
 
@@ -117,6 +118,31 @@ export class PostsComponent implements OnInit {
     let data = await response.json();
     console.log(data);
 
+  }
+
+  async deletePost(post: any){
+    let headersList = {
+      "Accept": "*/*",
+      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+      "Authorization": "bearer " + sessionStorage.getItem("authToken"),
+      "Content-Type": "application/json"
+    }
+
+    let response = await fetch("http://localhost/api/posts/"+post.id, {
+      method: "DELETE",
+      headers: headersList
+    });
+
+    let data = await response.json();
+    if (response.ok) {
+      // Eliminar el post de la lista local
+      this.posts = this.posts.filter((p: any) => p.id !== post.id);
+      console.log("Post eliminado con éxito");
+    } else {
+      let data = await response.json();
+      console.error('Error al eliminar el post:', data);
+    }
+    console.log(data);
   }
 
 }

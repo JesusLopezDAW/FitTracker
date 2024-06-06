@@ -66,6 +66,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/followers/count/{id}', 'followersNumber');
         Route::get('/following/count', 'followingNumber');
         Route::get('/following/count/{id}', 'followingNumber');
+        Route::get('/follow/user/{id}', 'followUser');
     });
     
     Route::resource("/log", LogController::class);

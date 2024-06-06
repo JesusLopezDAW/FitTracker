@@ -11,6 +11,9 @@
                         <div class="comments">
                             <i class="fas fa-comment"></i> {{ post.comments_count }} 
                         </div>
+                        <div *ngIf="isYou" class="trash" (click)="deletePost(post)">
+                            <i class="fas fa-trash"></i>
+                        </div>
                     </div>
                 </div>
                 <img [src]="post.image" class="card-img-top" alt="Post image">
