@@ -7,9 +7,9 @@
     </div>
 </div>
 
-<div *ngIf="!isLoading && exercises.length>0" class="workout-card">
+<div *ngIf="!isLoading" class="workout-card">
     <div class="workout-header">
-        <h2>Pecho</h2>
+        <h2>{{workoutName}}</h2>
         <button class="btn-startWorkout-desktop" mat-raised-button (click)="openBottomSheet()">Comenzar
             Entrenamiento</button>
         <div class="menu">
@@ -23,9 +23,9 @@
             </div>
         </div>
     </div>
-    <button mat-raised-button class="btn-startWorkout-mobile" id="btn-startWorkout-mobile" (click)="openBottomSheet()"
-        hidden>Comenzar entrenamiento</button>
+    <button mat-raised-button *ngIf="buttonMobile" class="btn-startWorkout-mobile" (click)="openBottomSheet()">Comenzar entrenamiento</button>
     <div class="workout-body desktop">
+        <p *ngIf="exercises.length==0" style="text-align: center;">Este entrenamiento no tiene ejercicios asigandos</p>
         <div class="exercise" *ngFor="let exercise of exercises">
             <img [src]="exercise.exercise.image" alt="Exercise Image">
             <div class="exercise-info">
@@ -45,6 +45,7 @@
         </div>
     </div>
     <div class="workout-body mobile">
+        <p *ngIf="exercises.length==0">Este entrenamiento no tiene ejercicios asigandos</p>
         <div class="exercise-mobile" *ngFor="let exercise of exercises">
             <div class="exercise-header">
                 <img [src]="exercise.exercise.image" alt="Exercise Image">
@@ -67,7 +68,7 @@
     </div>
 </div>
 
-<div class="workout-progress" *ngIf="workoutInProgress && !isLoading && exercises.length>0">
+<div class="workout-progress" *ngIf="workoutInProgress && !isLoading">
     <span class="titleButtonsWorkout">Entreno en Progreso</span>
     <br>
     <div class="buttons-workout">
@@ -76,4 +77,4 @@
     </div>
 </div>
 
-<app-error404-component class="workout-card" *ngIf="!isLoading && exercises.length==0"></app-error404-component>
+<!-- <app-error404-component class="workout-card" *ngIf="!isLoading && exercises.length==0"></app-error404-component> -->

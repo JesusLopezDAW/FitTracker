@@ -7,12 +7,11 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { StartWorkoutComponent } from '../start-workout/start-workout.component';
 import { WorkoutStateService } from '../workout-state.service';
-import { Error404ComponentComponent } from '../error404-component/error404-component.component';
 
 @Component({
   selector: 'app-workout',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, MatBottomSheetModule, MatButtonModule, Error404ComponentComponent],
+  imports: [FormsModule, CommonModule, RouterModule, MatBottomSheetModule, MatButtonModule],
   templateUrl: './workout.component.html',
   styleUrls: ['./workout.component.css']
 })
@@ -21,6 +20,8 @@ export class WorkoutComponent implements OnInit {
   menuOpen: boolean = false;
   workoutInProgress: boolean = false;
   isLoading: boolean = true;
+  workoutName = "";
+  buttonMobile = false;
 
   exercises: any[] = [];
 
@@ -41,8 +42,9 @@ export class WorkoutComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.workoutId = params.get('id')!;
       this.getExercises(this.workoutId)
+      this.sacarNombreEntrenamiento();
+
     });
-    console.log(this.exercises)
     if (this.isBrowser) {
       this.checkSize();
       this.renderer.listen('window', 'resize', () => this.checkSize());
@@ -74,6 +76,9 @@ export class WorkoutComponent implements OnInit {
       let data = await response.json();
       this.exercises = data.data;
       console.log(this.exercises)
+      if (!(this.exercises.length > 0)) {
+
+      }
 
     } catch (error) {
       console.error('Error fetching exercises:', error);
@@ -81,16 +86,13 @@ export class WorkoutComponent implements OnInit {
     } finally {
       this.isLoading = false; // Desactivar el estado de carga una vez obtenidos los datos
     }
-
-
   }
 
   checkSize() {
-    const button = this.document.getElementById("btn-startWorkout-mobile") as HTMLElement;
     if (window.innerWidth <= 992) {
-      button.removeAttribute("hidden");
+      this.buttonMobile = true;
     } else {
-      button.setAttribute("hidden", "true");
+      this.buttonMobile = false;
     }
   }
 
@@ -133,5 +135,19 @@ export class WorkoutComponent implements OnInit {
     this.workoutInProgress = false;
     this.workoutState.stopTimer();
     this.workoutState.reset();
+  }
+
+  async sacarNombreEntrenamiento() {
+    let headersList = {
+      "Authorization": "bearer " + sessionStorage.getItem("authToken")
+    }
+
+    let response = await fetch("http://localhost/api/workout/" + this.workoutId, {
+      method: "GET",
+      headers: headersList
+    });
+
+    let data = await response.json();
+    this.workoutName = data.data.name;
   }
 }

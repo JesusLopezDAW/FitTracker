@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AddButtonComponent } from '../add-button/add-button.component';
+import { ExerciseService } from '../../services/exercise.service';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, AddButtonComponent],
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.css']
 })
@@ -14,11 +16,10 @@ export class SearchBarComponent {
   query: string = '';
   exercises: any[] = [];
   showModal = false;
+  globalExercises: any = [];
+  userExercises: any = [];
 
-  toggleModal() {
-    // FALTA POR HACER
-    // AQUI HAY QUE LLAMAR DE ALGUNA MANERA AL BOTON QUE ESTA HIDDEN PARA QUE SALGA EL MODAL
-  }
+  constructor(private exerciseService: ExerciseService) { }
 
   onInputChange = async (event: Event) => {
     const input = event.target as HTMLInputElement;
@@ -51,5 +52,16 @@ export class SearchBarComponent {
     } else if (input.value.length === 0) {
       this.exercises = [];
     }
+  }
+  onExerciseAdded() {
+    this.showModal = false;
+    this.getExercises();
+  }
+
+  getExercises() {
+    this.exerciseService.getExercises().subscribe((data) => {
+      this.globalExercises = Object.entries(data.data.globals);
+      this.userExercises = Object.entries(data.data.user);
+    });
   }
 }
