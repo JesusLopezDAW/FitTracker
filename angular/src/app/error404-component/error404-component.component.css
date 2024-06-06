@@ -1,7 +1,9 @@
 h1 {
     animation: rotate 2s infinite linear;
 }
-
+div{
+    margin-top: 40px;
+}
 @keyframes rotate {
     from {
         transform: rotate(0deg);

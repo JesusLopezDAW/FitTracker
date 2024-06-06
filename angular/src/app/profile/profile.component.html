@@ -1,8 +1,8 @@
-<div class="container mt-5 content-profile">
+<div *ngIf="userExist" class="container mt-5 content-profile">
     <div class="row">
         <!-- Imagen de perfil -->
         <div class="col-md-3 text-center">
-            <img src="https://via.placeholder.com/150" alt="Profile Picture" class="rounded-circle" width="150"
+            <img [src]="profile.image" alt="Profile Picture" class="rounded-circle" width="150"
                 height="150">
         </div>
         <!-- Información del usuario -->
@@ -10,21 +10,21 @@
             <div class="d-flex flex-column">
                 <!-- Primer div: Nombre de usuario y botones -->
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="mt-3">jesuslpzz_</h2>
-                    <div>
+                    <h2 class="mt-3">{{ profile.username }}</h2>
+                    <div *ngIf="isYou">
                         <button routerLink="/edit-profile" routerLinkActive="active"
                             class="btn btn-outline-primary btn-sm">Editar perfil</button>
                     </div>
                 </div>
                 <!-- Segundo div: Publicaciones, seguidores y seguidos -->
                 <div class="d-flex justify-content-start align-items-center mt-3">
-                    <span><strong>0</strong> publicaciones</span>
-                    <span class="ml-4"><strong>732</strong> seguidores</span>
-                    <span class="ml-4"><strong>289</strong> seguidos</span>
+                    <span><strong>{{ posts }}</strong> publicaciones</span>
+                    <span class="ml-4"><strong>{{ followers }}</strong> seguidores</span>
+                    <span class="ml-4"><strong>{{ following }}</strong> seguidos</span>
                 </div>
                 <!-- Tercer div: Biografía -->
                 <div class="mt-4">
-                    <p>JESUS</p>
+                    <p>{{ profile.name }}</p>
                 </div>
             </div>
         </div>
@@ -33,11 +33,11 @@
     <div class="d-flex justify-content-around profileOptions">
         <a (click)="showSection('posts')" [ngClass]="{'active': isActive('posts')}" class="text-dark">Publicaciones</a>
         <a (click)="showSection('stats')" [ngClass]="{'active': isActive('stats')}" class="text-dark">Estadísticas</a>
-        <a (click)="showSection('likes')" [ngClass]="{'active': isActive('likes')}" class="text-dark">Likes</a>
+        <a *ngIf="isYou" (click)="showSection('likes')" [ngClass]="{'active': isActive('likes')}" class="text-dark">Likes</a>
     </div>
     <!-- Sección de contenido dinámico -->
     <div *ngIf="activeSection === 'posts'">
-        <app-posts></app-posts>
+        <app-posts [userId]="userId"></app-posts>
     </div>
     <div *ngIf="activeSection === 'stats'">
         <!-- <app-stats></app-stats> -->
@@ -46,3 +46,5 @@
         <!-- Aquí puedes añadir contenido para la sección de Likes -->
     </div>
 </div>
+
+<app-error404-component  *ngIf="!userExist"></app-error404-component>

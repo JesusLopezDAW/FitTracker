@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-posts',
@@ -9,19 +11,61 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  posts = [
-    { id: 1, author: 'Author 1', content: 'Post 1', image: 'https://via.placeholder.com/150' },
-    { id: 2, author: 'Author 2', content: 'Post 2', image: 'https://via.placeholder.com/150' },
-    { id: 3, author: 'Author 3', content: 'Post 3', image: 'https://via.placeholder.com/150' },
-    { id: 4, author: 'Author 4', content: 'Post 4', image: 'https://via.placeholder.com/150' },
-    { id: 5, author: 'Author 5', content: 'Post 5', image: 'https://via.placeholder.com/150' },
-    { id: 6, author: 'Author 6', content: 'Post 6', image: 'https://via.placeholder.com/150' },
-    { id: 7, author: 'Author 7', content: 'Post 7', image: 'https://via.placeholder.com/150' },
-    { id: 8, author: 'Author 8', content: 'Post 8', image: 'https://via.placeholder.com/150' },
-    { id: 9, author: 'Author 9', content: 'Post 9', image: 'https://via.placeholder.com/150' }
-  ];
+  posts: any = [];
+  @Input() userId: any = null;
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.getPosts();
+  }
+
+  async getPosts() {
+    if(this.userId){
+      try {
+        const token = sessionStorage.getItem("authToken")
+  
+        let headersList = {
+          "Accept": "*/*",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+  
+        let response = await fetch("http://localhost/api/user/posts/" + this.userId, {
+          method: "GET",
+          headers: headersList
+        });
+  
+        let data = await response.json();
+        console.log(data.data);
+        this.posts = data.data;
+  
+      } catch (error) {
+        console.error('Error fetching exercises:', error);
+      }
+    }else{
+      try {
+        const token = sessionStorage.getItem("authToken")
+  
+        let headersList = {
+          "Accept": "*/*",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+  
+        let response = await fetch("http://localhost/api/posts", {
+          method: "GET",
+          headers: headersList
+        });
+  
+        let data = await response.json();
+        console.log(data.data);
+        this.posts = data.data;
+  
+      } catch (error) {
+        console.error('Error fetching exercises:', error);
+      }
+    }
+    }
+    
 }

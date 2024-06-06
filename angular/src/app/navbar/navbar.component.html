@@ -118,10 +118,10 @@
             <p style="padding-left: 48px;" *ngIf="users.length === 0">No se encontraron resultados</p>
             <div *ngIf="users.length > 0">
                 <div *ngFor="let user of users" class="user-container" id="user-container">
-                    <!-- <a routerLink="/profile{{user.id}}" style="cursor: pointer;"> -->
+                    <a routerLink="/profile/{{user.id}}" style="cursor: pointer;" (click)="toggleSearch()">
                     <img src="{{ user.profile_photo_path }}" alt="" class="user-image">
                     <p class="user-name">{{ user.name }}</p>
-                    <!-- </a> -->
+                    </a>
                 </div>
             </div>
         </div>

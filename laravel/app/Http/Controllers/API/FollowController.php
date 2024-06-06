@@ -65,8 +65,18 @@ class FollowController extends Controller
         return JsonResponse::success(Auth::user()->followers->count(), 'Success', 200);
     }
 
+    public function followersNumberOtherUser($id)
+    {
+        return JsonResponse::success(User::find($id)->followers->count(), 'Success', 200);
+    }
+
     public function followingNumber()
     {
         return JsonResponse::success(Auth::user()->follows->count(), 'Success', 200);
+    }
+
+    public function followingNumberOtherUser($id)
+    {
+        return JsonResponse::success(User::find($id)->follows->count(), 'Success', 200);
     }
 }

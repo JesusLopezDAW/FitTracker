@@ -29,7 +29,11 @@ Route::middleware('auth:api')->group(function () {
 
     Route::resource("/food", FoodController::class);
 
+    Route::get('/posts/count', [PostController::class, 'postCount']);
+    Route::get('/posts/count/{id}', [PostController::class, 'postCountByUser']);
     Route::resource('/posts', PostController::class);
+    Route::get('/user/posts/{id}', [PostController::class,'userPosts']);
+
 
     Route::get('/feed', [PostController::class, 'getInterestingPosts']);
     Route::get('/feed/followed', [PostController::class, 'getFollowedPosts']);
@@ -46,7 +50,12 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/comments/{id}', [CommentController::class, 'commentsInPost']);
     Route::resource('/comments', CommentController::class);
 
-    Route::get('/search/user', [UserController::class, 'search']);
+    Route::controller(UserController::class)->group(function (){
+        Route::get('/search/user', 'search');
+        Route::get('/user/profile', 'getProfileInfo');
+        Route::get('/user/profile/{id}', 'getProfileInfoOtherUser');
+
+    });
 
     Route::controller(FollowController::class)->group(function (){
         Route::post('/follow/{user}', 'follow')->name('follow');
@@ -54,7 +63,9 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/followers', 'followers');
         Route::get('/following', 'following');
         Route::get('/followers/count', 'followersNumber');
+        Route::get('/followers/count/{id}', 'followersNumber');
         Route::get('/following/count', 'followingNumber');
+        Route::get('/following/count/{id}', 'followingNumber');
     });
     
     Route::resource("/log", LogController::class);

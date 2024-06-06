@@ -18,6 +18,11 @@ class PostController extends Controller
         return JsonResponse::success(Auth::user()->posts, 'success', 200);
     }
 
+    public function userPosts($id): HttpJsonResponse
+    {
+        return JsonResponse::success(User::find($id)->posts, 'success', 200);
+    }
+
     public function store(PostRequest $request): HttpJsonResponse
     {
         $userId = Auth::id();
@@ -109,7 +114,7 @@ class PostController extends Controller
         return JsonResponse::success($post, 'Delete success', 200);
     }
 
-    public function getFollowedPosts()
+    public function getFollowedPosts(): HttpJsonResponse
     {
         $user = Auth::user();
         if ($user->follows === null) {
@@ -131,7 +136,7 @@ class PostController extends Controller
         return JsonResponse::success($posts, 'Success', 200);
     }
 
-    public function getInterestingPosts()
+    public function getInterestingPosts(): HttpJsonResponse
     {
         $posts = Post::with(['user:id,name,profile_photo_path'])
         ->withCount('likes')
@@ -144,6 +149,18 @@ class PostController extends Controller
             $post->liked_by_user = $post->likes->where('user_id', $userId)->count() > 0;
         });
 
+        return JsonResponse::success($posts, 'Success', 200);
+    }
+
+    public function postCount(): HttpJsonResponse
+    {
+        $posts = Auth::user()->posts()->count();
+        return JsonResponse::success($posts, 'Success', 200);
+    }
+
+    public function postCountByUser($id): HttpJsonResponse
+    {
+        $posts = User::find($id)->posts()->count();
         return JsonResponse::success($posts, 'Success', 200);
     }
 
@@ -162,6 +179,7 @@ class PostController extends Controller
         LIMIT 1;');
         return $lastWorkout[0]->id;
     }
+
 
     private function verifyWorkout($workout)
     {
