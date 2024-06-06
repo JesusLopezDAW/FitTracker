@@ -1,15 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { WorkoutComponent } from '../../workout/workout.component';
 
 @Component({
   selector: 'app-exercise-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, WorkoutComponent],
   templateUrl: './exercise-modal.component.html',
   styleUrls: ['./exercise-modal.component.css']
 })
 export class ExerciseModalComponent implements OnInit {
+  @Input() workoutId: number = 0; // Proporcionar un valor por defecto
+  @Output() exercisesUpdated = new EventEmitter<void>(); // EventEmitter para notificar al componente principal
+
+
   query: string = '';
   exercises: any[] = [];
   page: number = 1;
@@ -19,12 +24,13 @@ export class ExerciseModalComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
+    console.log('Workout ID:', this.workoutId);
     this.loadExercises();
   }
 
   async loadExercises() {
     this.loading = true;
-    
+
     const baseUrl = "http://localhost/api/exercise/all";
     const url = `${baseUrl}?page=${this.page}`;
 
@@ -76,7 +82,6 @@ export class ExerciseModalComponent implements OnInit {
 
         if (response.ok) {
           const responseData = await response.json();
-          console.log(responseData.data.data);
           this.exercises = responseData.data.data;
         } else {
           console.error('Error en la respuesta de la petición:', response.statusText);
@@ -109,9 +114,49 @@ export class ExerciseModalComponent implements OnInit {
     return this.selectedExercises.has(exerciseId);
   }
 
-  addSelectedExercises(): void {
+  async addSelectedExercises() {
     const selectedIds = Array.from(this.selectedExercises);
     this.closeModal();
-    console.log(selectedIds);
+
+    for (const element of selectedIds) {
+      console.log("id: "+ element);
+      const headersList = {
+        "Authorization": "Bearer " + sessionStorage.getItem("authToken"),
+        "Content-Type": "application/json"
+      };
+
+      const bodyContent = JSON.stringify({
+        "exercise_logs": [
+          {
+            "workout_id": this.workoutId,
+            "exercise_id": element,
+            "user_id": 2,
+            "fecha_registro": "2024-06-01"
+          }
+        ],
+        "series": [
+          {
+            "workout_id": this.workoutId,
+            "exercise_id": element,
+            "reps": 0,
+            "kilograms": 0
+          }
+        ]
+      });
+
+      try {
+        const response = await fetch("http://localhost/api/exercise-logs", {
+          method: "POST",
+          body: bodyContent,
+          headers: headersList
+        });
+
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+    this.exercisesUpdated.emit();
   }
 }

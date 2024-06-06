@@ -4,7 +4,7 @@ import { StartWorkoutComponent } from './start-workout/start-workout.component';
 @Injectable({
   providedIn: 'root'
 })
-export class WorkoutStateService {
+export class WorkoutStateService{
   workoutInProgressChanged = new EventEmitter<boolean>();
   private startWorkoutComponent!: StartWorkoutComponent;
   duration: number = 0; // Duration in seconds
@@ -16,7 +16,7 @@ export class WorkoutStateService {
   exercises = [
     {
       name: 'Press de Pecho Iso-Lateral (Máquina)',
-      image: 'path/to/image1.png',
+      image: '',
       sets: [
         { previous: '90kg x 12', kg: 90, reps: 12, completed: false },
         { previous: '90kg x 9', kg: 90, reps: 9, completed: false },
@@ -26,7 +26,7 @@ export class WorkoutStateService {
     },
     {
       name: 'Press de Banca Inclinado (Mancuerna)',
-      image: 'path/to/image2.png',
+      image: '',
       sets: [
         { previous: '27.5kg x 10', kg: 27.5, reps: 10, completed: false },
         { previous: '27.5kg x 10', kg: 27.5, reps: 10, completed: false },
@@ -35,6 +35,36 @@ export class WorkoutStateService {
       ]
     }
   ];
+
+  constructor() {
+    this.initializeExercises();
+  }
+
+  initializeExercises() {
+    const newExercises = [
+      {
+        name: 'Sentadilla con Barra',
+        image: '',
+        sets: [
+          { previous: '60kg x 10', kg: 60, reps: 10, completed: false },
+          { previous: '60kg x 10', kg: 60, reps: 10, completed: false },
+          { previous: '60kg x 8', kg: 60, reps: 8, completed: false },
+          { previous: '60kg x 8', kg: 60, reps: 8, completed: false }
+        ]
+      },
+      {
+        name: 'Peso Muerto',
+        image: '',
+        sets: [
+          { previous: '100kg x 5', kg: 100, reps: 5, completed: false },
+          { previous: '100kg x 5', kg: 100, reps: 5, completed: false },
+          { previous: '100kg x 5', kg: 100, reps: 5, completed: false },
+          { previous: '100kg x 5', kg: 100, reps: 5, completed: false }
+        ]
+      }
+    ];
+    this.exercises.push(...newExercises);
+  }
 
   startTimer() {
     clearInterval(this.timer);
@@ -116,7 +146,7 @@ export class WorkoutStateService {
     this.stopTimer();
     this.reset();
   }
-  
+
   getFormattedDate(): string {
     const now = new Date();
     return now.toLocaleString();
