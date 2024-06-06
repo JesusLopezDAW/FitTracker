@@ -59,7 +59,6 @@ export class WorkoutComponent implements OnInit {
 
   async getExercises(id: string) {
     const token = sessionStorage.getItem("authToken")
-
     let headersList = {
       "Accept": "*/*",
       "Content-Type": "application/json",
@@ -77,8 +76,8 @@ export class WorkoutComponent implements OnInit {
       }
 
       let data = await response.json();
+      this.exercises = [];
       this.exercises = data.data;
-      console.log(this.exercises)
       if (!(this.exercises.length > 0)) {
 
       }
@@ -154,7 +153,12 @@ export class WorkoutComponent implements OnInit {
     this.workoutName = data.data.name;
   }
 
-  openExerciseModal() {
-    this.modalService.open(ExerciseModalComponent, { size: 'lg' });
+  openExerciseModal(): void {
+    const modalRef = this.modalService.open(ExerciseModalComponent, { size: 'lg' });
+    modalRef.componentInstance.workoutId = this.workoutId;
+
+    modalRef.componentInstance.exercisesUpdated.subscribe(() => {
+      this.getExercises(this.workoutId);
+    });
   }
 }
