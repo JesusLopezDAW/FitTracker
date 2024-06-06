@@ -1,4 +1,5 @@
 .card {
+    position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
 }
@@ -9,4 +10,58 @@
 
 .profilePost-container .card {
     margin-bottom: -8px;
+}
+
+.card-img-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    color: white;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.card:hover .card-img-overlay {
+    opacity: 1;
+}
+
+.card-img-top {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .card-img-top {
+    opacity: 0.7;
+}
+
+.overlay-content {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.overlay-content .likes, .overlay-content .comments {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem; /* Increase font size */
+}
+
+.overlay-content .likes i, .overlay-content .comments i {
+    margin-right: 10px;
+    font-size: 2rem; /* Increase icon size */
+}
+
+.liked-icon {
+    color: red;
+    /* Color rojo para el icono cuando está activo el like */
 }

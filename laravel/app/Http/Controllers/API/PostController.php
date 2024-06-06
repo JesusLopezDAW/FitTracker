@@ -15,12 +15,41 @@ class PostController extends Controller
 {
     public function index(): HttpJsonResponse
     {
-        return JsonResponse::success(Auth::user()->posts, 'success', 200);
+        $userId = Auth::id(); // Obtener el ID del usuario autenticado
+
+        // Consulta para obtener los posts con el número de likes, comentarios y el campo liked
+        $posts = Auth::user()->posts()
+            ->withCount('likes')
+            ->withCount('comments')
+            ->with(['likes' => function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            }])
+            ->get();
+        $posts->each(function ($post) use ($userId) {
+            $post->liked = $post->likes->where('user_id', $userId)->count() > 0;
+        });
+
+        return JsonResponse::success($posts, 'success', 200);
     }
 
     public function userPosts($id): HttpJsonResponse
     {
-        return JsonResponse::success(User::find($id)->posts, 'success', 200);
+        $userId = Auth::id(); // Obtener el ID del usuario autenticado
+
+        // Consulta para obtener los posts con el número de likes, comentarios y el campo liked
+        $posts = User::find($id)->posts()
+            ->withCount('likes')
+            ->withCount('comments')
+            ->with(['likes' => function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            }])
+            ->get();
+
+        $posts->each(function ($post) use ($userId) {
+            $post->liked = $post->likes->where('user_id', $userId)->count() > 0;
+        });
+
+        return JsonResponse::success($posts, 'success', 200);
     }
 
     public function store(PostRequest $request): HttpJsonResponse
@@ -139,10 +168,10 @@ class PostController extends Controller
     public function getInterestingPosts(): HttpJsonResponse
     {
         $posts = Post::with(['user:id,name,profile_photo_path'])
-        ->withCount('likes')
-        ->withCount('comments')
-        ->orderBy('likes_count', 'desc')
-        ->paginate(10);
+            ->withCount('likes')
+            ->withCount('comments')
+            ->orderBy('likes_count', 'desc')
+            ->paginate(10);
 
         $userId = Auth::id();
         $posts->each(function ($post) use ($userId) {
@@ -188,7 +217,7 @@ class PostController extends Controller
         }
     }
 
-    private function isLiked(){
-
+    private function isLiked()
+    {
     }
 }

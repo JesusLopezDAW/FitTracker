@@ -2,6 +2,17 @@
     <div class="row gx-2 gy-2">
         <div *ngFor="let post of posts" class="col-12 col-md-4">
             <div class="card">
+                <div class="card-img-overlay">
+                    <div class="overlay-content">
+                        <div class="likes" (click)="toggleLike(post)">
+                            <i *ngIf="post.liked" class="fa-solid fa-heart liked-icon"></i>
+                            <i *ngIf="!post.liked" class="fa-regular fa-heart noliked-icon"></i> {{ post.likes_count }}
+                        </div>
+                        <div class="comments">
+                            <i class="fas fa-comment"></i> {{ post.comments_count }} 
+                        </div>
+                    </div>
+                </div>
                 <img [src]="post.image" class="card-img-top" alt="Post image">
             </div>
         </div>
