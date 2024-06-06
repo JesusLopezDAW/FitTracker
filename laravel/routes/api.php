@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\CommentController;
+use App\Http\Controllers\API\Exercise_logController;
 use App\Http\Controllers\API\ExerciseController;
 use App\Http\Controllers\API\FollowController;
 use App\Http\Controllers\API\FoodController;
@@ -71,7 +72,8 @@ Route::middleware('auth:api')->group(function () {
     
     Route::resource("/log", LogController::class);
 
-    Route::resource("/log/exercise", LogExerciseController::class);
+    // Route::resource("/log/exercise", LogExerciseController::class);
 
+    Route::resource("/exercise-logs", Exercise_logController::class);
 
 });

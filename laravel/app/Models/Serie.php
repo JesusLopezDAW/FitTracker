@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Exercise_log extends Model
+class Serie extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'workout_id',
         'exercise_id',
-        'user_id',
-        'fecha_registro',
+        'reps',
+        'kilograms',
     ];
 
     public function workout()

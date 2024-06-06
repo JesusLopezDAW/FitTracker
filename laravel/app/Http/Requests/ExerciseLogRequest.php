@@ -24,10 +24,6 @@ class ExerciseLogRequest extends FormRequest
         return [
             'workout_id' => 'required|exists:workouts,id',
             'exercise_id' => 'required|exists:exercises,id',
-            'serie_type' => 'required|in:warm_up,normal,failed,drop',
-            'series' => 'required|integer|min:0',
-            'reps' => 'required|integer|min:0',
-            'kilograms' => 'required|integer|min:0',
             'fecha_registro' => 'nullable|date_format:Y-m-d H:i:s',
         ];
     }

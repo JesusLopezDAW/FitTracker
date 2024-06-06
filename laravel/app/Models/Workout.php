@@ -39,4 +39,9 @@ class Workout extends Model
     {
         return $this->hasMany(Exercise_Log::class);
     }
+
+    public function series()
+    {
+        return $this->hasMany(Serie::class);
+    }
 }

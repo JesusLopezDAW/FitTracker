@@ -9,20 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('exercise_logs', function (Blueprint $table) {
+        Schema::create('series', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('workout_id');
             $table->unsignedBigInteger('exercise_id');
-            $table->unsignedBigInteger('user_id');
-            $table->timestamp('fecha_registro')->default(now());
+            $table->integer('reps');
+            $table->integer('kilograms');
             $table->timestamps();
 
-            // Definición de claves foráneas
             $table->foreign('workout_id')->references('id')->on('workouts')->onDelete('cascade');
             $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exercise_logs');
+        Schema::dropIfExists('series');
     }
 };

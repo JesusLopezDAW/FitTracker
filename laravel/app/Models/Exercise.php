@@ -48,4 +48,9 @@ class Exercise extends Model
         // Solo indexar los registros con visibility 'public'
         return $this->visibility === 'global';
     }
+
+    public function series()
+    {
+        return $this->hasMany(Serie::class);
+    }
 }
