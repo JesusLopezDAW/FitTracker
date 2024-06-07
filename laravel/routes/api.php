@@ -1,5 +1,6 @@
 <?php
 
+use Algolia\AlgoliaSearch\Http\Psr7\Request;
 use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\Exercise_logController;
 use App\Http\Controllers\API\ExerciseController;
@@ -14,6 +15,14 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\WorkoutController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+
+Route::options('/{any}', function (Request $request) {
+    return response('', 200)
+        ->header('Access-Control-Allow-Origin', 'http://localhost:4200')
+        ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        ->header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization')
+        ->header('Access-Control-Allow-Credentials', 'true');
+})->where('any', '.*');
 
 Route::post('/register', [AuthController::class, 'register']);
 
@@ -65,9 +74,9 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/followers', 'followers');
         Route::get('/following', 'following');
         Route::get('/followers/count', 'followersNumber');
-        Route::get('/followers/count/{id}', 'followersNumber');
+        Route::get('/followers/count/{id}', 'followersNumberOtherUser');
         Route::get('/following/count', 'followingNumber');
-        Route::get('/following/count/{id}', 'followingNumber');
+        Route::get('/following/count/{id}', 'followingNumberOtherUser');
         Route::get('/follow/user/{id}', 'followUser');
     });
     

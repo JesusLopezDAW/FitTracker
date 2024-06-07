@@ -8,6 +8,7 @@ use App\Models\Follow;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse as HttpJsonResponse;
+use Illuminate\Support\Facades\DB;
 
 class FollowController extends Controller
 {
@@ -23,12 +24,15 @@ class FollowController extends Controller
         }
 
         // Verificar si el usuario ya sigue al usuario objetivo
-        if ($user->following()->where('followed_id', $id)->exists()) {
+        if ($user->follows()->where('followed_user_id', $id)->exists()) {
             return response()->json(['error' => 'Ya sigues a este usuario'], 400);
         }
 
         // Seguir al usuario objetivo
-        $user->following()->attach($id);
+        $follow = Follow::create([
+            "user_id" => $user->id,
+            "followed_user_id" => $followedUser->id,
+        ]);
         return JsonResponse::success('Follow success', 200);
     }
 
@@ -41,12 +45,13 @@ class FollowController extends Controller
         }
 
         // Verificar si el usuario ya sigue al usuario objetivo
-        if (!$user->following()->where('followed_id', $id)->exists()) {
+        if (!$user->follows()->where('followed_user_id', $id)->exists()) {
             return response()->json(['error' => 'No sigues a este usuario'], 400);
         }
 
         // Dejar de seguir al usuario objetivo
-        $user->following()->detach($id);
+        $follow = Follow::where('user_id', $user->id)->where('followed_user_id', $followedUser->id);
+        $follow->delete();
         return JsonResponse::success('Unfollow success', 201);
     }
 
@@ -62,22 +67,34 @@ class FollowController extends Controller
 
     public function followersNumber()
     {
-        return JsonResponse::success(Auth::user()->followers->count(), 'Success', 200);
+        $count = DB::table('follows')
+            ->where('followed_user_id', Auth::id())
+            ->count();
+        return JsonResponse::success($count, 'Success', 200);
     }
 
     public function followersNumberOtherUser($id)
     {
-        return JsonResponse::success(User::find($id)->followers()->count(), 'Success', 200);
+        $count = DB::table('follows')
+            ->where('followed_user_id', $id)
+            ->count();
+        return JsonResponse::success($count, 'Success', 200);
     }
 
     public function followingNumber()
     {
-        return JsonResponse::success(Auth::user()->following->count(), 'Success', 200);
+        $count = DB::table('follows')
+            ->where('user_id', Auth::id())
+            ->count();
+        return JsonResponse::success($count, 'Success', 200);
     }
 
     public function followingNumberOtherUser($id)
     {
-        return JsonResponse::success(User::find($id)->following()->count(), 'Success', 200);
+        $count = DB::table('follows')
+            ->where('user_id', $id)
+            ->count();
+        return JsonResponse::success($count, 'Success', 200);
     }
 
     public function followUser($id)

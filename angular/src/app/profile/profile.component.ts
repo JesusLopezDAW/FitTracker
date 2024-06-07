@@ -281,10 +281,10 @@ export class ProfileComponent {
     console.log('TOGGLE')
     if (this.follow) {
       await this.unfollow(this.userId);
-      await this.getFollowing();
+      await this.getFollowers();
     } else {
       await this.follows(this.userId);
-      await this.getFollowing();
+      await this.getFollowers();
     }
     this.follow = !this.follow;
   }
