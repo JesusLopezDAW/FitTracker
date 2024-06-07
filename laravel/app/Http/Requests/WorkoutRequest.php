@@ -24,7 +24,7 @@ class WorkoutRequest extends FormRequest
         return [
             'routine_id' => 'required|exists:routines,id',
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:200',
+            'description' => 'nullable|string|max:200',
         ];
     }
 }

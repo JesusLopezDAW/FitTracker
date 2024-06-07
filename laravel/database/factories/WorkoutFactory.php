@@ -29,6 +29,7 @@ class WorkoutFactory extends Factory
         $randomDate = mt_rand($startDate, $endDate);
 
         return [
+            'user_id' => $this->faker->numberBetween(1, 100),
             'name' => $this->faker->sentence(),
             'description' => $description,
             'routine_id' => $this->faker->numberBetween(1, 1000), // IDs de 1 a 100

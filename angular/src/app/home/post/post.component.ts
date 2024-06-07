@@ -18,7 +18,7 @@ export class PostComponent implements OnInit {
 
   toggleLike() {
     // Si el post no estaba previamente liked, incrementa el contador de likes
-    console.log(this.post.id);
+    console.log(this.post);
     if (!this.post.liked) {
       this.post.likes++;
       this.addLike();

@@ -25,8 +25,26 @@ class WorkoutController extends Controller
     public function getRoutineWorkout(string $id): HttpJsonResponse
     {
         $user = Auth::user();
-        $workouts = $user->workouts()->where('id', $id)->with('exercises')->get();
-        return JsonResponse::success($workouts, 'success', 200);
+        $workout = $user->workouts()->where('id', $id)->first();
+
+        if (!$workout) {
+            return response()->json(['error' => 'Workout not found'], 404);
+        }
+
+        $logs = $workout->exerciseLogs()->with(['exercise' => function ($query) {
+            $query->select('id', 'name', 'image')->with(['series' => function ($query) {
+                $query->select('id', 'exercise_id', 'reps', 'kilograms'); 
+            }]);
+        }])->get();
+        $exercises = [];
+
+        $logs->each(function ($log) use (&$exercises) {
+            $exercises[] = [
+                'exercise' =>$log->exercise
+            ];
+        });
+
+        return JsonResponse::success($exercises, 'success', 200);
     }
 
     // IMPLEMENTAR DEVOLVER EL FALLO
@@ -34,14 +52,15 @@ class WorkoutController extends Controller
     {
         $user = Auth::user();
 
-        // Verificar que la rutina pertenece al usuario autenticado
-        $routine = Routine::where('id', $request->input('routine_id'))->where('user_id', $user->id)->first();
-        if (!$routine) {
-            return JsonResponse::error('Error: This routine is not from this user', 401);
-        }
-
+        // // Verificar que la rutina pertenece al usuario autenticado
+        // $routine = Routine::where('id', $request->input('routine_id'))->where('user_id', $user->id)->first();
+        // if (!$routine) {
+        //     return JsonResponse::error('Error: This routine is not from this user', 401);
+        // }
+        $data = $request->validated();
+        $data['user_id'] = $user->id;
         // Crear el nuevo workout
-        $workout = Workout::create($request->validated());
+        $workout = Workout::create($data);
         return JsonResponse::success($workout, 'workout created successfully', 200);
     }
 

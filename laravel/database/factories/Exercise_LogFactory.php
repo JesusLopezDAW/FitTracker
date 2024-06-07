@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Exercise;
+use App\Models\Workout;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,12 +24,9 @@ class Exercise_LogFactory extends Factory
         $randomDate = mt_rand($startDate, $endDate);
 
         return [
-            'workout_id' => $this->faker->numberBetween(1, 2000), // Assuming workouts range from 1 to 2000
-            'exercise_id' => $this->faker->numberBetween(1, 160), // Assuming there are 100 exercises
-            'serie_type' => $this->faker->randomElement(['warm_up', 'normal', 'failed', 'drop']),
-            'series' => $this->faker->numberBetween(1, 5),
-            'reps' => $this->faker->numberBetween(5, 15),
-            'kilograms' => $this->faker->numberBetween(10, 100),
+            'user_id' => $this->faker->numberBetween(1, 100),
+            'workout_id' => Workout::factory(), // Generar un workout usando el factory de Workout
+            'exercise_id' => $this->faker->numberBetween(1, 100), // Generar un ejercicio usando el factory de Exercise
             'fecha_registro' => $this->faker->dateTimeBetween('-1 year', 'now'), // Assuming logs span the last year
             'created_at' => date('Y-m-d H:i:s', $randomDate), // Establece 'created_at' en la fecha aleatoria generada
         ];

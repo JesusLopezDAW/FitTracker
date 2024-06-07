@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -18,6 +18,12 @@ export class SearchBarComponent {
   showModal = false;
   globalExercises: any = [];
   userExercises: any = [];
+
+  @Output() toggle = new EventEmitter<void>();
+
+  triggerToggle() {
+    this.toggle.emit();
+  }
 
   constructor(private exerciseService: ExerciseService) { }
 

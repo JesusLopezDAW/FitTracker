@@ -40,6 +40,7 @@
                 </div>
                 <div *ngIf="!showForYou">
                     <app-post *ngFor="let post of postsFollowing" [post]="post"></app-post>
+                    <p *ngIf="postsFollowing.length==0">No sigues a nadie</p>
                 </div>
                 <div>
                     <br><br>

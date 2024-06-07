@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Routine;
+use App\Models\Serie;
 use App\Models\User;
 use App\Models\Workout;
 use Database\Factories\CommentFactory;
@@ -37,6 +38,5 @@ class DatabaseSeeder extends Seeder
         LikeFactory::times(5000)->create();
         CommentFactory::times(5000)->create();
         Exercise_LogFactory::times(5000)->create(); 
-
     }
 }

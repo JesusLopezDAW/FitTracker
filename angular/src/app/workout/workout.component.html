@@ -10,7 +10,7 @@
 <div *ngIf="!isLoading" class="workout-card">
     <div class="workout-header">
         <h2>{{workoutName}}</h2>
-        <button class="btn-startWorkout-desktop" mat-raised-button (click)="openBottomSheet()">Comenzar
+        <button class="btn-startWorkout-desktop" mat-raised-button (click)="openBottomSheet(workoutId)">Comenzar
             Entrenamiento</button>
         <div class="menu">
             <button style="background-color: transparent; border: none;" (click)="toggleMenu()"><i class="fas fa-ellipsis-v"></i></button>
@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <button mat-raised-button *ngIf="buttonMobile" class="btn-startWorkout-mobile" (click)="openBottomSheet()">Comenzar entrenamiento</button>
+    <button mat-raised-button *ngIf="buttonMobile" class="btn-startWorkout-mobile" (click)="openBottomSheet(workoutId)">Comenzar entrenamiento</button>
     <div class="workout-body desktop">
         <p *ngIf="exercises.length==0" style="text-align: center;">Este entrenamiento no tiene ejercicios asignados</p>
         <div class="exercise" *ngFor="let exercise of exercises">

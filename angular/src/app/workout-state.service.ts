@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { StartWorkoutComponent } from './start-workout/start-workout.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class WorkoutStateService{
   completedSets: number = 0;
   timer: any;
   endTime: string = '';
+  id: string | null = null;
   exercises = [
     {
       name: 'Press de Pecho Iso-Lateral (Máquina)',
@@ -36,34 +38,38 @@ export class WorkoutStateService{
     }
   ];
 
-  constructor() {
-    this.initializeExercises();
+  constructor(
+    private route: ActivatedRoute
+  ) {
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('id');
+        
+      
+    });
   }
 
-  initializeExercises() {
-    const newExercises = [
-      {
-        name: 'Sentadilla con Barra',
-        image: '',
-        sets: [
-          { previous: '60kg x 10', kg: 60, reps: 10, completed: false },
-          { previous: '60kg x 10', kg: 60, reps: 10, completed: false },
-          { previous: '60kg x 8', kg: 60, reps: 8, completed: false },
-          { previous: '60kg x 8', kg: 60, reps: 8, completed: false }
-        ]
-      },
-      {
-        name: 'Peso Muerto',
-        image: '',
-        sets: [
-          { previous: '100kg x 5', kg: 100, reps: 5, completed: false },
-          { previous: '100kg x 5', kg: 100, reps: 5, completed: false },
-          { previous: '100kg x 5', kg: 100, reps: 5, completed: false },
-          { previous: '100kg x 5', kg: 100, reps: 5, completed: false }
-        ]
-      }
-    ];
-    this.exercises.push(...newExercises);
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.initializeExercises(this.id);
+    console.log(this.id)
+  }
+
+  async initializeExercises(id:string|null) {
+    let token = sessionStorage.getItem("authToken");
+    let headersList = {
+      "Accept": "*/*",
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    }
+
+    let response = await fetch("http://localhost/api/routine-workout/" + id, {
+      method: "GET",
+      headers: headersList
+    });
+
+    let data = await response.json();
+    console.log(data);
   }
 
   startTimer() {

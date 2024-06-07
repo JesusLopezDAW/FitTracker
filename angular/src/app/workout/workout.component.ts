@@ -118,10 +118,11 @@ export class WorkoutComponent implements OnInit {
     console.log('Delete Routine');
   }
 
-  openBottomSheet(): void {
+  openBottomSheet(id: string): void {
     const bottomSheetRef = this.bottomSheet.open(StartWorkoutComponent, {
       hasBackdrop: true,
-      panelClass: 'fullscreen-bottom-sheet'
+      panelClass: 'fullscreen-bottom-sheet',
+      data: { workoutId: id }
     });
 
     bottomSheetRef.instance.workoutClosed.subscribe((wasPaused: boolean) => {
@@ -130,7 +131,7 @@ export class WorkoutComponent implements OnInit {
   }
 
   resumeWorkout(): void {
-    this.openBottomSheet();
+    this.openBottomSheet(this.workoutId);
   }
 
   discardWorkout(): void {

@@ -49,11 +49,11 @@ export class HomeComponent implements OnInit {
       });
       let data = await response.json();
       const posts = data.data.data;
-      // console.log(data.data.data);
+      console.log(data.data.data);
       // Asumiendo que `data` es un array de posts
       this.postsForYou = posts.map((post: any) => ({
         id: post.id,
-        author: post.name,
+        author: post.user.name,
         content: post.title,
         image: 'https://via.placeholder.com/50', // puedes cambiar esto si tienes la URL de la imagen del autor
         postImage: post.image,

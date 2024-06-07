@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\JsonResponse as HttpJsonResponse;
 use App\Helpers\JsonResponse;
-
+use App\Models\Workout;
 
 class Exercise_logController extends Controller
 {
