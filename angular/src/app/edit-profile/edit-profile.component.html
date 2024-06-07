@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-3">
             <nav class="nav flex-column">
-                <a class="nav-link active" aria-current="page" href="#">Editar perfil</a>
+                <a class="nav-link active" aria-current="page" href="/edit-profile">Editar perfil</a>
                 <a class="nav-link" href="#">Notificaciones</a>
                 <a class="nav-link" href="#">Cuentas silenciadas</a>
                 <a class="nav-link" href="#">Recuentos de Me gusta y veces que se ha compartido</a>
@@ -57,7 +57,11 @@
                         si se puede sugerir tu cuenta en otros perfiles.</div>
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
+
             </form>
+            <div>
+                <button (click)="logout()">LOGOUT</button>
+            </div>
         </div>
     </div>
 </div>
