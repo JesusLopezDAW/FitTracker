@@ -17,10 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id");
             $table->date("start_date");
             $table->date("end_date");
-            $table->string("duration");
-            $table->integer("volume");
-            $table->integer("records");
-            $table->string("calories_burned");
+            $table->string("duration")->nullable();
+            $table->integer("volume")->nullable();
+            $table->integer("records")->nullable();
+            $table->string("calories_burned")->nullable();
             $table->timestamps();
 
             // Definición de claves foráneas

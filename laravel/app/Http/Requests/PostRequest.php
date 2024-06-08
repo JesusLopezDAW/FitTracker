@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+
 
 class PostRequest extends FormRequest
 {
@@ -26,5 +29,16 @@ class PostRequest extends FormRequest
             'title' => 'nullable|string|max:255',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
+        
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            response()->json([
+                'status' => false,
+                'errors' => $validator->errors(),
+            ], 422)
+        );
     }
 }
