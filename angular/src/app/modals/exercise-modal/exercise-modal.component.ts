@@ -19,6 +19,7 @@ export class ExerciseModalComponent implements OnInit {
   page: number = 1;
   loading: boolean = false;
   selectedExercises = new Set<number>();
+  numberExercises = 0;
 
   constructor(public activeModal: NgbActiveModal, private exerciseService: ExerciseService) { }
 
@@ -102,8 +103,10 @@ export class ExerciseModalComponent implements OnInit {
   toggleSelection(exerciseId: number): void {
     if (this.selectedExercises.has(exerciseId)) {
       this.selectedExercises.delete(exerciseId);
+      this.numberExercises--;
     } else {
       this.selectedExercises.add(exerciseId);
+      this.numberExercises++;
     }
   }
 

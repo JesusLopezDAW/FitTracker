@@ -12,6 +12,7 @@
             <input type="text" class="form-control search-input" placeholder="Buscar ejercicio"
                 (input)="onInputChange($event)">
         </div>
+        <h5 style="align-items: center; margin-top: 10px;">{{numberExercises}} ejercicios seleccionados</h5>
         <div class="exercise-list" (scroll)="onScroll($event)">
             <div *ngFor="let exercise of exercises" class="exercise-item" [class.selected]="isSelected(exercise.id)"
                 (click)="toggleSelection(exercise.id)">

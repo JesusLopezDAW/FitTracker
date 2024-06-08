@@ -117,6 +117,12 @@
     margin-top: 15px;
 }
 
+.icon-right {
+    margin-left: auto;
+    cursor: pointer;
+    /* Empuja el icono a la derecha */
+}
+
 .exercise-details-mobile {
     display: flex;
 }
