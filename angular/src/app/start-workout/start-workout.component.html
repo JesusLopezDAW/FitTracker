@@ -36,7 +36,7 @@
             <thead>
                 <tr>
                     <th>SERIE</th>
-                    <th>ANTERIOR</th>
+                    <!-- <th>ANTERIOR</th> -->
                     <th>KG</th>
                     <th>REPS</th>
                     <th></th>
@@ -46,7 +46,7 @@
             <tbody>
                 <tr *ngFor="let set of exercise.sets; let setIndex = index" [ngClass]="{'completed': set.completed}">
                     <td>{{ setIndex + 1 }}</td>
-                    <td>{{ set.previous }}</td>
+                    <!-- <td>{{ set.previous }}</td> -->
                     <td>
                         <input type="number" [(ngModel)]="set.kg" placeholder="{{ set.kg }}">
                     </td>

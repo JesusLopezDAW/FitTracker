@@ -49,7 +49,6 @@ export class HomeComponent implements OnInit {
       });
       let data = await response.json();
       const posts = data.data.data;
-      console.log(data.data.data);
       // Asumiendo que `data` es un array de posts
       this.postsForYou = posts.map((post: any) => ({
         id: post.id,
@@ -82,7 +81,6 @@ export class HomeComponent implements OnInit {
       });
       let data = await response.json();
       const posts = data.data.data;
-      console.log(posts);
       this.postsFollowing = posts.map((post: any) => ({
         id: post.id,
         author: post.name,

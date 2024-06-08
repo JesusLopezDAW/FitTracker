@@ -22,6 +22,7 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'workout_id' => 'integer',
             'title' => 'nullable|string|max:255',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];

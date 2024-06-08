@@ -31,7 +31,6 @@ export class EditProfileComponent {
     let data = await response.json();
     if (response.ok) {
       const data = await response.json();
-      console.log('Successfully logged out', data);
       sessionStorage.removeItem("authToken");  // Remover el token después de hacer logout
       this.router.navigate(['/login']);  // Redirigir al usuario a la página de inicio de sesión
     } else {

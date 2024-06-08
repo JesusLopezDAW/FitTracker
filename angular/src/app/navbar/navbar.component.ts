@@ -58,6 +58,8 @@ export class NavbarComponent {
     this.isSearchActive = !this.isSearchActive;
     const iconApp = this.document.getElementById("divAppNavBar") as HTMLElement;
     const newWorkout = this.document.getElementById("newWorkout") as HTMLElement;
+    const searchinput = this.document.getElementById("search-input") as HTMLElement;
+    searchinput.focus();
     if (this.isSearchActive) {
       iconApp.innerHTML = '<img src="../../assets/icons/logoBlancoNavBar.png" alt="Logo" class="d-inline-block align-top imagenAppNavBar" style="width: 45px; height: 35px; margin-left: 144px; margin-top: 5px; margin-bottom: -10px;">';
       newWorkout.innerHTML = "<i class='fa-solid fa-plus'></i>";

@@ -1,13 +1,11 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { StartWorkoutComponent } from './start-workout/start-workout.component';
 import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WorkoutStateService{
+export class WorkoutStateService {
   workoutInProgressChanged = new EventEmitter<boolean>();
-  private startWorkoutComponent!: StartWorkoutComponent;
   duration: number = 0; // Duration in seconds
   totalVolume: number = 0;
   totalSets: number = 0;
@@ -17,59 +15,59 @@ export class WorkoutStateService{
   id: string | null = null;
   exercises = [
     {
+      id: 1,
       name: 'Press de Pecho Iso-Lateral (Máquina)',
       image: '',
       sets: [
-        { previous: '90kg x 12', kg: 90, reps: 12, completed: false },
-        { previous: '90kg x 9', kg: 90, reps: 9, completed: false },
-        { previous: '90kg x 9', kg: 90, reps: 9, completed: false },
-        { previous: '90kg x 9', kg: 90, reps: 9, completed: false }
-      ]
-    },
-    {
-      name: 'Press de Banca Inclinado (Mancuerna)',
-      image: '',
-      sets: [
-        { previous: '27.5kg x 10', kg: 27.5, reps: 10, completed: false },
-        { previous: '27.5kg x 10', kg: 27.5, reps: 10, completed: false },
-        { previous: '27.5kg x 9', kg: 27.5, reps: 9, completed: false },
-        { previous: '27.5kg x 9', kg: 27.5, reps: 9, completed: false }
+        { kg: 0, reps: 0, completed: false },
+        { kg: 0, reps: 0, completed: false },
+        { kg: 0, reps: 0, completed: false },
+        { kg: 0, reps: 0, completed: false }
       ]
     }
   ];
 
-  constructor(
-    private route: ActivatedRoute
-  ) {
-    this.route.paramMap.subscribe(params => {
-      this.id = params.get('id');
-        
-      
-    });
+  setWorkoutId(id: string) {
+    this.id = id;
+    this.initializeExercises(this.id)
   }
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.initializeExercises(this.id);
-    console.log(this.id)
-  }
-
-  async initializeExercises(id:string|null) {
+  async initializeExercises(id: string | null) {
     let token = sessionStorage.getItem("authToken");
     let headersList = {
       "Accept": "*/*",
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`
+    };
+
+    try {
+      let response = await fetch("http://localhost/api/routine-workout/" + id, {
+        method: "GET",
+        headers: headersList
+      });
+
+      if (response.ok) {
+        let data = await response.json();
+
+        this.exercises = data.data.map((exercise: any) => {
+          return {
+            id: exercise.exercise.id,
+            name: exercise.exercise.name,
+            image: exercise.exercise.image,
+            sets: exercise.exercise.series.map((set: any) => (
+              {
+              kg: set.kilograms,
+              reps: set.reps,
+              completed: false
+            }))
+          };
+        });
+      } else {
+        console.error('Error en la respuesta de la petición:', response.statusText);
+      }
+    } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
     }
-
-    let response = await fetch("http://localhost/api/routine-workout/" + id, {
-      method: "GET",
-      headers: headersList
-    });
-
-    let data = await response.json();
-    console.log(data);
   }
 
   startTimer() {
@@ -161,5 +159,4 @@ export class WorkoutStateService{
   setEndTime() {
     this.endTime = this.getFormattedDate();
   }
-
 }
