@@ -96,8 +96,8 @@ export class RoutinesComponent implements OnInit {
     const modalRef = this.modalService.open(CreateRoutineModalComponent, { centered: true });
     modalRef.result.then((result) => {
       if (result) {
-        this.routines.push({ name: result.name, type: result.type, workouts: [] });
         this.addRoutine(result.name, result.type);
+        this.routines.push({ name: result.name, type: result.type, workouts: [] });
       }
     }).catch((error) => {
       console.log('Modal dismissed with error:', error);
@@ -141,9 +141,9 @@ export class RoutinesComponent implements OnInit {
     const routineId = this.routines[routineIndex].id;
     modalRef.result.then((result) => {
       if (result) {
-        this.routines[routineIndex].workouts.push({ name: result.name, description: result.description });
         if (routineId && typeof routineId === 'number') {
           this.addWorkout(routineId, result.name, result.description, routineIndex);
+          this.routines[routineIndex].workouts.push({ name: result.name, description: result.description });
         }
       }
     }).catch((error) => {

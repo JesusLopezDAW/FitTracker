@@ -12,6 +12,7 @@
                         (click)="createRoutineModal()">Nueva rutina</button>
                 </div>
                 <div class="row">
+                    <h3 *ngIf="routines.length == 0">No tienes rutinas creadas</h3>
                     <ng-container *ngFor="let routine of routines; let routineIndex = index">
                         <div class="col-md-4 mb-3" id="divRoutines" cdkDropList [cdkDropListData]="routine.workouts"
                             (cdkDropListDropped)="drop($event, routineIndex)">
@@ -37,7 +38,8 @@
                                             <div class="d-flex align-items-center">
                                                 <fa-icon [icon]="faEdit" class="text-primary mr-2"
                                                     (click)="updateWorkoutModal(routineIndex, workoutIndex)"></fa-icon>
-                                                <div style="cursor: pointer;" [routerLink]="['/workout', workout.id]" routerLinkActive="active" >{{ workout.name }}</div>
+                                                <div style="cursor: pointer;" [routerLink]="['/workout', workout.id]"
+                                                    routerLinkActive="active">{{ workout.name }}</div>
                                             </div>
                                             <div>
                                                 <fa-icon [icon]="faBars" class="text-muted mr-2"></fa-icon>

@@ -23,13 +23,13 @@ export class StartWorkoutComponent implements OnInit {
   constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private bottomSheetRef: MatBottomSheetRef<StartWorkoutComponent>,
     public workoutState: WorkoutStateService,
-    private route: ActivatedRoute,
     private bottomSheet: MatBottomSheet) { }
 
   ngOnInit(): void {
     this.workoutId = this.data.workoutId;
     this.workoutState.startTimer();
     this.workoutState.updateTotals();
+    this.workoutState.initializeExercises(this.workoutId);
   }
 
   close(): void {
@@ -44,7 +44,6 @@ export class StartWorkoutComponent implements OnInit {
   }
 
   openSaveWorkout(): void {
-    // console.log(this.workoutState.exercises);
     this.workoutState.stopTimer();
     this.workoutState.setEndTime();
     this.bottomSheet.open(SaveWorkoutComponent, {

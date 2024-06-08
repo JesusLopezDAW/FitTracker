@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { WorkoutComponent } from '../../workout/workout.component';
+import { ExerciseService } from '../../exercise.service';
 
 @Component({
   selector: 'app-exercise-modal',
   standalone: true,
-  imports: [CommonModule, WorkoutComponent],
+  imports: [CommonModule],
   templateUrl: './exercise-modal.component.html',
   styleUrls: ['./exercise-modal.component.css']
 })
@@ -14,14 +14,13 @@ export class ExerciseModalComponent implements OnInit {
   @Input() workoutId: number = 0; // Proporcionar un valor por defecto
   @Output() exercisesUpdated = new EventEmitter<void>(); // EventEmitter para notificar al componente principal
 
-
   query: string = '';
   exercises: any[] = [];
   page: number = 1;
   loading: boolean = false;
   selectedExercises = new Set<number>();
 
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor(public activeModal: NgbActiveModal, private exerciseService: ExerciseService) { }
 
   ngOnInit(): void {
     this.loadExercises();
@@ -63,7 +62,6 @@ export class ExerciseModalComponent implements OnInit {
 
   async onInputChange(event: Event) {
     const input = event.target as HTMLInputElement;
-    console.log(input.value);
 
     if (input.value.length > 1) {
       const baseUrl = "http://localhost/api/search/exercise";
@@ -118,36 +116,33 @@ export class ExerciseModalComponent implements OnInit {
     this.closeModal();
 
     for (const element of selectedIds) {
-      console.log("id: "+ element);
+      console.log("id: " + element);
       const headersList = {
         "Authorization": "Bearer " + sessionStorage.getItem("authToken"),
         "Content-Type": "application/json"
       };
 
-      const bodyContent = JSON.stringify({
-        "exercise_logs": [
-          {
-            "workout_id": this.workoutId,
-            "exercise_id": element,
-            "user_id": 2,
-            "fecha_registro": "2024-06-01"
-          }
-        ]
+      let bodyContent = JSON.stringify({
+        "workout_id": this.workoutId,
+        "exercise_id": element
       });
 
       try {
-        const response = await fetch("http://localhost/api/exercise-logs", {
+        let response = await fetch("http://localhost/api/logs/exercise", {
           method: "POST",
           body: bodyContent,
           headers: headersList
         });
 
-        const data = await response.json();
+        let data = await response.text();
         console.log(data);
       } catch (error) {
         console.error('Error:', error);
       }
     }
+
+    // Notificar al WorkoutComponent que los ejercicios se han actualizado
+    this.exerciseService.notifyExercisesUpdated();
     this.exercisesUpdated.emit();
   }
 }
