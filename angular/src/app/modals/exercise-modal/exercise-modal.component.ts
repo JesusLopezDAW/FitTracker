@@ -24,7 +24,6 @@ export class ExerciseModalComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
-    console.log('Workout ID:', this.workoutId);
     this.loadExercises();
   }
 
@@ -132,14 +131,6 @@ export class ExerciseModalComponent implements OnInit {
             "exercise_id": element,
             "user_id": 2,
             "fecha_registro": "2024-06-01"
-          }
-        ],
-        "series": [
-          {
-            "workout_id": this.workoutId,
-            "exercise_id": element,
-            "reps": 0,
-            "kilograms": 0
           }
         ]
       });

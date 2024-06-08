@@ -44,6 +44,7 @@ export class WorkoutComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.workoutId = params.get('id')!;
+      this.workoutState.setWorkoutId(this.workoutId);
       this.getExercises(this.workoutId)
       this.sacarNombreEntrenamiento();
 

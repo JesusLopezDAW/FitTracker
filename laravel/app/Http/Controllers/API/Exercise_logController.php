@@ -19,11 +19,6 @@ class Exercise_logController extends Controller
     public function store(Request $request): HttpJsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'exercise_logs' => 'required|array',
-            'exercise_logs.*.workout_id' => 'required|integer',
-            'exercise_logs.*.exercise_id' => 'required|integer',
-            'exercise_logs.*.user_id' => 'required|integer',
-            'exercise_logs.*.fecha_registro' => 'required|date',
             'series' => 'required|array',
             'series.*.workout_id' => 'required|integer',
             'series.*.exercise_id' => 'required|integer',
@@ -38,15 +33,6 @@ class Exercise_logController extends Controller
         DB::beginTransaction();
 
         try {
-            foreach ($request->exercise_logs as $log) {
-                Exercise_log::create([
-                    'workout_id' => $log['workout_id'],
-                    'exercise_id' => $log['exercise_id'],
-                    'user_id' => Auth::id(),
-                    'fecha_registro' => $log['fecha_registro'],
-                ]);
-            }
-
             foreach ($request->series as $serie) {
                 Serie::create([
                     'workout_id' => $serie['workout_id'],

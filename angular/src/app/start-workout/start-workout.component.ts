@@ -20,9 +20,8 @@ import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 export class StartWorkoutComponent implements OnInit {
   @Output() workoutClosed = new EventEmitter<boolean>();
   workoutId: string = '';
-
-  constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data: { workoutId: string },
-  private bottomSheetRef: MatBottomSheetRef<StartWorkoutComponent>,
+  constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
+    private bottomSheetRef: MatBottomSheetRef<StartWorkoutComponent>,
     public workoutState: WorkoutStateService,
     private route: ActivatedRoute,
     private bottomSheet: MatBottomSheet) { }
@@ -45,11 +44,13 @@ export class StartWorkoutComponent implements OnInit {
   }
 
   openSaveWorkout(): void {
+    // console.log(this.workoutState.exercises);
     this.workoutState.stopTimer();
     this.workoutState.setEndTime();
     this.bottomSheet.open(SaveWorkoutComponent, {
       hasBackdrop: true,
-      panelClass: 'fullscreen-bottom-sheet'
+      panelClass: 'fullscreen-bottom-sheet',
+      data: { exercises: this.workoutState.exercises }  // Pasar los datos actualizados
     });
   }
 

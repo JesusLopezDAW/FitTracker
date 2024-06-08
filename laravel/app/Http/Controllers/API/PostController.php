@@ -58,15 +58,7 @@ class PostController extends Controller
 
         // Verificar si el usuario está autenticado
         if (!$userId) {
-            return JsonResponse::error('User not authenticated', 401);
-        }
-
-        // Obtener el último workout para el usuario
-        $workout = $this->getLastWorkoutForUser($userId);
-
-        // Verificar si se encontró un workout
-        if (!$workout) {
-            return JsonResponse::error('Error: Workout not found for the user', 404);
+            return response()->json(['error' => 'User not authenticated'], 401);
         }
 
         // Verificar si hay una imagen en la solicitud
@@ -77,19 +69,16 @@ class PostController extends Controller
         }
 
         // Crear un nuevo post con los datos validados
-        $post = DB::table('posts')->insertGetId([
+        $post = Post::create([
             'user_id' => $userId, // Asignar el ID del usuario al campo user_id
             'title' => $request->input('title'),
             'image' => $imageData,
-            'workout_id' => $workout, // Asegúrate de obtener el ID del workout
-            'created_at' => now(),
-            'updated_at' => now(),
+            'workout_id' => $request->input('workout_id'), // Asegúrate de obtener el ID del workout
         ]);
 
-        $post = DB::table('posts')->find($post);
-
-        return JsonResponse::success($post, 'Post created successfully', 201);
+        return response()->json(['success' => true, 'data' => $post, 'message' => 'Post created successfully'], 201);
     }
+
 
     public function show(string $id): HttpJsonResponse
     {
@@ -219,5 +208,32 @@ class PostController extends Controller
 
     private function isLiked()
     {
+    }
+
+    public function newPost(PostRequest $request): HttpJsonResponse
+    {
+        $userId = Auth::id();
+
+        // Verificar si el usuario está autenticado
+        if (!$userId) {
+            return response()->json(['error' => 'User not authenticated'], 401);
+        }
+
+        // Verificar si hay una imagen en la solicitud
+        $imageData = null;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageData = base64_encode(file_get_contents($image->path()));
+        }
+
+        // Crear un nuevo post con los datos validados
+        $post = Post::create([
+            'user_id' => $userId, // Asignar el ID del usuario al campo user_id
+            'title' => $request->input('title'),
+            'image' => $imageData,
+            'workout_id' => $request->input('workout_id'), // Asegúrate de obtener el ID del workout
+        ]);
+
+        return response()->json(['success' => true, 'data' => $post, 'message' => 'Post created successfully'], 201);
     }
 }
