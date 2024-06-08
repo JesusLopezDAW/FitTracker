@@ -81,9 +81,9 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/follow/user/{id}', 'followUser');
     });
     
-    Route::resource("/logs/exercise", LogExerciseController::class);
-    
     Route::resource("/log", LogController::class);
+    
+    Route::resource("/logs/exercise", LogExerciseController::class);
 
     Route::resource("/exercise-logs", Exercise_logController::class);
 

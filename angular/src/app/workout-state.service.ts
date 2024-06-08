@@ -1,9 +1,9 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class WorkoutStateService {
   workoutInProgressChanged = new EventEmitter<boolean>();
   duration: number = 0; // Duration in seconds
@@ -16,7 +16,7 @@ export class WorkoutStateService {
   exercises = [
     {
       id: 1,
-      name: 'Press de Pecho Iso-Lateral (Máquina)',
+      name: '',
       image: '',
       sets: [
         { kg: 0, reps: 0, completed: false },
@@ -48,18 +48,12 @@ export class WorkoutStateService {
 
       if (response.ok) {
         let data = await response.json();
-
         this.exercises = data.data.map((exercise: any) => {
           return {
             id: exercise.exercise.id,
             name: exercise.exercise.name,
             image: exercise.exercise.image,
-            sets: exercise.exercise.series.map((set: any) => (
-              {
-              kg: set.kilograms,
-              reps: set.reps,
-              completed: false
-            }))
+            sets: [{ kg: 0, reps: 0, completed: false }]
           };
         });
       } else {

@@ -24,7 +24,7 @@ class ExerciseLogRequest extends FormRequest
         return [
             'workout_id' => 'required|exists:workouts,id',
             'exercise_id' => 'required|exists:exercises,id',
-            'fecha_registro' => 'nullable|date_format:Y-m-d H:i:s',
+            'fecha_registro' => now(),
         ];
     }
 }

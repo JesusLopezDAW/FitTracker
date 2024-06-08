@@ -21,6 +21,9 @@
             <span>Series: {{ workoutState.completedSets }}</span>
         </div>
     </div>
+    <div *ngIf="workoutState.exercises.length == 0">
+        <h3 style="text-align: center; margin-top: 20px;">Este entrenamiento no tiene ejercicios</h3>
+    </div>
     <div class="exercise" *ngFor="let exercise of workoutState.exercises; let exerciseIndex = index">
         <div class="exercise-header">
             <img [src]="exercise.image" alt="{{ exercise.name }}">

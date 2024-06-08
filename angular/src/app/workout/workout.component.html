@@ -13,18 +13,20 @@
         <button class="btn-startWorkout-desktop" mat-raised-button (click)="openBottomSheet(workoutId)">Comenzar
             Entrenamiento</button>
         <div class="menu">
-            <button style="background-color: transparent; border: none;" (click)="toggleMenu()"><i class="fas fa-ellipsis-v"></i></button>
+            <button style="background-color: transparent; border: none;" (click)="toggleMenu()"><i
+                    class="fas fa-ellipsis-v"></i></button>
             <div class="menu-dropdown" *ngIf="menuOpen" (click)="closeMenu()">
                 <ul>
                     <!-- <li (click)="copyRoutineLink()">Copiar link</li> -->
                     <!-- <li (click)="editRoutine()">Editar entrenamiento</li> -->
-                    <!-- <li (click)="deleteRoutine()">Eliminar entrenamiento</li> --> 
-                    <li (click)="openExerciseModal()">Añadir ejercicio</li> 
+                    <!-- <li (click)="deleteRoutine()">Eliminar entrenamiento</li> -->
+                    <li (click)="openExerciseModal()">Añadir ejercicio</li>
                 </ul>
             </div>
         </div>
     </div>
-    <button mat-raised-button *ngIf="buttonMobile" class="btn-startWorkout-mobile" (click)="openBottomSheet(workoutId)">Comenzar entrenamiento</button>
+    <button mat-raised-button *ngIf="buttonMobile" class="btn-startWorkout-mobile"
+        (click)="openBottomSheet(workoutId)">Comenzar entrenamiento</button>
     <div class="workout-body desktop">
         <p *ngIf="exercises.length==0" style="text-align: center;">Este entrenamiento no tiene ejercicios asignados</p>
         <div class="exercise" *ngFor="let exercise of exercises">
@@ -40,6 +42,9 @@
                     </div>
                     <div class="detail rest">
                         <i class="fas fa-clock"></i> Rest {{exercise.rest}}
+                    </div>
+                    <div class="icon-right">
+                        <i class="fas fa-trash fa-xl"></i>
                     </div>
                 </div>
             </div>

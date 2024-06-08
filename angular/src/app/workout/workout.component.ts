@@ -47,8 +47,8 @@ export class WorkoutComponent implements OnInit {
       this.workoutState.setWorkoutId(this.workoutId);
       this.getExercises(this.workoutId)
       this.sacarNombreEntrenamiento();
-
     });
+
     if (this.isBrowser) {
       this.checkSize();
       this.renderer.listen('window', 'resize', () => this.checkSize());

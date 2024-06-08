@@ -21,13 +21,15 @@
 }
 
 .exercise-list {
-    height: 92%;
+    height: 89%;
     overflow-y: auto;
     margin-top: 20px;
 }
+
 .exercise-list::-webkit-scrollbar {
     display: none;
 }
+
 .exercise-item {
     display: flex;
     align-items: center;

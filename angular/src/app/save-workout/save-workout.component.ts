@@ -70,13 +70,6 @@ export class SaveWorkoutComponent {
 
       
       for (const exercise of this.workoutState.exercises) {
-        const exerciseLogs = [];
-        exerciseLogs.push({
-          "workout_id": this.workoutState.id,
-          "exercise_id": exercise.id,
-          "fecha_registro": this.convertDateFormat(this.workoutState.endTime)
-        });
-        
         const series: { workout_id: string | null; exercise_id: number; reps: number; kilograms: number; }[] = [];
 
         exercise.sets.forEach(element => {
@@ -91,7 +84,6 @@ export class SaveWorkoutComponent {
 
         if (series.length > 0) {
           const bodyContent = JSON.stringify({
-            exercise_logs: exerciseLogs,
             series: series
           });
 
@@ -113,6 +105,7 @@ export class SaveWorkoutComponent {
           console.log("El ejercicio " + exercise.id + " no tiene series asignadas por lo que no se ha insertado");
         }
       }
+      
       
       this.workoutState.reset();
       this.close();
