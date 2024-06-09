@@ -23,6 +23,8 @@
                     </label>
                 </div>
 
+                <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey"></re-captcha>
+
                 <div>
                     <button type="submit">Acceder</button>
                 </div>
@@ -33,9 +35,9 @@
             </form>
         </div>
 
-        <div *ngIf="loginError" class="formulario" style="margin-top: 5px; color: red;">
-            Error: Credenciales incorrectas.
+        <div *ngIf="loginError" class="formulario" style="margin-top: 5px; color: red; margin-top: 5px;">
+            Error: {{errorLog}}
         </div>
     </div>
-   
+
 </section>
