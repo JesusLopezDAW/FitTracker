@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit {
     await this.postsSiguiendo();
   }
 
-
   async postsParaTi(): Promise<void> {
     const headersList = {
       "Accept": "*/*",
@@ -50,24 +49,25 @@ export class HomeComponent implements OnInit {
       let data = await response.json();
       const posts = data.data.data;
       console.log(posts);
+      this.postsForYou = [];
       this.postsForYou = posts.map((post: any) => ({
         id: post.id,
-        author: post.user.name,
+        author: post.user.username,
         content: post.title,
         image: post.user.profile_photo_path,
         postImage: post.image,
         likes: post.likes_count,
         comments: post.comments_count,
-        liked: post.liked_by_user
+        liked: post.liked_by_user,
+        workout_id: post.workout_id
       }));
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   }
+
   async postsSiguiendo(): Promise<void> {
     const headersList = {
-      "Accept": "*/*",
-      "User-Agent": "Thunder Client (https://www.thunderclient.com/)",
       "Authorization": "Bearer " + sessionStorage.getItem("authToken"),
       "Content-Type": "application/json"
     };
@@ -80,15 +80,17 @@ export class HomeComponent implements OnInit {
       let data = await response.json();
       const posts = data.data.data;
       console.log(posts);
+      this.postsFollowing = [];
       this.postsFollowing = posts.map((post: any) => ({
         id: post.id,
-        author: post.user.name,
+        author: post.user.username,
         content: post.title,
         image: post.user.profile_photo_path,
         postImage: post.image,
         liked: post.liked_by_user,
         likes: post.likes_count,
-        comments: post.comments_count
+        comments: post.comments_count,
+        workout_id: post.workout_id
       }));
     } catch (error) {
       console.error('Error fetching data:', error);

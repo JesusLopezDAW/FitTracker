@@ -87,7 +87,7 @@ Route::middleware('auth:api')->group(function () {
     Route::resource("/log", LogController::class);
     
     Route::resource("/logs/exercise", LogExerciseController::class);
-    Route::get("/logs/byWorkout/{id}", [LogExerciseController::class, 'getByWorkoutId']);
+    Route::post("/logs/byWorkout", [LogExerciseController::class, 'getByWorkoutId']);
 
     Route::resource("/exercise-logs", Exercise_logController::class);
 
