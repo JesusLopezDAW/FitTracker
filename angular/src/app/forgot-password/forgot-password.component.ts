@@ -14,21 +14,28 @@ import { CommonModule } from '@angular/common';
 export class ForgotPasswordComponent {
   email: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
-  sendResetLink(): void {
-    const headers = { 'Content-Type': 'application/json' };
-    const body = JSON.stringify({ email: this.email });
+  async sendResetLink(): Promise<void> {
 
-    this.http.post('http://localhost/api/forgot-password', body, { headers })
-      .subscribe({
-        next: (response) => {
-          console.log('Reset link sent', response);
-          this.router.navigate(['/login']);
-        },
-        error: (err) => {
-          console.error('Failed to send reset link', err);
-        }
-      });
+    let headersList = {
+      "Accept": "*/*",
+      "Content-Type": "application/json"
+    }
+
+    let bodyContent = JSON.stringify({
+      "email": this.email
+    });
+
+    let response = await fetch("http://localhost/api/send-password-reset-email", {
+      method: "POST",
+      body: bodyContent,
+      headers: headersList
+    });
+
+    let data = await response.json();
+    console.log(data);
+    console.log('Reset link sent', response);
+    this.router.navigate(['/login']);
   }
 }
