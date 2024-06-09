@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, Renderer2, PLATFORM_ID } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, RouterModule, Router } from '@angular/router';
 import { DOCUMENT, isPlatformBrowser, CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
@@ -33,9 +33,17 @@ export class AppComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) private platformId: Object,
     private renderer: Renderer2,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.isLoggedIn = this.authService.isAuthenticated();
+        console.log(this.authService.isAuthenticated());
+      }
+
+    });
   }
 
   ngOnInit(): void {
@@ -43,9 +51,7 @@ export class AppComponent implements OnInit {
       this.checkSize();
       this.renderer.listen('window', 'resize', () => this.checkSize());
     }
-    this.authService.isLoggedIn().subscribe((loggedIn: boolean) => {
-      this.isLoggedIn = loggedIn;
-    });
+
   }
 
   checkSize() {

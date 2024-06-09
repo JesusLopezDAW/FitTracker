@@ -134,7 +134,7 @@ class PostController extends Controller
         }
         $followedUserIds = $user->follows->pluck('id');
 
-        $posts = Post::with(['user:id,name,profile_photo_path'])
+        $posts = Post::with(['user:id,username,profile_photo_path'])
             ->whereIn('user_id', $followedUserIds)
             ->orderBy('created_at', 'desc')
             ->withCount('likes')
@@ -150,7 +150,7 @@ class PostController extends Controller
 
     public function getInterestingPosts(): HttpJsonResponse
     {
-        $posts = Post::with(['user:id,name,profile_photo_path'])
+        $posts = Post::with(['user:id,username,profile_photo_path'])
             ->withCount('likes')
             ->withCount('comments')
             ->orderBy('likes_count', 'desc')
