@@ -79,7 +79,6 @@ export class NavbarComponent {
   }
 
   clearSearchInput() {
-    console.log("asdasdasdasd");
     const searchInput = document.querySelector('.search-input') as HTMLInputElement;
     if (searchInput) {
       searchInput.value = '';
@@ -96,7 +95,6 @@ export class NavbarComponent {
 
   onInputChange = async (event: Event) => {
     const input = event.target as HTMLInputElement;
-    console.log(input.value);
 
     if (input.value.length > 1) {
       const baseUrl = "http://localhost/api/search/user";
@@ -114,7 +112,6 @@ export class NavbarComponent {
 
         if (response.ok) {
           const responseData = await response.json();
-          console.log(responseData.data);
           this.users = responseData.data;
         } else {
           console.error('Error en la respuesta de la petición:', response.statusText);

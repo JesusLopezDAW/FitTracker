@@ -5,7 +5,7 @@
 <!-- <ng-container *ngIf="(isLoggedIn$ | async); else notLoggedIn"> -->
 <div class="container-fluid d-flex">
     <app-navbar *ngIf="isLoggedIn"></app-navbar>
-    <div class="main-content">
+    <div class="main-content" id="main-content">
         <router-outlet></router-outlet>
     </div>
 </div>

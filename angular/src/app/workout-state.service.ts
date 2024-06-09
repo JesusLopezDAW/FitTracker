@@ -12,6 +12,7 @@ export class WorkoutStateService {
   completedSets: number = 0;
   timer: any;
   endTime: string = '';
+  startTime: string = '';
   id: string | null = null;
   exercises = [
     {
@@ -65,6 +66,7 @@ export class WorkoutStateService {
   }
 
   startTimer() {
+    this.setStartTime();
     clearInterval(this.timer);
     this.timer = setInterval(() => {
       this.duration++;
@@ -148,6 +150,10 @@ export class WorkoutStateService {
   getFormattedDate(): string {
     const now = new Date();
     return now.toLocaleString();
+  }
+
+  setStartTime() {
+    this.startTime = this.getFormattedDate();
   }
 
   setEndTime() {

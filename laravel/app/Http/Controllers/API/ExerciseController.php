@@ -42,24 +42,15 @@ class ExerciseController extends Controller
         $data['visibility'] = $visibility;
         $data['extra_info'] = "Creado desde el panel de administracion";
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('public/images/exercises');
-            $imageFullPath = storage_path('app/' . $imagePath);
-            $imageBinary = file_get_contents($imageFullPath);
-            $imagenBase64 = base64_encode($imageBinary);
-            $imagenDataURL = "data:image/jpeg;base64," . $imagenBase64;
-            $data['image'] = $imagenDataURL;
+        if ($request->input('image')) {
+            $data['image'] = $request->input('image');
         }
-
+        
         if ($request->hasFile('video')) {
             $videoPath = $request->file('video')->store('public/videos/exercises');
-            $videoFullPath = storage_path('app/' . $videoPath);
-            $videoBinary = file_get_contents($videoFullPath);
-            $videoBase64 = base64_encode($videoBinary);
-            $videoDataURL = "data:video/mp4;base64," . $videoBase64;
-            $data['video'] = $videoDataURL;
+            $data['video'] = $videoPath;
         }
-
+        
         $exercise = Exercise::create($data);
 
         return JsonResponse::success($exercise, 'Store success', 201);

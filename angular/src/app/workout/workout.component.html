@@ -43,7 +43,7 @@
                     <div class="detail rest">
                         <i class="fas fa-clock"></i> Rest {{exercise.rest}}
                     </div>
-                    <div class="icon-right">
+                    <div class="icon-right" (click)="deleteExercise(exercise.id)">
                         <i class="fas fa-trash fa-xl"></i>
                     </div>
                 </div>

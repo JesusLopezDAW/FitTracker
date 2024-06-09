@@ -33,7 +33,7 @@
                 <ul>
                   <li *ngFor="let exercise of globalExercise[1]">
                     <a class="image" [routerLink]="['/exercises', exercise.id]">
-                      <img [src]="exercise.image" alt="Imagen">{{ exercise.name }}
+                      <img [src]="exercise.image" alt="Imagen" style="width: 50px; height: 50px;">{{ exercise.name }}
                     </a>
                   </li>
                 </ul>
@@ -66,7 +66,7 @@
                   <ul>
                     <li *ngFor="let exercise of userExercise[1]">
                       <a class="image" [routerLink]="['/exercises', exercise.id]">
-                        <img [src]="exercise.image" alt="Imagen">{{ exercise.name }}
+                        <img [src]="exercise.image" alt="Imagen" style="height: 50px; width: 50px; border-radius: 25px;">{{ exercise.name }}
                       </a>
                     </li>
                   </ul>
@@ -78,9 +78,8 @@
       </ng-container>
       <ng-template #noExercises>
         <div class="text-center">
-          <p>No hay ejercicios disponibles.</p>
+          <p>No tienes ejercicios propios</p>
           <button class="btn btn-primary" (click)="toggleModal()">Añadir Ejercicio</button>
-          
         </div>
       </ng-template>
     </div>

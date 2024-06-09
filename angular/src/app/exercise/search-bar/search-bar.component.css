@@ -89,6 +89,7 @@
 
 .search-input-wrapper {
   position: relative;
+  margin-top: 15px;
 }
 
 .search-icon {
@@ -109,7 +110,26 @@ a {
   text-decoration: none;
 }
 
-.searchbar-header{
+.searchbar-header {
   justify-content: space-between;
   display: flex;
+}
+
+@media (max-width: 1650px) {
+  .searchbar-content{
+    left: 76%;
+    right: 54px;
+  }
+}
+@media (max-width: 1439px) {
+
+  .searchbar-content {
+      left: 73% !important;
+      right: 25px !important;
+  }
+}
+@media (max-width: 992px) {
+  .searchbar-content {
+    display: none;
+}
 }

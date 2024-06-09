@@ -116,7 +116,7 @@ h3 {
     position: fixed;
 }
 
-.mat-mdc-raised-button .mdc-button__label{
+.mat-mdc-raised-button .mdc-button__label {
     z-index: 1;
     background-color: var(--principal);
     padding: 6px;
@@ -146,9 +146,16 @@ h3 {
         overflow-x: auto !important;
         color: var(--principal) !important;
     }
-    .Exercises-content, .nav-tabs{
+
+    .Exercises-content,
+    .nav-tabs {
         left: 156px !important;
         max-width: calc(100% - 45%) !important;
+    }
+
+    .searchbar-content {
+        left: 73% !important;
+        right: 25px !important;
     }
 }
 
@@ -175,15 +182,17 @@ h3 {
         max-width: calc(89%) !important;
     }
 
-    .Exercises-content, .nav-tabs{
+    .Exercises-content,
+    .nav-tabs {
         left: 30px !important;
-        max-width: calc(100% - 40%) !important;
+        max-width: 100% !important;
     }
 
-    .nav-tabs{
+    .nav-tabs {
         top: 80px !important;
     }
-    .Exercises-content{
+
+    .Exercises-content {
         top: 135px !important;
     }
 
@@ -206,7 +215,8 @@ h3 {
         right: 0 !important;
     }
 
-    .Exercises-content, .nav-tabs{
+    .Exercises-content,
+    .nav-tabs {
         max-width: 100% !important;
     }
 }

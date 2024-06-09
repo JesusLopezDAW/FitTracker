@@ -27,7 +27,7 @@ class ExerciseRequest extends FormRequest
             'muscle' => 'nullable|in:abdominals,abductors,adductors,biceps,calves,chest,forearms,glutes,hamstrings,lats,lower_back,middle_back,neck,quadriceps,traps,triceps|string',
             'equipment' => 'nullable|string',
             'difficulty' => 'nullable|string|in:beginner,intermediate,expert',
-            'instructions' => 'required|string'
+            'instructions' => 'nullable|string'
         ];
     }
 

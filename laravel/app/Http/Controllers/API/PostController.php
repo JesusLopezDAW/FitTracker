@@ -15,9 +15,8 @@ class PostController extends Controller
 {
     public function index(): HttpJsonResponse
     {
-        $userId = Auth::id(); // Obtener el ID del usuario autenticado
+        $userId = Auth::id();
 
-        // Consulta para obtener los posts con el número de likes, comentarios y el campo liked
         $posts = Auth::user()->posts()
             ->withCount('likes')
             ->withCount('comments')
@@ -34,9 +33,8 @@ class PostController extends Controller
 
     public function userPosts($id): HttpJsonResponse
     {
-        $userId = Auth::id(); // Obtener el ID del usuario autenticado
+        $userId = Auth::id();
 
-        // Consulta para obtener los posts con el número de likes, comentarios y el campo liked
         $posts = User::find($id)->posts()
             ->withCount('likes')
             ->withCount('comments')
@@ -56,24 +54,20 @@ class PostController extends Controller
     {
         $userId = Auth::id();
 
-        // Verificar si el usuario está autenticado
         if (!$userId) {
             return response()->json(['error' => 'User not authenticated'], 401);
         }
 
-        // Verificar si hay una imagen en la solicitud
         $imageData = null;
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageData = base64_encode(file_get_contents($image->path()));
+        if ($request->input('image')) {
+            $imageData = $request->input('image');
         }
 
-        // Crear un nuevo post con los datos validados
         $post = Post::create([
-            'user_id' => $userId, // Asignar el ID del usuario al campo user_id
+            'user_id' => $userId,
             'title' => $request->input('title'),
             'image' => $imageData,
-            'workout_id' => $request->input('workout_id'), // Asegúrate de obtener el ID del workout
+            'workout_id' => $request->input('workout_id'),
         ]);
 
         return response()->json(['success' => true, 'data' => $post, 'message' => 'Post created successfully'], 201);
@@ -102,7 +96,7 @@ class PostController extends Controller
         }
 
         $user = $post->user;
-        // Verificar si el usuario es el propietario del post
+
         if ($user->id !== $userId) {
             return JsonResponse::error('Error: You are not authorized to update this post', 403);
         }
@@ -121,7 +115,7 @@ class PostController extends Controller
         if (!$post) {
             return JsonResponse::error('Error: This post do not exist', 400);
         }
-        // TODO: move functions
+
         $user = $post->user;
         if ($user->id !== $userId) {
             return JsonResponse::error('Error: You are not authorized to update this post', 403);
