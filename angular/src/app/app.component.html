@@ -2,14 +2,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- <title>asd</title> -->
-<!-- <ng-container *ngIf="(isLoggedIn$ | async); else notLoggedIn"> -->
+<ng-container *ngIf="(isLoggedIn); else notLoggedIn">
 <div class="container-fluid d-flex">
-    <app-navbar *ngIf="isLoggedIn"></app-navbar>
+    <app-navbar></app-navbar>
     <div class="main-content">
         <router-outlet></router-outlet>
     </div>
 </div>
-<!-- </ng-container>
+</ng-container>
 <ng-template #notLoggedIn>
     <router-outlet></router-outlet>
-</ng-template> -->
+</ng-template>

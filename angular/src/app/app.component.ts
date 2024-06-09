@@ -36,6 +36,12 @@ export class AppComponent implements OnInit {
     private authService: AuthService
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
+
+    this.isLoggedIn = this.authService.isAuthenticated();
+
+    this.authService.isLoggedIn().subscribe((loggedIn: boolean) => {
+      this.isLoggedIn = loggedIn;
+    });
   }
 
   ngOnInit(): void {
