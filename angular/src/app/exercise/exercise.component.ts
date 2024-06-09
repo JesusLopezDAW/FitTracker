@@ -56,12 +56,26 @@ export class ExerciseComponent implements OnInit {
   }
 
   onExerciseAdded() {
-    console.log("223")
     this.showModal = false;
     this.getExercises();
   }
 
   setActiveTab(tab: string): void {
     this.activeTab = tab;
+  }
+
+  async deleteExercise(id: number) {
+    console.log(id);
+    let headersList = {
+      "Authorization": "Bearer " + sessionStorage.getItem("authToken")
+    }
+
+    let response = await fetch("http://localhost/api/exercise/"+id, {
+      method: "DELETE",
+      headers: headersList
+    });
+    let data = await response.json();
+    console.log(data);
+    this.getExercises();
   }
 }

@@ -110,11 +110,11 @@ if (!empty($commentsData)) {
                                     propios:</strong> {{ count($exercises) }}</li>
                             <li class="list-group-item"><i class="fas fa-utensils mr-2"></i><strong>Aliementos
                                     propios:</strong> {{ count($foods) }}</li>
-                            <li class="list-group-item"><i
+                            {{-- <li class="list-group-item"><i
                                     class="fas fa-user-friends mr-2"></i><strong>Siguiendo:</strong>
-                                {{ count($followedUsers) }}</li>
-                            <li class="list-group-item"><i class="fas fa-users mr-2"></i><strong>Seguidores:</strong>
-                                {{ count($followers) }}</li>
+                                {{ count($followedUsers) }}</li> --}}
+                            {{-- <li class="list-group-item"><i class="fas fa-users mr-2"></i><strong>Seguidores:</strong>
+                                {{ count($followers) }}</li> --}}
                             <li class="list-group-item"><i class="fas fa-edit mr-2"></i><strong>Posts:</strong>
                                 {{ count($posts) }}</li>
                             <li class="list-group-item"><i
@@ -212,7 +212,7 @@ if (!empty($commentsData)) {
                                                                 <!-- Añade un margen a la izquierda y establece flex-column para alinear verticalmente -->
                                                                 <p class="mb-0">{{ $exerciseLog->exercise->name }}
                                                                 </p>
-                                                                <div class="d-flex">
+                                                                {{-- <div class="d-flex">
                                                                     <div class="border rounded p-1 mr-2">
                                                                         <span><i class="fas fa-dumbbell"></i>
                                                                             {{ $exerciseLog->series }} sets</span>
@@ -221,7 +221,7 @@ if (!empty($commentsData)) {
                                                                         <span><i class="fas fa-sync-alt"></i>
                                                                             {{ $exerciseLog->reps }} reps</span>
                                                                     </div>
-                                                                </div>
+                                                                </div> --}}
                                                             </div>
                                                         </div>
                                                     </li>

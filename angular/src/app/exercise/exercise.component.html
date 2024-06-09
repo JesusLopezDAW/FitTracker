@@ -64,10 +64,14 @@
                 id="collapse{{globalExercises.length + i}}">
                 <div class="card-body">
                   <ul>
-                    <li *ngFor="let exercise of userExercise[1]">
+                    <li *ngFor="let exercise of userExercise[1]" class="listExercises">
                       <a class="image" [routerLink]="['/exercises', exercise.id]">
-                        <img [src]="exercise.image" alt="Imagen" style="height: 50px; width: 50px; border-radius: 25px;">{{ exercise.name }}
+                        <img [src]="exercise.image" alt="Imagen"
+                          style="height: 50px; width: 50px; border-radius: 25px;">{{ exercise.name }}
                       </a>
+                      <div style="text-align: right; cursor: pointer;" (click)="deleteExercise(exercise.id)">
+                        <i class="fas fa-trash fa-xl"></i>
+                      </div>
                     </li>
                   </ul>
                 </div>
