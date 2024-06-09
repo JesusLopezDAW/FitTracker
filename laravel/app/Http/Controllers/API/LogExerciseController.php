@@ -11,7 +11,9 @@ use App\Models\Post;
 use App\Models\Workout;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse as HttpJsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LogExerciseController extends Controller
 {
@@ -58,37 +60,60 @@ class LogExerciseController extends Controller
         return JsonResponse::success($log, 'Success', 200);
     }
 
-    public function getByWorkoutId($workoutId)
+    public function getByWorkoutId(Request $request)
     {
-        // Obtener el tiempo de publicación del post
-        $postTime = Post::where('workout_id', $workoutId)->value('created_at');
+        // Obtener los parámetros de la solicitud
+        $postId = $request->input('post_id');
+        $workoutId = $request->input('workout_id');
 
-        // Convertir el tiempo de publicación del post a una instancia de Carbon
-        $postTime = Carbon::parse($postTime);
+        $postData = DB::select('SELECT 
+            p.image AS post_image,
+            u.id AS user_id,
+            u.username AS user_username,
+            u.profile_photo_path AS user_image,
+            w.name AS workout_name,
+            w.description AS workout_description
+        FROM 
+            posts p
+            INNER JOIN users u ON p.user_id = u.id
+            INNER JOIN workouts w ON p.workout_id = w.id
+        WHERE 
+            p.id = ?
+        ', [$postId]);
 
-        // Obtener los registros de ejercicio por el ID de entrenamiento
-        $logs = Exercise_log::where('workout_id', $workoutId)->get();
+        // Verificar si se encontró el post
+        if (empty($postData)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Post not found'
+            ], 404);
+        }
 
-        // Filtrar las series por el mismo día y hora que el post
-        $exercises = [];
+        // Consulta para obtener los datos del workout
+        $workoutData = DB::select("SELECT se.kilograms, se.reps, e.name AS exercise_name, e.image AS exercise_image
+        FROM exercise_logs el
+        LEFT JOIN series se ON el.exercise_id = se.exercise_id
+        LEFT JOIN exercises e ON el.exercise_id = e.id
+        WHERE el.workout_id = ?
+        AND EXISTS (
+            SELECT 1
+            FROM posts p
+            WHERE p.id = ?
+            AND se.created_at BETWEEN DATE_SUB(p.created_at, INTERVAL 5 MINUTE)
+            AND DATE_ADD(p.created_at, INTERVAL 5 MINUTE)
+        )", [$workoutId, $postId]);
 
-        $logs->each(function ($log) use (&$exercises, $postTime) {
-            $filteredSeries = $log->exercise->series->filter(function ($series) use ($postTime) {
-                return $series->created_at->toDateString() == $postTime->toDateString() &&
-                    $series->created_at->toTimeString() == $postTime->toTimeString();
-            });
+        // Crear el objeto de respuesta
+        $response = [
+            "postData" => $postData,
+            "workoutData" => $workoutData
+        ];
 
-            // Agregar las series filtradas al array de ejercicios solo si hay series que coincidan
-            if (!$filteredSeries->isEmpty()) {
-                $exercises[] = [
-                    'exercise' => $log->exercise,
-                    'series' => $filteredSeries
-                ];
-            }
-        });
-
-        // Retornar la respuesta JSON
-        return JsonResponse::success($exercises, 'Success', 200);
+        return response()->json([
+            'success' => true,
+            'data' => $response,
+            'message' => 'Success'
+        ], 200);
     }
 
     private function validateExist(Exercise_Log | string $log)

@@ -1,5 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PostModalComponent } from '../../modals/post-modal/post-modal.component';
 
 @Component({
   selector: 'app-post',
@@ -11,24 +13,21 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 export class PostComponent implements OnInit {
   @Input() post: any;
 
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+  constructor(@Inject(DOCUMENT) private document: Document, private modalService: NgbModal) { }
 
   ngOnInit(): void {
   }
 
   toggleLike() {
-    // Si el post no estaba previamente liked, incrementa el contador de likes
     console.log(this.post);
     if (!this.post.liked) {
       this.post.likes++;
       this.addLike();
     } else {
-      // Si el post estaba previamente liked, decrementa el contador de likes
       this.post.likes--;
       this.removeLike();
     }
 
-    // Cambia el estado de liked
     this.post.liked = !this.post.liked;
   }
 
@@ -52,17 +51,15 @@ export class PostComponent implements OnInit {
 
     let data = await response.json();
     console.log(data);
-
   }
+  
   async removeLike(): Promise<void> {
     let headersList = {
-      "Accept": "*/*",
-      "User-Agent": "Thunder Client (https://www.thunderclient.com)",
       "Authorization": "bearer " + sessionStorage.getItem("authToken"),
       "Content-Type": "application/json"
     }
 
-    let response = await fetch("http://localhost/api/likes/"+this.post.id, {
+    let response = await fetch("http://localhost/api/likes/" + this.post.id, {
       method: "DELETE",
       headers: headersList
     });
@@ -70,5 +67,11 @@ export class PostComponent implements OnInit {
     let data = await response.json();
     console.log(data);
 
+  }
+
+  showPost(post_id: number, workout_id: number) {
+    const modalRef = this.modalService.open(PostModalComponent, { size: 'lg' });
+    modalRef.componentInstance.post_id = post_id;
+    modalRef.componentInstance.workout_id = workout_id;
   }
 }

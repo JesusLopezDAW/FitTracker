@@ -20,7 +20,21 @@ class CommentController extends Controller
     public function commentsInPost(string $id): HttpJsonResponse
     {
         $post = Post::find($id);
-        return JsonResponse::success($post->comments, 'Success', 200);
+        $comments = $post->comments()->with('user:id,username,profile_photo_path')->get();
+
+        $response = $comments->map(function ($comment) {
+            return [
+                'comment' => $comment->content,
+                'created_at' => $comment->created_at,
+                'user' => [
+                    'id' => $comment->user->id,
+                    'username' => $comment->user->username,
+                    'profile_photo_path' => $comment->user->profile_photo_path
+                ]
+            ];
+        });
+
+        return JsonResponse::success($response, 'Success', 200);
     }
 
     public function store(CommentRequest $request): HttpJsonResponse

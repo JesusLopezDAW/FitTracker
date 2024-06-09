@@ -1,0 +1,46 @@
+<div *ngIf="!isLoading" class="modal">
+    <div class="modal-content">
+        <div class="left-panel">
+            <img [src]="post.post_image" alt="Post Image" style="width: 640px; height: 480px;">
+        </div>
+        <div class="right-panel">
+            <div class="header">
+                <img [src]="post.user_image" alt="User Image" class="user-image">
+                <span>{{post.user_username}}</span>
+                <i class="fas fa-times close-icon" (click)="closeModal()"></i>
+            </div>
+            <div *ngIf="!isLoadingComments" class="comments-section">
+                <div *ngFor="let comment of comments" class="comment" style="display: flex;">
+                    <img [src]="comment.user_image" alt="User Image" class="user-image">
+                    <div>
+                        <p>{{comment.username}}</p>
+                        <p>{{comment.comment}}</p>
+                    </div>
+                </div>
+                <div *ngIf="comments.length == 0">
+                    <p>No hay comentarios</p>
+                </div>
+            </div>
+            <div *ngIf="!isLoadingComments" class="comment-input">
+                <input type="text" placeholder="Añade un comentario..." [(ngModel)]="newComment">
+                <button (click)="addComment()">Publicar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isLoading" class="modal">
+    <div class="d-flex justify-content-center align-items-center fixed-top w-100" style="margin-top: 50vh;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isLoadingComments" class="comments-section">
+    <div class="d-flex justify-content-center align-items-center fixed-top w-100" style="margin-top: 50vh;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
