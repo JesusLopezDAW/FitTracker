@@ -49,18 +49,16 @@ export class HomeComponent implements OnInit {
       });
       let data = await response.json();
       const posts = data.data.data;
-      // Asumiendo que `data` es un array de posts
+      console.log(posts);
       this.postsForYou = posts.map((post: any) => ({
         id: post.id,
         author: post.user.name,
         content: post.title,
-        image: 'https://via.placeholder.com/50', // puedes cambiar esto si tienes la URL de la imagen del autor
+        image: post.user.profile_photo_path,
         postImage: post.image,
         likes: post.likes_count,
         comments: post.comments_count,
         liked: post.liked_by_user
-        // liked: post.liked
-        // image: post.user.profile_photo_path,
       }));
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -81,17 +79,16 @@ export class HomeComponent implements OnInit {
       });
       let data = await response.json();
       const posts = data.data.data;
+      console.log(posts);
       this.postsFollowing = posts.map((post: any) => ({
         id: post.id,
-        author: post.name,
+        author: post.user.name,
         content: post.title,
-        image: 'https://via.placeholder.com/50', // puedes cambiar esto si tienes la URL de la imagen del autor
-        // image: post.user.profile_photo_path,
+        image: post.user.profile_photo_path,
         postImage: post.image,
         liked: post.liked_by_user,
         likes: post.likes_count,
         comments: post.comments_count
-        // liked: post.liked
       }));
     } catch (error) {
       console.error('Error fetching data:', error);

@@ -54,7 +54,7 @@ export class PostsComponent implements OnInit {
           "Authorization": `Bearer ${token}`
         }
 
-        let response = await fetch("http://localhost/api/posts", {
+        let response = await fetch("http://localhost/api/post", {
           method: "GET",
           headers: headersList
         });
@@ -128,7 +128,7 @@ export class PostsComponent implements OnInit {
       "Content-Type": "application/json"
     }
 
-    let response = await fetch("http://localhost/api/posts/"+post.id, {
+    let response = await fetch("http://localhost/api/post/"+post.id, {
       method: "DELETE",
       headers: headersList
     });

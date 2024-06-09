@@ -56,6 +56,7 @@ export class ExerciseComponent implements OnInit {
   }
 
   onExerciseAdded() {
+    console.log("223")
     this.showModal = false;
     this.getExercises();
   }

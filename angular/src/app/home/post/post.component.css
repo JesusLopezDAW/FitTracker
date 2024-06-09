@@ -11,8 +11,10 @@
 }
 
 .post-image {
-    max-width: 100%;
-    height: auto;
+    width: 640px;
+    height: 480px;
+    object-fit: cover; /* Hace que la imagen cubra todo el contenedor */
+    object-position: center; /* Centra la imagen dentro del contenedor */
 }
 
 .post-actions {
@@ -31,4 +33,11 @@
 /* Cambia el color del icono sin like a rojo cuando se pasa el ratón sobre él */
 .noliked-icon:hover {
     color: red;
+}
+
+.rounded-circle {
+    border-radius: 50% !important;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
 }

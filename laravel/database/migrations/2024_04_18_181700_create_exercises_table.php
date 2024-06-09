@@ -49,7 +49,7 @@ return new class extends Migration
                 'intermediate',
                 'expert'
             ]);
-            $table->longText("instructions");
+            $table->longText("instructions")->nullable();
             $table->string("extra_info")->nullable();
             $table->longText("image")->nullable();
             $table->longText("image2")->nullable();

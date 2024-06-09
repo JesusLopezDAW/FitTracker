@@ -1,13 +1,15 @@
-import { Component, Output, EventEmitter} from '@angular/core';
+import { ExerciseComponent } from './../exercise.component';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-exercise-modal',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './add-exercise-modal.component.html',
-  styleUrl: './add-exercise-modal.component.css'
+  styleUrls: ['./add-exercise-modal.component.css']
 })
 export class AddExerciseModalComponent {
   @Output() exerciseAdded = new EventEmitter<void>();
@@ -19,11 +21,27 @@ export class AddExerciseModalComponent {
   equipment: string = '';
   difficulty: string = '';
   instructions: string = '';
-  extra_info: string = '';
-  image: string = '';
-  video: string = '';
+  extra_info = "Creado desde apartado cliente";
+  image: string | ArrayBuffer | null = null;
+  video: File | null = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private exerciseComponent: ExerciseComponent) { }
+
+  onImageSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files![0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.image = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  onVideoSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.video = input.files[0];
+    }
+  }
 
   addExercise() {
     const token = sessionStorage.getItem("authToken")
@@ -42,25 +60,25 @@ export class AddExerciseModalComponent {
       instructions: this.instructions,
       extra_info: this.extra_info,
       image: this.image,
-      video: this.video,
+      // video: this.video,
       suggestion: 'yes'
     };
-    console.log(exerciseData)
 
     this.http.post('http://localhost/api/exercise', exerciseData, { headers })
       .subscribe(
         (response) => {
           console.log('Exercise added successfully:', response);
-          this.exerciseAdded.emit();
+          this.exerciseComponent.onExerciseAdded();
+          // this.exerciseAdded.emit();
         },
         (error) => {
           console.error('Error adding exercise:', error);
-          // You can handle errors here, like displaying an error message
         }
       );
+    this.closeModal();
   }
+
   closeModal() {
     this.close.emit();
   }
-
 }

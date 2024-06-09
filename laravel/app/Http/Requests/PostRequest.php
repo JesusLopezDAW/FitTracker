@@ -27,9 +27,8 @@ class PostRequest extends FormRequest
         return [
             'workout_id' => 'integer',
             'title' => 'nullable|string|max:255',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => ['nullable', 'string', 'regex:/^data:image\/[a-zA-Z]+;base64,/']
         ];
-        
     }
 
     protected function failedValidation(Validator $validator)

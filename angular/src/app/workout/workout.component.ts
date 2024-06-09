@@ -79,9 +79,6 @@ export class WorkoutComponent implements OnInit {
       let data = await response.json();
       this.exercises = [];
       this.exercises = data.data;
-      if (!(this.exercises.length > 0)) {
-
-      }
 
     } catch (error) {
       console.error('Error fetching exercises:', error);
@@ -162,5 +159,21 @@ export class WorkoutComponent implements OnInit {
     modalRef.componentInstance.exercisesUpdated.subscribe(() => {
       this.getExercises(this.workoutId);
     });
+  }
+
+  async deleteExercise(id: number) {
+    let headersList = {
+      "Authorization": "bearer " + sessionStorage.getItem("authToken"),
+      "Content-Type": "application/json"
+    }
+
+    let response = await fetch("http://localhost/api/logs/exercise/" + id, {
+      method: "DELETE",
+      headers: headersList
+    });
+
+    let data = await response.json();
+    console.log(data);
+    this.getExercises(this.workoutId);
   }
 }

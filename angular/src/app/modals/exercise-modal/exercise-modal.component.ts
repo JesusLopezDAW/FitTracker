@@ -119,7 +119,6 @@ export class ExerciseModalComponent implements OnInit {
     this.closeModal();
 
     for (const element of selectedIds) {
-      console.log("id: " + element);
       const headersList = {
         "Authorization": "Bearer " + sessionStorage.getItem("authToken"),
         "Content-Type": "application/json"
@@ -137,7 +136,7 @@ export class ExerciseModalComponent implements OnInit {
           headers: headersList
         });
 
-        let data = await response.text();
+        let data = await response.json();
         console.log(data);
       } catch (error) {
         console.error('Error:', error);

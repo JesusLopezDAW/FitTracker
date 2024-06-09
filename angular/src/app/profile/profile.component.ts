@@ -252,8 +252,7 @@ export class ProfileComponent {
     console.log(this.isYou)
   }
 
-  async isFollow(){
-    
+  async isFollow() {
     try {
       const token = sessionStorage.getItem("authToken")
 
@@ -263,13 +262,14 @@ export class ProfileComponent {
         "Authorization": `Bearer ${token}`
       }
 
-      let response = await fetch("http://localhost/api/follow/user/" + this.userId, { 
+      let response = await fetch("http://localhost/api/follow/user/" + this.userId, {
         method: "GET",
         headers: headersList
       });
-      
+
       let data = await response.json();
-      console.log('Es: ' + data);
+      console.log('Es: ');
+      console.log(data);
       this.follow = data.data;
 
     } catch (error) {
@@ -289,7 +289,7 @@ export class ProfileComponent {
     this.follow = !this.follow;
   }
 
-  async follows(id: string){
+  async follows(id: string) {
     try {
       const token = sessionStorage.getItem("authToken")
 
@@ -299,7 +299,7 @@ export class ProfileComponent {
         "Authorization": `Bearer ${token}`
       }
 
-      let response = await fetch("http://localhost/api/follow/"+id, {
+      let response = await fetch("http://localhost/api/follow/" + id, {
         method: "POST",
         headers: headersList
       });
@@ -312,7 +312,7 @@ export class ProfileComponent {
     }
   }
 
-  async unfollow(id: string){
+  async unfollow(id: string) {
     try {
       const token = sessionStorage.getItem("authToken")
 
@@ -322,7 +322,7 @@ export class ProfileComponent {
         "Authorization": `Bearer ${token}`
       }
 
-      let response = await fetch("http://localhost/api/unfollow/"+id, {
+      let response = await fetch("http://localhost/api/unfollow/" + id, {
         method: "POST",
         headers: headersList
       });
