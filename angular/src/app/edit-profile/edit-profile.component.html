@@ -1,6 +1,6 @@
 <div class="container mt-4">
     <div class="row">
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
             <nav class="nav flex-column">
                 <a class="nav-link active" aria-current="page" href="/edit-profile">Editar perfil</a>
                 <a class="nav-link" href="#">Notificaciones</a>
@@ -17,50 +17,42 @@
                 <a class="nav-link" href="#">Compartiendo</a>
                 <a class="nav-link" href="#">Cuentas restringidas</a>
             </nav>
-        </div>
+        </div> -->
         <div class="col-md-9">
             <h3>Editar perfil</h3>
             <form>
                 <div class="mb-3">
                     <label for="profilePicture" class="form-label">Foto de perfil</label>
                     <div class="d-flex align-items-center">
-                        <img src="path-to-profile-pic.jpg" alt="Profile Picture" class="rounded-circle me-3" width="50"
+                        <img [src]="profile_photo_path" alt="Profile Picture" class="rounded-circle me-3" width="50"
                             height="50">
-                        <button type="button" class="btn btn-primary">Cambiar foto</button>
+                        <div class="form-group">
+                            <input id="profile_photo"  type="file" class="form-control">
+                        </div>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="website" class="form-label">Sitio web</label>
-                    <input type="url" class="form-control" id="website" placeholder="Sitio web">
-                    <div class="form-text">Solo puedes editar tus enlaces en móviles. Visita la aplicación de Instagram
-                        y edita tu perfil para cambiar los sitios web en tu biografía.</div>
+                    <label for="name">Name</label>
+                    <input id="name" [value]="name" class="form-control">
+
                 </div>
                 <div class="mb-3">
-                    <label for="bio" class="form-label">Presentación</label>
-                    <textarea class="form-control" id="bio" rows="3"></textarea>
-                    <div class="form-text">1 / 150</div>
+                    <label for="surname">Surname</label>
+                    <input id="surname" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="gender" class="form-label">Sexo</label>
-                    <select class="form-select" id="gender">
-                        <option value="male">Hombre</option>
-                        <option value="female">Mujer</option>
-                        <option value="other">Otro</option>
-                    </select>
-                    <div class="form-text">Esto no formará parte de tu perfil público.</div>
+                   
                 </div>
                 <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" type="checkbox" id="accountSuggestions">
-                    <label class="form-check-label" for="accountSuggestions">Mostrar sugerencias de cuentas en los
-                        perfiles</label>
-                    <div class="form-text">Elige si la gente puede ver sugerencias de cuentas similares en tu perfil, y
-                        si se puede sugerir tu cuenta en otros perfiles.</div>
+                    
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
 
             </form>
-            <div>
-                <button class="btn btn-secondary" style="background-color: red;" (click)="logout()">LOGOUT</button>
+            <hr>
+            <div style="margin-top: 15px;">
+                <h3>Desea hacer logout?</h3>
+                <button class="btn btn-secondary" style="background-color: red;" (click)="logout()">logout</button>
             </div>
         </div>
     </div>
