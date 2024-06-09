@@ -12,6 +12,9 @@ import { ExerciseComponent } from './exercise/exercise.component';
 import { WorkoutComponent } from './workout/workout.component';
 import { ExerciseDetailComponent } from './exercise-detail/exercise-detail.component';
 import { Error404ComponentComponent } from './error404-component/error404-component.component';
+import { RegisterComponent } from './register/register.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { NoAuthGuard } from './no-auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -21,10 +24,13 @@ export const routes: Routes = [
   { path: 'routines', component: RoutinesComponent, canActivate: [AuthGuard] },
   { path: 'routine/:id', component: RoutineDetailsComponent, canActivate: [AuthGuard] },  
   { path: 'exercises', component: ExerciseComponent, canActivate: [AuthGuard] },
-  { path: 'exercises/:id', component: ExerciseDetailComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'exercises/:id', component: ExerciseDetailComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
+  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [NoAuthGuard] },
   { path: 'protected', component: ProtectedComponent, canActivate: [AuthGuard] },
-  { path: 'workout/:id', component: WorkoutComponent },
-  { path: 'startWorkout/:id', component: WorkoutComponent },
-  { path: '**', component: Error404ComponentComponent }
+  { path: 'workout/:id', component: WorkoutComponent, canActivate: [AuthGuard]  },
+  { path: 'startWorkout/:id', component: WorkoutComponent, canActivate: [AuthGuard]  },
+  { path: '**', component: Error404ComponentComponent, canActivate: [AuthGuard]  }
+  // { path: '**', component: Error404ComponentComponent, redirectTo: '/login'  }
 ];

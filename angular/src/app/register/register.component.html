@@ -1,1 +1,86 @@
-<p>register works!</p>
+<section>
+    <div class="contenedor">
+        <div class="formulario">
+            <form (ngSubmit)="register()">
+                <h2>Crear Cuenta</h2>
+
+                <div class="fila">
+                    <div class="input-contenedor">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" required [(ngModel)]="name" name="name" placeholder="Nombre">
+                    </div>
+
+                    <div class="input-contenedor">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" [(ngModel)]="surname" name="surname" placeholder="Apellido">
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="input-contenedor">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" [(ngModel)]="username" name="username" placeholder="Nombre de usuario">
+                    </div>
+
+                    <div class="input-contenedor">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="text" required [(ngModel)]="phone_number" name="phone_number"
+                            placeholder="Número de teléfono">
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="input-contenedor">
+                        <i class="fa-solid fa-venus-mars"></i>
+                        <select required [(ngModel)]="gender" name="gender">
+                            <option value="male">Masculino</option>
+                            <option value="female">Femenino</option>
+                            <option value="other">Otro</option>
+                            <option value="prefer_not_to_say">Prefiero no decir</option>
+                        </select>
+                    </div>
+
+                    <div class="input-contenedor">
+                        <i class="fa-solid fa-calendar"></i>
+                        <input type="date" [(ngModel)]="birthdate" name="birthdate" placeholder="Fecha de nacimiento">
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="input-contenedor">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" required [(ngModel)]="email" name="email" placeholder="Correo electrónico">
+                    </div>
+
+                    <div class="input-contenedor">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña">
+                    </div>
+                </div>
+
+                <div class="fila">
+                    <div class="input-contenedor">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" required [(ngModel)]="confirmPassword" name="confirmPassword"
+                            placeholder="Confirmar contraseña">
+                    </div>
+
+                    <div class="input-contenedor">
+                        <i class="fa-solid fa-flag"></i>
+                        <select [(ngModel)]="country" name="country">
+                            <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit">Registrarse</button>
+                </div>
+
+                <div class="registrar">
+                    <p>Ya tengo cuenta <a routerLink="/login">Iniciar Sesión</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

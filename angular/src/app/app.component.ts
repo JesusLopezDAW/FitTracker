@@ -6,6 +6,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from './services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -24,11 +26,14 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class AppComponent implements OnInit {
   private isBrowser: boolean;
+  isLoggedIn = true;
+  public mostrarMenu = false;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private authService: AuthService
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
@@ -38,6 +43,9 @@ export class AppComponent implements OnInit {
       this.checkSize();
       this.renderer.listen('window', 'resize', () => this.checkSize());
     }
+    this.authService.isLoggedIn().subscribe((loggedIn: boolean) => {
+      this.isLoggedIn = loggedIn;
+    });
   }
 
   checkSize() {
@@ -50,5 +58,10 @@ export class AppComponent implements OnInit {
       newWorkout.innerHTML = "Nuevo entrenamiento";
       iconApp.innerHTML = '<h1 style="font-family: Dancing Script; padding-left: 0px; font-size: 42px; margin-bottom: -2px">FitTracker</h1>';
     }
+  }
+
+  receberMostraMenu(mostraMenuLogin: boolean) {
+    console.log('mostraMenuLogin', mostraMenuLogin);
+    this.mostrarMenu = mostraMenuLogin;
   }
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\API\RoutineController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\WorkoutController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PasswordResetController;
 use Illuminate\Support\Facades\Route;
 
 Route::options('/{any}', function (Request $request) {
@@ -27,6 +28,8 @@ Route::options('/{any}', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('login', [AuthController::class, 'login']);
+
+Route::post('/send-password-reset-email', [PasswordResetController::class, 'sendPasswordResetEmail']);
 
 // Rutas protegidas por el middleware auth:api
 Route::middleware('auth:api')->group(function () {
