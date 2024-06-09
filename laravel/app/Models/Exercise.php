@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Scout\Searchable;
 
 class Exercise extends Model
@@ -45,8 +46,11 @@ class Exercise extends Model
 
     public function shouldBeSearchable()
     {
-        // Solo indexar los registros con visibility 'public'
-        return $this->visibility === 'global';
+        if ($this->visibility === 'global' || Auth::check() && $this->user_id === Auth::id()) {
+            return true;
+        }
+    
+        return false;
     }
 
     public function series()
