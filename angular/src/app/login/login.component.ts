@@ -1,5 +1,5 @@
 // src/app/login/login.component.ts
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter  } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  loginError: boolean = false;
+
 
   constructor(private authService: AuthService, private router: Router, private http: HttpClient) { }
 
@@ -33,6 +35,7 @@ export class LoginComponent {
         },
         error: (err) => {
           console.error('Login failed', err);
+          this.loginError = true;
         }
       });
   }

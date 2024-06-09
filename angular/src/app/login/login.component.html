@@ -1,36 +1,41 @@
-<!-- src/app/login/login.component.html -->
 <section>
     <div class="contenedor">
         <div class="formulario">
             <form (ngSubmit)="acceder()">
-                <h2>Iniciar Sesion</h2>
+                <h2>Iniciar Sesión</h2>
 
                 <div class="input-contenedor">
                     <i class="fa-solid fa-envelope"></i>
-                    <input type="email" required [(ngModel)]="email" name="email">
-                    <label>Email</label>
+                    <input type="email" required [(ngModel)]="email" name="email" placeholder="Correo electrónico">
                 </div>
 
                 <div class="input-contenedor">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" required [(ngModel)]="password" name="password">
-                    <label>Contraseña</label>
+                    <input type="password" required [(ngModel)]="password" name="password" placeholder="Contraseña">
                 </div>
+
+                
 
                 <div class="olvidar">
                     <label>
                         <input type="checkbox">
-                        <a href="#">Olvide la contraseña</a>
+                        <a routerLink="/forgot-password">Olvidé la contraseña</a>
                     </label>
                 </div>
 
                 <div>
                     <button type="submit">Acceder</button>
-                    <div class="registrar">
-                        <p>No tengo cuenta <a href="#">Crear una cuenta</a></p>
-                    </div>
+                </div>
+
+                <div class="registrar">
+                    <p>No tengo cuenta <a routerLink="/register">Crear una cuenta</a></p>
                 </div>
             </form>
         </div>
+
+        <div *ngIf="loginError" class="formulario" style="margin-top: 5px; color: red;">
+            Error: Credenciales incorrectas.
+        </div>
     </div>
+   
 </section>
