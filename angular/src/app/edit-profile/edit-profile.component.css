@@ -1,6 +1,6 @@
 .container {
-    color: white;
-    background-color: #000;
+    color: var(--text-color);
+    background-color: var(--background-color);
     min-height: 100vh;
     padding: 20px;
 }
@@ -11,7 +11,7 @@
 }
 
 .nav-link.active {
-    color: white;
+    color: var(--text-color);
     font-weight: bold;
 }
 
@@ -21,20 +21,20 @@
 }
 
 .form-control {
-    background-color: #121212;
-    color: white;
+    background-color: var(--background-input);
+    color: var(--text-color);
     border: none;
 }
 
 .form-control:focus {
-    background-color: #121212;
-    color: white;
+    background-color:var(--background-input);
+    color: var(--text-color);
     border: none;
     box-shadow: none;
 }
 
 .btn-primary {
-    background-color: #0095f6;
+    background-color: var(--principal);
     border: none;
 }
 
@@ -43,6 +43,6 @@
 }
 
 .form-check-input:checked {
-    background-color: #0095f6;
-    border-color: #0095f6;
+    background-color: var(--principal);
+    border-color: var(--principal);
 }

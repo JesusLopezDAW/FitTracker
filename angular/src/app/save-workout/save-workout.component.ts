@@ -5,6 +5,7 @@ import { MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef } from '@angul
 import { WorkoutStateService } from '../workout-state.service';
 import { StartWorkoutComponent } from '../start-workout/start-workout.component';
 import { WorkoutComponent } from '../workout/workout.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-save-workout',
@@ -148,12 +149,32 @@ export class SaveWorkoutComponent {
   }
 
   async save() {
-    if (confirm('¿Estás seguro de que deseas guardar el entrenamiento?')) {
-      this.insertSeries();
-      this.insertLog();
-      this.insertPost();
-      this.workoutState.reset();
-      this.close();
-    }
+    Swal.fire({
+      text: "¿Estás seguro de que deseas guardar el entrenamiento?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, guardar',
+      cancelButtonText: 'Cancelar',
+      customClass: {
+        popup: 'swal2-popup',
+        title: 'swal2-title',
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.insertSeries();
+        this.insertLog();
+        this.insertPost();
+        this.workoutState.reset();
+        this.close();
+        Swal.fire(
+          'Guardado',
+          'El entrenamiento ha sido guardado.',
+          'success'
+        );
+      }
+    });
   }
+
 }
