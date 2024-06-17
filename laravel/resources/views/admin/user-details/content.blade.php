@@ -397,7 +397,7 @@ if (!empty($commentsData)) {
                                                                             alt="{{ $exerciseLog->exercise->name }}"
                                                                             style="width: 100%; height: auto; object-fit: cover;">
                                                                     </div>
-                                                                    <div>
+                                                                    {{-- <div>
                                                                         @if ($exerciseLog->series == 1)
                                                                             <p class="mb-0 text-dark"
                                                                                 style="font-size: 16px;">
@@ -409,7 +409,7 @@ if (!empty($commentsData)) {
                                                                                 {{ $exerciseLog->series }} series de
                                                                                 {{ $exerciseLog->exercise->name }}</p>
                                                                         @endif
-                                                                    </div>
+                                                                    </div> --}}
                                                                 </div>
                                                             @endforeach
                                                         @endif
