@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { PostModalComponent } from '../../modals/post-modal/post-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -15,7 +17,7 @@ export class PostsComponent implements OnInit {
   @Input() userId: any = null;
   @Input() isYou: boolean = true;
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.getPosts();
@@ -145,4 +147,9 @@ export class PostsComponent implements OnInit {
     console.log(data);
   }
 
+  showPost(post_id: number, workout_id: number) {
+    const modalRef = this.modalService.open(PostModalComponent, { size: 'lg' });
+    modalRef.componentInstance.post_id = post_id;
+    modalRef.componentInstance.workout_id = workout_id;
+  }
 }
