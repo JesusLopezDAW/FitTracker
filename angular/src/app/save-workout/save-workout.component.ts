@@ -123,29 +123,31 @@ export class SaveWorkoutComponent {
   }
 
   async insertPost() {
-    const headersList = {
-      "Authorization": "Bearer " + sessionStorage.getItem("authToken"),
-      "Content-Type": "application/json"
-    };
+    if (this.imageUrl) {
+      const headersList = {
+        "Authorization": "Bearer " + sessionStorage.getItem("authToken"),
+        "Content-Type": "application/json"
+      };
 
-    const workout_id = Number(this.workoutState.id);
-    const title = this.description;
-    const image = this.imageUrl;
+      const workout_id = Number(this.workoutState.id);
+      const title = this.description;
+      const image = this.imageUrl;
 
-    const bodyContent = JSON.stringify({
-      "workout_id": workout_id,
-      "title": title,
-      "image": image
-    });
+      const bodyContent = JSON.stringify({
+        "workout_id": workout_id,
+        "title": title,
+        "image": image
+      });
 
-    let response = await fetch("http://localhost/api/post", {
-      method: "POST",
-      body: bodyContent,
-      headers: headersList
-    });
+      let response = await fetch("http://localhost/api/post", {
+        method: "POST",
+        body: bodyContent,
+        headers: headersList
+      });
 
-    let data = await response.text();
-    console.log(data);
+      let data = await response.text();
+      console.log(data);
+    }
   }
 
   async save() {
